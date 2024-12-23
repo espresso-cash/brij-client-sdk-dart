@@ -148,8 +148,7 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
 
 const _$IdTypeEnumMap = {
   IdType.voterId: 'voterId',
-  IdType.passport: 'passport',
-  IdType.driverLicense: 'driverLicense',
+  IdType.ninV2: 'ninV2',
   IdType.other: 'other',
 };
 
