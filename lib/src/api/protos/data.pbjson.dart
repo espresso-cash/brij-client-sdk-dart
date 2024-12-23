@@ -41,13 +41,14 @@ const DocumentType$json = {
   '2': [
     {'1': 'DOCUMENT_TYPE_UNSPECIFIED', '2': 0},
     {'1': 'DOCUMENT_TYPE_VOTER_ID', '2': 1},
+    {'1': 'DOCUMENT_TYPE_NIN_V2', '2': 2},
   ],
 };
 
 /// Descriptor for `DocumentType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List documentTypeDescriptor = $convert.base64Decode(
     'CgxEb2N1bWVudFR5cGUSHQoZRE9DVU1FTlRfVFlQRV9VTlNQRUNJRklFRBAAEhoKFkRPQ1VNRU'
-    '5UX1RZUEVfVk9URVJfSUQQAQ==');
+    '5UX1RZUEVfVk9URVJfSUQQARIYChRET0NVTUVOVF9UWVBFX05JTl9WMhAC');
 
 @$core.Deprecated('Use nameDescriptor instead')
 const Name$json = {
