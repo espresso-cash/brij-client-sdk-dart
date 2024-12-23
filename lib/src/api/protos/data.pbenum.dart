@@ -43,10 +43,12 @@ class DataType extends $pb.ProtobufEnum {
 class DocumentType extends $pb.ProtobufEnum {
   static const DocumentType DOCUMENT_TYPE_UNSPECIFIED = DocumentType._(0, _omitEnumNames ? '' : 'DOCUMENT_TYPE_UNSPECIFIED');
   static const DocumentType DOCUMENT_TYPE_VOTER_ID = DocumentType._(1, _omitEnumNames ? '' : 'DOCUMENT_TYPE_VOTER_ID');
+  static const DocumentType DOCUMENT_TYPE_NIN_V2 = DocumentType._(2, _omitEnumNames ? '' : 'DOCUMENT_TYPE_NIN_V2');
 
   static const $core.List<DocumentType> values = <DocumentType> [
     DOCUMENT_TYPE_UNSPECIFIED,
     DOCUMENT_TYPE_VOTER_ID,
+    DOCUMENT_TYPE_NIN_V2,
   ];
 
   static final $core.Map<$core.int, DocumentType> _byValue = $pb.ProtobufEnum.initByValue(values);
