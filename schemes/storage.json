@@ -597,9 +597,6 @@
         },
         "walletProofSignature": {
           "type": "string"
-        },
-        "walletProofMessage": {
-          "type": "string"
         }
       }
     },

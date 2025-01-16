@@ -13,7 +13,6 @@ _$V1InitStorageRequestImpl _$$V1InitStorageRequestImplFromJson(
       message: json['message'] as String,
       encryptedSecretKey: json['encryptedSecretKey'] as String,
       walletProofSignature: json['walletProofSignature'] as String,
-      walletProofMessage: json['walletProofMessage'] as String,
     );
 
 Map<String, dynamic> _$$V1InitStorageRequestImplToJson(
@@ -23,5 +22,4 @@ Map<String, dynamic> _$$V1InitStorageRequestImplToJson(
       'message': instance.message,
       'encryptedSecretKey': instance.encryptedSecretKey,
       'walletProofSignature': instance.walletProofSignature,
-      'walletProofMessage': instance.walletProofMessage,
     };
