@@ -11,6 +11,8 @@ import '../models/v1_get_partner_info_request.dart';
 import '../models/v1_get_partner_info_response.dart';
 import '../models/v1_get_user_data_request.dart';
 import '../models/v1_get_user_data_response.dart';
+import '../models/v1_get_wallet_proof_request.dart';
+import '../models/v1_get_wallet_proof_response.dart';
 import '../models/v1_grant_access_request.dart';
 import '../models/v1_grant_access_response.dart';
 import '../models/v1_init_storage_request.dart';
@@ -47,6 +49,11 @@ abstract class StorageServiceClient {
   @POST('/v1/getUserData')
   Future<V1GetUserDataResponse> storageServiceGetUserData({
     @Body() required V1GetUserDataRequest body,
+  });
+
+  @POST('/v1/getWalletProof')
+  Future<V1GetWalletProofResponse> storageServiceGetWalletProof({
+    @Body() required V1GetWalletProofRequest body,
   });
 
   @POST('/v1/grantAccess')
