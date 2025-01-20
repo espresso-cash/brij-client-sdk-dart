@@ -21,7 +21,7 @@ V1GetInfoRequest _$V1GetInfoRequestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$V1GetInfoRequest {
   String get publicKey => throw _privateConstructorUsedError;
-  String get walletAddress => throw _privateConstructorUsedError;
+  String? get walletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this V1GetInfoRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $V1GetInfoRequestCopyWith<$Res> {
           V1GetInfoRequest value, $Res Function(V1GetInfoRequest) then) =
       _$V1GetInfoRequestCopyWithImpl<$Res, V1GetInfoRequest>;
   @useResult
-  $Res call({String publicKey, String walletAddress});
+  $Res call({String publicKey, String? walletAddress});
 }
 
 /// @nodoc
@@ -58,17 +58,17 @@ class _$V1GetInfoRequestCopyWithImpl<$Res, $Val extends V1GetInfoRequest>
   @override
   $Res call({
     Object? publicKey = null,
-    Object? walletAddress = null,
+    Object? walletAddress = freezed,
   }) {
     return _then(_value.copyWith(
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
               as String,
-      walletAddress: null == walletAddress
+      walletAddress: freezed == walletAddress
           ? _value.walletAddress
           : walletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$V1GetInfoRequestImplCopyWith<$Res>
       __$$V1GetInfoRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String publicKey, String walletAddress});
+  $Res call({String publicKey, String? walletAddress});
 }
 
 /// @nodoc
@@ -98,17 +98,17 @@ class __$$V1GetInfoRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? publicKey = null,
-    Object? walletAddress = null,
+    Object? walletAddress = freezed,
   }) {
     return _then(_$V1GetInfoRequestImpl(
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
               as String,
-      walletAddress: null == walletAddress
+      walletAddress: freezed == walletAddress
           ? _value.walletAddress
           : walletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -116,8 +116,7 @@ class __$$V1GetInfoRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$V1GetInfoRequestImpl implements _V1GetInfoRequest {
-  const _$V1GetInfoRequestImpl(
-      {required this.publicKey, required this.walletAddress});
+  const _$V1GetInfoRequestImpl({required this.publicKey, this.walletAddress});
 
   factory _$V1GetInfoRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$V1GetInfoRequestImplFromJson(json);
@@ -125,7 +124,7 @@ class _$V1GetInfoRequestImpl implements _V1GetInfoRequest {
   @override
   final String publicKey;
   @override
-  final String walletAddress;
+  final String? walletAddress;
 
   @override
   String toString() {
@@ -167,7 +166,7 @@ class _$V1GetInfoRequestImpl implements _V1GetInfoRequest {
 abstract class _V1GetInfoRequest implements V1GetInfoRequest {
   const factory _V1GetInfoRequest(
       {required final String publicKey,
-      required final String walletAddress}) = _$V1GetInfoRequestImpl;
+      final String? walletAddress}) = _$V1GetInfoRequestImpl;
 
   factory _V1GetInfoRequest.fromJson(Map<String, dynamic> json) =
       _$V1GetInfoRequestImpl.fromJson;
@@ -175,7 +174,7 @@ abstract class _V1GetInfoRequest implements V1GetInfoRequest {
   @override
   String get publicKey;
   @override
-  String get walletAddress;
+  String? get walletAddress;
 
   /// Create a copy of V1GetInfoRequest
   /// with the given fields replaced by the non-null parameter values.

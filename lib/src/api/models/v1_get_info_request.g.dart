@@ -10,7 +10,7 @@ _$V1GetInfoRequestImpl _$$V1GetInfoRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$V1GetInfoRequestImpl(
       publicKey: json['publicKey'] as String,
-      walletAddress: json['walletAddress'] as String,
+      walletAddress: json['walletAddress'] as String?,
     );
 
 Map<String, dynamic> _$$V1GetInfoRequestImplToJson(

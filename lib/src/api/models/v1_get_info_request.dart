@@ -11,7 +11,7 @@ part 'v1_get_info_request.g.dart';
 class V1GetInfoRequest with _$V1GetInfoRequest {
   const factory V1GetInfoRequest({
     required String publicKey,
-    required String walletAddress,
+    String? walletAddress,
   }) = _V1GetInfoRequest;
   
   factory V1GetInfoRequest.fromJson(Map<String, Object?> json) => _$V1GetInfoRequestFromJson(json);
