@@ -1405,6 +1405,8 @@ mixin _$Document {
   IdType get type => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
   String get countryCode => throw _privateConstructorUsedError;
+  List<int>? get frontImage => throw _privateConstructorUsedError;
+  List<int>? get backImage => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   ValidationStatus get status => throw _privateConstructorUsedError;
 
@@ -1427,6 +1429,8 @@ abstract class $DocumentCopyWith<$Res> {
       {IdType type,
       String number,
       String countryCode,
+      List<int>? frontImage,
+      List<int>? backImage,
       String id,
       ValidationStatus status});
 }
@@ -1449,6 +1453,8 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? type = null,
     Object? number = null,
     Object? countryCode = null,
+    Object? frontImage = freezed,
+    Object? backImage = freezed,
     Object? id = null,
     Object? status = null,
   }) {
@@ -1465,6 +1471,14 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      frontImage: freezed == frontImage
+          ? _value.frontImage
+          : frontImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+      backImage: freezed == backImage
+          ? _value.backImage
+          : backImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1489,6 +1503,8 @@ abstract class _$$DocumentImplCopyWith<$Res>
       {IdType type,
       String number,
       String countryCode,
+      List<int>? frontImage,
+      List<int>? backImage,
       String id,
       ValidationStatus status});
 }
@@ -1509,6 +1525,8 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? type = null,
     Object? number = null,
     Object? countryCode = null,
+    Object? frontImage = freezed,
+    Object? backImage = freezed,
     Object? id = null,
     Object? status = null,
   }) {
@@ -1525,6 +1543,14 @@ class __$$DocumentImplCopyWithImpl<$Res>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      frontImage: freezed == frontImage
+          ? _value._frontImage
+          : frontImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+      backImage: freezed == backImage
+          ? _value._backImage
+          : backImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1544,8 +1570,12 @@ class _$DocumentImpl implements _Document {
       {required this.type,
       required this.number,
       required this.countryCode,
+      final List<int>? frontImage,
+      final List<int>? backImage,
       this.id = '',
-      this.status = ValidationStatus.unspecified});
+      this.status = ValidationStatus.unspecified})
+      : _frontImage = frontImage,
+        _backImage = backImage;
 
   factory _$DocumentImpl.fromJson(Map<String, dynamic> json) =>
       _$$DocumentImplFromJson(json);
@@ -1556,6 +1586,26 @@ class _$DocumentImpl implements _Document {
   final String number;
   @override
   final String countryCode;
+  final List<int>? _frontImage;
+  @override
+  List<int>? get frontImage {
+    final value = _frontImage;
+    if (value == null) return null;
+    if (_frontImage is EqualUnmodifiableListView) return _frontImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<int>? _backImage;
+  @override
+  List<int>? get backImage {
+    final value = _backImage;
+    if (value == null) return null;
+    if (_backImage is EqualUnmodifiableListView) return _backImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey()
   final String id;
@@ -1565,7 +1615,7 @@ class _$DocumentImpl implements _Document {
 
   @override
   String toString() {
-    return 'Document(type: $type, number: $number, countryCode: $countryCode, id: $id, status: $status)';
+    return 'Document(type: $type, number: $number, countryCode: $countryCode, frontImage: $frontImage, backImage: $backImage, id: $id, status: $status)';
   }
 
   @override
@@ -1577,14 +1627,25 @@ class _$DocumentImpl implements _Document {
             (identical(other.number, number) || other.number == number) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
+            const DeepCollectionEquality()
+                .equals(other._frontImage, _frontImage) &&
+            const DeepCollectionEquality()
+                .equals(other._backImage, _backImage) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, type, number, countryCode, id, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      type,
+      number,
+      countryCode,
+      const DeepCollectionEquality().hash(_frontImage),
+      const DeepCollectionEquality().hash(_backImage),
+      id,
+      status);
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -1607,6 +1668,8 @@ abstract class _Document implements Document {
       {required final IdType type,
       required final String number,
       required final String countryCode,
+      final List<int>? frontImage,
+      final List<int>? backImage,
       final String id,
       final ValidationStatus status}) = _$DocumentImpl;
 
@@ -1619,6 +1682,10 @@ abstract class _Document implements Document {
   String get number;
   @override
   String get countryCode;
+  @override
+  List<int>? get frontImage;
+  @override
+  List<int>? get backImage;
   @override
   String get id;
   @override

@@ -132,6 +132,12 @@ _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$IdTypeEnumMap, json['type']),
       number: json['number'] as String,
       countryCode: json['countryCode'] as String,
+      frontImage: (json['frontImage'] as List<dynamic>?)
+          ?.map((e) => (e as num).toInt())
+          .toList(),
+      backImage: (json['backImage'] as List<dynamic>?)
+          ?.map((e) => (e as num).toInt())
+          .toList(),
       id: json['id'] as String? ?? '',
       status: $enumDecodeNullable(_$ValidationStatusEnumMap, json['status']) ??
           ValidationStatus.unspecified,
@@ -142,6 +148,8 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
       'type': _$IdTypeEnumMap[instance.type]!,
       'number': instance.number,
       'countryCode': instance.countryCode,
+      'frontImage': instance.frontImage,
+      'backImage': instance.backImage,
       'id': instance.id,
       'status': _$ValidationStatusEnumMap[instance.status]!,
     };

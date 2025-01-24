@@ -139,6 +139,7 @@ class Document extends $pb.GeneratedMessage {
     DocumentType? type,
     $core.String? number,
     $core.String? countryCode,
+    DocumentPhoto? photo,
   }) {
     final $result = create();
     if (type != null) {
@@ -150,6 +151,9 @@ class Document extends $pb.GeneratedMessage {
     if (countryCode != null) {
       $result.countryCode = countryCode;
     }
+    if (photo != null) {
+      $result.photo = photo;
+    }
     return $result;
   }
   Document._() : super();
@@ -160,6 +164,7 @@ class Document extends $pb.GeneratedMessage {
     ..e<DocumentType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: DocumentType.DOCUMENT_TYPE_UNSPECIFIED, valueOf: DocumentType.valueOf, enumValues: DocumentType.values)
     ..aOS(2, _omitFieldNames ? '' : 'number')
     ..aOS(3, _omitFieldNames ? '' : 'countryCode')
+    ..aOM<DocumentPhoto>(4, _omitFieldNames ? '' : 'photo', subBuilder: DocumentPhoto.create)
     ..hasRequiredFields = false
   ;
 
@@ -210,6 +215,81 @@ class Document extends $pb.GeneratedMessage {
   $core.bool hasCountryCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearCountryCode() => clearField(3);
+
+  @$pb.TagNumber(4)
+  DocumentPhoto get photo => $_getN(3);
+  @$pb.TagNumber(4)
+  set photo(DocumentPhoto v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPhoto() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPhoto() => clearField(4);
+  @$pb.TagNumber(4)
+  DocumentPhoto ensurePhoto() => $_ensure(3);
+}
+
+class DocumentPhoto extends $pb.GeneratedMessage {
+  factory DocumentPhoto({
+    $core.List<$core.int>? frontImage,
+    $core.List<$core.int>? backImage,
+  }) {
+    final $result = create();
+    if (frontImage != null) {
+      $result.frontImage = frontImage;
+    }
+    if (backImage != null) {
+      $result.backImage = backImage;
+    }
+    return $result;
+  }
+  DocumentPhoto._() : super();
+  factory DocumentPhoto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DocumentPhoto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DocumentPhoto', package: const $pb.PackageName(_omitMessageNames ? '' : 'brij.storage.v1'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'frontImage', $pb.PbFieldType.OY)
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'backImage', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DocumentPhoto clone() => DocumentPhoto()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DocumentPhoto copyWith(void Function(DocumentPhoto) updates) => super.copyWith((message) => updates(message as DocumentPhoto)) as DocumentPhoto;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DocumentPhoto create() => DocumentPhoto._();
+  DocumentPhoto createEmptyInstance() => create();
+  static $pb.PbList<DocumentPhoto> createRepeated() => $pb.PbList<DocumentPhoto>();
+  @$core.pragma('dart2js:noInline')
+  static DocumentPhoto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DocumentPhoto>(create);
+  static DocumentPhoto? _defaultInstance;
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get frontImage => $_getN(0);
+  @$pb.TagNumber(4)
+  set frontImage($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFrontImage() => $_has(0);
+  @$pb.TagNumber(4)
+  void clearFrontImage() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.List<$core.int> get backImage => $_getN(1);
+  @$pb.TagNumber(5)
+  set backImage($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBackImage() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearBackImage() => clearField(5);
 }
 
 class BankInfo extends $pb.GeneratedMessage {

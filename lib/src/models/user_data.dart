@@ -85,6 +85,8 @@ class Document with _$Document {
     required IdType type,
     required String number,
     required String countryCode,
+    List<int>? frontImage,
+    List<int>? backImage,
     @Default('') String id,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Document;

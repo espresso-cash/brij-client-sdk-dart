@@ -167,6 +167,8 @@ UserData _processUserData({
           countryCode: wrappedData.countryCode,
           id: id,
           status: status,
+          frontImage: wrappedData.photo.frontImage,
+          backImage: wrappedData.photo.backImage,
         );
       case V1DataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
