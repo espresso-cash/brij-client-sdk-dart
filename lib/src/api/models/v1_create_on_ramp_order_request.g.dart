@@ -10,9 +10,9 @@ _$V1CreateOnRampOrderRequestImpl _$$V1CreateOnRampOrderRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$V1CreateOnRampOrderRequestImpl(
       partnerPublicKey: json['partnerPublicKey'] as String,
-      cryptoAmount: json['cryptoAmount'] as String,
+      cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
       cryptoCurrency: json['cryptoCurrency'] as String,
-      fiatAmount: json['fiatAmount'] as String,
+      fiatAmount: (json['fiatAmount'] as num).toDouble(),
       fiatCurrency: json['fiatCurrency'] as String,
       userSignature: json['userSignature'] as String,
     );
