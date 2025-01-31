@@ -341,4 +341,3 @@ String createPartnerOffRampMessage({
     '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$cryptoWalletAddress';
 
 const bool _isWeb = identical(0, 0.0);
-const _encryptionAsyncThreshold = 1024 * 1024; // 1MB
