@@ -304,17 +304,17 @@ Order processOrderData({
 }
 
 String createUserOnRampMessage({
-  required String cryptoAmount,
+  required double cryptoAmount,
   required String cryptoCurrency,
-  required String fiatAmount,
+  required double fiatAmount,
   required String fiatCurrency,
 }) =>
     '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency';
 
 String createUserOffRampMessage({
-  required String cryptoAmount,
+  required double cryptoAmount,
   required String cryptoCurrency,
-  required String fiatAmount,
+  required double fiatAmount,
   required String fiatCurrency,
   required String bankName,
   required String bankAccount,
@@ -322,9 +322,9 @@ String createUserOffRampMessage({
     '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$bankName|$bankAccount';
 
 String createPartnerOnRampMessage({
-  required String cryptoAmount,
+  required double cryptoAmount,
   required String cryptoCurrency,
-  required String fiatAmount,
+  required double fiatAmount,
   required String fiatCurrency,
   required String bankName,
   required String bankAccount,
@@ -332,13 +332,12 @@ String createPartnerOnRampMessage({
     '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$bankName|$bankAccount';
 
 String createPartnerOffRampMessage({
-  required String cryptoAmount,
+  required double cryptoAmount,
   required String cryptoCurrency,
-  required String fiatAmount,
+  required double fiatAmount,
   required String fiatCurrency,
   required String cryptoWalletAddress,
 }) =>
     '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$cryptoWalletAddress';
 
 const bool _isWeb = identical(0, 0.0);
-const _encryptionAsyncThreshold = 1024 * 1024; // 1MB

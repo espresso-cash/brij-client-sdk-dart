@@ -22,9 +22,9 @@ V1CreateOffRampOrderRequest _$V1CreateOffRampOrderRequestFromJson(
 /// @nodoc
 mixin _$V1CreateOffRampOrderRequest {
   String get partnerPublicKey => throw _privateConstructorUsedError;
-  String get cryptoAmount => throw _privateConstructorUsedError;
+  double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
-  String get fiatAmount => throw _privateConstructorUsedError;
+  double get fiatAmount => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
   String get bankName => throw _privateConstructorUsedError;
   String get bankAccount => throw _privateConstructorUsedError;
@@ -50,9 +50,9 @@ abstract class $V1CreateOffRampOrderRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {String partnerPublicKey,
-      String cryptoAmount,
+      double cryptoAmount,
       String cryptoCurrency,
-      String fiatAmount,
+      double fiatAmount,
       String fiatCurrency,
       String bankName,
       String bankAccount,
@@ -92,7 +92,7 @@ class _$V1CreateOffRampOrderRequestCopyWithImpl<$Res,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       cryptoCurrency: null == cryptoCurrency
           ? _value.cryptoCurrency
           : cryptoCurrency // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ class _$V1CreateOffRampOrderRequestCopyWithImpl<$Res,
       fiatAmount: null == fiatAmount
           ? _value.fiatAmount
           : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       fiatCurrency: null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -132,9 +132,9 @@ abstract class _$$V1CreateOffRampOrderRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {String partnerPublicKey,
-      String cryptoAmount,
+      double cryptoAmount,
       String cryptoCurrency,
-      String fiatAmount,
+      double fiatAmount,
       String fiatCurrency,
       String bankName,
       String bankAccount,
@@ -173,7 +173,7 @@ class __$$V1CreateOffRampOrderRequestImplCopyWithImpl<$Res>
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       cryptoCurrency: null == cryptoCurrency
           ? _value.cryptoCurrency
           : cryptoCurrency // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ class __$$V1CreateOffRampOrderRequestImplCopyWithImpl<$Res>
       fiatAmount: null == fiatAmount
           ? _value.fiatAmount
           : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       fiatCurrency: null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -223,11 +223,11 @@ class _$V1CreateOffRampOrderRequestImpl
   @override
   final String partnerPublicKey;
   @override
-  final String cryptoAmount;
+  final double cryptoAmount;
   @override
   final String cryptoCurrency;
   @override
-  final String fiatAmount;
+  final double fiatAmount;
   @override
   final String fiatCurrency;
   @override
@@ -299,9 +299,9 @@ abstract class _V1CreateOffRampOrderRequest
     implements V1CreateOffRampOrderRequest {
   const factory _V1CreateOffRampOrderRequest(
       {required final String partnerPublicKey,
-      required final String cryptoAmount,
+      required final double cryptoAmount,
       required final String cryptoCurrency,
-      required final String fiatAmount,
+      required final double fiatAmount,
       required final String fiatCurrency,
       required final String bankName,
       required final String bankAccount,
@@ -313,11 +313,11 @@ abstract class _V1CreateOffRampOrderRequest
   @override
   String get partnerPublicKey;
   @override
-  String get cryptoAmount;
+  double get cryptoAmount;
   @override
   String get cryptoCurrency;
   @override
-  String get fiatAmount;
+  double get fiatAmount;
   @override
   String get fiatCurrency;
   @override

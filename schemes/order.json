@@ -384,15 +384,15 @@
           "type": "string"
         },
         "cryptoAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "cryptoCurrency": {
           "type": "string"
         },
         "fiatAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "fiatCurrency": {
           "type": "string"
@@ -423,15 +423,15 @@
           "type": "string"
         },
         "cryptoAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "cryptoCurrency": {
           "type": "string"
         },
         "fiatAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "fiatCurrency": {
           "type": "string"
@@ -502,15 +502,15 @@
           "type": "string"
         },
         "cryptoAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "cryptoCurrency": {
           "type": "string"
         },
         "fiatAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "fiatCurrency": {
           "type": "string"

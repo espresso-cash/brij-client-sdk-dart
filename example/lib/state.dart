@@ -50,6 +50,7 @@ class WalletAppState extends ChangeNotifier {
     try {
       await _client.init(walletAddress: _wallet!.publicKey.toString());
     } catch (e) {
+      print('error: $e');
       rethrow;
     }
 
@@ -135,9 +136,9 @@ class WalletAppState extends ChangeNotifier {
   }) async {
     final orderId = await _client.createOnRampOrder(
       partnerPK: partnerPK,
-      cryptoAmount: amount,
+      cryptoAmount: double.parse(amount),
       cryptoCurrency: currency,
-      fiatAmount: amount,
+      fiatAmount: double.parse(amount),
       fiatCurrency: currency,
     );
 
@@ -154,9 +155,9 @@ class WalletAppState extends ChangeNotifier {
   }) async {
     final orderId = await _client.createOffRampOrder(
       partnerPK: partnerPK,
-      cryptoAmount: amount,
+      cryptoAmount: double.parse(amount),
       cryptoCurrency: currency,
-      fiatAmount: amount,
+      fiatAmount: double.parse(amount),
       fiatCurrency: currency,
       bankName: bankName,
       bankAccount: bankAccount,
