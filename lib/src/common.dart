@@ -309,7 +309,7 @@ String createUserOnRampMessage({
   required double fiatAmount,
   required String fiatCurrency,
 }) =>
-    '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency';
+    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency';
 
 String createUserOffRampMessage({
   required double cryptoAmount,
@@ -319,7 +319,7 @@ String createUserOffRampMessage({
   required String bankName,
   required String bankAccount,
 }) =>
-    '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$bankName|$bankAccount';
+    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency|$bankName|$bankAccount';
 
 String createPartnerOnRampMessage({
   required double cryptoAmount,
@@ -329,7 +329,7 @@ String createPartnerOnRampMessage({
   required String bankName,
   required String bankAccount,
 }) =>
-    '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$bankName|$bankAccount';
+    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency|$bankName|$bankAccount';
 
 String createPartnerOffRampMessage({
   required double cryptoAmount,
@@ -338,6 +338,10 @@ String createPartnerOffRampMessage({
   required String fiatCurrency,
   required String cryptoWalletAddress,
 }) =>
-    '$cryptoAmount|$cryptoCurrency|$fiatAmount|$fiatCurrency|$cryptoWalletAddress';
+    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency|$cryptoWalletAddress';
 
 const bool _isWeb = identical(0, 0.0);
+
+extension NumFormatting on double {
+  String toSignatureString() => this % 1 == 0 ? toInt().toString() : toString();
+}
