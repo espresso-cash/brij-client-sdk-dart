@@ -15,6 +15,9 @@ import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
 import 'package:protobuf/protobuf.dart';
 
+import 'currency/amount.dart';
+import 'currency/currency_list.dart';
+
 export 'models/order_id.dart';
 export 'models/validation_result.dart';
 
@@ -308,8 +311,14 @@ String createUserOnRampMessage({
   required String cryptoCurrency,
   required double fiatAmount,
   required String fiatCurrency,
-}) =>
-    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency';
+}) {
+  final cryptoAmountDecimals =
+      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals =
+      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+
+  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency';
+}
 
 String createUserOffRampMessage({
   required double cryptoAmount,
@@ -318,8 +327,14 @@ String createUserOffRampMessage({
   required String fiatCurrency,
   required String bankName,
   required String bankAccount,
-}) =>
-    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency|$bankName|$bankAccount';
+}) {
+  final cryptoAmountDecimals =
+      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals =
+      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+
+  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
+}
 
 String createPartnerOnRampMessage({
   required double cryptoAmount,
@@ -328,8 +343,14 @@ String createPartnerOnRampMessage({
   required String fiatCurrency,
   required String bankName,
   required String bankAccount,
-}) =>
-    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency|$bankName|$bankAccount';
+}) {
+  final cryptoAmountDecimals =
+      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals =
+      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+
+  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
+}
 
 String createPartnerOffRampMessage({
   required double cryptoAmount,
@@ -337,11 +358,13 @@ String createPartnerOffRampMessage({
   required double fiatAmount,
   required String fiatCurrency,
   required String cryptoWalletAddress,
-}) =>
-    '${cryptoAmount.toSignatureString()}|$cryptoCurrency|${fiatAmount.toSignatureString()}|$fiatCurrency|$cryptoWalletAddress';
+}) {
+  final cryptoAmountDecimals =
+      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals =
+      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+
+  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$cryptoWalletAddress';
+}
 
 const bool _isWeb = identical(0, 0.0);
-
-extension NumFormatting on double {
-  String toSignatureString() => this % 1 == 0 ? toInt().toString() : toString();
-}
