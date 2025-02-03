@@ -8,15 +8,13 @@ import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_response.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
+import 'package:kyc_client_dart/src/currency/currency_list.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
 import 'package:pinenacl/digests.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
 import 'package:protobuf/protobuf.dart';
-
-import 'currency/amount.dart';
-import 'currency/currency_list.dart';
 
 export 'models/order_id.dart';
 export 'models/validation_result.dart';
