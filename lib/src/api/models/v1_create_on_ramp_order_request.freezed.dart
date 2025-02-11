@@ -27,6 +27,7 @@ mixin _$V1CreateOnRampOrderRequest {
   double get fiatAmount => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
   String get userSignature => throw _privateConstructorUsedError;
+  String get cryptoWalletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this V1CreateOnRampOrderRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $V1CreateOnRampOrderRequestCopyWith<$Res> {
       String cryptoCurrency,
       double fiatAmount,
       String fiatCurrency,
-      String userSignature});
+      String userSignature,
+      String cryptoWalletAddress});
 }
 
 /// @nodoc
@@ -76,6 +78,7 @@ class _$V1CreateOnRampOrderRequestCopyWithImpl<$Res,
     Object? fiatAmount = null,
     Object? fiatCurrency = null,
     Object? userSignature = null,
+    Object? cryptoWalletAddress = null,
   }) {
     return _then(_value.copyWith(
       partnerPublicKey: null == partnerPublicKey
@@ -102,6 +105,10 @@ class _$V1CreateOnRampOrderRequestCopyWithImpl<$Res,
           ? _value.userSignature
           : userSignature // ignore: cast_nullable_to_non_nullable
               as String,
+      cryptoWalletAddress: null == cryptoWalletAddress
+          ? _value.cryptoWalletAddress
+          : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -121,7 +128,8 @@ abstract class _$$V1CreateOnRampOrderRequestImplCopyWith<$Res>
       String cryptoCurrency,
       double fiatAmount,
       String fiatCurrency,
-      String userSignature});
+      String userSignature,
+      String cryptoWalletAddress});
 }
 
 /// @nodoc
@@ -145,6 +153,7 @@ class __$$V1CreateOnRampOrderRequestImplCopyWithImpl<$Res>
     Object? fiatAmount = null,
     Object? fiatCurrency = null,
     Object? userSignature = null,
+    Object? cryptoWalletAddress = null,
   }) {
     return _then(_$V1CreateOnRampOrderRequestImpl(
       partnerPublicKey: null == partnerPublicKey
@@ -171,6 +180,10 @@ class __$$V1CreateOnRampOrderRequestImplCopyWithImpl<$Res>
           ? _value.userSignature
           : userSignature // ignore: cast_nullable_to_non_nullable
               as String,
+      cryptoWalletAddress: null == cryptoWalletAddress
+          ? _value.cryptoWalletAddress
+          : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -184,7 +197,8 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
       required this.cryptoCurrency,
       required this.fiatAmount,
       required this.fiatCurrency,
-      required this.userSignature});
+      required this.userSignature,
+      required this.cryptoWalletAddress});
 
   factory _$V1CreateOnRampOrderRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -202,10 +216,12 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
   final String fiatCurrency;
   @override
   final String userSignature;
+  @override
+  final String cryptoWalletAddress;
 
   @override
   String toString() {
-    return 'V1CreateOnRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, userSignature: $userSignature)';
+    return 'V1CreateOnRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, userSignature: $userSignature, cryptoWalletAddress: $cryptoWalletAddress)';
   }
 
   @override
@@ -224,13 +240,22 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
             (identical(other.fiatCurrency, fiatCurrency) ||
                 other.fiatCurrency == fiatCurrency) &&
             (identical(other.userSignature, userSignature) ||
-                other.userSignature == userSignature));
+                other.userSignature == userSignature) &&
+            (identical(other.cryptoWalletAddress, cryptoWalletAddress) ||
+                other.cryptoWalletAddress == cryptoWalletAddress));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, partnerPublicKey, cryptoAmount,
-      cryptoCurrency, fiatAmount, fiatCurrency, userSignature);
+  int get hashCode => Object.hash(
+      runtimeType,
+      partnerPublicKey,
+      cryptoAmount,
+      cryptoCurrency,
+      fiatAmount,
+      fiatCurrency,
+      userSignature,
+      cryptoWalletAddress);
 
   /// Create a copy of V1CreateOnRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -252,12 +277,14 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
 abstract class _V1CreateOnRampOrderRequest
     implements V1CreateOnRampOrderRequest {
   const factory _V1CreateOnRampOrderRequest(
-      {required final String partnerPublicKey,
-      required final double cryptoAmount,
-      required final String cryptoCurrency,
-      required final double fiatAmount,
-      required final String fiatCurrency,
-      required final String userSignature}) = _$V1CreateOnRampOrderRequestImpl;
+          {required final String partnerPublicKey,
+          required final double cryptoAmount,
+          required final String cryptoCurrency,
+          required final double fiatAmount,
+          required final String fiatCurrency,
+          required final String userSignature,
+          required final String cryptoWalletAddress}) =
+      _$V1CreateOnRampOrderRequestImpl;
 
   factory _V1CreateOnRampOrderRequest.fromJson(Map<String, dynamic> json) =
       _$V1CreateOnRampOrderRequestImpl.fromJson;
@@ -274,6 +301,8 @@ abstract class _V1CreateOnRampOrderRequest
   String get fiatCurrency;
   @override
   String get userSignature;
+  @override
+  String get cryptoWalletAddress;
 
   /// Create a copy of V1CreateOnRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.

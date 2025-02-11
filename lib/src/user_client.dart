@@ -378,6 +378,7 @@ class KycUserClient {
     required String cryptoCurrency,
     required double fiatAmount,
     required String fiatCurrency,
+    required String cryptoWalletAddress,
   }) async {
     final signatureMessage = createUserOnRampMessage(
       cryptoAmount: cryptoAmount,
@@ -394,6 +395,7 @@ class KycUserClient {
         cryptoCurrency: cryptoCurrency,
         fiatAmount: fiatAmount,
         fiatCurrency: fiatCurrency,
+        cryptoWalletAddress: cryptoWalletAddress,
         userSignature: base58.encode(signature.signature.asTypedList),
       ),
     );

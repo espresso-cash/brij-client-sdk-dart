@@ -16,6 +16,7 @@ class V1CreateOnRampOrderRequest with _$V1CreateOnRampOrderRequest {
     required double fiatAmount,
     required String fiatCurrency,
     required String userSignature,
+    required String cryptoWalletAddress,
   }) = _V1CreateOnRampOrderRequest;
   
   factory V1CreateOnRampOrderRequest.fromJson(Map<String, Object?> json) => _$V1CreateOnRampOrderRequestFromJson(json);

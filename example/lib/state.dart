@@ -140,6 +140,7 @@ class WalletAppState extends ChangeNotifier {
       cryptoCurrency: currency,
       fiatAmount: double.parse(amount),
       fiatCurrency: currency,
+      cryptoWalletAddress: _wallet!.publicKey.toString(),
     );
 
     _onRampOrderId = orderId;
