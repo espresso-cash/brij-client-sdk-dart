@@ -14,7 +14,6 @@ class V1InitStorageRequest with _$V1InitStorageRequest {
     required String message,
     required String encryptedSecretKey,
     required String walletProofSignature,
-    required String walletProofMessage,
   }) = _V1InitStorageRequest;
   
   factory V1InitStorageRequest.fromJson(Map<String, Object?> json) => _$V1InitStorageRequestFromJson(json);
