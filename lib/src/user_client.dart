@@ -378,10 +378,11 @@ class KycUserClient {
 
   Future<String> createOnRampOrder({
     required String partnerPK,
-    required String cryptoAmount,
+    required double cryptoAmount,
     required String cryptoCurrency,
-    required String fiatAmount,
+    required double fiatAmount,
     required String fiatCurrency,
+    required String cryptoWalletAddress,
   }) async {
     final signatureMessage = createUserOnRampMessage(
       cryptoAmount: cryptoAmount,
@@ -398,6 +399,7 @@ class KycUserClient {
         cryptoCurrency: cryptoCurrency,
         fiatAmount: fiatAmount,
         fiatCurrency: fiatCurrency,
+        cryptoWalletAddress: cryptoWalletAddress,
         userSignature: base58.encode(signature.signature.asTypedList),
       ),
     );
@@ -407,9 +409,9 @@ class KycUserClient {
 
   Future<String> createOffRampOrder({
     required String partnerPK,
-    required String cryptoAmount,
+    required double cryptoAmount,
     required String cryptoCurrency,
-    required String fiatAmount,
+    required double fiatAmount,
     required String fiatCurrency,
     required String bankName,
     required String bankAccount,

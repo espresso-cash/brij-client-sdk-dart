@@ -10,11 +10,12 @@ _$V1CreateOnRampOrderRequestImpl _$$V1CreateOnRampOrderRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$V1CreateOnRampOrderRequestImpl(
       partnerPublicKey: json['partnerPublicKey'] as String,
-      cryptoAmount: json['cryptoAmount'] as String,
+      cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
       cryptoCurrency: json['cryptoCurrency'] as String,
-      fiatAmount: json['fiatAmount'] as String,
+      fiatAmount: (json['fiatAmount'] as num).toDouble(),
       fiatCurrency: json['fiatCurrency'] as String,
       userSignature: json['userSignature'] as String,
+      cryptoWalletAddress: json['cryptoWalletAddress'] as String,
     );
 
 Map<String, dynamic> _$$V1CreateOnRampOrderRequestImplToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$V1CreateOnRampOrderRequestImplToJson(
       'fiatAmount': instance.fiatAmount,
       'fiatCurrency': instance.fiatCurrency,
       'userSignature': instance.userSignature,
+      'cryptoWalletAddress': instance.cryptoWalletAddress,
     };

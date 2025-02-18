@@ -27,9 +27,9 @@ mixin _$V1GetOrderResponse {
   String get userPublicKey => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  String get cryptoAmount => throw _privateConstructorUsedError;
+  double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
-  String get fiatAmount => throw _privateConstructorUsedError;
+  double get fiatAmount => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
   String get bankName => throw _privateConstructorUsedError;
   String get bankAccount => throw _privateConstructorUsedError;
@@ -64,9 +64,9 @@ abstract class $V1GetOrderResponseCopyWith<$Res> {
       String userPublicKey,
       String comment,
       String type,
-      String cryptoAmount,
+      double cryptoAmount,
       String cryptoCurrency,
-      String fiatAmount,
+      double fiatAmount,
       String fiatCurrency,
       String bankName,
       String bankAccount,
@@ -145,7 +145,7 @@ class _$V1GetOrderResponseCopyWithImpl<$Res, $Val extends V1GetOrderResponse>
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       cryptoCurrency: null == cryptoCurrency
           ? _value.cryptoCurrency
           : cryptoCurrency // ignore: cast_nullable_to_non_nullable
@@ -153,7 +153,7 @@ class _$V1GetOrderResponseCopyWithImpl<$Res, $Val extends V1GetOrderResponse>
       fiatAmount: null == fiatAmount
           ? _value.fiatAmount
           : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       fiatCurrency: null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -210,9 +210,9 @@ abstract class _$$V1GetOrderResponseImplCopyWith<$Res>
       String userPublicKey,
       String comment,
       String type,
-      String cryptoAmount,
+      double cryptoAmount,
       String cryptoCurrency,
-      String fiatAmount,
+      double fiatAmount,
       String fiatCurrency,
       String bankName,
       String bankAccount,
@@ -289,7 +289,7 @@ class __$$V1GetOrderResponseImplCopyWithImpl<$Res>
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       cryptoCurrency: null == cryptoCurrency
           ? _value.cryptoCurrency
           : cryptoCurrency // ignore: cast_nullable_to_non_nullable
@@ -297,7 +297,7 @@ class __$$V1GetOrderResponseImplCopyWithImpl<$Res>
       fiatAmount: null == fiatAmount
           ? _value.fiatAmount
           : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       fiatCurrency: null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -380,11 +380,11 @@ class _$V1GetOrderResponseImpl implements _V1GetOrderResponse {
   @override
   final String type;
   @override
-  final String cryptoAmount;
+  final double cryptoAmount;
   @override
   final String cryptoCurrency;
   @override
-  final String fiatAmount;
+  final double fiatAmount;
   @override
   final String fiatCurrency;
   @override
@@ -500,9 +500,9 @@ abstract class _V1GetOrderResponse implements V1GetOrderResponse {
       required final String userPublicKey,
       required final String comment,
       required final String type,
-      required final String cryptoAmount,
+      required final double cryptoAmount,
       required final String cryptoCurrency,
-      required final String fiatAmount,
+      required final double fiatAmount,
       required final String fiatCurrency,
       required final String bankName,
       required final String bankAccount,
@@ -531,11 +531,11 @@ abstract class _V1GetOrderResponse implements V1GetOrderResponse {
   @override
   String get type;
   @override
-  String get cryptoAmount;
+  double get cryptoAmount;
   @override
   String get cryptoCurrency;
   @override
-  String get fiatAmount;
+  double get fiatAmount;
   @override
   String get fiatCurrency;
   @override
