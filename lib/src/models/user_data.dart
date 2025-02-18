@@ -101,6 +101,7 @@ class BankInfo with _$BankInfo {
     required String bankName,
     required String bankCode,
     required String accountNumber,
+    required String countryCode,
     @Default('') String id,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _BankInfo;

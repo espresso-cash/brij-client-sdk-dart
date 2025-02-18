@@ -297,6 +297,7 @@ class BankInfo extends $pb.GeneratedMessage {
     $core.String? accountNumber,
     $core.String? bankCode,
     $core.String? bankName,
+    $core.String? countryCode,
   }) {
     final $result = create();
     if (accountNumber != null) {
@@ -308,6 +309,9 @@ class BankInfo extends $pb.GeneratedMessage {
     if (bankName != null) {
       $result.bankName = bankName;
     }
+    if (countryCode != null) {
+      $result.countryCode = countryCode;
+    }
     return $result;
   }
   BankInfo._() : super();
@@ -318,6 +322,7 @@ class BankInfo extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'accountNumber')
     ..aOS(2, _omitFieldNames ? '' : 'bankCode')
     ..aOS(3, _omitFieldNames ? '' : 'bankName')
+    ..aOS(4, _omitFieldNames ? '' : 'countryCode')
     ..hasRequiredFields = false
   ;
 
@@ -368,6 +373,15 @@ class BankInfo extends $pb.GeneratedMessage {
   $core.bool hasBankName() => $_has(2);
   @$pb.TagNumber(3)
   void clearBankName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get countryCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set countryCode($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCountryCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCountryCode() => clearField(4);
 }
 
 class Email extends $pb.GeneratedMessage {

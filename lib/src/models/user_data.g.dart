@@ -165,6 +165,7 @@ _$BankInfoImpl _$$BankInfoImplFromJson(Map<String, dynamic> json) =>
       bankName: json['bankName'] as String,
       bankCode: json['bankCode'] as String,
       accountNumber: json['accountNumber'] as String,
+      countryCode: json['countryCode'] as String,
       id: json['id'] as String? ?? '',
       status: $enumDecodeNullable(_$ValidationStatusEnumMap, json['status']) ??
           ValidationStatus.unspecified,
@@ -175,6 +176,7 @@ Map<String, dynamic> _$$BankInfoImplToJson(_$BankInfoImpl instance) =>
       'bankName': instance.bankName,
       'bankCode': instance.bankCode,
       'accountNumber': instance.accountNumber,
+      'countryCode': instance.countryCode,
       'id': instance.id,
       'status': _$ValidationStatusEnumMap[instance.status]!,
     };

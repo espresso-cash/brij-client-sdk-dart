@@ -177,6 +177,7 @@ UserData _processUserData({
           bankName: wrappedData.bankName,
           accountNumber: wrappedData.accountNumber,
           bankCode: wrappedData.bankCode,
+          countryCode: wrappedData.countryCode,
           id: id,
           status: status,
         );

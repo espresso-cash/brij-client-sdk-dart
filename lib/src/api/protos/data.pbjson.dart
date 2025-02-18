@@ -127,13 +127,15 @@ const BankInfo$json = {
     {'1': 'account_number', '3': 1, '4': 1, '5': 9, '10': 'accountNumber'},
     {'1': 'bank_code', '3': 2, '4': 1, '5': 9, '10': 'bankCode'},
     {'1': 'bank_name', '3': 3, '4': 1, '5': 9, '10': 'bankName'},
+    {'1': 'country_code', '3': 4, '4': 1, '5': 9, '10': 'countryCode'},
   ],
 };
 
 /// Descriptor for `BankInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List bankInfoDescriptor = $convert.base64Decode(
     'CghCYW5rSW5mbxIlCg5hY2NvdW50X251bWJlchgBIAEoCVINYWNjb3VudE51bWJlchIbCgliYW'
-    '5rX2NvZGUYAiABKAlSCGJhbmtDb2RlEhsKCWJhbmtfbmFtZRgDIAEoCVIIYmFua05hbWU=');
+    '5rX2NvZGUYAiABKAlSCGJhbmtDb2RlEhsKCWJhbmtfbmFtZRgDIAEoCVIIYmFua05hbWUSIQoM'
+    'Y291bnRyeV9jb2RlGAQgASgJUgtjb3VudHJ5Q29kZQ==');
 
 @$core.Deprecated('Use emailDescriptor instead')
 const Email$json = {

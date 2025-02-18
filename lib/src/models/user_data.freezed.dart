@@ -1708,6 +1708,7 @@ mixin _$BankInfo {
   String get bankName => throw _privateConstructorUsedError;
   String get bankCode => throw _privateConstructorUsedError;
   String get accountNumber => throw _privateConstructorUsedError;
+  String get countryCode => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   ValidationStatus get status => throw _privateConstructorUsedError;
 
@@ -1730,6 +1731,7 @@ abstract class $BankInfoCopyWith<$Res> {
       {String bankName,
       String bankCode,
       String accountNumber,
+      String countryCode,
       String id,
       ValidationStatus status});
 }
@@ -1752,6 +1754,7 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
     Object? bankName = null,
     Object? bankCode = null,
     Object? accountNumber = null,
+    Object? countryCode = null,
     Object? id = null,
     Object? status = null,
   }) {
@@ -1767,6 +1770,10 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
       accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -1792,6 +1799,7 @@ abstract class _$$BankInfoImplCopyWith<$Res>
       {String bankName,
       String bankCode,
       String accountNumber,
+      String countryCode,
       String id,
       ValidationStatus status});
 }
@@ -1812,6 +1820,7 @@ class __$$BankInfoImplCopyWithImpl<$Res>
     Object? bankName = null,
     Object? bankCode = null,
     Object? accountNumber = null,
+    Object? countryCode = null,
     Object? id = null,
     Object? status = null,
   }) {
@@ -1827,6 +1836,10 @@ class __$$BankInfoImplCopyWithImpl<$Res>
       accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -1847,6 +1860,7 @@ class _$BankInfoImpl implements _BankInfo {
       {required this.bankName,
       required this.bankCode,
       required this.accountNumber,
+      required this.countryCode,
       this.id = '',
       this.status = ValidationStatus.unspecified});
 
@@ -1860,6 +1874,8 @@ class _$BankInfoImpl implements _BankInfo {
   @override
   final String accountNumber;
   @override
+  final String countryCode;
+  @override
   @JsonKey()
   final String id;
   @override
@@ -1868,7 +1884,7 @@ class _$BankInfoImpl implements _BankInfo {
 
   @override
   String toString() {
-    return 'BankInfo(bankName: $bankName, bankCode: $bankCode, accountNumber: $accountNumber, id: $id, status: $status)';
+    return 'BankInfo(bankName: $bankName, bankCode: $bankCode, accountNumber: $accountNumber, countryCode: $countryCode, id: $id, status: $status)';
   }
 
   @override
@@ -1882,14 +1898,16 @@ class _$BankInfoImpl implements _BankInfo {
                 other.bankCode == bankCode) &&
             (identical(other.accountNumber, accountNumber) ||
                 other.accountNumber == accountNumber) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, bankName, bankCode, accountNumber, id, status);
+  int get hashCode => Object.hash(
+      runtimeType, bankName, bankCode, accountNumber, countryCode, id, status);
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1912,6 +1930,7 @@ abstract class _BankInfo implements BankInfo {
       {required final String bankName,
       required final String bankCode,
       required final String accountNumber,
+      required final String countryCode,
       final String id,
       final ValidationStatus status}) = _$BankInfoImpl;
 
@@ -1924,6 +1943,8 @@ abstract class _BankInfo implements BankInfo {
   String get bankCode;
   @override
   String get accountNumber;
+  @override
+  String get countryCode;
   @override
   String get id;
   @override
