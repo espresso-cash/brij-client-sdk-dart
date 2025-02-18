@@ -22,6 +22,35 @@ class _StorageServiceClient implements StorageServiceClient {
   final ParseErrorLogger? errorLogger;
 
   @override
+  Future<dynamic> storageServiceCheckAccess(
+      {required V1CheckAccessRequest body}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/v1/checkAccess',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
   Future<V1GetInfoResponse> storageServiceGetInfo(
       {required V1GetInfoRequest body}) async {
     final _extra = <String, dynamic>{};
