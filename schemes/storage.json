@@ -439,7 +439,12 @@
       }
     },
     "v1CheckAccessResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "hasAccess": {
+          "type": "boolean"
+        }
+      }
     },
     "v1CustomValidationDataField": {
       "type": "object",

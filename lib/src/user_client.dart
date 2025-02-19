@@ -482,14 +482,9 @@ class KycUserClient {
         .toList();
   }
 
-  Future<bool> hasGrantedAccess(String partnerPK) async {
-    try {
-      await _storageClient.storageServiceCheckAccess(
+  Future<bool> hasGrantedAccess(String partnerPK) async => _storageClient
+      .storageServiceCheckAccess(
         body: V1CheckAccessRequest(partnerPublicKey: partnerPK),
-      );
-      return true;
-    } on Exception catch (_) {
-      return false;
-    }
-  }
+      )
+      .then((e) => e.hasAccess);
 }
