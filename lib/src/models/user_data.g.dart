@@ -20,15 +20,15 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       birthDate: json['birthDate'] == null
           ? null
           : BirthDate.fromJson(json['birthDate'] as Map<String, dynamic>),
-      document: json['document'] == null
-          ? null
-          : Document.fromJson(json['document'] as Map<String, dynamic>),
-      bankInfo: json['bankInfo'] == null
-          ? null
-          : BankInfo.fromJson(json['bankInfo'] as Map<String, dynamic>),
-      selfie: json['selfie'] == null
-          ? null
-          : Selfie.fromJson(json['selfie'] as Map<String, dynamic>),
+      documents: (json['documents'] as List<dynamic>?)
+          ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      bankInfos: (json['bankInfos'] as List<dynamic>?)
+          ?.map((e) => BankInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      selfies: (json['selfies'] as List<dynamic>?)
+          ?.map((e) => Selfie.fromJson(e as Map<String, dynamic>))
+          .toList(),
       custom: json['custom'] as Map<String, dynamic>?,
     );
 
@@ -38,9 +38,9 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'phone': instance.phone,
       'name': instance.name,
       'birthDate': instance.birthDate,
-      'document': instance.document,
-      'bankInfo': instance.bankInfo,
-      'selfie': instance.selfie,
+      'documents': instance.documents,
+      'bankInfos': instance.bankInfos,
+      'selfies': instance.selfies,
       'custom': instance.custom,
     };
 

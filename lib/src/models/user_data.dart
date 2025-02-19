@@ -12,9 +12,9 @@ class UserData with _$UserData {
     Phone? phone,
     Name? name,
     BirthDate? birthDate,
-    Document? document,
-    BankInfo? bankInfo,
-    Selfie? selfie,
+    List<Document>? documents,
+    List<BankInfo>? bankInfos,
+    List<Selfie>? selfies,
     Map<String, dynamic>? custom,
   }) = _UserData;
 

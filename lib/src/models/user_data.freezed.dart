@@ -24,9 +24,9 @@ mixin _$UserData {
   Phone? get phone => throw _privateConstructorUsedError;
   Name? get name => throw _privateConstructorUsedError;
   BirthDate? get birthDate => throw _privateConstructorUsedError;
-  Document? get document => throw _privateConstructorUsedError;
-  BankInfo? get bankInfo => throw _privateConstructorUsedError;
-  Selfie? get selfie => throw _privateConstructorUsedError;
+  List<Document>? get documents => throw _privateConstructorUsedError;
+  List<BankInfo>? get bankInfos => throw _privateConstructorUsedError;
+  List<Selfie>? get selfies => throw _privateConstructorUsedError;
   Map<String, dynamic>? get custom => throw _privateConstructorUsedError;
 
   /// Serializes this UserData to a JSON map.
@@ -49,18 +49,15 @@ abstract class $UserDataCopyWith<$Res> {
       Phone? phone,
       Name? name,
       BirthDate? birthDate,
-      Document? document,
-      BankInfo? bankInfo,
-      Selfie? selfie,
+      List<Document>? documents,
+      List<BankInfo>? bankInfos,
+      List<Selfie>? selfies,
       Map<String, dynamic>? custom});
 
   $EmailCopyWith<$Res>? get email;
   $PhoneCopyWith<$Res>? get phone;
   $NameCopyWith<$Res>? get name;
   $BirthDateCopyWith<$Res>? get birthDate;
-  $DocumentCopyWith<$Res>? get document;
-  $BankInfoCopyWith<$Res>? get bankInfo;
-  $SelfieCopyWith<$Res>? get selfie;
 }
 
 /// @nodoc
@@ -82,9 +79,9 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? phone = freezed,
     Object? name = freezed,
     Object? birthDate = freezed,
-    Object? document = freezed,
-    Object? bankInfo = freezed,
-    Object? selfie = freezed,
+    Object? documents = freezed,
+    Object? bankInfos = freezed,
+    Object? selfies = freezed,
     Object? custom = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,18 +101,18 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
               as BirthDate?,
-      document: freezed == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as Document?,
-      bankInfo: freezed == bankInfo
-          ? _value.bankInfo
-          : bankInfo // ignore: cast_nullable_to_non_nullable
-              as BankInfo?,
-      selfie: freezed == selfie
-          ? _value.selfie
-          : selfie // ignore: cast_nullable_to_non_nullable
-              as Selfie?,
+      documents: freezed == documents
+          ? _value.documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Document>?,
+      bankInfos: freezed == bankInfos
+          ? _value.bankInfos
+          : bankInfos // ignore: cast_nullable_to_non_nullable
+              as List<BankInfo>?,
+      selfies: freezed == selfies
+          ? _value.selfies
+          : selfies // ignore: cast_nullable_to_non_nullable
+              as List<Selfie>?,
       custom: freezed == custom
           ? _value.custom
           : custom // ignore: cast_nullable_to_non_nullable
@@ -178,48 +175,6 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
       return _then(_value.copyWith(birthDate: value) as $Val);
     });
   }
-
-  /// Create a copy of UserData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DocumentCopyWith<$Res>? get document {
-    if (_value.document == null) {
-      return null;
-    }
-
-    return $DocumentCopyWith<$Res>(_value.document!, (value) {
-      return _then(_value.copyWith(document: value) as $Val);
-    });
-  }
-
-  /// Create a copy of UserData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BankInfoCopyWith<$Res>? get bankInfo {
-    if (_value.bankInfo == null) {
-      return null;
-    }
-
-    return $BankInfoCopyWith<$Res>(_value.bankInfo!, (value) {
-      return _then(_value.copyWith(bankInfo: value) as $Val);
-    });
-  }
-
-  /// Create a copy of UserData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SelfieCopyWith<$Res>? get selfie {
-    if (_value.selfie == null) {
-      return null;
-    }
-
-    return $SelfieCopyWith<$Res>(_value.selfie!, (value) {
-      return _then(_value.copyWith(selfie: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -235,9 +190,9 @@ abstract class _$$UserDataImplCopyWith<$Res>
       Phone? phone,
       Name? name,
       BirthDate? birthDate,
-      Document? document,
-      BankInfo? bankInfo,
-      Selfie? selfie,
+      List<Document>? documents,
+      List<BankInfo>? bankInfos,
+      List<Selfie>? selfies,
       Map<String, dynamic>? custom});
 
   @override
@@ -248,12 +203,6 @@ abstract class _$$UserDataImplCopyWith<$Res>
   $NameCopyWith<$Res>? get name;
   @override
   $BirthDateCopyWith<$Res>? get birthDate;
-  @override
-  $DocumentCopyWith<$Res>? get document;
-  @override
-  $BankInfoCopyWith<$Res>? get bankInfo;
-  @override
-  $SelfieCopyWith<$Res>? get selfie;
 }
 
 /// @nodoc
@@ -273,9 +222,9 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? name = freezed,
     Object? birthDate = freezed,
-    Object? document = freezed,
-    Object? bankInfo = freezed,
-    Object? selfie = freezed,
+    Object? documents = freezed,
+    Object? bankInfos = freezed,
+    Object? selfies = freezed,
     Object? custom = freezed,
   }) {
     return _then(_$UserDataImpl(
@@ -295,18 +244,18 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
               as BirthDate?,
-      document: freezed == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as Document?,
-      bankInfo: freezed == bankInfo
-          ? _value.bankInfo
-          : bankInfo // ignore: cast_nullable_to_non_nullable
-              as BankInfo?,
-      selfie: freezed == selfie
-          ? _value.selfie
-          : selfie // ignore: cast_nullable_to_non_nullable
-              as Selfie?,
+      documents: freezed == documents
+          ? _value._documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Document>?,
+      bankInfos: freezed == bankInfos
+          ? _value._bankInfos
+          : bankInfos // ignore: cast_nullable_to_non_nullable
+              as List<BankInfo>?,
+      selfies: freezed == selfies
+          ? _value._selfies
+          : selfies // ignore: cast_nullable_to_non_nullable
+              as List<Selfie>?,
       custom: freezed == custom
           ? _value._custom
           : custom // ignore: cast_nullable_to_non_nullable
@@ -323,11 +272,14 @@ class _$UserDataImpl implements _UserData {
       this.phone,
       this.name,
       this.birthDate,
-      this.document,
-      this.bankInfo,
-      this.selfie,
+      final List<Document>? documents,
+      final List<BankInfo>? bankInfos,
+      final List<Selfie>? selfies,
       final Map<String, dynamic>? custom})
-      : _custom = custom;
+      : _documents = documents,
+        _bankInfos = bankInfos,
+        _selfies = selfies,
+        _custom = custom;
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
@@ -340,12 +292,36 @@ class _$UserDataImpl implements _UserData {
   final Name? name;
   @override
   final BirthDate? birthDate;
+  final List<Document>? _documents;
   @override
-  final Document? document;
+  List<Document>? get documents {
+    final value = _documents;
+    if (value == null) return null;
+    if (_documents is EqualUnmodifiableListView) return _documents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<BankInfo>? _bankInfos;
   @override
-  final BankInfo? bankInfo;
+  List<BankInfo>? get bankInfos {
+    final value = _bankInfos;
+    if (value == null) return null;
+    if (_bankInfos is EqualUnmodifiableListView) return _bankInfos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Selfie>? _selfies;
   @override
-  final Selfie? selfie;
+  List<Selfie>? get selfies {
+    final value = _selfies;
+    if (value == null) return null;
+    if (_selfies is EqualUnmodifiableListView) return _selfies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final Map<String, dynamic>? _custom;
   @override
   Map<String, dynamic>? get custom {
@@ -358,7 +334,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(email: $email, phone: $phone, name: $name, birthDate: $birthDate, document: $document, bankInfo: $bankInfo, selfie: $selfie, custom: $custom)';
+    return 'UserData(email: $email, phone: $phone, name: $name, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfies: $selfies, custom: $custom)';
   }
 
   @override
@@ -371,18 +347,26 @@ class _$UserDataImpl implements _UserData {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.birthDate, birthDate) ||
                 other.birthDate == birthDate) &&
-            (identical(other.document, document) ||
-                other.document == document) &&
-            (identical(other.bankInfo, bankInfo) ||
-                other.bankInfo == bankInfo) &&
-            (identical(other.selfie, selfie) || other.selfie == selfie) &&
+            const DeepCollectionEquality()
+                .equals(other._documents, _documents) &&
+            const DeepCollectionEquality()
+                .equals(other._bankInfos, _bankInfos) &&
+            const DeepCollectionEquality().equals(other._selfies, _selfies) &&
             const DeepCollectionEquality().equals(other._custom, _custom));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, phone, name, birthDate,
-      document, bankInfo, selfie, const DeepCollectionEquality().hash(_custom));
+  int get hashCode => Object.hash(
+      runtimeType,
+      email,
+      phone,
+      name,
+      birthDate,
+      const DeepCollectionEquality().hash(_documents),
+      const DeepCollectionEquality().hash(_bankInfos),
+      const DeepCollectionEquality().hash(_selfies),
+      const DeepCollectionEquality().hash(_custom));
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -406,9 +390,9 @@ abstract class _UserData implements UserData {
       final Phone? phone,
       final Name? name,
       final BirthDate? birthDate,
-      final Document? document,
-      final BankInfo? bankInfo,
-      final Selfie? selfie,
+      final List<Document>? documents,
+      final List<BankInfo>? bankInfos,
+      final List<Selfie>? selfies,
       final Map<String, dynamic>? custom}) = _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
@@ -423,11 +407,11 @@ abstract class _UserData implements UserData {
   @override
   BirthDate? get birthDate;
   @override
-  Document? get document;
+  List<Document>? get documents;
   @override
-  BankInfo? get bankInfo;
+  List<BankInfo>? get bankInfos;
   @override
-  Selfie? get selfie;
+  List<Selfie>? get selfies;
   @override
   Map<String, dynamic>? get custom;
 

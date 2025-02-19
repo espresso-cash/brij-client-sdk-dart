@@ -115,9 +115,9 @@ UserData _processUserData({
   Phone? phone;
   Name? name;
   BirthDate? birthDate;
-  Document? document;
-  BankInfo? bankInfo;
-  Selfie? selfie;
+  final List<Document> documents = [];
+  final List<BankInfo> bankInfos = [];
+  final List<Selfie> selfies = [];
 
   for (final encryptedData in response.userData) {
     final decryptedData = decrypt(
@@ -162,31 +162,35 @@ UserData _processUserData({
         );
       case V1DataType.dataTypeDocument:
         final wrappedData = proto.Document.fromBuffer(decryptedData);
-        document = Document(
-          type: wrappedData.type.toIdType(),
-          number: wrappedData.number,
-          countryCode: wrappedData.countryCode,
-          id: id,
-          status: status,
-          frontImage: wrappedData.photo.frontImage,
-          backImage: wrappedData.photo.backImage,
+        documents.add(
+          Document(
+            type: wrappedData.type.toIdType(),
+            number: wrappedData.number,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            status: status,
+            frontImage: wrappedData.photo.frontImage,
+            backImage: wrappedData.photo.backImage,
+          ),
         );
       case V1DataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
-        bankInfo = BankInfo(
+        bankInfos.add(BankInfo(
           bankName: wrappedData.bankName,
           accountNumber: wrappedData.accountNumber,
           bankCode: wrappedData.bankCode,
           countryCode: wrappedData.countryCode,
           id: id,
           status: status,
-        );
+        ));
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
-        selfie = Selfie(
-          value: wrappedData.value,
-          id: id,
-          status: status,
+        selfies.add(
+          Selfie(
+            value: wrappedData.value,
+            id: id,
+            status: status,
+          ),
         );
       case V1DataType.dataTypeUnspecified:
       case V1DataType.$unknown:
@@ -212,9 +216,9 @@ UserData _processUserData({
     phone: phone,
     name: name,
     birthDate: birthDate,
-    document: document,
-    bankInfo: bankInfo,
-    selfie: selfie,
+    documents: documents,
+    bankInfos: bankInfos,
+    selfies: selfies,
     custom: customValidationData,
   );
 }
