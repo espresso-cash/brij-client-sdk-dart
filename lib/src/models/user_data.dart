@@ -12,9 +12,9 @@ class UserData with _$UserData {
     Phone? phone,
     Name? name,
     BirthDate? birthDate,
-    Document? document,
-    BankInfo? bankInfo,
-    Selfie? selfie,
+    List<Document>? documents,
+    List<BankInfo>? bankInfos,
+    List<Selfie>? selfies,
     Map<String, dynamic>? custom,
   }) = _UserData;
 
@@ -85,6 +85,8 @@ class Document with _$Document {
     required IdType type,
     required String number,
     required String countryCode,
+    List<int>? frontImage,
+    List<int>? backImage,
     @Default('') String id,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Document;
@@ -99,6 +101,7 @@ class BankInfo with _$BankInfo {
     required String bankName,
     required String bankCode,
     required String accountNumber,
+    required String countryCode,
     @Default('') String id,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _BankInfo;

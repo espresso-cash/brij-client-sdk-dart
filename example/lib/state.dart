@@ -102,7 +102,7 @@ class WalletAppState extends ChangeNotifier {
 
       _emailId = data.email?.id ?? '';
       _phoneId = data.phone?.id ?? '';
-      _selfieId = data.selfie?.id ?? '';
+      _selfieId = data.selfies?.first.id ?? '';
 
       _email = data.email?.value ?? '-';
       _phone = data.phone?.value ?? '-';
