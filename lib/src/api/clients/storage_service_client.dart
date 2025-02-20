@@ -5,6 +5,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../models/v1_check_access_request.dart';
+import '../models/v1_check_access_response.dart';
 import '../models/v1_get_info_request.dart';
 import '../models/v1_get_info_response.dart';
 import '../models/v1_get_partner_info_request.dart';
@@ -33,6 +35,11 @@ part 'storage_service_client.g.dart';
 @RestApi()
 abstract class StorageServiceClient {
   factory StorageServiceClient(Dio dio, {String? baseUrl}) = _StorageServiceClient;
+
+  @POST('/v1/checkAccess')
+  Future<V1CheckAccessResponse> storageServiceCheckAccess({
+    @Body() required V1CheckAccessRequest body,
+  });
 
   @POST('/v1/getInfo')
   Future<V1GetInfoResponse> storageServiceGetInfo({
