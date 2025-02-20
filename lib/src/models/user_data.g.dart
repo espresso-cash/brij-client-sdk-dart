@@ -26,9 +26,9 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       bankInfos: (json['bankInfos'] as List<dynamic>?)
           ?.map((e) => BankInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
-      selfies: (json['selfies'] as List<dynamic>?)
-          ?.map((e) => Selfie.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      selfie: json['selfie'] == null
+          ? null
+          : Selfie.fromJson(json['selfie'] as Map<String, dynamic>),
       custom: json['custom'] as Map<String, dynamic>?,
     );
 
@@ -40,7 +40,7 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'birthDate': instance.birthDate,
       'documents': instance.documents,
       'bankInfos': instance.bankInfos,
-      'selfies': instance.selfies,
+      'selfie': instance.selfie,
       'custom': instance.custom,
     };
 

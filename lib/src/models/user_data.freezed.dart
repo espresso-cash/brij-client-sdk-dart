@@ -26,7 +26,7 @@ mixin _$UserData {
   BirthDate? get birthDate => throw _privateConstructorUsedError;
   List<Document>? get documents => throw _privateConstructorUsedError;
   List<BankInfo>? get bankInfos => throw _privateConstructorUsedError;
-  List<Selfie>? get selfies => throw _privateConstructorUsedError;
+  Selfie? get selfie => throw _privateConstructorUsedError;
   Map<String, dynamic>? get custom => throw _privateConstructorUsedError;
 
   /// Serializes this UserData to a JSON map.
@@ -51,13 +51,14 @@ abstract class $UserDataCopyWith<$Res> {
       BirthDate? birthDate,
       List<Document>? documents,
       List<BankInfo>? bankInfos,
-      List<Selfie>? selfies,
+      Selfie? selfie,
       Map<String, dynamic>? custom});
 
   $EmailCopyWith<$Res>? get email;
   $PhoneCopyWith<$Res>? get phone;
   $NameCopyWith<$Res>? get name;
   $BirthDateCopyWith<$Res>? get birthDate;
+  $SelfieCopyWith<$Res>? get selfie;
 }
 
 /// @nodoc
@@ -81,7 +82,7 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? birthDate = freezed,
     Object? documents = freezed,
     Object? bankInfos = freezed,
-    Object? selfies = freezed,
+    Object? selfie = freezed,
     Object? custom = freezed,
   }) {
     return _then(_value.copyWith(
@@ -109,10 +110,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.bankInfos
           : bankInfos // ignore: cast_nullable_to_non_nullable
               as List<BankInfo>?,
-      selfies: freezed == selfies
-          ? _value.selfies
-          : selfies // ignore: cast_nullable_to_non_nullable
-              as List<Selfie>?,
+      selfie: freezed == selfie
+          ? _value.selfie
+          : selfie // ignore: cast_nullable_to_non_nullable
+              as Selfie?,
       custom: freezed == custom
           ? _value.custom
           : custom // ignore: cast_nullable_to_non_nullable
@@ -175,6 +176,20 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
       return _then(_value.copyWith(birthDate: value) as $Val);
     });
   }
+
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SelfieCopyWith<$Res>? get selfie {
+    if (_value.selfie == null) {
+      return null;
+    }
+
+    return $SelfieCopyWith<$Res>(_value.selfie!, (value) {
+      return _then(_value.copyWith(selfie: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -192,7 +207,7 @@ abstract class _$$UserDataImplCopyWith<$Res>
       BirthDate? birthDate,
       List<Document>? documents,
       List<BankInfo>? bankInfos,
-      List<Selfie>? selfies,
+      Selfie? selfie,
       Map<String, dynamic>? custom});
 
   @override
@@ -203,6 +218,8 @@ abstract class _$$UserDataImplCopyWith<$Res>
   $NameCopyWith<$Res>? get name;
   @override
   $BirthDateCopyWith<$Res>? get birthDate;
+  @override
+  $SelfieCopyWith<$Res>? get selfie;
 }
 
 /// @nodoc
@@ -224,7 +241,7 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? birthDate = freezed,
     Object? documents = freezed,
     Object? bankInfos = freezed,
-    Object? selfies = freezed,
+    Object? selfie = freezed,
     Object? custom = freezed,
   }) {
     return _then(_$UserDataImpl(
@@ -252,10 +269,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value._bankInfos
           : bankInfos // ignore: cast_nullable_to_non_nullable
               as List<BankInfo>?,
-      selfies: freezed == selfies
-          ? _value._selfies
-          : selfies // ignore: cast_nullable_to_non_nullable
-              as List<Selfie>?,
+      selfie: freezed == selfie
+          ? _value.selfie
+          : selfie // ignore: cast_nullable_to_non_nullable
+              as Selfie?,
       custom: freezed == custom
           ? _value._custom
           : custom // ignore: cast_nullable_to_non_nullable
@@ -274,11 +291,10 @@ class _$UserDataImpl implements _UserData {
       this.birthDate,
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
-      final List<Selfie>? selfies,
+      this.selfie,
       final Map<String, dynamic>? custom})
       : _documents = documents,
         _bankInfos = bankInfos,
-        _selfies = selfies,
         _custom = custom;
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -312,16 +328,8 @@ class _$UserDataImpl implements _UserData {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<Selfie>? _selfies;
   @override
-  List<Selfie>? get selfies {
-    final value = _selfies;
-    if (value == null) return null;
-    if (_selfies is EqualUnmodifiableListView) return _selfies;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final Selfie? selfie;
   final Map<String, dynamic>? _custom;
   @override
   Map<String, dynamic>? get custom {
@@ -334,7 +342,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(email: $email, phone: $phone, name: $name, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfies: $selfies, custom: $custom)';
+    return 'UserData(email: $email, phone: $phone, name: $name, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfie: $selfie, custom: $custom)';
   }
 
   @override
@@ -351,7 +359,7 @@ class _$UserDataImpl implements _UserData {
                 .equals(other._documents, _documents) &&
             const DeepCollectionEquality()
                 .equals(other._bankInfos, _bankInfos) &&
-            const DeepCollectionEquality().equals(other._selfies, _selfies) &&
+            (identical(other.selfie, selfie) || other.selfie == selfie) &&
             const DeepCollectionEquality().equals(other._custom, _custom));
   }
 
@@ -365,7 +373,7 @@ class _$UserDataImpl implements _UserData {
       birthDate,
       const DeepCollectionEquality().hash(_documents),
       const DeepCollectionEquality().hash(_bankInfos),
-      const DeepCollectionEquality().hash(_selfies),
+      selfie,
       const DeepCollectionEquality().hash(_custom));
 
   /// Create a copy of UserData
@@ -392,7 +400,7 @@ abstract class _UserData implements UserData {
       final BirthDate? birthDate,
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
-      final List<Selfie>? selfies,
+      final Selfie? selfie,
       final Map<String, dynamic>? custom}) = _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
@@ -411,7 +419,7 @@ abstract class _UserData implements UserData {
   @override
   List<BankInfo>? get bankInfos;
   @override
-  List<Selfie>? get selfies;
+  Selfie? get selfie;
   @override
   Map<String, dynamic>? get custom;
 

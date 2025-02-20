@@ -117,7 +117,7 @@ UserData _processUserData({
   BirthDate? birthDate;
   final List<Document> documents = [];
   final List<BankInfo> bankInfos = [];
-  final List<Selfie> selfies = [];
+  Selfie? selfie;
 
   for (final encryptedData in response.userData) {
     final decryptedData = decrypt(
@@ -185,12 +185,10 @@ UserData _processUserData({
         ));
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
-        selfies.add(
-          Selfie(
-            value: wrappedData.value,
-            id: id,
-            status: status,
-          ),
+        selfie = Selfie(
+          value: wrappedData.value,
+          id: id,
+          status: status,
         );
       case V1DataType.dataTypeUnspecified:
       case V1DataType.$unknown:
@@ -218,7 +216,7 @@ UserData _processUserData({
     birthDate: birthDate,
     documents: documents,
     bankInfos: bankInfos,
-    selfies: selfies,
+    selfie: selfie,
     custom: customValidationData,
   );
 }

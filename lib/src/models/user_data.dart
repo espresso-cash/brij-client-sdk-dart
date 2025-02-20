@@ -14,7 +14,7 @@ class UserData with _$UserData {
     BirthDate? birthDate,
     List<Document>? documents,
     List<BankInfo>? bankInfos,
-    List<Selfie>? selfies,
+    Selfie? selfie,
     Map<String, dynamic>? custom,
   }) = _UserData;
 
