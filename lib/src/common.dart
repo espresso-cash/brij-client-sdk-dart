@@ -115,6 +115,7 @@ UserData _processUserData({
   Phone? phone;
   Name? name;
   BirthDate? birthDate;
+  Citizenship? citizenship;
   final List<Document> documents = [];
   final List<BankInfo> bankInfos = [];
   Selfie? selfie;
@@ -169,6 +170,7 @@ UserData _processUserData({
             countryCode: wrappedData.countryCode,
             id: id,
             status: status,
+            expirationDate: wrappedData.expirationDate.toDateTime(),
             frontImage: wrappedData.photo.frontImage,
             backImage: wrappedData.photo.backImage,
           ),
@@ -186,6 +188,13 @@ UserData _processUserData({
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
         selfie = Selfie(
+          value: wrappedData.value,
+          id: id,
+          status: status,
+        );
+      case V1DataType.dataTypeCitizenship:
+        final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
+        citizenship = Citizenship(
           value: wrappedData.value,
           id: id,
           status: status,
@@ -214,6 +223,7 @@ UserData _processUserData({
     phone: phone,
     name: name,
     birthDate: birthDate,
+    citizenship: citizenship,
     documents: documents,
     bankInfos: bankInfos,
     selfie: selfie,

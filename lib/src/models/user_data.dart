@@ -11,6 +11,7 @@ class UserData with _$UserData {
     Email? email,
     Phone? phone,
     Name? name,
+    Citizenship? citizenship,
     BirthDate? birthDate,
     List<Document>? documents,
     List<BankInfo>? bankInfos,
@@ -68,6 +69,18 @@ class Name with _$Name {
 }
 
 @freezed
+class Citizenship with _$Citizenship {
+  const factory Citizenship({
+    required String value,
+    @Default('') String id,
+    @Default(ValidationStatus.unspecified) ValidationStatus status,
+  }) = _Citizenship;
+
+  factory Citizenship.fromJson(Map<String, dynamic> json) =>
+      _$CitizenshipFromJson(json);
+}
+
+@freezed
 class BirthDate with _$BirthDate {
   const factory BirthDate({
     required DateTime value,
@@ -85,6 +98,7 @@ class Document with _$Document {
     required IdType type,
     required String number,
     required String countryCode,
+    DateTime? expirationDate,
     List<int>? frontImage,
     List<int>? backImage,
     @Default('') String id,

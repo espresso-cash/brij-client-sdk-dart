@@ -23,6 +23,7 @@ mixin _$UserData {
   Email? get email => throw _privateConstructorUsedError;
   Phone? get phone => throw _privateConstructorUsedError;
   Name? get name => throw _privateConstructorUsedError;
+  Citizenship? get citizenship => throw _privateConstructorUsedError;
   BirthDate? get birthDate => throw _privateConstructorUsedError;
   List<Document>? get documents => throw _privateConstructorUsedError;
   List<BankInfo>? get bankInfos => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $UserDataCopyWith<$Res> {
       {Email? email,
       Phone? phone,
       Name? name,
+      Citizenship? citizenship,
       BirthDate? birthDate,
       List<Document>? documents,
       List<BankInfo>? bankInfos,
@@ -57,6 +59,7 @@ abstract class $UserDataCopyWith<$Res> {
   $EmailCopyWith<$Res>? get email;
   $PhoneCopyWith<$Res>? get phone;
   $NameCopyWith<$Res>? get name;
+  $CitizenshipCopyWith<$Res>? get citizenship;
   $BirthDateCopyWith<$Res>? get birthDate;
   $SelfieCopyWith<$Res>? get selfie;
 }
@@ -79,6 +82,7 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? email = freezed,
     Object? phone = freezed,
     Object? name = freezed,
+    Object? citizenship = freezed,
     Object? birthDate = freezed,
     Object? documents = freezed,
     Object? bankInfos = freezed,
@@ -98,6 +102,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name?,
+      citizenship: freezed == citizenship
+          ? _value.citizenship
+          : citizenship // ignore: cast_nullable_to_non_nullable
+              as Citizenship?,
       birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
@@ -167,6 +175,20 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $CitizenshipCopyWith<$Res>? get citizenship {
+    if (_value.citizenship == null) {
+      return null;
+    }
+
+    return $CitizenshipCopyWith<$Res>(_value.citizenship!, (value) {
+      return _then(_value.copyWith(citizenship: value) as $Val);
+    });
+  }
+
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $BirthDateCopyWith<$Res>? get birthDate {
     if (_value.birthDate == null) {
       return null;
@@ -204,6 +226,7 @@ abstract class _$$UserDataImplCopyWith<$Res>
       {Email? email,
       Phone? phone,
       Name? name,
+      Citizenship? citizenship,
       BirthDate? birthDate,
       List<Document>? documents,
       List<BankInfo>? bankInfos,
@@ -216,6 +239,8 @@ abstract class _$$UserDataImplCopyWith<$Res>
   $PhoneCopyWith<$Res>? get phone;
   @override
   $NameCopyWith<$Res>? get name;
+  @override
+  $CitizenshipCopyWith<$Res>? get citizenship;
   @override
   $BirthDateCopyWith<$Res>? get birthDate;
   @override
@@ -238,6 +263,7 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? email = freezed,
     Object? phone = freezed,
     Object? name = freezed,
+    Object? citizenship = freezed,
     Object? birthDate = freezed,
     Object? documents = freezed,
     Object? bankInfos = freezed,
@@ -257,6 +283,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name?,
+      citizenship: freezed == citizenship
+          ? _value.citizenship
+          : citizenship // ignore: cast_nullable_to_non_nullable
+              as Citizenship?,
       birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
@@ -288,6 +318,7 @@ class _$UserDataImpl implements _UserData {
       {this.email,
       this.phone,
       this.name,
+      this.citizenship,
       this.birthDate,
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
@@ -306,6 +337,8 @@ class _$UserDataImpl implements _UserData {
   final Phone? phone;
   @override
   final Name? name;
+  @override
+  final Citizenship? citizenship;
   @override
   final BirthDate? birthDate;
   final List<Document>? _documents;
@@ -342,7 +375,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(email: $email, phone: $phone, name: $name, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfie: $selfie, custom: $custom)';
+    return 'UserData(email: $email, phone: $phone, name: $name, citizenship: $citizenship, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfie: $selfie, custom: $custom)';
   }
 
   @override
@@ -353,6 +386,8 @@ class _$UserDataImpl implements _UserData {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.citizenship, citizenship) ||
+                other.citizenship == citizenship) &&
             (identical(other.birthDate, birthDate) ||
                 other.birthDate == birthDate) &&
             const DeepCollectionEquality()
@@ -370,6 +405,7 @@ class _$UserDataImpl implements _UserData {
       email,
       phone,
       name,
+      citizenship,
       birthDate,
       const DeepCollectionEquality().hash(_documents),
       const DeepCollectionEquality().hash(_bankInfos),
@@ -397,6 +433,7 @@ abstract class _UserData implements UserData {
       {final Email? email,
       final Phone? phone,
       final Name? name,
+      final Citizenship? citizenship,
       final BirthDate? birthDate,
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
@@ -412,6 +449,8 @@ abstract class _UserData implements UserData {
   Phone? get phone;
   @override
   Name? get name;
+  @override
+  Citizenship? get citizenship;
   @override
   BirthDate? get birthDate;
   @override
@@ -1200,6 +1239,195 @@ abstract class _Name implements Name {
       throw _privateConstructorUsedError;
 }
 
+Citizenship _$CitizenshipFromJson(Map<String, dynamic> json) {
+  return _Citizenship.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Citizenship {
+  String get value => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  ValidationStatus get status => throw _privateConstructorUsedError;
+
+  /// Serializes this Citizenship to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CitizenshipCopyWith<Citizenship> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CitizenshipCopyWith<$Res> {
+  factory $CitizenshipCopyWith(
+          Citizenship value, $Res Function(Citizenship) then) =
+      _$CitizenshipCopyWithImpl<$Res, Citizenship>;
+  @useResult
+  $Res call({String value, String id, ValidationStatus status});
+}
+
+/// @nodoc
+class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
+    implements $CitizenshipCopyWith<$Res> {
+  _$CitizenshipCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+    Object? id = null,
+    Object? status = null,
+  }) {
+    return _then(_value.copyWith(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ValidationStatus,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CitizenshipImplCopyWith<$Res>
+    implements $CitizenshipCopyWith<$Res> {
+  factory _$$CitizenshipImplCopyWith(
+          _$CitizenshipImpl value, $Res Function(_$CitizenshipImpl) then) =
+      __$$CitizenshipImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String value, String id, ValidationStatus status});
+}
+
+/// @nodoc
+class __$$CitizenshipImplCopyWithImpl<$Res>
+    extends _$CitizenshipCopyWithImpl<$Res, _$CitizenshipImpl>
+    implements _$$CitizenshipImplCopyWith<$Res> {
+  __$$CitizenshipImplCopyWithImpl(
+      _$CitizenshipImpl _value, $Res Function(_$CitizenshipImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+    Object? id = null,
+    Object? status = null,
+  }) {
+    return _then(_$CitizenshipImpl(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ValidationStatus,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CitizenshipImpl implements _Citizenship {
+  const _$CitizenshipImpl(
+      {required this.value,
+      this.id = '',
+      this.status = ValidationStatus.unspecified});
+
+  factory _$CitizenshipImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CitizenshipImplFromJson(json);
+
+  @override
+  final String value;
+  @override
+  @JsonKey()
+  final String id;
+  @override
+  @JsonKey()
+  final ValidationStatus status;
+
+  @override
+  String toString() {
+    return 'Citizenship(value: $value, id: $id, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CitizenshipImpl &&
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, value, id, status);
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith =>
+      __$$CitizenshipImplCopyWithImpl<_$CitizenshipImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CitizenshipImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Citizenship implements Citizenship {
+  const factory _Citizenship(
+      {required final String value,
+      final String id,
+      final ValidationStatus status}) = _$CitizenshipImpl;
+
+  factory _Citizenship.fromJson(Map<String, dynamic> json) =
+      _$CitizenshipImpl.fromJson;
+
+  @override
+  String get value;
+  @override
+  String get id;
+  @override
+  ValidationStatus get status;
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 BirthDate _$BirthDateFromJson(Map<String, dynamic> json) {
   return _BirthDate.fromJson(json);
 }
@@ -1397,6 +1625,7 @@ mixin _$Document {
   IdType get type => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
   String get countryCode => throw _privateConstructorUsedError;
+  DateTime? get expirationDate => throw _privateConstructorUsedError;
   List<int>? get frontImage => throw _privateConstructorUsedError;
   List<int>? get backImage => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
@@ -1421,6 +1650,7 @@ abstract class $DocumentCopyWith<$Res> {
       {IdType type,
       String number,
       String countryCode,
+      DateTime? expirationDate,
       List<int>? frontImage,
       List<int>? backImage,
       String id,
@@ -1445,6 +1675,7 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? type = null,
     Object? number = null,
     Object? countryCode = null,
+    Object? expirationDate = freezed,
     Object? frontImage = freezed,
     Object? backImage = freezed,
     Object? id = null,
@@ -1463,6 +1694,10 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      expirationDate: freezed == expirationDate
+          ? _value.expirationDate
+          : expirationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       frontImage: freezed == frontImage
           ? _value.frontImage
           : frontImage // ignore: cast_nullable_to_non_nullable
@@ -1495,6 +1730,7 @@ abstract class _$$DocumentImplCopyWith<$Res>
       {IdType type,
       String number,
       String countryCode,
+      DateTime? expirationDate,
       List<int>? frontImage,
       List<int>? backImage,
       String id,
@@ -1517,6 +1753,7 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? type = null,
     Object? number = null,
     Object? countryCode = null,
+    Object? expirationDate = freezed,
     Object? frontImage = freezed,
     Object? backImage = freezed,
     Object? id = null,
@@ -1535,6 +1772,10 @@ class __$$DocumentImplCopyWithImpl<$Res>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      expirationDate: freezed == expirationDate
+          ? _value.expirationDate
+          : expirationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       frontImage: freezed == frontImage
           ? _value._frontImage
           : frontImage // ignore: cast_nullable_to_non_nullable
@@ -1562,6 +1803,7 @@ class _$DocumentImpl implements _Document {
       {required this.type,
       required this.number,
       required this.countryCode,
+      this.expirationDate,
       final List<int>? frontImage,
       final List<int>? backImage,
       this.id = '',
@@ -1578,6 +1820,8 @@ class _$DocumentImpl implements _Document {
   final String number;
   @override
   final String countryCode;
+  @override
+  final DateTime? expirationDate;
   final List<int>? _frontImage;
   @override
   List<int>? get frontImage {
@@ -1607,7 +1851,7 @@ class _$DocumentImpl implements _Document {
 
   @override
   String toString() {
-    return 'Document(type: $type, number: $number, countryCode: $countryCode, frontImage: $frontImage, backImage: $backImage, id: $id, status: $status)';
+    return 'Document(type: $type, number: $number, countryCode: $countryCode, expirationDate: $expirationDate, frontImage: $frontImage, backImage: $backImage, id: $id, status: $status)';
   }
 
   @override
@@ -1619,6 +1863,8 @@ class _$DocumentImpl implements _Document {
             (identical(other.number, number) || other.number == number) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
+            (identical(other.expirationDate, expirationDate) ||
+                other.expirationDate == expirationDate) &&
             const DeepCollectionEquality()
                 .equals(other._frontImage, _frontImage) &&
             const DeepCollectionEquality()
@@ -1634,6 +1880,7 @@ class _$DocumentImpl implements _Document {
       type,
       number,
       countryCode,
+      expirationDate,
       const DeepCollectionEquality().hash(_frontImage),
       const DeepCollectionEquality().hash(_backImage),
       id,
@@ -1660,6 +1907,7 @@ abstract class _Document implements Document {
       {required final IdType type,
       required final String number,
       required final String countryCode,
+      final DateTime? expirationDate,
       final List<int>? frontImage,
       final List<int>? backImage,
       final String id,
@@ -1674,6 +1922,8 @@ abstract class _Document implements Document {
   String get number;
   @override
   String get countryCode;
+  @override
+  DateTime? get expirationDate;
   @override
   List<int>? get frontImage;
   @override

@@ -17,6 +17,9 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] == null
           ? null
           : Name.fromJson(json['name'] as Map<String, dynamic>),
+      citizenship: json['citizenship'] == null
+          ? null
+          : Citizenship.fromJson(json['citizenship'] as Map<String, dynamic>),
       birthDate: json['birthDate'] == null
           ? null
           : BirthDate.fromJson(json['birthDate'] as Map<String, dynamic>),
@@ -37,6 +40,7 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'name': instance.name,
+      'citizenship': instance.citizenship,
       'birthDate': instance.birthDate,
       'documents': instance.documents,
       'bankInfos': instance.bankInfos,
@@ -112,6 +116,21 @@ Map<String, dynamic> _$$NameImplToJson(_$NameImpl instance) =>
       'status': _$ValidationStatusEnumMap[instance.status]!,
     };
 
+_$CitizenshipImpl _$$CitizenshipImplFromJson(Map<String, dynamic> json) =>
+    _$CitizenshipImpl(
+      value: json['value'] as String,
+      id: json['id'] as String? ?? '',
+      status: $enumDecodeNullable(_$ValidationStatusEnumMap, json['status']) ??
+          ValidationStatus.unspecified,
+    );
+
+Map<String, dynamic> _$$CitizenshipImplToJson(_$CitizenshipImpl instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'id': instance.id,
+      'status': _$ValidationStatusEnumMap[instance.status]!,
+    };
+
 _$BirthDateImpl _$$BirthDateImplFromJson(Map<String, dynamic> json) =>
     _$BirthDateImpl(
       value: DateTime.parse(json['value'] as String),
@@ -132,6 +151,9 @@ _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$IdTypeEnumMap, json['type']),
       number: json['number'] as String,
       countryCode: json['countryCode'] as String,
+      expirationDate: json['expirationDate'] == null
+          ? null
+          : DateTime.parse(json['expirationDate'] as String),
       frontImage: (json['frontImage'] as List<dynamic>?)
           ?.map((e) => (e as num).toInt())
           .toList(),
@@ -148,6 +170,7 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
       'type': _$IdTypeEnumMap[instance.type]!,
       'number': instance.number,
       'countryCode': instance.countryCode,
+      'expirationDate': instance.expirationDate?.toIso8601String(),
       'frontImage': instance.frontImage,
       'backImage': instance.backImage,
       'id': instance.id,
