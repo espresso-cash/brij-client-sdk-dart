@@ -22,6 +22,7 @@ class DataType extends $pb.ProtobufEnum {
   static const DataType DATA_TYPE_DOCUMENT = DataType._(5, _omitEnumNames ? '' : 'DATA_TYPE_DOCUMENT');
   static const DataType DATA_TYPE_BANK_INFO = DataType._(6, _omitEnumNames ? '' : 'DATA_TYPE_BANK_INFO');
   static const DataType DATA_TYPE_SELFIE_IMAGE = DataType._(7, _omitEnumNames ? '' : 'DATA_TYPE_SELFIE_IMAGE');
+  static const DataType DATA_TYPE_CITIZENSHIP = DataType._(8, _omitEnumNames ? '' : 'DATA_TYPE_CITIZENSHIP');
 
   static const $core.List<DataType> values = <DataType> [
     DATA_TYPE_UNSPECIFIED,
@@ -32,6 +33,7 @@ class DataType extends $pb.ProtobufEnum {
     DATA_TYPE_DOCUMENT,
     DATA_TYPE_BANK_INFO,
     DATA_TYPE_SELFIE_IMAGE,
+    DATA_TYPE_CITIZENSHIP,
   ];
 
   static final $core.Map<$core.int, DataType> _byValue = $pb.ProtobufEnum.initByValue(values);

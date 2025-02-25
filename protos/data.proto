@@ -15,6 +15,7 @@ enum DataType {
   DATA_TYPE_DOCUMENT = 5;
   DATA_TYPE_BANK_INFO = 6;
   DATA_TYPE_SELFIE_IMAGE = 7;
+  DATA_TYPE_CITIZENSHIP = 8;
 }
 
 message Name {
@@ -38,7 +39,8 @@ message Document {
   DocumentType type = 1;
   string number = 2;
   string country_code = 3;
-  optional DocumentPhoto photo = 4;
+  optional google.protobuf.Timestamp expiration_date = 4;
+  optional DocumentPhoto photo = 5;
 }
 
 message DocumentPhoto {
@@ -62,5 +64,9 @@ message SelfieImage {
 }
 
 message Phone {
+  string value = 1;
+}
+
+message Citizenship {
   string value = 1;
 }

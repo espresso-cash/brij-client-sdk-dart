@@ -25,6 +25,7 @@ const DataType$json = {
     {'1': 'DATA_TYPE_DOCUMENT', '2': 5},
     {'1': 'DATA_TYPE_BANK_INFO', '2': 6},
     {'1': 'DATA_TYPE_SELFIE_IMAGE', '2': 7},
+    {'1': 'DATA_TYPE_CITIZENSHIP', '2': 8},
   ],
 };
 
@@ -33,7 +34,8 @@ final $typed_data.Uint8List dataTypeDescriptor = $convert.base64Decode(
     'CghEYXRhVHlwZRIZChVEQVRBX1RZUEVfVU5TUEVDSUZJRUQQABITCg9EQVRBX1RZUEVfUEhPTk'
     'UQARITCg9EQVRBX1RZUEVfRU1BSUwQAhISCg5EQVRBX1RZUEVfTkFNRRADEhgKFERBVEFfVFlQ'
     'RV9CSVJUSF9EQVRFEAQSFgoSREFUQV9UWVBFX0RPQ1VNRU5UEAUSFwoTREFUQV9UWVBFX0JBTk'
-    'tfSU5GTxAGEhoKFkRBVEFfVFlQRV9TRUxGSUVfSU1BR0UQBw==');
+    'tfSU5GTxAGEhoKFkRBVEFfVFlQRV9TRUxGSUVfSU1BR0UQBxIZChVEQVRBX1RZUEVfQ0lUSVpF'
+    'TlNISVAQCA==');
 
 @$core.Deprecated('Use documentTypeDescriptor instead')
 const DocumentType$json = {
@@ -87,9 +89,11 @@ const Document$json = {
     {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.brij.storage.v1.DocumentType', '10': 'type'},
     {'1': 'number', '3': 2, '4': 1, '5': 9, '10': 'number'},
     {'1': 'country_code', '3': 3, '4': 1, '5': 9, '10': 'countryCode'},
-    {'1': 'photo', '3': 4, '4': 1, '5': 11, '6': '.brij.storage.v1.DocumentPhoto', '9': 0, '10': 'photo', '17': true},
+    {'1': 'expiration_date', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '9': 0, '10': 'expirationDate', '17': true},
+    {'1': 'photo', '3': 5, '4': 1, '5': 11, '6': '.brij.storage.v1.DocumentPhoto', '9': 1, '10': 'photo', '17': true},
   ],
   '8': [
+    {'1': '_expiration_date'},
     {'1': '_photo'},
   ],
 };
@@ -98,8 +102,10 @@ const Document$json = {
 final $typed_data.Uint8List documentDescriptor = $convert.base64Decode(
     'CghEb2N1bWVudBIxCgR0eXBlGAEgASgOMh0uYnJpai5zdG9yYWdlLnYxLkRvY3VtZW50VHlwZV'
     'IEdHlwZRIWCgZudW1iZXIYAiABKAlSBm51bWJlchIhCgxjb3VudHJ5X2NvZGUYAyABKAlSC2Nv'
-    'dW50cnlDb2RlEjkKBXBob3RvGAQgASgLMh4uYnJpai5zdG9yYWdlLnYxLkRvY3VtZW50UGhvdG'
-    '9IAFIFcGhvdG+IAQFCCAoGX3Bob3Rv');
+    'dW50cnlDb2RlEkgKD2V4cGlyYXRpb25fZGF0ZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW'
+    '1lc3RhbXBIAFIOZXhwaXJhdGlvbkRhdGWIAQESOQoFcGhvdG8YBSABKAsyHi5icmlqLnN0b3Jh'
+    'Z2UudjEuRG9jdW1lbnRQaG90b0gBUgVwaG90b4gBAUISChBfZXhwaXJhdGlvbl9kYXRlQggKBl'
+    '9waG90bw==');
 
 @$core.Deprecated('Use documentPhotoDescriptor instead')
 const DocumentPhoto$json = {
@@ -172,4 +178,16 @@ const Phone$json = {
 /// Descriptor for `Phone`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List phoneDescriptor = $convert.base64Decode(
     'CgVQaG9uZRIUCgV2YWx1ZRgBIAEoCVIFdmFsdWU=');
+
+@$core.Deprecated('Use citizenshipDescriptor instead')
+const Citizenship$json = {
+  '1': 'Citizenship',
+  '2': [
+    {'1': 'value', '3': 1, '4': 1, '5': 9, '10': 'value'},
+  ],
+};
+
+/// Descriptor for `Citizenship`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List citizenshipDescriptor = $convert.base64Decode(
+    'CgtDaXRpemVuc2hpcBIUCgV2YWx1ZRgBIAEoCVIFdmFsdWU=');
 
