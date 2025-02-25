@@ -11,6 +11,8 @@ _$V1GetPartnerInfoResponseImpl _$$V1GetPartnerInfoResponseImplFromJson(
     _$V1GetPartnerInfoResponseImpl(
       name: json['name'] as String,
       publicKey: json['publicKey'] as String,
+      privacyUrl: json['privacyUrl'] as String,
+      termsUrl: json['termsUrl'] as String,
     );
 
 Map<String, dynamic> _$$V1GetPartnerInfoResponseImplToJson(
@@ -18,4 +20,6 @@ Map<String, dynamic> _$$V1GetPartnerInfoResponseImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'publicKey': instance.publicKey,
+      'privacyUrl': instance.privacyUrl,
+      'termsUrl': instance.termsUrl,
     };
