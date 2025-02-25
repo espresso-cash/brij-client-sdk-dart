@@ -248,6 +248,10 @@ class KycUserClient {
             number: document.number,
             type: document.type.toDocumentType(),
             countryCode: document.countryCode,
+            photo: proto.DocumentPhoto(
+              frontImage: document.frontImage,
+              backImage: document.backImage,
+            ),
           ),
           type: V1DataType.dataTypeDocument,
           id: document.id,

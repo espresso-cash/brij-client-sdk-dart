@@ -115,8 +115,8 @@ UserData _processUserData({
   Phone? phone;
   Name? name;
   BirthDate? birthDate;
-  Document? document;
-  BankInfo? bankInfo;
+  final List<Document> documents = [];
+  final List<BankInfo> bankInfos = [];
   Selfie? selfie;
 
   for (final encryptedData in response.userData) {
@@ -162,22 +162,27 @@ UserData _processUserData({
         );
       case V1DataType.dataTypeDocument:
         final wrappedData = proto.Document.fromBuffer(decryptedData);
-        document = Document(
-          type: wrappedData.type.toIdType(),
-          number: wrappedData.number,
-          countryCode: wrappedData.countryCode,
-          id: id,
-          status: status,
+        documents.add(
+          Document(
+            type: wrappedData.type.toIdType(),
+            number: wrappedData.number,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            status: status,
+            frontImage: wrappedData.photo.frontImage,
+            backImage: wrappedData.photo.backImage,
+          ),
         );
       case V1DataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
-        bankInfo = BankInfo(
+        bankInfos.add(BankInfo(
           bankName: wrappedData.bankName,
           accountNumber: wrappedData.accountNumber,
           bankCode: wrappedData.bankCode,
+          countryCode: wrappedData.countryCode,
           id: id,
           status: status,
-        );
+        ));
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
         selfie = Selfie(
@@ -209,8 +214,8 @@ UserData _processUserData({
     phone: phone,
     name: name,
     birthDate: birthDate,
-    document: document,
-    bankInfo: bankInfo,
+    documents: documents,
+    bankInfos: bankInfos,
     selfie: selfie,
     custom: customValidationData,
   );
