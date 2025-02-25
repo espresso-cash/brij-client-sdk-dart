@@ -8,6 +8,7 @@ import 'package:kyc_client_dart/src/api/clients/order_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/validator_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
+import 'package:kyc_client_dart/src/api/models/v1_check_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
@@ -484,4 +485,10 @@ class KycUserClient {
         )
         .toList();
   }
+
+  Future<bool> hasGrantedAccess(String partnerPK) async => _storageClient
+      .storageServiceCheckAccess(
+        body: V1CheckAccessRequest(partnerPublicKey: partnerPK),
+      )
+      .then((e) => e.hasAccess);
 }
