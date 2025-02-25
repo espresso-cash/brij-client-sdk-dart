@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bs58/bs58.dart';
 import 'package:cryptography/cryptography.dart' hide PublicKey, SecretBox;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
+import 'package:dfunc/dfunc.dart';
 import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/src/api/clients/order_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
@@ -216,6 +217,7 @@ class KycUserClient {
     Phone? phone,
     Name? name,
     Document? document,
+    Citizenship? citizenship,
     BankInfo? bankInfo,
     BirthDate? dob,
     Selfie? selfie,
@@ -248,6 +250,11 @@ class KycUserClient {
             number: document.number,
             type: document.type.toDocumentType(),
             countryCode: document.countryCode,
+            expirationDate: document.expirationDate?.let(
+              (date) => Timestamp.fromDateTime(
+                DateTime.utc(date.year, date.month, date.day),
+              ),
+            ),
             photo: proto.DocumentPhoto(
               frontImage: document.frontImage,
               backImage: document.backImage,
@@ -262,6 +269,7 @@ class KycUserClient {
             bankName: bankInfo.bankName,
             accountNumber: bankInfo.accountNumber,
             bankCode: bankInfo.bankCode,
+            countryCode: bankInfo.countryCode,
           ),
           type: V1DataType.dataTypeBankInfo,
           id: bankInfo.id,
@@ -275,6 +283,14 @@ class KycUserClient {
           ),
           type: V1DataType.dataTypeBirthDate,
           id: dob.id
+        ),
+      if (citizenship != null)
+        (
+          data: proto.Citizenship(
+            value: citizenship.value,
+          ),
+          type: V1DataType.dataTypeCitizenship,
+          id: citizenship.id,
         ),
       if (selfie != null)
         (
