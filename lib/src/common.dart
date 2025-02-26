@@ -21,7 +21,7 @@ export 'models/validation_result.dart';
 
 String generateHash(Object data) {
   final bytes = switch (data) {
-    GeneratedMessage() => _serializeProto(data),
+    GeneratedMessage() => serializeProto(data),
     Uint8List() => data,
     String() => Uint8List.fromList(utf8.encode(data)),
     _ => throw ArgumentError('Unsupported type: ${data.runtimeType}')
@@ -30,7 +30,7 @@ String generateHash(Object data) {
   return hex.encode(Hash.sha256(bytes));
 }
 
-Uint8List _serializeProto(GeneratedMessage data) {
+Uint8List serializeProto(GeneratedMessage data) {
   if (data.runtimeType == proto.BirthDate) {
     final value = data as proto.BirthDate;
     data = proto.BirthDate(value: Timestamp()..seconds = value.value.seconds);
