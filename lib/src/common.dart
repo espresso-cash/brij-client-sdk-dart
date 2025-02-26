@@ -126,7 +126,7 @@ UserData _processUserData({
     );
 
     final id = encryptedData.id;
-
+    final hash = encryptedData.hash;
     final verificationData = validationMap[id];
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
@@ -137,6 +137,7 @@ UserData _processUserData({
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeName:
         final wrappedData = proto.Name.fromBuffer(decryptedData);
@@ -145,6 +146,7 @@ UserData _processUserData({
           lastName: wrappedData.lastName,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeBirthDate:
         final wrappedData = proto.BirthDate.fromBuffer(decryptedData);
@@ -152,6 +154,7 @@ UserData _processUserData({
           value: wrappedData.value.toDateTime(),
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypePhone:
         final wrappedData = proto.Phone.fromBuffer(decryptedData);
@@ -159,6 +162,7 @@ UserData _processUserData({
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeDocument:
         final wrappedData = proto.Document.fromBuffer(decryptedData);
@@ -168,6 +172,7 @@ UserData _processUserData({
           countryCode: wrappedData.countryCode,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
@@ -177,6 +182,7 @@ UserData _processUserData({
           bankCode: wrappedData.bankCode,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
@@ -184,6 +190,7 @@ UserData _processUserData({
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeUnspecified:
       case V1DataType.$unknown:
