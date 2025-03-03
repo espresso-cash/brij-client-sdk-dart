@@ -168,7 +168,7 @@ class __$$KycItemImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$KycItemImpl implements _KycItem {
+class _$KycItemImpl extends _KycItem {
   const _$KycItemImpl(
       {required this.country,
       required this.status,
@@ -177,7 +177,8 @@ class _$KycItemImpl implements _KycItem {
       final List<String> hashes = const [],
       final Map<String, dynamic> additionalData = const {}})
       : _hashes = hashes,
-        _additionalData = additionalData;
+        _additionalData = additionalData,
+        super._();
 
   factory _$KycItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$KycItemImplFromJson(json);
@@ -256,7 +257,7 @@ class _$KycItemImpl implements _KycItem {
   }
 }
 
-abstract class _KycItem implements KycItem {
+abstract class _KycItem extends KycItem {
   const factory _KycItem(
       {required final String country,
       required final KycStatus status,
@@ -264,6 +265,7 @@ abstract class _KycItem implements KycItem {
       required final String userPublicKey,
       final List<String> hashes,
       final Map<String, dynamic> additionalData}) = _$KycItemImpl;
+  const _KycItem._() : super._();
 
   factory _KycItem.fromJson(Map<String, dynamic> json) = _$KycItemImpl.fromJson;
 

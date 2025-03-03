@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/src/api/models/v1_kyc_item.dart';
 import 'package:kyc_client_dart/src/api/models/v1_kyc_status.dart';
+
+import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
 
 part 'kyc_item.freezed.dart';
 part 'kyc_item.g.dart';
@@ -29,6 +33,19 @@ enum KycStatus {
         return KycStatus.unspecified;
     }
   }
+
+  proto.KycStatus toProto() {
+    switch (this) {
+      case KycStatus.unspecified:
+        return proto.KycStatus.KYC_STATUS_UNSPECIFIED;
+      case KycStatus.pending:
+        return proto.KycStatus.KYC_STATUS_PENDING;
+      case KycStatus.approved:
+        return proto.KycStatus.KYC_STATUS_APPROVED;
+      case KycStatus.rejected:
+        return proto.KycStatus.KYC_STATUS_REJECTED;
+    }
+  }
 }
 
 @freezed
@@ -42,6 +59,8 @@ class KycItem with _$KycItem {
     @Default({}) Map<String, dynamic> additionalData,
   }) = _KycItem;
 
+  const KycItem._();
+
   factory KycItem.fromJson(Map<String, dynamic> json) =>
       _$KycItemFromJson(json);
 
@@ -53,6 +72,32 @@ class KycItem with _$KycItem {
         hashes: proto.hashes,
         additionalData: Map<String, dynamic>.from(proto.additionalData),
       );
+
+  (proto.KycItem, V1KycItem) toMessageFormats() {
+    final protoMessage = proto.KycItem(
+      country: country,
+      status: status.toProto(),
+      provider: provider,
+      userPublicKey: userPublicKey,
+      hashes: hashes,
+      additionalData: additionalData.map(
+        (key, value) => MapEntry(key, utf8.encode(value.toString())),
+      ),
+    );
+
+    final apiMessage = V1KycItem(
+      country: country,
+      status: toStatusDto(status),
+      provider: provider,
+      userPublicKey: userPublicKey,
+      hashes: hashes,
+      additionalData: additionalData.map(
+        (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+
+    return (protoMessage, apiMessage);
+  }
 }
 
 V1KycStatus toStatusDto(KycStatus status) {
@@ -65,28 +110,5 @@ V1KycStatus toStatusDto(KycStatus status) {
       return V1KycStatus.kycStatusApproved;
     case KycStatus.rejected:
       return V1KycStatus.kycStatusRejected;
-  }
-}
-
-extension KycItemExt on KycItem {
-  String toMessage() {
-    final parts = [
-      country,
-      status.name,
-      provider,
-      userPublicKey,
-    ];
-
-    if (hashes.isNotEmpty) {
-      parts.add(hashes.join(','));
-    }
-
-    if (additionalData.isNotEmpty) {
-      parts.add(
-        additionalData.entries.map((e) => '${e.key}:${e.value}').join(','),
-      );
-    }
-
-    return parts.join('|');
   }
 }

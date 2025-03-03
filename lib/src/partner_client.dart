@@ -16,7 +16,6 @@ import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_kyc_item.dart';
 import 'package:kyc_client_dart/src/api/models/v1_reject_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_custom_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_validation_data_request.dart';
@@ -24,7 +23,6 @@ import 'package:kyc_client_dart/src/api/models/v1_set_custom_validation_data_req
 import 'package:kyc_client_dart/src/api/models/v1_set_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_update_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/common.dart';
-import 'package:kyc_client_dart/src/models/kyc_item.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
@@ -371,23 +369,13 @@ class KycPartnerClient {
   }
 
   Future<String> createKycEntry({required KycItem kycItem}) async {
-    final v1KycItem = V1KycItem(
-      country: kycItem.country,
-      status: toStatusDto(kycItem.status),
-      provider: kycItem.provider,
-      userPublicKey: kycItem.userPublicKey,
-      hashes: kycItem.hashes,
-      additionalData: kycItem.additionalData.map(
-        (key, value) => MapEntry(key, value.toString()),
-      ),
-    );
+    final (protoMessage, apiMessage) = kycItem.toMessageFormats();
 
-    final message = kycItem.toMessage();
-    final signature = _signingKey.sign(utf8.encode(message));
+    final signature = _signingKey.sign(protoMessage.writeToBuffer());
 
     final response = await _storageClient.storageServiceCreateKycStatus(
       body: V1CreateKycStatusRequest(
-        data: v1KycItem,
+        data: apiMessage,
         signature: base58.encode(signature.signature.asTypedList),
       ),
     );
@@ -399,24 +387,14 @@ class KycPartnerClient {
     required String kycId,
     required KycItem kycItem,
   }) async {
-    final v1KycItem = V1KycItem(
-      country: kycItem.country,
-      status: toStatusDto(kycItem.status),
-      provider: kycItem.provider,
-      userPublicKey: kycItem.userPublicKey,
-      hashes: kycItem.hashes,
-      additionalData: kycItem.additionalData.map(
-        (key, value) => MapEntry(key, value.toString()),
-      ),
-    );
+    final (protoMessage, apiMessage) = kycItem.toMessageFormats();
 
-    final message = kycItem.toMessage();
-    final signature = _signingKey.sign(utf8.encode(message));
+    final signature = _signingKey.sign(protoMessage.writeToBuffer());
 
     await _storageClient.storageServiceUpdateKycStatus(
       body: V1UpdateKycStatusRequest(
         kycId: kycId,
-        data: v1KycItem,
+        data: apiMessage,
         signature: base58.encode(signature.signature.asTypedList),
       ),
     );
