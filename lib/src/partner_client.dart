@@ -10,17 +10,21 @@ import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
 import 'package:kyc_client_dart/src/api/models/v1_accept_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_complete_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_create_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_fail_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_kyc_item.dart';
 import 'package:kyc_client_dart/src/api/models/v1_reject_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_custom_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_custom_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_validation_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_update_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/common.dart';
+import 'package:kyc_client_dart/src/models/kyc_item.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
@@ -363,6 +367,58 @@ class KycPartnerClient {
       ),
     );
 
-    return KycStatusDetails.fromJson(response.toJson());
+    return KycStatusDetails.fromProto(response);
+  }
+
+  Future<String> createKycEntry({required KycItem kycItem}) async {
+    final v1KycItem = V1KycItem(
+      country: kycItem.country,
+      status: toStatusDto(kycItem.status),
+      provider: kycItem.provider,
+      userPublicKey: kycItem.userPublicKey,
+      hashes: kycItem.hashes,
+      additionalData: kycItem.additionalData.map(
+        (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+
+    final message = kycItem.toMessage();
+    final signature = _signingKey.sign(utf8.encode(message));
+
+    final response = await _storageClient.storageServiceCreateKycStatus(
+      body: V1CreateKycStatusRequest(
+        data: v1KycItem,
+        signature: base58.encode(signature.signature.asTypedList),
+      ),
+    );
+
+    return response.kycId;
+  }
+
+  Future<void> updateKycEntry({
+    required String kycId,
+    required KycItem kycItem,
+  }) async {
+    final v1KycItem = V1KycItem(
+      country: kycItem.country,
+      status: toStatusDto(kycItem.status),
+      provider: kycItem.provider,
+      userPublicKey: kycItem.userPublicKey,
+      hashes: kycItem.hashes,
+      additionalData: kycItem.additionalData.map(
+        (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+
+    final message = kycItem.toMessage();
+    final signature = _signingKey.sign(utf8.encode(message));
+
+    await _storageClient.storageServiceUpdateKycStatus(
+      body: V1UpdateKycStatusRequest(
+        kycId: kycId,
+        data: v1KycItem,
+        signature: base58.encode(signature.signature.asTypedList),
+      ),
+    );
   }
 }

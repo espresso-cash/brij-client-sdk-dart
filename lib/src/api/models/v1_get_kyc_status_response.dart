@@ -14,9 +14,10 @@ part 'v1_get_kyc_status_response.g.dart';
 class V1GetKycStatusResponse with _$V1GetKycStatusResponse {
   const factory V1GetKycStatusResponse({
     required V1KycStatus status,
-    required V1KycItem data,
-    required String signature,
+    required V1KycItem? data,
+    required String? signature,
   }) = _V1GetKycStatusResponse;
-  
-  factory V1GetKycStatusResponse.fromJson(Map<String, Object?> json) => _$V1GetKycStatusResponseFromJson(json);
+
+  factory V1GetKycStatusResponse.fromJson(Map<String, Object?> json) =>
+      _$V1GetKycStatusResponseFromJson(json);
 }

@@ -10,8 +10,10 @@ _$V1GetKycStatusResponseImpl _$$V1GetKycStatusResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$V1GetKycStatusResponseImpl(
       status: V1KycStatus.fromJson(json['status'] as String),
-      data: V1KycItem.fromJson(json['data'] as Map<String, dynamic>),
-      signature: json['signature'] as String,
+      data: json['data'] == null
+          ? null
+          : V1KycItem.fromJson(json['data'] as Map<String, dynamic>),
+      signature: json['signature'] as String?,
     );
 
 Map<String, dynamic> _$$V1GetKycStatusResponseImplToJson(

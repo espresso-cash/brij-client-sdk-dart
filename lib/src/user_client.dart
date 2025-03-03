@@ -502,6 +502,6 @@ class KycUserClient {
       ),
     );
 
-    return KycStatusDetails.fromJson(response.toJson());
+    return KycStatusDetails.fromProto(response);
   }
 }

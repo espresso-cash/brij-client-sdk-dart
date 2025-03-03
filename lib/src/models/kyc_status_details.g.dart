@@ -25,8 +25,8 @@ Map<String, dynamic> _$$KycStatusDetailsImplToJson(
     };
 
 const _$KycStatusEnumMap = {
-  KycStatus.unspecified: 'unspecified',
-  KycStatus.pending: 'pending',
-  KycStatus.approved: 'approved',
-  KycStatus.rejected: 'rejected',
+  KycStatus.unspecified: 'KYC_STATUS_UNSPECIFIED',
+  KycStatus.pending: 'KYC_STATUS_PENDING',
+  KycStatus.approved: 'KYC_STATUS_APPROVED',
+  KycStatus.rejected: 'KYC_STATUS_REJECTED',
 };
