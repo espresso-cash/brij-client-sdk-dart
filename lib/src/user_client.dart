@@ -13,6 +13,7 @@ import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.
 import 'package:kyc_client_dart/src/api/models/v1_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_partner_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
@@ -30,6 +31,7 @@ import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart
 import 'package:kyc_client_dart/src/common.dart';
 import 'package:kyc_client_dart/src/config/config.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
+import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart' hide Signature;
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
@@ -487,4 +489,19 @@ class KycUserClient {
         body: V1CheckAccessRequest(partnerPublicKey: partnerPK),
       )
       .then((e) => e.hasAccess);
+
+  Future<KycStatusDetails> getKycStatusDetails({
+    required String userPK,
+    required String country,
+  }) async {
+    final response = await _storageClient.storageServiceGetKycStatus(
+      body: V1GetKycStatusRequest(
+        userPublicKey: userPK,
+        country: country,
+        validatorPublicKey: config.verifierAuthPk,
+      ),
+    );
+
+    return KycStatusDetails.fromJson(response.toJson());
+  }
 }
