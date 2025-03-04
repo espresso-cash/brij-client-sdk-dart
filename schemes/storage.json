@@ -549,7 +549,8 @@
           "$ref": "#/definitions/v1KycItem"
         },
         "signature": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -652,7 +653,8 @@
           "$ref": "#/definitions/v1KycItem"
         },
         "signature": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -903,7 +905,8 @@
           "$ref": "#/definitions/v1KycItem"
         },
         "signature": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         }
       }
     },
