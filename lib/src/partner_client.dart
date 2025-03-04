@@ -376,7 +376,7 @@ class KycPartnerClient {
     final response = await _storageClient.storageServiceCreateKycStatus(
       body: V1CreateKycStatusRequest(
         data: apiMessage,
-        signature: base58.encode(signature.signature.asTypedList),
+        signature: base64.encode(signature.signature.asTypedList),
       ),
     );
 
@@ -395,7 +395,7 @@ class KycPartnerClient {
       body: V1UpdateKycStatusRequest(
         kycId: kycId,
         data: apiMessage,
-        signature: base58.encode(signature.signature.asTypedList),
+        signature: base64.encode(signature.signature.asTypedList),
       ),
     );
   }
