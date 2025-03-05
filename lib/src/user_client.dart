@@ -283,13 +283,13 @@ class KycUserClient {
     ];
 
     for (final item in dataList) {
-      final protoData = item.data.writeToBuffer();
+      final protoData = serializeProto(item.data);
       final encryptedData = encrypt(
         data: protoData,
         secretBox: _secretBox,
       );
 
-      final hash = generateHash(item.data);
+      final hash = generateHash(encryptedData);
       final message = '${item.type}|$hash';
       final signature = _signingKey.sign(utf8.encode(message));
 
