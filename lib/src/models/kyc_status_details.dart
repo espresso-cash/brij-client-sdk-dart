@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_response.dart';
+import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
 import 'package:kyc_client_dart/src/models/kyc_item.dart';
 
 part 'kyc_status_details.freezed.dart';
@@ -16,10 +19,14 @@ class KycStatusDetails with _$KycStatusDetails {
   factory KycStatusDetails.fromJson(Map<String, dynamic> json) =>
       _$KycStatusDetailsFromJson(json);
 
-  factory KycStatusDetails.fromProto(V1GetKycStatusResponse proto) =>
+  factory KycStatusDetails.fromProto(V1GetKycStatusResponse resp) =>
       KycStatusDetails(
-        status: KycStatus.fromProto(proto.status),
-        data: proto.data != null ? KycItem.fromProto(proto.data!) : null,
-        signature: proto.signature,
+        status: KycStatus.fromApi(resp.status),
+        data: resp.data != null
+            ? KycItem.fromProto(
+                proto.KycItem.fromBuffer(base64Decode(resp.data!)),
+              )
+            : null,
+        signature: resp.signature,
       );
 }
