@@ -9,7 +9,7 @@ part of 'v1_create_kyc_status_request.dart';
 _$V1CreateKycStatusRequestImpl _$$V1CreateKycStatusRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$V1CreateKycStatusRequestImpl(
-      data: V1KycItem.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] as String,
       signature: json['signature'] as String,
     );
 
