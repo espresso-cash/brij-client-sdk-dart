@@ -22,7 +22,7 @@ V1GetKycStatusResponse _$V1GetKycStatusResponseFromJson(
 /// @nodoc
 mixin _$V1GetKycStatusResponse {
   V1KycStatus get status => throw _privateConstructorUsedError;
-  V1KycItem? get data => throw _privateConstructorUsedError;
+  String? get data => throw _privateConstructorUsedError;
   String? get signature => throw _privateConstructorUsedError;
 
   /// Serializes this V1GetKycStatusResponse to a JSON map.
@@ -41,9 +41,7 @@ abstract class $V1GetKycStatusResponseCopyWith<$Res> {
           $Res Function(V1GetKycStatusResponse) then) =
       _$V1GetKycStatusResponseCopyWithImpl<$Res, V1GetKycStatusResponse>;
   @useResult
-  $Res call({V1KycStatus status, V1KycItem? data, String? signature});
-
-  $V1KycItemCopyWith<$Res>? get data;
+  $Res call({V1KycStatus status, String? data, String? signature});
 }
 
 /// @nodoc
@@ -74,26 +72,12 @@ class _$V1GetKycStatusResponseCopyWithImpl<$Res,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as V1KycItem?,
+              as String?,
       signature: freezed == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
-  }
-
-  /// Create a copy of V1GetKycStatusResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $V1KycItemCopyWith<$Res>? get data {
-    if (_value.data == null) {
-      return null;
-    }
-
-    return $V1KycItemCopyWith<$Res>(_value.data!, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
   }
 }
 
@@ -106,10 +90,7 @@ abstract class _$$V1GetKycStatusResponseImplCopyWith<$Res>
       __$$V1GetKycStatusResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({V1KycStatus status, V1KycItem? data, String? signature});
-
-  @override
-  $V1KycItemCopyWith<$Res>? get data;
+  $Res call({V1KycStatus status, String? data, String? signature});
 }
 
 /// @nodoc
@@ -139,7 +120,7 @@ class __$$V1GetKycStatusResponseImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as V1KycItem?,
+              as String?,
       signature: freezed == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
@@ -160,7 +141,7 @@ class _$V1GetKycStatusResponseImpl implements _V1GetKycStatusResponse {
   @override
   final V1KycStatus status;
   @override
-  final V1KycItem? data;
+  final String? data;
   @override
   final String? signature;
 
@@ -204,7 +185,7 @@ class _$V1GetKycStatusResponseImpl implements _V1GetKycStatusResponse {
 abstract class _V1GetKycStatusResponse implements V1GetKycStatusResponse {
   const factory _V1GetKycStatusResponse(
       {required final V1KycStatus status,
-      required final V1KycItem? data,
+      required final String? data,
       required final String? signature}) = _$V1GetKycStatusResponseImpl;
 
   factory _V1GetKycStatusResponse.fromJson(Map<String, dynamic> json) =
@@ -213,7 +194,7 @@ abstract class _V1GetKycStatusResponse implements V1GetKycStatusResponse {
   @override
   V1KycStatus get status;
   @override
-  V1KycItem? get data;
+  String? get data;
   @override
   String? get signature;
 

@@ -546,7 +546,8 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/v1KycItem"
+          "type": "string",
+          "format": "byte"
         },
         "signature": {
           "type": "string",
@@ -650,7 +651,8 @@
           "$ref": "#/definitions/v1KycStatus"
         },
         "data": {
-          "$ref": "#/definitions/v1KycItem"
+          "type": "string",
+          "format": "byte"
         },
         "signature": {
           "type": "string",
@@ -756,36 +758,6 @@
     },
     "v1InitStorageResponse": {
       "type": "object"
-    },
-    "v1KycItem": {
-      "type": "object",
-      "properties": {
-        "country": {
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/v1KycStatus"
-        },
-        "provider": {
-          "type": "string"
-        },
-        "userPublicKey": {
-          "type": "string"
-        },
-        "hashes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "additionalData": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      }
     },
     "v1KycStatus": {
       "type": "string",
@@ -902,7 +874,8 @@
           "type": "string"
         },
         "data": {
-          "$ref": "#/definitions/v1KycItem"
+          "type": "string",
+          "format": "byte"
         },
         "signature": {
           "type": "string",

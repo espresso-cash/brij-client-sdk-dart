@@ -369,13 +369,13 @@ class KycPartnerClient {
   }
 
   Future<String> createKycEntry({required KycItem kycItem}) async {
-    final (protoMessage, apiMessage) = kycItem.toMessageFormats();
+    final protoMessage = kycItem.toProto().writeToBuffer();
 
-    final signature = _signingKey.sign(protoMessage.writeToBuffer());
+    final signature = _signingKey.sign(protoMessage);
 
     final response = await _storageClient.storageServiceCreateKycStatus(
       body: V1CreateKycStatusRequest(
-        data: apiMessage,
+        data: base64.encode(protoMessage),
         signature: base64.encode(signature.signature.asTypedList),
       ),
     );
@@ -387,14 +387,14 @@ class KycPartnerClient {
     required String kycId,
     required KycItem kycItem,
   }) async {
-    final (protoMessage, apiMessage) = kycItem.toMessageFormats();
+    final protoMessage = kycItem.toProto().writeToBuffer();
 
-    final signature = _signingKey.sign(protoMessage.writeToBuffer());
+    final signature = _signingKey.sign(protoMessage);
 
     await _storageClient.storageServiceUpdateKycStatus(
       body: V1UpdateKycStatusRequest(
         kycId: kycId,
-        data: apiMessage,
+        data: base64.encode(protoMessage),
         signature: base64.encode(signature.signature.asTypedList),
       ),
     );

@@ -10,7 +10,7 @@ _$V1UpdateKycStatusRequestImpl _$$V1UpdateKycStatusRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$V1UpdateKycStatusRequestImpl(
       kycId: json['kycId'] as String,
-      data: V1KycItem.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] as String,
       signature: json['signature'] as String,
     );
 

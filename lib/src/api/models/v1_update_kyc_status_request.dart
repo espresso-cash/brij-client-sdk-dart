@@ -4,8 +4,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'v1_kyc_item.dart';
-
 part 'v1_update_kyc_status_request.freezed.dart';
 part 'v1_update_kyc_status_request.g.dart';
 
@@ -13,7 +11,7 @@ part 'v1_update_kyc_status_request.g.dart';
 class V1UpdateKycStatusRequest with _$V1UpdateKycStatusRequest {
   const factory V1UpdateKycStatusRequest({
     required String kycId,
-    required V1KycItem data,
+    required String data,
     required String signature,
   }) = _V1UpdateKycStatusRequest;
   

@@ -21,7 +21,7 @@ V1CreateKycStatusRequest _$V1CreateKycStatusRequestFromJson(
 
 /// @nodoc
 mixin _$V1CreateKycStatusRequest {
-  V1KycItem get data => throw _privateConstructorUsedError;
+  String get data => throw _privateConstructorUsedError;
   String get signature => throw _privateConstructorUsedError;
 
   /// Serializes this V1CreateKycStatusRequest to a JSON map.
@@ -40,9 +40,7 @@ abstract class $V1CreateKycStatusRequestCopyWith<$Res> {
           $Res Function(V1CreateKycStatusRequest) then) =
       _$V1CreateKycStatusRequestCopyWithImpl<$Res, V1CreateKycStatusRequest>;
   @useResult
-  $Res call({V1KycItem data, String signature});
-
-  $V1KycItemCopyWith<$Res> get data;
+  $Res call({String data, String signature});
 }
 
 /// @nodoc
@@ -68,22 +66,12 @@ class _$V1CreateKycStatusRequestCopyWithImpl<$Res,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as V1KycItem,
+              as String,
       signature: null == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  /// Create a copy of V1CreateKycStatusRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $V1KycItemCopyWith<$Res> get data {
-    return $V1KycItemCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
   }
 }
 
@@ -96,10 +84,7 @@ abstract class _$$V1CreateKycStatusRequestImplCopyWith<$Res>
       __$$V1CreateKycStatusRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({V1KycItem data, String signature});
-
-  @override
-  $V1KycItemCopyWith<$Res> get data;
+  $Res call({String data, String signature});
 }
 
 /// @nodoc
@@ -124,7 +109,7 @@ class __$$V1CreateKycStatusRequestImplCopyWithImpl<$Res>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as V1KycItem,
+              as String,
       signature: null == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
@@ -143,7 +128,7 @@ class _$V1CreateKycStatusRequestImpl implements _V1CreateKycStatusRequest {
       _$$V1CreateKycStatusRequestImplFromJson(json);
 
   @override
-  final V1KycItem data;
+  final String data;
   @override
   final String signature;
 
@@ -185,14 +170,14 @@ class _$V1CreateKycStatusRequestImpl implements _V1CreateKycStatusRequest {
 
 abstract class _V1CreateKycStatusRequest implements V1CreateKycStatusRequest {
   const factory _V1CreateKycStatusRequest(
-      {required final V1KycItem data,
+      {required final String data,
       required final String signature}) = _$V1CreateKycStatusRequestImpl;
 
   factory _V1CreateKycStatusRequest.fromJson(Map<String, dynamic> json) =
       _$V1CreateKycStatusRequestImpl.fromJson;
 
   @override
-  V1KycItem get data;
+  String get data;
   @override
   String get signature;
 
