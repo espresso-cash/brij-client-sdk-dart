@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/v1_kyc_item.dart';
 import 'package:kyc_client_dart/src/api/models/v1_kyc_status.dart';
 
 import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
@@ -19,7 +18,7 @@ enum KycStatus {
   @JsonValue('KYC_STATUS_REJECTED')
   rejected;
 
-  static KycStatus fromProto(V1KycStatus status) {
+  static KycStatus fromApi(V1KycStatus status) {
     switch (status) {
       case V1KycStatus.kycStatusUnspecified:
         return KycStatus.unspecified;
@@ -30,6 +29,21 @@ enum KycStatus {
       case V1KycStatus.kycStatusRejected:
         return KycStatus.rejected;
       case V1KycStatus.$unknown:
+        return KycStatus.unspecified;
+    }
+  }
+
+  static KycStatus fromProto(proto.KycStatus status) {
+    switch (status) {
+      case proto.KycStatus.KYC_STATUS_UNSPECIFIED:
+        return KycStatus.unspecified;
+      case proto.KycStatus.KYC_STATUS_PENDING:
+        return KycStatus.pending;
+      case proto.KycStatus.KYC_STATUS_APPROVED:
+        return KycStatus.approved;
+      case proto.KycStatus.KYC_STATUS_REJECTED:
+        return KycStatus.rejected;
+      case _:
         return KycStatus.unspecified;
     }
   }
@@ -64,16 +78,18 @@ class KycItem with _$KycItem {
   factory KycItem.fromJson(Map<String, dynamic> json) =>
       _$KycItemFromJson(json);
 
-  factory KycItem.fromProto(V1KycItem proto) => KycItem(
+  factory KycItem.fromProto(proto.KycItem proto) => KycItem(
         country: proto.country,
         status: KycStatus.fromProto(proto.status),
         provider: proto.provider,
         userPublicKey: proto.userPublicKey,
         hashes: proto.hashes,
-        additionalData: Map<String, dynamic>.from(proto.additionalData),
+        additionalData: proto.additionalData.map(
+          (key, value) => MapEntry(key, utf8.decode(value)),
+        ),
       );
 
-  (proto.KycItem, V1KycItem) toMessageFormats() {
+  proto.KycItem toProto() {
     final protoMessage = proto.KycItem(
       country: country,
       status: status.toProto(),
@@ -85,30 +101,6 @@ class KycItem with _$KycItem {
       ),
     );
 
-    final apiMessage = V1KycItem(
-      country: country,
-      status: toStatusDto(status),
-      provider: provider,
-      userPublicKey: userPublicKey,
-      hashes: hashes,
-      additionalData: additionalData.map(
-        (key, value) => MapEntry(key, value.toString()),
-      ),
-    );
-
-    return (protoMessage, apiMessage);
-  }
-}
-
-V1KycStatus toStatusDto(KycStatus status) {
-  switch (status) {
-    case KycStatus.unspecified:
-      return V1KycStatus.kycStatusUnspecified;
-    case KycStatus.pending:
-      return V1KycStatus.kycStatusPending;
-    case KycStatus.approved:
-      return V1KycStatus.kycStatusApproved;
-    case KycStatus.rejected:
-      return V1KycStatus.kycStatusRejected;
+    return protoMessage;
   }
 }
