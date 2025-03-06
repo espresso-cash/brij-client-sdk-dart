@@ -115,8 +115,9 @@ UserData _processUserData({
   Phone? phone;
   Name? name;
   BirthDate? birthDate;
-  Document? document;
-  BankInfo? bankInfo;
+  Citizenship? citizenship;
+  final List<Document> documents = [];
+  final List<BankInfo> bankInfos = [];
   Selfie? selfie;
 
   for (final encryptedData in response.userData) {
@@ -166,27 +167,42 @@ UserData _processUserData({
         );
       case V1DataType.dataTypeDocument:
         final wrappedData = proto.Document.fromBuffer(decryptedData);
-        document = Document(
-          type: wrappedData.type.toIdType(),
-          number: wrappedData.number,
-          countryCode: wrappedData.countryCode,
-          id: id,
-          status: status,
-          hash: hash,
+        documents.add(
+          Document(
+            type: wrappedData.type.toIdType(),
+            number: wrappedData.number,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            status: status,
+            expirationDate: wrappedData.expirationDate.toDateTime(),
+            frontImage: wrappedData.photo.frontImage,
+            backImage: wrappedData.photo.backImage,
+          ),
         );
       case V1DataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
-        bankInfo = BankInfo(
-          bankName: wrappedData.bankName,
-          accountNumber: wrappedData.accountNumber,
-          bankCode: wrappedData.bankCode,
-          id: id,
-          status: status,
-          hash: hash,
+        bankInfos.add(
+          BankInfo(
+            bankName: wrappedData.bankName,
+            accountNumber: wrappedData.accountNumber,
+            bankCode: wrappedData.bankCode,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            status: status,
+            hash: hash,
+          ),
         );
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
         selfie = Selfie(
+          value: wrappedData.value,
+          id: id,
+          status: status,
+          hash: hash,
+        );
+      case V1DataType.dataTypeCitizenship:
+        final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
+        citizenship = Citizenship(
           value: wrappedData.value,
           id: id,
           status: status,
@@ -216,8 +232,9 @@ UserData _processUserData({
     phone: phone,
     name: name,
     birthDate: birthDate,
-    document: document,
-    bankInfo: bankInfo,
+    citizenship: citizenship,
+    documents: documents,
+    bankInfos: bankInfos,
     selfie: selfie,
     custom: customValidationData,
   );

@@ -22,6 +22,8 @@ enum V1DataType {
   dataTypeBankInfo('DATA_TYPE_BANK_INFO'),
   @JsonValue('DATA_TYPE_SELFIE_IMAGE')
   dataTypeSelfieImage('DATA_TYPE_SELFIE_IMAGE'),
+  @JsonValue('DATA_TYPE_CITIZENSHIP')
+  dataTypeCitizenship('DATA_TYPE_CITIZENSHIP'),
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
