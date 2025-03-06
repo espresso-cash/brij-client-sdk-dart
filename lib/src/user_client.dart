@@ -24,6 +24,7 @@ import 'package:kyc_client_dart/src/api/models/v1_init_phone_validation_request.
 import 'package:kyc_client_dart/src/api/models/v1_init_storage_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_user_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_start_kyc_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_email_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_phone_request.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
@@ -503,5 +504,19 @@ class KycUserClient {
     );
 
     return KycStatusDetails.fromJson(response.toJson());
+  }
+
+  Future<String> startKycRequest({
+    required String country,
+    required List<String> dataHashes,
+  }) async {
+    final response = await _validatorClient.verifierServiceStartKyc(
+      body: V1StartKycRequest(
+        country: country,
+        dataHashes: dataHashes,
+      ),
+    );
+
+    return response.kycId;
   }
 }
