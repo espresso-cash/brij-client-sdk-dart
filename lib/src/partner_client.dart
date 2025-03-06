@@ -10,8 +10,10 @@ import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
 import 'package:kyc_client_dart/src/api/models/v1_accept_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_complete_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_create_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_fail_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_reject_order_request.dart';
@@ -19,7 +21,9 @@ import 'package:kyc_client_dart/src/api/models/v1_remove_custom_validation_data_
 import 'package:kyc_client_dart/src/api/models/v1_remove_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_custom_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_validation_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_update_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/common.dart';
+import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
@@ -348,4 +352,51 @@ class KycPartnerClient {
       _orderClient.orderServiceRejectOrder(
         body: V1RejectOrderRequest(orderId: orderId, reason: reason),
       );
+
+  Future<KycStatusDetails> getKycStatusDetails({
+    required String userPK,
+    required String country,
+  }) async {
+    final response = await _storageClient.storageServiceGetKycStatus(
+      body: V1GetKycStatusRequest(
+        userPublicKey: userPK,
+        country: country,
+        validatorPublicKey: config.verifierAuthPk,
+      ),
+    );
+
+    return KycStatusDetails.fromProto(response);
+  }
+
+  Future<String> createKycEntry({required KycItem kycItem}) async {
+    final protoMessage = kycItem.toProto().writeToBuffer();
+
+    final signature = _signingKey.sign(protoMessage);
+
+    final response = await _storageClient.storageServiceCreateKycStatus(
+      body: V1CreateKycStatusRequest(
+        data: base64.encode(protoMessage),
+        signature: base64.encode(signature.signature.asTypedList),
+      ),
+    );
+
+    return response.kycId;
+  }
+
+  Future<void> updateKycEntry({
+    required String kycId,
+    required KycItem kycItem,
+  }) async {
+    final protoMessage = kycItem.toProto().writeToBuffer();
+
+    final signature = _signingKey.sign(protoMessage);
+
+    await _storageClient.storageServiceUpdateKycStatus(
+      body: V1UpdateKycStatusRequest(
+        kycId: kycId,
+        data: base64.encode(protoMessage),
+        signature: base64.encode(signature.signature.asTypedList),
+      ),
+    );
+  }
 }

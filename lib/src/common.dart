@@ -21,7 +21,7 @@ export 'models/validation_result.dart';
 
 String generateHash(Object data) {
   final bytes = switch (data) {
-    GeneratedMessage() => _serializeProto(data),
+    GeneratedMessage() => serializeProto(data),
     Uint8List() => data,
     String() => Uint8List.fromList(utf8.encode(data)),
     _ => throw ArgumentError('Unsupported type: ${data.runtimeType}')
@@ -30,7 +30,7 @@ String generateHash(Object data) {
   return hex.encode(Hash.sha256(bytes));
 }
 
-Uint8List _serializeProto(GeneratedMessage data) {
+Uint8List serializeProto(GeneratedMessage data) {
   if (data.runtimeType == proto.BirthDate) {
     final value = data as proto.BirthDate;
     data = proto.BirthDate(value: Timestamp()..seconds = value.value.seconds);
@@ -127,7 +127,7 @@ UserData _processUserData({
     );
 
     final id = encryptedData.id;
-
+    final hash = encryptedData.hash;
     final verificationData = validationMap[id];
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
@@ -138,6 +138,7 @@ UserData _processUserData({
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeName:
         final wrappedData = proto.Name.fromBuffer(decryptedData);
@@ -146,6 +147,7 @@ UserData _processUserData({
           lastName: wrappedData.lastName,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeBirthDate:
         final wrappedData = proto.BirthDate.fromBuffer(decryptedData);
@@ -153,6 +155,7 @@ UserData _processUserData({
           value: wrappedData.value.toDateTime(),
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypePhone:
         final wrappedData = proto.Phone.fromBuffer(decryptedData);
@@ -160,6 +163,7 @@ UserData _processUserData({
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeDocument:
         final wrappedData = proto.Document.fromBuffer(decryptedData);
@@ -177,20 +181,24 @@ UserData _processUserData({
         );
       case V1DataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
-        bankInfos.add(BankInfo(
-          bankName: wrappedData.bankName,
-          accountNumber: wrappedData.accountNumber,
-          bankCode: wrappedData.bankCode,
-          countryCode: wrappedData.countryCode,
-          id: id,
-          status: status,
-        ));
+        bankInfos.add(
+          BankInfo(
+            bankName: wrappedData.bankName,
+            accountNumber: wrappedData.accountNumber,
+            bankCode: wrappedData.bankCode,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            status: status,
+            hash: hash,
+          ),
+        );
       case V1DataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
         selfie = Selfie(
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeCitizenship:
         final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
@@ -198,6 +206,7 @@ UserData _processUserData({
           value: wrappedData.value,
           id: id,
           status: status,
+          hash: hash,
         );
       case V1DataType.dataTypeUnspecified:
       case V1DataType.$unknown:

@@ -8,6 +8,8 @@ class PartnerModel with _$PartnerModel {
   factory PartnerModel({
     required String name,
     required String publicKey,
+    required String privacyUrl,
+    required String termsUrl,
   }) = _PartnerModel;
 
   factory PartnerModel.fromJson(Map<String, dynamic> json) =>
