@@ -6,7 +6,7 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/src/api/clients/order_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
-import 'package:kyc_client_dart/src/api/clients/validator_service_client.dart';
+import 'package:kyc_client_dart/src/api/clients/verifier_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
 import 'package:kyc_client_dart/src/api/models/v1_check_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.dart';
@@ -60,7 +60,7 @@ class KycUserClient {
   late final SigningKey _signingKey;
 
   late final StorageServiceClient _storageClient;
-  late final ValidatorServiceClient _validatorClient;
+  late final VerifierServiceClient _validatorClient;
   late final OrderServiceClient _orderClient;
 
   String get authPublicKey => _authPublicKey;
@@ -114,7 +114,7 @@ class KycUserClient {
   Future<void> _initializeValidatorClient() async {
     final dio = await _createAuthenticatedClient('verifier.brij.fi');
     _validatorClient =
-        ValidatorServiceClient(dio, baseUrl: config.validatorBaseUrl);
+        VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
   }
 
   Future<void> _initializeOrderClient() async {
@@ -335,7 +335,7 @@ class KycUserClient {
     required String documentId,
     required String selfieImageId,
   }) async {
-    await _validatorClient.validatorServiceInitDocumentValidation(
+    await _validatorClient.verifierServiceInitDocumentValidation(
       body: V1InitDocumentValidationRequest(
         name: nameId,
         birthDate: birthDateId,
@@ -346,7 +346,7 @@ class KycUserClient {
   }
 
   Future<void> initEmailValidation({required String dataId}) async {
-    await _validatorClient.validatorServiceInitEmailValidation(
+    await _validatorClient.verifierServiceInitEmailValidation(
       body: V1InitEmailValidationRequest(dataId: dataId),
     );
   }
@@ -355,13 +355,13 @@ class KycUserClient {
     required String code,
     required String dataId,
   }) async {
-    await _validatorClient.validatorServiceValidateEmail(
+    await _validatorClient.verifierServiceValidateEmail(
       body: V1ValidateEmailRequest(code: code, dataId: dataId),
     );
   }
 
   Future<void> initPhoneValidation({required String dataId}) async {
-    await _validatorClient.validatorServiceInitPhoneValidation(
+    await _validatorClient.verifierServiceInitPhoneValidation(
       body: V1InitPhoneValidationRequest(dataId: dataId),
     );
   }
@@ -370,7 +370,7 @@ class KycUserClient {
     required String code,
     required String dataId,
   }) async {
-    await _validatorClient.validatorServiceValidatePhone(
+    await _validatorClient.verifierServiceValidatePhone(
       body: V1ValidatePhoneRequest(code: code, dataId: dataId),
     );
   }
