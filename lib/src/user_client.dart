@@ -13,6 +13,7 @@ import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.
 import 'package:kyc_client_dart/src/api/models/v1_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_partner_info_request.dart';
@@ -518,5 +519,15 @@ class KycUserClient {
     );
 
     return response.kycId;
+  }
+
+  Future<void> getKycRequirements({
+    required String country,
+  }) async {
+    final response = await _validatorClient.verifierServiceGetKycRequirements(
+      body: V1GetKycRequirementsRequest(country: country),
+    );
+
+    print(response); //TODO parse response into model
   }
 }
