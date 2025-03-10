@@ -190,7 +190,7 @@ mixin _$RequirementItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BasicInfoType type) basicInfo,
-    required TResult Function(String countryCode, DocumentType documentType,
+    required TResult Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)
         document,
   }) =>
@@ -198,7 +198,7 @@ mixin _$RequirementItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
-    TResult? Function(String countryCode, DocumentType documentType,
+    TResult? Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)?
         document,
   }) =>
@@ -206,7 +206,7 @@ mixin _$RequirementItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
-    TResult Function(String countryCode, DocumentType documentType,
+    TResult Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)?
         document,
     required TResult orElse(),
@@ -336,7 +336,7 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BasicInfoType type) basicInfo,
-    required TResult Function(String countryCode, DocumentType documentType,
+    required TResult Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)
         document,
   }) {
@@ -347,7 +347,7 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
-    TResult? Function(String countryCode, DocumentType documentType,
+    TResult? Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)?
         document,
   }) {
@@ -358,7 +358,7 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
-    TResult Function(String countryCode, DocumentType documentType,
+    TResult Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)?
         document,
     required TResult orElse(),
@@ -432,7 +432,7 @@ abstract class _$$DocumentRequirementImplCopyWith<$Res> {
   @useResult
   $Res call(
       {String countryCode,
-      DocumentType documentType,
+      IdType documentType,
       FieldRequirement fieldRequirement});
 
   $FieldRequirementCopyWith<$Res> get fieldRequirement;
@@ -463,7 +463,7 @@ class __$$DocumentRequirementImplCopyWithImpl<$Res>
       documentType: null == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
-              as DocumentType,
+              as IdType,
       fieldRequirement: null == fieldRequirement
           ? _value.fieldRequirement
           : fieldRequirement // ignore: cast_nullable_to_non_nullable
@@ -498,7 +498,7 @@ class _$DocumentRequirementImpl implements DocumentRequirement {
   @override
   final String countryCode;
   @override
-  final DocumentType documentType;
+  final IdType documentType;
   @override
   final FieldRequirement fieldRequirement;
 
@@ -541,7 +541,7 @@ class _$DocumentRequirementImpl implements DocumentRequirement {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BasicInfoType type) basicInfo,
-    required TResult Function(String countryCode, DocumentType documentType,
+    required TResult Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)
         document,
   }) {
@@ -552,7 +552,7 @@ class _$DocumentRequirementImpl implements DocumentRequirement {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
-    TResult? Function(String countryCode, DocumentType documentType,
+    TResult? Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)?
         document,
   }) {
@@ -563,7 +563,7 @@ class _$DocumentRequirementImpl implements DocumentRequirement {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
-    TResult Function(String countryCode, DocumentType documentType,
+    TResult Function(String countryCode, IdType documentType,
             FieldRequirement fieldRequirement)?
         document,
     required TResult orElse(),
@@ -616,7 +616,7 @@ class _$DocumentRequirementImpl implements DocumentRequirement {
 abstract class DocumentRequirement implements RequirementItem {
   const factory DocumentRequirement(
           {required final String countryCode,
-          required final DocumentType documentType,
+          required final IdType documentType,
           required final FieldRequirement fieldRequirement}) =
       _$DocumentRequirementImpl;
 
@@ -624,7 +624,7 @@ abstract class DocumentRequirement implements RequirementItem {
       _$DocumentRequirementImpl.fromJson;
 
   String get countryCode;
-  DocumentType get documentType;
+  IdType get documentType;
   FieldRequirement get fieldRequirement;
 
   /// Create a copy of RequirementItem

@@ -29,7 +29,7 @@ _$DocumentRequirementImpl _$$DocumentRequirementImplFromJson(
         Map<String, dynamic> json) =>
     _$DocumentRequirementImpl(
       countryCode: json['countryCode'] as String,
-      documentType: $enumDecode(_$DocumentTypeEnumMap, json['documentType']),
+      documentType: $enumDecode(_$IdTypeEnumMap, json['documentType']),
       fieldRequirement: FieldRequirement.fromJson(
           json['fieldRequirement'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
@@ -39,16 +39,15 @@ Map<String, dynamic> _$$DocumentRequirementImplToJson(
         _$DocumentRequirementImpl instance) =>
     <String, dynamic>{
       'countryCode': instance.countryCode,
-      'documentType': _$DocumentTypeEnumMap[instance.documentType]!,
+      'documentType': _$IdTypeEnumMap[instance.documentType]!,
       'fieldRequirement': instance.fieldRequirement,
       'runtimeType': instance.$type,
     };
 
-const _$DocumentTypeEnumMap = {
-  DocumentType.voterId: 'voterId',
-  DocumentType.nationalId: 'nationalId',
-  DocumentType.passport: 'passport',
-  DocumentType.drivingLicense: 'drivingLicense',
+const _$IdTypeEnumMap = {
+  IdType.voterId: 'voterId',
+  IdType.ninV2: 'ninV2',
+  IdType.other: 'other',
 };
 
 _$SingleFieldRequirementImpl _$$SingleFieldRequirementImplFromJson(
@@ -70,6 +69,7 @@ const _$DocumentFieldEnumMap = {
   DocumentField.photoFront: 'photoFront',
   DocumentField.photoBack: 'photoBack',
   DocumentField.expiryDate: 'expiryDate',
+  DocumentField.other: 'other',
 };
 
 _$AndFieldRequirementImpl _$$AndFieldRequirementImplFromJson(

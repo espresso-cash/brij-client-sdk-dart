@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kyc_client_dart/kyc_client_dart.dart';
 import 'package:kyc_client_dart/src/api/models/condition_document_field_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_document_type.dart';
@@ -27,7 +28,7 @@ class KycRequirement with _$KycRequirement {
         return const RequirementItem.basicInfo(type: BasicInfoType.phone);
       } else if (type == V1DataType.dataTypeDocument) {
         String countryCode = '';
-        DocumentType documentType = DocumentType.voterId;
+        IdType documentType = IdType.voterId;
 
         _extractDocumentMetadata(formula, (code, type) {
           if (code != null) countryCode = code;
@@ -54,14 +55,14 @@ class KycRequirement with _$KycRequirement {
 
   static void _extractDocumentMetadata(
     V1Formula formula,
-    Function(String?, DocumentType?) onMetadata,
+    void Function(String?, IdType?) onMetadata,
   ) {
     if (formula.and != null) {
-      for (final nestedFormula in formula.and!.formulas ?? []) {
+      for (final nestedFormula in formula.and?.formulas ?? []) {
         _extractDocumentMetadata(nestedFormula as V1Formula, onMetadata);
       }
     } else if (formula.or != null) {
-      for (final nestedFormula in formula.or!.formulas ?? []) {
+      for (final nestedFormula in formula.or?.formulas ?? []) {
         _extractDocumentMetadata(nestedFormula as V1Formula, onMetadata);
       }
     } else if (formula.not != null) {
@@ -69,7 +70,7 @@ class KycRequirement with _$KycRequirement {
     } else if (formula.condition != null) {
       final condition = formula.condition!;
       String? countryCode;
-      DocumentType? documentType;
+      IdType? documentType;
 
       if (condition.countryCode != null) {
         countryCode = condition.countryCode;
@@ -85,7 +86,7 @@ class KycRequirement with _$KycRequirement {
     if (formula.and != null && formula.and!.formulas.isNotEmpty) {
       final requirements = <FieldRequirement>[];
 
-      for (final nestedFormula in formula.and!.formulas) {
+      for (final nestedFormula in formula.and?.formulas ?? <V1Formula>[]) {
         final requirement = _extractFieldRequirements(nestedFormula);
         if (requirement is AndFieldRequirement) {
           requirements.addAll(requirement.requirements);
@@ -103,7 +104,7 @@ class KycRequirement with _$KycRequirement {
     if (formula.or != null && formula.or!.formulas.isNotEmpty) {
       final requirements = <FieldRequirement>[];
 
-      for (final nestedFormula in formula.or!.formulas) {
+      for (final nestedFormula in formula.or?.formulas ?? <V1Formula>[]) {
         final requirement = _extractFieldRequirements(nestedFormula);
         if (requirement is OrFieldRequirement) {
           requirements.addAll(requirement.requirements);
@@ -131,33 +132,31 @@ class KycRequirement with _$KycRequirement {
     return const FieldRequirement.and(requirements: []);
   }
 
-  static DocumentType _mapDocumentType(V1DocumentType protoType) {
-    switch (protoType) {
-      case V1DocumentType.documentTypeVoterID:
-        return DocumentType.voterId;
-      case V1DocumentType.documentTypeNinV2:
-        return DocumentType.nationalId;
-      default:
-        return DocumentType.drivingLicense;
-    }
-  }
+  static IdType _mapDocumentType(V1DocumentType protoType) =>
+      switch (protoType) {
+        V1DocumentType.documentTypeVoterID => IdType.voterId,
+        V1DocumentType.documentTypeNinV2 => IdType.ninV2,
+        V1DocumentType.documentTypeUnspecified ||
+        V1DocumentType.$unknown =>
+          IdType.other,
+      };
 
   static DocumentField _mapDocumentField(
     ConditionDocumentFieldType protoField,
-  ) {
-    switch (protoField) {
-      case ConditionDocumentFieldType.documentFieldTypeIDNumber:
-        return DocumentField.idNumber;
-      case ConditionDocumentFieldType.documentFieldTypePhotoFront:
-        return DocumentField.photoFront;
-      case ConditionDocumentFieldType.documentFieldTypePhotoBack:
-        return DocumentField.photoBack;
-      case ConditionDocumentFieldType.documentFieldTypeExpiryDate:
-        return DocumentField.expiryDate;
-      default:
-        return DocumentField.idNumber;
-    }
-  }
+  ) =>
+      switch (protoField) {
+        ConditionDocumentFieldType.documentFieldTypeIDNumber =>
+          DocumentField.idNumber,
+        ConditionDocumentFieldType.documentFieldTypePhotoFront =>
+          DocumentField.photoFront,
+        ConditionDocumentFieldType.documentFieldTypePhotoBack =>
+          DocumentField.photoBack,
+        ConditionDocumentFieldType.documentFieldTypeExpiryDate =>
+          DocumentField.expiryDate,
+        ConditionDocumentFieldType.documentFieldTypeUnspecified ||
+        ConditionDocumentFieldType.$unknown =>
+          DocumentField.other,
+      };
 }
 
 @freezed
@@ -168,7 +167,7 @@ class RequirementItem with _$RequirementItem {
 
   const factory RequirementItem.document({
     required String countryCode,
-    required DocumentType documentType,
+    required IdType documentType,
     required FieldRequirement fieldRequirement,
   }) = DocumentRequirement;
 
@@ -199,16 +198,10 @@ enum BasicInfoType {
   phone,
 }
 
-enum DocumentType {
-  voterId,
-  nationalId,
-  passport,
-  drivingLicense,
-}
-
 enum DocumentField {
   idNumber,
   photoFront,
   photoBack,
   expiryDate,
+  other,
 }
