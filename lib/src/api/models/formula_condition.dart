@@ -13,10 +13,11 @@ part 'formula_condition.g.dart';
 @Freezed()
 class FormulaCondition with _$FormulaCondition {
   const factory FormulaCondition({
-    required String countryCode,
-    required V1DocumentType documentType,
-    required ConditionDocumentFieldType documentField,
+    String? countryCode,
+    V1DocumentType? documentType,
+    ConditionDocumentFieldType? documentField,
   }) = _FormulaCondition;
-  
-  factory FormulaCondition.fromJson(Map<String, Object?> json) => _$FormulaConditionFromJson(json);
+
+  factory FormulaCondition.fromJson(Map<String, Object?> json) =>
+      _$FormulaConditionFromJson(json);
 }

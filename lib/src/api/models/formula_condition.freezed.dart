@@ -20,9 +20,9 @@ FormulaCondition _$FormulaConditionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FormulaCondition {
-  String get countryCode => throw _privateConstructorUsedError;
-  V1DocumentType get documentType => throw _privateConstructorUsedError;
-  ConditionDocumentFieldType get documentField =>
+  String? get countryCode => throw _privateConstructorUsedError;
+  V1DocumentType? get documentType => throw _privateConstructorUsedError;
+  ConditionDocumentFieldType? get documentField =>
       throw _privateConstructorUsedError;
 
   /// Serializes this FormulaCondition to a JSON map.
@@ -42,9 +42,9 @@ abstract class $FormulaConditionCopyWith<$Res> {
       _$FormulaConditionCopyWithImpl<$Res, FormulaCondition>;
   @useResult
   $Res call(
-      {String countryCode,
-      V1DocumentType documentType,
-      ConditionDocumentFieldType documentField});
+      {String? countryCode,
+      V1DocumentType? documentType,
+      ConditionDocumentFieldType? documentField});
 }
 
 /// @nodoc
@@ -62,23 +62,23 @@ class _$FormulaConditionCopyWithImpl<$Res, $Val extends FormulaCondition>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? countryCode = null,
-    Object? documentType = null,
-    Object? documentField = null,
+    Object? countryCode = freezed,
+    Object? documentType = freezed,
+    Object? documentField = freezed,
   }) {
     return _then(_value.copyWith(
-      countryCode: null == countryCode
+      countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      documentType: null == documentType
+              as String?,
+      documentType: freezed == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
-              as V1DocumentType,
-      documentField: null == documentField
+              as V1DocumentType?,
+      documentField: freezed == documentField
           ? _value.documentField
           : documentField // ignore: cast_nullable_to_non_nullable
-              as ConditionDocumentFieldType,
+              as ConditionDocumentFieldType?,
     ) as $Val);
   }
 }
@@ -92,9 +92,9 @@ abstract class _$$FormulaConditionImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String countryCode,
-      V1DocumentType documentType,
-      ConditionDocumentFieldType documentField});
+      {String? countryCode,
+      V1DocumentType? documentType,
+      ConditionDocumentFieldType? documentField});
 }
 
 /// @nodoc
@@ -110,23 +110,23 @@ class __$$FormulaConditionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? countryCode = null,
-    Object? documentType = null,
-    Object? documentField = null,
+    Object? countryCode = freezed,
+    Object? documentType = freezed,
+    Object? documentField = freezed,
   }) {
     return _then(_$FormulaConditionImpl(
-      countryCode: null == countryCode
+      countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      documentType: null == documentType
+              as String?,
+      documentType: freezed == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
-              as V1DocumentType,
-      documentField: null == documentField
+              as V1DocumentType?,
+      documentField: freezed == documentField
           ? _value.documentField
           : documentField // ignore: cast_nullable_to_non_nullable
-              as ConditionDocumentFieldType,
+              as ConditionDocumentFieldType?,
     ));
   }
 }
@@ -135,19 +135,17 @@ class __$$FormulaConditionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FormulaConditionImpl implements _FormulaCondition {
   const _$FormulaConditionImpl(
-      {required this.countryCode,
-      required this.documentType,
-      required this.documentField});
+      {this.countryCode, this.documentType, this.documentField});
 
   factory _$FormulaConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$FormulaConditionImplFromJson(json);
 
   @override
-  final String countryCode;
+  final String? countryCode;
   @override
-  final V1DocumentType documentType;
+  final V1DocumentType? documentType;
   @override
-  final ConditionDocumentFieldType documentField;
+  final ConditionDocumentFieldType? documentField;
 
   @override
   String toString() {
@@ -191,20 +189,20 @@ class _$FormulaConditionImpl implements _FormulaCondition {
 
 abstract class _FormulaCondition implements FormulaCondition {
   const factory _FormulaCondition(
-          {required final String countryCode,
-          required final V1DocumentType documentType,
-          required final ConditionDocumentFieldType documentField}) =
+          {final String? countryCode,
+          final V1DocumentType? documentType,
+          final ConditionDocumentFieldType? documentField}) =
       _$FormulaConditionImpl;
 
   factory _FormulaCondition.fromJson(Map<String, dynamic> json) =
       _$FormulaConditionImpl.fromJson;
 
   @override
-  String get countryCode;
+  String? get countryCode;
   @override
-  V1DocumentType get documentType;
+  V1DocumentType? get documentType;
   @override
-  ConditionDocumentFieldType get documentField;
+  ConditionDocumentFieldType? get documentField;
 
   /// Create a copy of FormulaCondition
   /// with the given fields replaced by the non-null parameter values.

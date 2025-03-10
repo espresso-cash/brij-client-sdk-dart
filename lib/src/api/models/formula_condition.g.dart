@@ -9,19 +9,23 @@ part of 'formula_condition.dart';
 _$FormulaConditionImpl _$$FormulaConditionImplFromJson(
         Map<String, dynamic> json) =>
     _$FormulaConditionImpl(
-      countryCode: json['countryCode'] as String,
-      documentType: V1DocumentType.fromJson(json['documentType'] as String),
-      documentField:
-          ConditionDocumentFieldType.fromJson(json['documentField'] as String),
+      countryCode: json['countryCode'] as String?,
+      documentType: json['documentType'] == null
+          ? null
+          : V1DocumentType.fromJson(json['documentType'] as String),
+      documentField: json['documentField'] == null
+          ? null
+          : ConditionDocumentFieldType.fromJson(
+              json['documentField'] as String),
     );
 
 Map<String, dynamic> _$$FormulaConditionImplToJson(
         _$FormulaConditionImpl instance) =>
     <String, dynamic>{
       'countryCode': instance.countryCode,
-      'documentType': _$V1DocumentTypeEnumMap[instance.documentType]!,
+      'documentType': _$V1DocumentTypeEnumMap[instance.documentType],
       'documentField':
-          _$ConditionDocumentFieldTypeEnumMap[instance.documentField]!,
+          _$ConditionDocumentFieldTypeEnumMap[instance.documentField],
     };
 
 const _$V1DocumentTypeEnumMap = {

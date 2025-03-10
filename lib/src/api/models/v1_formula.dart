@@ -14,12 +14,13 @@ part 'v1_formula.g.dart';
 @Freezed()
 class V1Formula with _$V1Formula {
   const factory V1Formula({
-    required FormulaNested and,
-    required FormulaNested or,
-    required V1Formula not,
-    required bool constant,
-    required FormulaCondition condition,
+    FormulaNested? and,
+    FormulaNested? or,
+    V1Formula? not,
+    bool? constant,
+    FormulaCondition? condition,
   }) = _V1Formula;
-  
-  factory V1Formula.fromJson(Map<String, Object?> json) => _$V1FormulaFromJson(json);
+
+  factory V1Formula.fromJson(Map<String, Object?> json) =>
+      _$V1FormulaFromJson(json);
 }

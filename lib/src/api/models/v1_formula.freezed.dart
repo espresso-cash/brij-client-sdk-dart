@@ -20,11 +20,11 @@ V1Formula _$V1FormulaFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$V1Formula {
-  FormulaNested get and => throw _privateConstructorUsedError;
-  FormulaNested get or => throw _privateConstructorUsedError;
-  V1Formula get not => throw _privateConstructorUsedError;
-  bool get constant => throw _privateConstructorUsedError;
-  FormulaCondition get condition => throw _privateConstructorUsedError;
+  FormulaNested? get and => throw _privateConstructorUsedError;
+  FormulaNested? get or => throw _privateConstructorUsedError;
+  V1Formula? get not => throw _privateConstructorUsedError;
+  bool? get constant => throw _privateConstructorUsedError;
+  FormulaCondition? get condition => throw _privateConstructorUsedError;
 
   /// Serializes this V1Formula to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,16 +42,16 @@ abstract class $V1FormulaCopyWith<$Res> {
       _$V1FormulaCopyWithImpl<$Res, V1Formula>;
   @useResult
   $Res call(
-      {FormulaNested and,
-      FormulaNested or,
-      V1Formula not,
-      bool constant,
-      FormulaCondition condition});
+      {FormulaNested? and,
+      FormulaNested? or,
+      V1Formula? not,
+      bool? constant,
+      FormulaCondition? condition});
 
-  $FormulaNestedCopyWith<$Res> get and;
-  $FormulaNestedCopyWith<$Res> get or;
-  $V1FormulaCopyWith<$Res> get not;
-  $FormulaConditionCopyWith<$Res> get condition;
+  $FormulaNestedCopyWith<$Res>? get and;
+  $FormulaNestedCopyWith<$Res>? get or;
+  $V1FormulaCopyWith<$Res>? get not;
+  $FormulaConditionCopyWith<$Res>? get condition;
 }
 
 /// @nodoc
@@ -69,33 +69,33 @@ class _$V1FormulaCopyWithImpl<$Res, $Val extends V1Formula>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? and = null,
-    Object? or = null,
-    Object? not = null,
-    Object? constant = null,
-    Object? condition = null,
+    Object? and = freezed,
+    Object? or = freezed,
+    Object? not = freezed,
+    Object? constant = freezed,
+    Object? condition = freezed,
   }) {
     return _then(_value.copyWith(
-      and: null == and
+      and: freezed == and
           ? _value.and
           : and // ignore: cast_nullable_to_non_nullable
-              as FormulaNested,
-      or: null == or
+              as FormulaNested?,
+      or: freezed == or
           ? _value.or
           : or // ignore: cast_nullable_to_non_nullable
-              as FormulaNested,
-      not: null == not
+              as FormulaNested?,
+      not: freezed == not
           ? _value.not
           : not // ignore: cast_nullable_to_non_nullable
-              as V1Formula,
-      constant: null == constant
+              as V1Formula?,
+      constant: freezed == constant
           ? _value.constant
           : constant // ignore: cast_nullable_to_non_nullable
-              as bool,
-      condition: null == condition
+              as bool?,
+      condition: freezed == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as FormulaCondition,
+              as FormulaCondition?,
     ) as $Val);
   }
 
@@ -103,8 +103,12 @@ class _$V1FormulaCopyWithImpl<$Res, $Val extends V1Formula>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FormulaNestedCopyWith<$Res> get and {
-    return $FormulaNestedCopyWith<$Res>(_value.and, (value) {
+  $FormulaNestedCopyWith<$Res>? get and {
+    if (_value.and == null) {
+      return null;
+    }
+
+    return $FormulaNestedCopyWith<$Res>(_value.and!, (value) {
       return _then(_value.copyWith(and: value) as $Val);
     });
   }
@@ -113,8 +117,12 @@ class _$V1FormulaCopyWithImpl<$Res, $Val extends V1Formula>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FormulaNestedCopyWith<$Res> get or {
-    return $FormulaNestedCopyWith<$Res>(_value.or, (value) {
+  $FormulaNestedCopyWith<$Res>? get or {
+    if (_value.or == null) {
+      return null;
+    }
+
+    return $FormulaNestedCopyWith<$Res>(_value.or!, (value) {
       return _then(_value.copyWith(or: value) as $Val);
     });
   }
@@ -123,8 +131,12 @@ class _$V1FormulaCopyWithImpl<$Res, $Val extends V1Formula>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $V1FormulaCopyWith<$Res> get not {
-    return $V1FormulaCopyWith<$Res>(_value.not, (value) {
+  $V1FormulaCopyWith<$Res>? get not {
+    if (_value.not == null) {
+      return null;
+    }
+
+    return $V1FormulaCopyWith<$Res>(_value.not!, (value) {
       return _then(_value.copyWith(not: value) as $Val);
     });
   }
@@ -133,8 +145,12 @@ class _$V1FormulaCopyWithImpl<$Res, $Val extends V1Formula>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FormulaConditionCopyWith<$Res> get condition {
-    return $FormulaConditionCopyWith<$Res>(_value.condition, (value) {
+  $FormulaConditionCopyWith<$Res>? get condition {
+    if (_value.condition == null) {
+      return null;
+    }
+
+    return $FormulaConditionCopyWith<$Res>(_value.condition!, (value) {
       return _then(_value.copyWith(condition: value) as $Val);
     });
   }
@@ -149,20 +165,20 @@ abstract class _$$V1FormulaImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {FormulaNested and,
-      FormulaNested or,
-      V1Formula not,
-      bool constant,
-      FormulaCondition condition});
+      {FormulaNested? and,
+      FormulaNested? or,
+      V1Formula? not,
+      bool? constant,
+      FormulaCondition? condition});
 
   @override
-  $FormulaNestedCopyWith<$Res> get and;
+  $FormulaNestedCopyWith<$Res>? get and;
   @override
-  $FormulaNestedCopyWith<$Res> get or;
+  $FormulaNestedCopyWith<$Res>? get or;
   @override
-  $V1FormulaCopyWith<$Res> get not;
+  $V1FormulaCopyWith<$Res>? get not;
   @override
-  $FormulaConditionCopyWith<$Res> get condition;
+  $FormulaConditionCopyWith<$Res>? get condition;
 }
 
 /// @nodoc
@@ -178,33 +194,33 @@ class __$$V1FormulaImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? and = null,
-    Object? or = null,
-    Object? not = null,
-    Object? constant = null,
-    Object? condition = null,
+    Object? and = freezed,
+    Object? or = freezed,
+    Object? not = freezed,
+    Object? constant = freezed,
+    Object? condition = freezed,
   }) {
     return _then(_$V1FormulaImpl(
-      and: null == and
+      and: freezed == and
           ? _value.and
           : and // ignore: cast_nullable_to_non_nullable
-              as FormulaNested,
-      or: null == or
+              as FormulaNested?,
+      or: freezed == or
           ? _value.or
           : or // ignore: cast_nullable_to_non_nullable
-              as FormulaNested,
-      not: null == not
+              as FormulaNested?,
+      not: freezed == not
           ? _value.not
           : not // ignore: cast_nullable_to_non_nullable
-              as V1Formula,
-      constant: null == constant
+              as V1Formula?,
+      constant: freezed == constant
           ? _value.constant
           : constant // ignore: cast_nullable_to_non_nullable
-              as bool,
-      condition: null == condition
+              as bool?,
+      condition: freezed == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as FormulaCondition,
+              as FormulaCondition?,
     ));
   }
 }
@@ -213,25 +229,21 @@ class __$$V1FormulaImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$V1FormulaImpl implements _V1Formula {
   const _$V1FormulaImpl(
-      {required this.and,
-      required this.or,
-      required this.not,
-      required this.constant,
-      required this.condition});
+      {this.and, this.or, this.not, this.constant, this.condition});
 
   factory _$V1FormulaImpl.fromJson(Map<String, dynamic> json) =>
       _$$V1FormulaImplFromJson(json);
 
   @override
-  final FormulaNested and;
+  final FormulaNested? and;
   @override
-  final FormulaNested or;
+  final FormulaNested? or;
   @override
-  final V1Formula not;
+  final V1Formula? not;
   @override
-  final bool constant;
+  final bool? constant;
   @override
-  final FormulaCondition condition;
+  final FormulaCondition? condition;
 
   @override
   String toString() {
@@ -275,25 +287,25 @@ class _$V1FormulaImpl implements _V1Formula {
 
 abstract class _V1Formula implements V1Formula {
   const factory _V1Formula(
-      {required final FormulaNested and,
-      required final FormulaNested or,
-      required final V1Formula not,
-      required final bool constant,
-      required final FormulaCondition condition}) = _$V1FormulaImpl;
+      {final FormulaNested? and,
+      final FormulaNested? or,
+      final V1Formula? not,
+      final bool? constant,
+      final FormulaCondition? condition}) = _$V1FormulaImpl;
 
   factory _V1Formula.fromJson(Map<String, dynamic> json) =
       _$V1FormulaImpl.fromJson;
 
   @override
-  FormulaNested get and;
+  FormulaNested? get and;
   @override
-  FormulaNested get or;
+  FormulaNested? get or;
   @override
-  V1Formula get not;
+  V1Formula? get not;
   @override
-  bool get constant;
+  bool? get constant;
   @override
-  FormulaCondition get condition;
+  FormulaCondition? get condition;
 
   /// Create a copy of V1Formula
   /// with the given fields replaced by the non-null parameter values.
