@@ -9,6 +9,19 @@ import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_response.
 part 'kyc_requirement.freezed.dart';
 part 'kyc_requirement.g.dart';
 
+enum BasicInfoType {
+  email,
+  phone,
+}
+
+enum DocumentField {
+  idNumber,
+  photoFront,
+  photoBack,
+  expiryDate,
+  other,
+}
+
 @freezed
 class KycRequirement with _$KycRequirement {
   const factory KycRequirement({
@@ -83,10 +96,11 @@ class KycRequirement with _$KycRequirement {
   }
 
   static FieldRequirement _extractFieldRequirements(V1Formula formula) {
-    if (formula.and != null && formula.and!.formulas.isNotEmpty) {
+    final andFormulas = formula.and;
+    if (andFormulas != null && andFormulas.formulas.isNotEmpty) {
       final requirements = <FieldRequirement>[];
 
-      for (final nestedFormula in formula.and?.formulas ?? <V1Formula>[]) {
+      for (final nestedFormula in andFormulas.formulas) {
         final requirement = _extractFieldRequirements(nestedFormula);
         if (requirement is AndFieldRequirement) {
           requirements.addAll(requirement.requirements);
@@ -101,10 +115,11 @@ class KycRequirement with _$KycRequirement {
       return FieldRequirement.and(requirements: requirements);
     }
 
-    if (formula.or != null && formula.or!.formulas.isNotEmpty) {
+    final orFormulas = formula.or;
+    if (orFormulas != null && orFormulas.formulas.isNotEmpty) {
       final requirements = <FieldRequirement>[];
 
-      for (final nestedFormula in formula.or?.formulas ?? <V1Formula>[]) {
+      for (final nestedFormula in orFormulas.formulas) {
         final requirement = _extractFieldRequirements(nestedFormula);
         if (requirement is OrFieldRequirement) {
           requirements.addAll(requirement.requirements);
@@ -119,14 +134,19 @@ class KycRequirement with _$KycRequirement {
       return FieldRequirement.or(requirements: requirements);
     }
 
-    if (formula.not != null) {
-      return _extractFieldRequirements(formula.not!);
+    final notFormula = formula.not;
+    if (notFormula != null) {
+      return _extractFieldRequirements(notFormula);
     }
 
-    if (formula.condition?.documentField != null) {
-      return FieldRequirement.single(
-        field: _mapDocumentField(formula.condition!.documentField!),
-      );
+    final condition = formula.condition;
+    if (condition?.documentField != null) {
+      final documentField = condition?.documentField;
+      if (documentField != null) {
+        return FieldRequirement.single(
+          field: _mapDocumentField(documentField),
+        );
+      }
     }
 
     return const FieldRequirement.and(requirements: []);
@@ -191,17 +211,4 @@ class FieldRequirement with _$FieldRequirement {
 
   factory FieldRequirement.fromJson(Map<String, dynamic> json) =>
       _$FieldRequirementFromJson(json);
-}
-
-enum BasicInfoType {
-  email,
-  phone,
-}
-
-enum DocumentField {
-  idNumber,
-  photoFront,
-  photoBack,
-  expiryDate,
-  other,
 }
