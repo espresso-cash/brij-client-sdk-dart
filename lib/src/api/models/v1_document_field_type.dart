@@ -5,7 +5,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @JsonEnum()
-enum ConditionDocumentFieldType {
+enum V1DocumentFieldType {
   @JsonValue('DOCUMENT_FIELD_TYPE_UNSPECIFIED')
   documentFieldTypeUnspecified('DOCUMENT_FIELD_TYPE_UNSPECIFIED'),
   @JsonValue('DOCUMENT_FIELD_TYPE_ID_NUMBER')
@@ -14,14 +14,12 @@ enum ConditionDocumentFieldType {
   documentFieldTypePhotoFront('DOCUMENT_FIELD_TYPE_PHOTO_FRONT'),
   @JsonValue('DOCUMENT_FIELD_TYPE_PHOTO_BACK')
   documentFieldTypePhotoBack('DOCUMENT_FIELD_TYPE_PHOTO_BACK'),
-  @JsonValue('DOCUMENT_FIELD_TYPE_EXPIRY_DATE')
-  documentFieldTypeExpiryDate('DOCUMENT_FIELD_TYPE_EXPIRY_DATE'),
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
-  const ConditionDocumentFieldType(this.json);
+  const V1DocumentFieldType(this.json);
 
-  factory ConditionDocumentFieldType.fromJson(String json) => values.firstWhere(
+  factory V1DocumentFieldType.fromJson(String json) => values.firstWhere(
         (e) => e.json == json,
         orElse: () => $unknown,
       );

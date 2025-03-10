@@ -68,7 +68,6 @@ const _$DocumentFieldEnumMap = {
   DocumentField.idNumber: 'idNumber',
   DocumentField.photoFront: 'photoFront',
   DocumentField.photoBack: 'photoBack',
-  DocumentField.expiryDate: 'expiryDate',
   DocumentField.other: 'other',
 };
 

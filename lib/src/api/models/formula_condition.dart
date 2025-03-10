@@ -4,7 +4,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'condition_document_field_type.dart';
+import 'v1_document_field_type.dart';
 import 'v1_document_type.dart';
 
 part 'formula_condition.freezed.dart';
@@ -15,7 +15,7 @@ class FormulaCondition with _$FormulaCondition {
   const factory FormulaCondition({
     String? countryCode,
     V1DocumentType? documentType,
-    ConditionDocumentFieldType? documentField,
+    V1DocumentFieldType? documentField,
   }) = _FormulaCondition;
 
   factory FormulaCondition.fromJson(Map<String, Object?> json) =>

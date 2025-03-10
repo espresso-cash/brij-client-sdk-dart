@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/kyc_client_dart.dart';
-import 'package:kyc_client_dart/src/api/models/condition_document_field_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
+import 'package:kyc_client_dart/src/api/models/v1_document_field_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_document_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_formula.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_response.dart';
@@ -18,7 +18,6 @@ enum DocumentField {
   idNumber,
   photoFront,
   photoBack,
-  expiryDate,
   other,
 }
 
@@ -162,19 +161,16 @@ class KycRequirement with _$KycRequirement {
       };
 
   static DocumentField _mapDocumentField(
-    ConditionDocumentFieldType protoField,
+    V1DocumentFieldType protoField,
   ) =>
       switch (protoField) {
-        ConditionDocumentFieldType.documentFieldTypeIDNumber =>
-          DocumentField.idNumber,
-        ConditionDocumentFieldType.documentFieldTypePhotoFront =>
+        V1DocumentFieldType.documentFieldTypeIDNumber => DocumentField.idNumber,
+        V1DocumentFieldType.documentFieldTypePhotoFront =>
           DocumentField.photoFront,
-        ConditionDocumentFieldType.documentFieldTypePhotoBack =>
+        V1DocumentFieldType.documentFieldTypePhotoBack =>
           DocumentField.photoBack,
-        ConditionDocumentFieldType.documentFieldTypeExpiryDate =>
-          DocumentField.expiryDate,
-        ConditionDocumentFieldType.documentFieldTypeUnspecified ||
-        ConditionDocumentFieldType.$unknown =>
+        V1DocumentFieldType.documentFieldTypeUnspecified ||
+        V1DocumentFieldType.$unknown =>
           DocumentField.other,
       };
 }

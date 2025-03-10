@@ -521,13 +521,11 @@ class KycUserClient {
     return response.kycId;
   }
 
-  Future<void> getKycRequirements({
-    required String country,
-  }) async {
+  Future<KycRequirement> getKycRequirements({required String country}) async {
     final response = await _validatorClient.verifierServiceGetKycRequirements(
       body: V1GetKycRequirementsRequest(country: country),
     );
 
-    print(response); //TODO parse response into model
+    return KycRequirement.fromProto(response);
   }
 }

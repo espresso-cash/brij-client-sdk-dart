@@ -242,17 +242,6 @@
     }
   },
   "definitions": {
-    "ConditionDocumentFieldType": {
-      "type": "string",
-      "enum": [
-        "DOCUMENT_FIELD_TYPE_UNSPECIFIED",
-        "DOCUMENT_FIELD_TYPE_ID_NUMBER",
-        "DOCUMENT_FIELD_TYPE_PHOTO_FRONT",
-        "DOCUMENT_FIELD_TYPE_PHOTO_BACK",
-        "DOCUMENT_FIELD_TYPE_EXPIRY_DATE"
-      ],
-      "default": "DOCUMENT_FIELD_TYPE_UNSPECIFIED"
-    },
     "FormulaCondition": {
       "type": "object",
       "properties": {
@@ -263,7 +252,7 @@
           "$ref": "#/definitions/v1DocumentType"
         },
         "documentField": {
-          "$ref": "#/definitions/ConditionDocumentFieldType"
+          "$ref": "#/definitions/v1DocumentFieldType"
         }
       }
     },
@@ -320,6 +309,16 @@
         "DATA_TYPE_SELFIE_IMAGE"
       ],
       "default": "DATA_TYPE_UNSPECIFIED"
+    },
+    "v1DocumentFieldType": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT_FIELD_TYPE_UNSPECIFIED",
+        "DOCUMENT_FIELD_TYPE_ID_NUMBER",
+        "DOCUMENT_FIELD_TYPE_PHOTO_FRONT",
+        "DOCUMENT_FIELD_TYPE_PHOTO_BACK"
+      ],
+      "default": "DOCUMENT_FIELD_TYPE_UNSPECIFIED"
     },
     "v1DocumentType": {
       "type": "string",

@@ -15,8 +15,7 @@ _$FormulaConditionImpl _$$FormulaConditionImplFromJson(
           : V1DocumentType.fromJson(json['documentType'] as String),
       documentField: json['documentField'] == null
           ? null
-          : ConditionDocumentFieldType.fromJson(
-              json['documentField'] as String),
+          : V1DocumentFieldType.fromJson(json['documentField'] as String),
     );
 
 Map<String, dynamic> _$$FormulaConditionImplToJson(
@@ -24,8 +23,7 @@ Map<String, dynamic> _$$FormulaConditionImplToJson(
     <String, dynamic>{
       'countryCode': instance.countryCode,
       'documentType': _$V1DocumentTypeEnumMap[instance.documentType],
-      'documentField':
-          _$ConditionDocumentFieldTypeEnumMap[instance.documentField],
+      'documentField': _$V1DocumentFieldTypeEnumMap[instance.documentField],
     };
 
 const _$V1DocumentTypeEnumMap = {
@@ -35,16 +33,14 @@ const _$V1DocumentTypeEnumMap = {
   V1DocumentType.$unknown: r'$unknown',
 };
 
-const _$ConditionDocumentFieldTypeEnumMap = {
-  ConditionDocumentFieldType.documentFieldTypeUnspecified:
+const _$V1DocumentFieldTypeEnumMap = {
+  V1DocumentFieldType.documentFieldTypeUnspecified:
       'DOCUMENT_FIELD_TYPE_UNSPECIFIED',
-  ConditionDocumentFieldType.documentFieldTypeIDNumber:
+  V1DocumentFieldType.documentFieldTypeIDNumber:
       'DOCUMENT_FIELD_TYPE_ID_NUMBER',
-  ConditionDocumentFieldType.documentFieldTypePhotoFront:
+  V1DocumentFieldType.documentFieldTypePhotoFront:
       'DOCUMENT_FIELD_TYPE_PHOTO_FRONT',
-  ConditionDocumentFieldType.documentFieldTypePhotoBack:
+  V1DocumentFieldType.documentFieldTypePhotoBack:
       'DOCUMENT_FIELD_TYPE_PHOTO_BACK',
-  ConditionDocumentFieldType.documentFieldTypeExpiryDate:
-      'DOCUMENT_FIELD_TYPE_EXPIRY_DATE',
-  ConditionDocumentFieldType.$unknown: r'$unknown',
+  V1DocumentFieldType.$unknown: r'$unknown',
 };
