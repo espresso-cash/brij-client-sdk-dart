@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "espressocash/validator/v1/validator.proto",
+    "title": "brij/verifier/v1/service.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "ValidatorService"
+      "name": "VerifierService"
     }
   ],
   "consumes": [
@@ -16,14 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/v1/initDocumentValidation": {
+    "/v1/getKycRequirements": {
       "post": {
-        "operationId": "ValidatorService_InitDocumentValidation",
+        "operationId": "VerifierService_GetKycRequirements",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1InitDocumentValidationResponse"
+              "$ref": "#/definitions/v1GetKycRequirementsResponse"
             }
           },
           "default": {
@@ -39,18 +39,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1InitDocumentValidationRequest"
+              "$ref": "#/definitions/v1GetKycRequirementsRequest"
             }
           }
         ],
         "tags": [
-          "ValidatorService"
+          "VerifierService"
         ]
       }
     },
     "/v1/initEmailValidation": {
       "post": {
-        "operationId": "ValidatorService_InitEmailValidation",
+        "operationId": "VerifierService_InitEmailValidation",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -76,13 +76,13 @@
           }
         ],
         "tags": [
-          "ValidatorService"
+          "VerifierService"
         ]
       }
     },
     "/v1/initPhoneValidation": {
       "post": {
-        "operationId": "ValidatorService_InitPhoneValidation",
+        "operationId": "VerifierService_InitPhoneValidation",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -108,13 +108,45 @@
           }
         ],
         "tags": [
-          "ValidatorService"
+          "VerifierService"
+        ]
+      }
+    },
+    "/v1/startKyc": {
+      "post": {
+        "operationId": "VerifierService_StartKyc",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StartKycResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1StartKycRequest"
+            }
+          }
+        ],
+        "tags": [
+          "VerifierService"
         ]
       }
     },
     "/v1/validateEmail": {
       "post": {
-        "operationId": "ValidatorService_ValidateEmail",
+        "operationId": "VerifierService_ValidateEmail",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -140,13 +172,13 @@
           }
         ],
         "tags": [
-          "ValidatorService"
+          "VerifierService"
         ]
       }
     },
     "/v1/validatePhone": {
       "post": {
-        "operationId": "ValidatorService_ValidatePhone",
+        "operationId": "VerifierService_ValidatePhone",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -172,7 +204,7 @@
           }
         ],
         "tags": [
-          "ValidatorService"
+          "VerifierService"
         ]
       }
     }
@@ -206,24 +238,15 @@
         }
       }
     },
-    "v1InitDocumentValidationRequest": {
+    "v1GetKycRequirementsRequest": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "document": {
-          "type": "string"
-        },
-        "birthDate": {
-          "type": "string"
-        },
-        "selfieImage": {
+        "country": {
           "type": "string"
         }
       }
     },
-    "v1InitDocumentValidationResponse": {
+    "v1GetKycRequirementsResponse": {
       "type": "object"
     },
     "v1InitEmailValidationRequest": {
@@ -247,6 +270,28 @@
     },
     "v1InitPhoneValidationResponse": {
       "type": "object"
+    },
+    "v1StartKycRequest": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "dataHashes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1StartKycResponse": {
+      "type": "object",
+      "properties": {
+        "kycId": {
+          "type": "string"
+        }
+      }
     },
     "v1ValidateEmailRequest": {
       "type": "object",
