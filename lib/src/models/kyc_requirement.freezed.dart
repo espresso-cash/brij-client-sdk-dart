@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$KycRequirement {
   String get country => throw _privateConstructorUsedError;
-  List<RequirementItem> get requirements => throw _privateConstructorUsedError;
+  List<Requirement> get requirements => throw _privateConstructorUsedError;
 
   /// Create a copy of KycRequirement
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +32,7 @@ abstract class $KycRequirementCopyWith<$Res> {
           KycRequirement value, $Res Function(KycRequirement) then) =
       _$KycRequirementCopyWithImpl<$Res, KycRequirement>;
   @useResult
-  $Res call({String country, List<RequirementItem> requirements});
+  $Res call({String country, List<Requirement> requirements});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$KycRequirementCopyWithImpl<$Res, $Val extends KycRequirement>
       requirements: null == requirements
           ? _value.requirements
           : requirements // ignore: cast_nullable_to_non_nullable
-              as List<RequirementItem>,
+              as List<Requirement>,
     ) as $Val);
   }
 }
@@ -74,7 +74,7 @@ abstract class _$$KycRequirementImplCopyWith<$Res>
       __$$KycRequirementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String country, List<RequirementItem> requirements});
+  $Res call({String country, List<Requirement> requirements});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$KycRequirementImplCopyWithImpl<$Res>
       requirements: null == requirements
           ? _value._requirements
           : requirements // ignore: cast_nullable_to_non_nullable
-              as List<RequirementItem>,
+              as List<Requirement>,
     ));
   }
 }
@@ -110,15 +110,14 @@ class __$$KycRequirementImplCopyWithImpl<$Res>
 
 class _$KycRequirementImpl implements _KycRequirement {
   const _$KycRequirementImpl(
-      {required this.country,
-      required final List<RequirementItem> requirements})
+      {required this.country, required final List<Requirement> requirements})
       : _requirements = requirements;
 
   @override
   final String country;
-  final List<RequirementItem> _requirements;
+  final List<Requirement> _requirements;
   @override
-  List<RequirementItem> get requirements {
+  List<Requirement> get requirements {
     if (_requirements is EqualUnmodifiableListView) return _requirements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_requirements);
@@ -155,14 +154,13 @@ class _$KycRequirementImpl implements _KycRequirement {
 
 abstract class _KycRequirement implements KycRequirement {
   const factory _KycRequirement(
-          {required final String country,
-          required final List<RequirementItem> requirements}) =
-      _$KycRequirementImpl;
+      {required final String country,
+      required final List<Requirement> requirements}) = _$KycRequirementImpl;
 
   @override
   String get country;
   @override
-  List<RequirementItem> get requirements;
+  List<Requirement> get requirements;
 
   /// Create a copy of KycRequirement
   /// with the given fields replaced by the non-null parameter values.
@@ -172,88 +170,122 @@ abstract class _KycRequirement implements KycRequirement {
       throw _privateConstructorUsedError;
 }
 
-RequirementItem _$RequirementItemFromJson(Map<String, dynamic> json) {
+Requirement _$RequirementFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'basicInfo':
       return BasicInfoRequirement.fromJson(json);
-    case 'document':
-      return DocumentRequirement.fromJson(json);
+    case 'countryCode':
+      return CountryCodeRequirement.fromJson(json);
+    case 'documentType':
+      return DocumentTypeRequirement.fromJson(json);
+    case 'documentField':
+      return DocumentFieldRequirement.fromJson(json);
+    case 'and':
+      return AndRequirement.fromJson(json);
+    case 'or':
+      return OrRequirement.fromJson(json);
+    case 'not':
+      return NotRequirement.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'RequirementItem',
+      throw CheckedFromJsonException(json, 'runtimeType', 'Requirement',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$RequirementItem {
+mixin _$Requirement {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BasicInfoType type) basicInfo,
-    required TResult Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)
-        document,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
-    TResult? Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)?
-        document,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
-    TResult Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)?
-        document,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BasicInfoRequirement value) basicInfo,
-    required TResult Function(DocumentRequirement value) document,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoRequirement value)? basicInfo,
-    TResult? Function(DocumentRequirement value)? document,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BasicInfoRequirement value)? basicInfo,
-    TResult Function(DocumentRequirement value)? document,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this RequirementItem to a JSON map.
+  /// Serializes this Requirement to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RequirementItemCopyWith<$Res> {
-  factory $RequirementItemCopyWith(
-          RequirementItem value, $Res Function(RequirementItem) then) =
-      _$RequirementItemCopyWithImpl<$Res, RequirementItem>;
+abstract class $RequirementCopyWith<$Res> {
+  factory $RequirementCopyWith(
+          Requirement value, $Res Function(Requirement) then) =
+      _$RequirementCopyWithImpl<$Res, Requirement>;
 }
 
 /// @nodoc
-class _$RequirementItemCopyWithImpl<$Res, $Val extends RequirementItem>
-    implements $RequirementItemCopyWith<$Res> {
-  _$RequirementItemCopyWithImpl(this._value, this._then);
+class _$RequirementCopyWithImpl<$Res, $Val extends Requirement>
+    implements $RequirementCopyWith<$Res> {
+  _$RequirementCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -268,13 +300,13 @@ abstract class _$$BasicInfoRequirementImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$BasicInfoRequirementImplCopyWithImpl<$Res>
-    extends _$RequirementItemCopyWithImpl<$Res, _$BasicInfoRequirementImpl>
+    extends _$RequirementCopyWithImpl<$Res, _$BasicInfoRequirementImpl>
     implements _$$BasicInfoRequirementImplCopyWith<$Res> {
   __$$BasicInfoRequirementImplCopyWithImpl(_$BasicInfoRequirementImpl _value,
       $Res Function(_$BasicInfoRequirementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -307,7 +339,7 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
 
   @override
   String toString() {
-    return 'RequirementItem.basicInfo(type: $type)';
+    return 'Requirement.basicInfo(type: $type)';
   }
 
   @override
@@ -322,7 +354,7 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @override
   int get hashCode => Object.hash(runtimeType, type);
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -336,9 +368,12 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BasicInfoType type) basicInfo,
-    required TResult Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)
-        document,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
   }) {
     return basicInfo(type);
   }
@@ -347,9 +382,12 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
-    TResult? Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)?
-        document,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
   }) {
     return basicInfo?.call(type);
   }
@@ -358,9 +396,12 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
-    TResult Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)?
-        document,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
   }) {
     if (basicInfo != null) {
@@ -373,7 +414,12 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BasicInfoRequirement value) basicInfo,
-    required TResult Function(DocumentRequirement value) document,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
   }) {
     return basicInfo(this);
   }
@@ -382,7 +428,12 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoRequirement value)? basicInfo,
-    TResult? Function(DocumentRequirement value)? document,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
   }) {
     return basicInfo?.call(this);
   }
@@ -391,7 +442,12 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BasicInfoRequirement value)? basicInfo,
-    TResult Function(DocumentRequirement value)? document,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
   }) {
     if (basicInfo != null) {
@@ -408,7 +464,7 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   }
 }
 
-abstract class BasicInfoRequirement implements RequirementItem {
+abstract class BasicInfoRequirement implements Requirement {
   const factory BasicInfoRequirement({required final BasicInfoType type}) =
       _$BasicInfoRequirementImpl;
 
@@ -417,7 +473,7 @@ abstract class BasicInfoRequirement implements RequirementItem {
 
   BasicInfoType get type;
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl>
@@ -425,151 +481,123 @@ abstract class BasicInfoRequirement implements RequirementItem {
 }
 
 /// @nodoc
-abstract class _$$DocumentRequirementImplCopyWith<$Res> {
-  factory _$$DocumentRequirementImplCopyWith(_$DocumentRequirementImpl value,
-          $Res Function(_$DocumentRequirementImpl) then) =
-      __$$DocumentRequirementImplCopyWithImpl<$Res>;
+abstract class _$$CountryCodeRequirementImplCopyWith<$Res> {
+  factory _$$CountryCodeRequirementImplCopyWith(
+          _$CountryCodeRequirementImpl value,
+          $Res Function(_$CountryCodeRequirementImpl) then) =
+      __$$CountryCodeRequirementImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String countryCode,
-      IdType documentType,
-      FieldRequirement fieldRequirement});
-
-  $FieldRequirementCopyWith<$Res> get fieldRequirement;
+  $Res call({String code});
 }
 
 /// @nodoc
-class __$$DocumentRequirementImplCopyWithImpl<$Res>
-    extends _$RequirementItemCopyWithImpl<$Res, _$DocumentRequirementImpl>
-    implements _$$DocumentRequirementImplCopyWith<$Res> {
-  __$$DocumentRequirementImplCopyWithImpl(_$DocumentRequirementImpl _value,
-      $Res Function(_$DocumentRequirementImpl) _then)
+class __$$CountryCodeRequirementImplCopyWithImpl<$Res>
+    extends _$RequirementCopyWithImpl<$Res, _$CountryCodeRequirementImpl>
+    implements _$$CountryCodeRequirementImplCopyWith<$Res> {
+  __$$CountryCodeRequirementImplCopyWithImpl(
+      _$CountryCodeRequirementImpl _value,
+      $Res Function(_$CountryCodeRequirementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? countryCode = null,
-    Object? documentType = null,
-    Object? fieldRequirement = null,
+    Object? code = null,
   }) {
-    return _then(_$DocumentRequirementImpl(
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
+    return _then(_$CountryCodeRequirementImpl(
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
-      documentType: null == documentType
-          ? _value.documentType
-          : documentType // ignore: cast_nullable_to_non_nullable
-              as IdType,
-      fieldRequirement: null == fieldRequirement
-          ? _value.fieldRequirement
-          : fieldRequirement // ignore: cast_nullable_to_non_nullable
-              as FieldRequirement,
     ));
-  }
-
-  /// Create a copy of RequirementItem
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FieldRequirementCopyWith<$Res> get fieldRequirement {
-    return $FieldRequirementCopyWith<$Res>(_value.fieldRequirement, (value) {
-      return _then(_value.copyWith(fieldRequirement: value));
-    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DocumentRequirementImpl implements DocumentRequirement {
-  const _$DocumentRequirementImpl(
-      {required this.countryCode,
-      required this.documentType,
-      required this.fieldRequirement,
-      final String? $type})
-      : $type = $type ?? 'document';
+class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
+  const _$CountryCodeRequirementImpl({required this.code, final String? $type})
+      : $type = $type ?? 'countryCode';
 
-  factory _$DocumentRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DocumentRequirementImplFromJson(json);
+  factory _$CountryCodeRequirementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CountryCodeRequirementImplFromJson(json);
 
   @override
-  final String countryCode;
-  @override
-  final IdType documentType;
-  @override
-  final FieldRequirement fieldRequirement;
+  final String code;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'RequirementItem.document(countryCode: $countryCode, documentType: $documentType, fieldRequirement: $fieldRequirement)';
+    return 'Requirement.countryCode(code: $code)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DocumentRequirementImpl &&
-            (identical(other.countryCode, countryCode) ||
-                other.countryCode == countryCode) &&
-            (identical(other.documentType, documentType) ||
-                other.documentType == documentType) &&
-            (identical(other.fieldRequirement, fieldRequirement) ||
-                other.fieldRequirement == fieldRequirement));
+            other is _$CountryCodeRequirementImpl &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, countryCode, documentType, fieldRequirement);
+  int get hashCode => Object.hash(runtimeType, code);
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DocumentRequirementImplCopyWith<_$DocumentRequirementImpl> get copyWith =>
-      __$$DocumentRequirementImplCopyWithImpl<_$DocumentRequirementImpl>(
-          this, _$identity);
+  _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl>
+      get copyWith => __$$CountryCodeRequirementImplCopyWithImpl<
+          _$CountryCodeRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BasicInfoType type) basicInfo,
-    required TResult Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)
-        document,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
   }) {
-    return document(countryCode, documentType, fieldRequirement);
+    return countryCode(code);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
-    TResult? Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)?
-        document,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
   }) {
-    return document?.call(countryCode, documentType, fieldRequirement);
+    return countryCode?.call(code);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
-    TResult Function(String countryCode, IdType documentType,
-            FieldRequirement fieldRequirement)?
-        document,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
   }) {
-    if (document != null) {
-      return document(countryCode, documentType, fieldRequirement);
+    if (countryCode != null) {
+      return countryCode(code);
     }
     return orElse();
   }
@@ -578,176 +606,291 @@ class _$DocumentRequirementImpl implements DocumentRequirement {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BasicInfoRequirement value) basicInfo,
-    required TResult Function(DocumentRequirement value) document,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
   }) {
-    return document(this);
+    return countryCode(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoRequirement value)? basicInfo,
-    TResult? Function(DocumentRequirement value)? document,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
   }) {
-    return document?.call(this);
+    return countryCode?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BasicInfoRequirement value)? basicInfo,
-    TResult Function(DocumentRequirement value)? document,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
   }) {
-    if (document != null) {
-      return document(this);
+    if (countryCode != null) {
+      return countryCode(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DocumentRequirementImplToJson(
+    return _$$CountryCodeRequirementImplToJson(
       this,
     );
   }
 }
 
-abstract class DocumentRequirement implements RequirementItem {
-  const factory DocumentRequirement(
-          {required final String countryCode,
-          required final IdType documentType,
-          required final FieldRequirement fieldRequirement}) =
-      _$DocumentRequirementImpl;
+abstract class CountryCodeRequirement implements Requirement {
+  const factory CountryCodeRequirement({required final String code}) =
+      _$CountryCodeRequirementImpl;
 
-  factory DocumentRequirement.fromJson(Map<String, dynamic> json) =
-      _$DocumentRequirementImpl.fromJson;
+  factory CountryCodeRequirement.fromJson(Map<String, dynamic> json) =
+      _$CountryCodeRequirementImpl.fromJson;
 
-  String get countryCode;
-  IdType get documentType;
-  FieldRequirement get fieldRequirement;
+  String get code;
 
-  /// Create a copy of RequirementItem
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DocumentRequirementImplCopyWith<_$DocumentRequirementImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
-FieldRequirement _$FieldRequirementFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'single':
-      return SingleFieldRequirement.fromJson(json);
-    case 'and':
-      return AndFieldRequirement.fromJson(json);
-    case 'or':
-      return OrFieldRequirement.fromJson(json);
+/// @nodoc
+abstract class _$$DocumentTypeRequirementImplCopyWith<$Res> {
+  factory _$$DocumentTypeRequirementImplCopyWith(
+          _$DocumentTypeRequirementImpl value,
+          $Res Function(_$DocumentTypeRequirementImpl) then) =
+      __$$DocumentTypeRequirementImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({IdType type});
+}
 
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'FieldRequirement',
-          'Invalid union type "${json['runtimeType']}"!');
+/// @nodoc
+class __$$DocumentTypeRequirementImplCopyWithImpl<$Res>
+    extends _$RequirementCopyWithImpl<$Res, _$DocumentTypeRequirementImpl>
+    implements _$$DocumentTypeRequirementImplCopyWith<$Res> {
+  __$$DocumentTypeRequirementImplCopyWithImpl(
+      _$DocumentTypeRequirementImpl _value,
+      $Res Function(_$DocumentTypeRequirementImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Requirement
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$DocumentTypeRequirementImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as IdType,
+    ));
   }
 }
 
 /// @nodoc
-mixin _$FieldRequirement {
+@JsonSerializable()
+class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
+  const _$DocumentTypeRequirementImpl({required this.type, final String? $type})
+      : $type = $type ?? 'documentType';
+
+  factory _$DocumentTypeRequirementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DocumentTypeRequirementImplFromJson(json);
+
+  @override
+  final IdType type;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'Requirement.documentType(type: $type)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DocumentTypeRequirementImpl &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  /// Create a copy of Requirement
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl>
+      get copyWith => __$$DocumentTypeRequirementImplCopyWithImpl<
+          _$DocumentTypeRequirementImpl>(this, _$identity);
+
+  @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DocumentField field) single,
-    required TResult Function(List<FieldRequirement> requirements) and,
-    required TResult Function(List<FieldRequirement> requirements) or,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(BasicInfoType type) basicInfo,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
+  }) {
+    return documentType(type);
+  }
+
+  @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DocumentField field)? single,
-    TResult? Function(List<FieldRequirement> requirements)? and,
-    TResult? Function(List<FieldRequirement> requirements)? or,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(BasicInfoType type)? basicInfo,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
+  }) {
+    return documentType?.call(type);
+  }
+
+  @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DocumentField field)? single,
-    TResult Function(List<FieldRequirement> requirements)? and,
-    TResult Function(List<FieldRequirement> requirements)? or,
+    TResult Function(BasicInfoType type)? basicInfo,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    if (documentType != null) {
+      return documentType(type);
+    }
+    return orElse();
+  }
+
+  @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SingleFieldRequirement value) single,
-    required TResult Function(AndFieldRequirement value) and,
-    required TResult Function(OrFieldRequirement value) or,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(BasicInfoRequirement value) basicInfo,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
+  }) {
+    return documentType(this);
+  }
+
+  @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SingleFieldRequirement value)? single,
-    TResult? Function(AndFieldRequirement value)? and,
-    TResult? Function(OrFieldRequirement value)? or,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(BasicInfoRequirement value)? basicInfo,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
+  }) {
+    return documentType?.call(this);
+  }
+
+  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SingleFieldRequirement value)? single,
-    TResult Function(AndFieldRequirement value)? and,
-    TResult Function(OrFieldRequirement value)? or,
+    TResult Function(BasicInfoRequirement value)? basicInfo,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    if (documentType != null) {
+      return documentType(this);
+    }
+    return orElse();
+  }
 
-  /// Serializes this FieldRequirement to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DocumentTypeRequirementImplToJson(
+      this,
+    );
+  }
 }
 
-/// @nodoc
-abstract class $FieldRequirementCopyWith<$Res> {
-  factory $FieldRequirementCopyWith(
-          FieldRequirement value, $Res Function(FieldRequirement) then) =
-      _$FieldRequirementCopyWithImpl<$Res, FieldRequirement>;
-}
+abstract class DocumentTypeRequirement implements Requirement {
+  const factory DocumentTypeRequirement({required final IdType type}) =
+      _$DocumentTypeRequirementImpl;
 
-/// @nodoc
-class _$FieldRequirementCopyWithImpl<$Res, $Val extends FieldRequirement>
-    implements $FieldRequirementCopyWith<$Res> {
-  _$FieldRequirementCopyWithImpl(this._value, this._then);
+  factory DocumentTypeRequirement.fromJson(Map<String, dynamic> json) =
+      _$DocumentTypeRequirementImpl.fromJson;
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  IdType get type;
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SingleFieldRequirementImplCopyWith<$Res> {
-  factory _$$SingleFieldRequirementImplCopyWith(
-          _$SingleFieldRequirementImpl value,
-          $Res Function(_$SingleFieldRequirementImpl) then) =
-      __$$SingleFieldRequirementImplCopyWithImpl<$Res>;
+abstract class _$$DocumentFieldRequirementImplCopyWith<$Res> {
+  factory _$$DocumentFieldRequirementImplCopyWith(
+          _$DocumentFieldRequirementImpl value,
+          $Res Function(_$DocumentFieldRequirementImpl) then) =
+      __$$DocumentFieldRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DocumentField field});
 }
 
 /// @nodoc
-class __$$SingleFieldRequirementImplCopyWithImpl<$Res>
-    extends _$FieldRequirementCopyWithImpl<$Res, _$SingleFieldRequirementImpl>
-    implements _$$SingleFieldRequirementImplCopyWith<$Res> {
-  __$$SingleFieldRequirementImplCopyWithImpl(
-      _$SingleFieldRequirementImpl _value,
-      $Res Function(_$SingleFieldRequirementImpl) _then)
+class __$$DocumentFieldRequirementImplCopyWithImpl<$Res>
+    extends _$RequirementCopyWithImpl<$Res, _$DocumentFieldRequirementImpl>
+    implements _$$DocumentFieldRequirementImplCopyWith<$Res> {
+  __$$DocumentFieldRequirementImplCopyWithImpl(
+      _$DocumentFieldRequirementImpl _value,
+      $Res Function(_$DocumentFieldRequirementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? field = null,
   }) {
-    return _then(_$SingleFieldRequirementImpl(
+    return _then(_$DocumentFieldRequirementImpl(
       field: null == field
           ? _value.field
           : field // ignore: cast_nullable_to_non_nullable
@@ -758,12 +901,13 @@ class __$$SingleFieldRequirementImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SingleFieldRequirementImpl implements SingleFieldRequirement {
-  const _$SingleFieldRequirementImpl({required this.field, final String? $type})
-      : $type = $type ?? 'single';
+class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
+  const _$DocumentFieldRequirementImpl(
+      {required this.field, final String? $type})
+      : $type = $type ?? 'documentField';
 
-  factory _$SingleFieldRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SingleFieldRequirementImplFromJson(json);
+  factory _$DocumentFieldRequirementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DocumentFieldRequirementImplFromJson(json);
 
   @override
   final DocumentField field;
@@ -773,14 +917,14 @@ class _$SingleFieldRequirementImpl implements SingleFieldRequirement {
 
   @override
   String toString() {
-    return 'FieldRequirement.single(field: $field)';
+    return 'Requirement.documentField(field: $field)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SingleFieldRequirementImpl &&
+            other is _$DocumentFieldRequirementImpl &&
             (identical(other.field, field) || other.field == field));
   }
 
@@ -788,45 +932,57 @@ class _$SingleFieldRequirementImpl implements SingleFieldRequirement {
   @override
   int get hashCode => Object.hash(runtimeType, field);
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SingleFieldRequirementImplCopyWith<_$SingleFieldRequirementImpl>
-      get copyWith => __$$SingleFieldRequirementImplCopyWithImpl<
-          _$SingleFieldRequirementImpl>(this, _$identity);
+  _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl>
+      get copyWith => __$$DocumentFieldRequirementImplCopyWithImpl<
+          _$DocumentFieldRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DocumentField field) single,
-    required TResult Function(List<FieldRequirement> requirements) and,
-    required TResult Function(List<FieldRequirement> requirements) or,
+    required TResult Function(BasicInfoType type) basicInfo,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
   }) {
-    return single(field);
+    return documentField(field);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DocumentField field)? single,
-    TResult? Function(List<FieldRequirement> requirements)? and,
-    TResult? Function(List<FieldRequirement> requirements)? or,
+    TResult? Function(BasicInfoType type)? basicInfo,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
   }) {
-    return single?.call(field);
+    return documentField?.call(field);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DocumentField field)? single,
-    TResult Function(List<FieldRequirement> requirements)? and,
-    TResult Function(List<FieldRequirement> requirements)? or,
+    TResult Function(BasicInfoType type)? basicInfo,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
   }) {
-    if (single != null) {
-      return single(field);
+    if (documentField != null) {
+      return documentField(field);
     }
     return orElse();
   }
@@ -834,108 +990,120 @@ class _$SingleFieldRequirementImpl implements SingleFieldRequirement {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SingleFieldRequirement value) single,
-    required TResult Function(AndFieldRequirement value) and,
-    required TResult Function(OrFieldRequirement value) or,
+    required TResult Function(BasicInfoRequirement value) basicInfo,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
   }) {
-    return single(this);
+    return documentField(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SingleFieldRequirement value)? single,
-    TResult? Function(AndFieldRequirement value)? and,
-    TResult? Function(OrFieldRequirement value)? or,
+    TResult? Function(BasicInfoRequirement value)? basicInfo,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
   }) {
-    return single?.call(this);
+    return documentField?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SingleFieldRequirement value)? single,
-    TResult Function(AndFieldRequirement value)? and,
-    TResult Function(OrFieldRequirement value)? or,
+    TResult Function(BasicInfoRequirement value)? basicInfo,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
   }) {
-    if (single != null) {
-      return single(this);
+    if (documentField != null) {
+      return documentField(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SingleFieldRequirementImplToJson(
+    return _$$DocumentFieldRequirementImplToJson(
       this,
     );
   }
 }
 
-abstract class SingleFieldRequirement implements FieldRequirement {
-  const factory SingleFieldRequirement({required final DocumentField field}) =
-      _$SingleFieldRequirementImpl;
+abstract class DocumentFieldRequirement implements Requirement {
+  const factory DocumentFieldRequirement({required final DocumentField field}) =
+      _$DocumentFieldRequirementImpl;
 
-  factory SingleFieldRequirement.fromJson(Map<String, dynamic> json) =
-      _$SingleFieldRequirementImpl.fromJson;
+  factory DocumentFieldRequirement.fromJson(Map<String, dynamic> json) =
+      _$DocumentFieldRequirementImpl.fromJson;
 
   DocumentField get field;
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SingleFieldRequirementImplCopyWith<_$SingleFieldRequirementImpl>
+  _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AndFieldRequirementImplCopyWith<$Res> {
-  factory _$$AndFieldRequirementImplCopyWith(_$AndFieldRequirementImpl value,
-          $Res Function(_$AndFieldRequirementImpl) then) =
-      __$$AndFieldRequirementImplCopyWithImpl<$Res>;
+abstract class _$$AndRequirementImplCopyWith<$Res> {
+  factory _$$AndRequirementImplCopyWith(_$AndRequirementImpl value,
+          $Res Function(_$AndRequirementImpl) then) =
+      __$$AndRequirementImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<FieldRequirement> requirements});
+  $Res call({List<Requirement> requirements});
 }
 
 /// @nodoc
-class __$$AndFieldRequirementImplCopyWithImpl<$Res>
-    extends _$FieldRequirementCopyWithImpl<$Res, _$AndFieldRequirementImpl>
-    implements _$$AndFieldRequirementImplCopyWith<$Res> {
-  __$$AndFieldRequirementImplCopyWithImpl(_$AndFieldRequirementImpl _value,
-      $Res Function(_$AndFieldRequirementImpl) _then)
+class __$$AndRequirementImplCopyWithImpl<$Res>
+    extends _$RequirementCopyWithImpl<$Res, _$AndRequirementImpl>
+    implements _$$AndRequirementImplCopyWith<$Res> {
+  __$$AndRequirementImplCopyWithImpl(
+      _$AndRequirementImpl _value, $Res Function(_$AndRequirementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? requirements = null,
   }) {
-    return _then(_$AndFieldRequirementImpl(
+    return _then(_$AndRequirementImpl(
       requirements: null == requirements
           ? _value._requirements
           : requirements // ignore: cast_nullable_to_non_nullable
-              as List<FieldRequirement>,
+              as List<Requirement>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$AndFieldRequirementImpl implements AndFieldRequirement {
-  const _$AndFieldRequirementImpl(
-      {required final List<FieldRequirement> requirements, final String? $type})
+class _$AndRequirementImpl implements AndRequirement {
+  const _$AndRequirementImpl(
+      {required final List<Requirement> requirements, final String? $type})
       : _requirements = requirements,
         $type = $type ?? 'and';
 
-  factory _$AndFieldRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AndFieldRequirementImplFromJson(json);
+  factory _$AndRequirementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AndRequirementImplFromJson(json);
 
-  final List<FieldRequirement> _requirements;
+  final List<Requirement> _requirements;
   @override
-  List<FieldRequirement> get requirements {
+  List<Requirement> get requirements {
     if (_requirements is EqualUnmodifiableListView) return _requirements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_requirements);
@@ -946,14 +1114,14 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
 
   @override
   String toString() {
-    return 'FieldRequirement.and(requirements: $requirements)';
+    return 'Requirement.and(requirements: $requirements)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AndFieldRequirementImpl &&
+            other is _$AndRequirementImpl &&
             const DeepCollectionEquality()
                 .equals(other._requirements, _requirements));
   }
@@ -963,21 +1131,25 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_requirements));
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AndFieldRequirementImplCopyWith<_$AndFieldRequirementImpl> get copyWith =>
-      __$$AndFieldRequirementImplCopyWithImpl<_$AndFieldRequirementImpl>(
+  _$$AndRequirementImplCopyWith<_$AndRequirementImpl> get copyWith =>
+      __$$AndRequirementImplCopyWithImpl<_$AndRequirementImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DocumentField field) single,
-    required TResult Function(List<FieldRequirement> requirements) and,
-    required TResult Function(List<FieldRequirement> requirements) or,
+    required TResult Function(BasicInfoType type) basicInfo,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
   }) {
     return and(requirements);
   }
@@ -985,9 +1157,13 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DocumentField field)? single,
-    TResult? Function(List<FieldRequirement> requirements)? and,
-    TResult? Function(List<FieldRequirement> requirements)? or,
+    TResult? Function(BasicInfoType type)? basicInfo,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
   }) {
     return and?.call(requirements);
   }
@@ -995,9 +1171,13 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DocumentField field)? single,
-    TResult Function(List<FieldRequirement> requirements)? and,
-    TResult Function(List<FieldRequirement> requirements)? or,
+    TResult Function(BasicInfoType type)? basicInfo,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
   }) {
     if (and != null) {
@@ -1009,9 +1189,13 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SingleFieldRequirement value) single,
-    required TResult Function(AndFieldRequirement value) and,
-    required TResult Function(OrFieldRequirement value) or,
+    required TResult Function(BasicInfoRequirement value) basicInfo,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
   }) {
     return and(this);
   }
@@ -1019,9 +1203,13 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SingleFieldRequirement value)? single,
-    TResult? Function(AndFieldRequirement value)? and,
-    TResult? Function(OrFieldRequirement value)? or,
+    TResult? Function(BasicInfoRequirement value)? basicInfo,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
   }) {
     return and?.call(this);
   }
@@ -1029,9 +1217,13 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SingleFieldRequirement value)? single,
-    TResult Function(AndFieldRequirement value)? and,
-    TResult Function(OrFieldRequirement value)? or,
+    TResult Function(BasicInfoRequirement value)? basicInfo,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
   }) {
     if (and != null) {
@@ -1042,76 +1234,75 @@ class _$AndFieldRequirementImpl implements AndFieldRequirement {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AndFieldRequirementImplToJson(
+    return _$$AndRequirementImplToJson(
       this,
     );
   }
 }
 
-abstract class AndFieldRequirement implements FieldRequirement {
-  const factory AndFieldRequirement(
-          {required final List<FieldRequirement> requirements}) =
-      _$AndFieldRequirementImpl;
+abstract class AndRequirement implements Requirement {
+  const factory AndRequirement(
+      {required final List<Requirement> requirements}) = _$AndRequirementImpl;
 
-  factory AndFieldRequirement.fromJson(Map<String, dynamic> json) =
-      _$AndFieldRequirementImpl.fromJson;
+  factory AndRequirement.fromJson(Map<String, dynamic> json) =
+      _$AndRequirementImpl.fromJson;
 
-  List<FieldRequirement> get requirements;
+  List<Requirement> get requirements;
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AndFieldRequirementImplCopyWith<_$AndFieldRequirementImpl> get copyWith =>
+  _$$AndRequirementImplCopyWith<_$AndRequirementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$OrFieldRequirementImplCopyWith<$Res> {
-  factory _$$OrFieldRequirementImplCopyWith(_$OrFieldRequirementImpl value,
-          $Res Function(_$OrFieldRequirementImpl) then) =
-      __$$OrFieldRequirementImplCopyWithImpl<$Res>;
+abstract class _$$OrRequirementImplCopyWith<$Res> {
+  factory _$$OrRequirementImplCopyWith(
+          _$OrRequirementImpl value, $Res Function(_$OrRequirementImpl) then) =
+      __$$OrRequirementImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<FieldRequirement> requirements});
+  $Res call({List<Requirement> requirements});
 }
 
 /// @nodoc
-class __$$OrFieldRequirementImplCopyWithImpl<$Res>
-    extends _$FieldRequirementCopyWithImpl<$Res, _$OrFieldRequirementImpl>
-    implements _$$OrFieldRequirementImplCopyWith<$Res> {
-  __$$OrFieldRequirementImplCopyWithImpl(_$OrFieldRequirementImpl _value,
-      $Res Function(_$OrFieldRequirementImpl) _then)
+class __$$OrRequirementImplCopyWithImpl<$Res>
+    extends _$RequirementCopyWithImpl<$Res, _$OrRequirementImpl>
+    implements _$$OrRequirementImplCopyWith<$Res> {
+  __$$OrRequirementImplCopyWithImpl(
+      _$OrRequirementImpl _value, $Res Function(_$OrRequirementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? requirements = null,
   }) {
-    return _then(_$OrFieldRequirementImpl(
+    return _then(_$OrRequirementImpl(
       requirements: null == requirements
           ? _value._requirements
           : requirements // ignore: cast_nullable_to_non_nullable
-              as List<FieldRequirement>,
+              as List<Requirement>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OrFieldRequirementImpl implements OrFieldRequirement {
-  const _$OrFieldRequirementImpl(
-      {required final List<FieldRequirement> requirements, final String? $type})
+class _$OrRequirementImpl implements OrRequirement {
+  const _$OrRequirementImpl(
+      {required final List<Requirement> requirements, final String? $type})
       : _requirements = requirements,
         $type = $type ?? 'or';
 
-  factory _$OrFieldRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrFieldRequirementImplFromJson(json);
+  factory _$OrRequirementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrRequirementImplFromJson(json);
 
-  final List<FieldRequirement> _requirements;
+  final List<Requirement> _requirements;
   @override
-  List<FieldRequirement> get requirements {
+  List<Requirement> get requirements {
     if (_requirements is EqualUnmodifiableListView) return _requirements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_requirements);
@@ -1122,14 +1313,14 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
 
   @override
   String toString() {
-    return 'FieldRequirement.or(requirements: $requirements)';
+    return 'Requirement.or(requirements: $requirements)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrFieldRequirementImpl &&
+            other is _$OrRequirementImpl &&
             const DeepCollectionEquality()
                 .equals(other._requirements, _requirements));
   }
@@ -1139,21 +1330,24 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_requirements));
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrFieldRequirementImplCopyWith<_$OrFieldRequirementImpl> get copyWith =>
-      __$$OrFieldRequirementImplCopyWithImpl<_$OrFieldRequirementImpl>(
-          this, _$identity);
+  _$$OrRequirementImplCopyWith<_$OrRequirementImpl> get copyWith =>
+      __$$OrRequirementImplCopyWithImpl<_$OrRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DocumentField field) single,
-    required TResult Function(List<FieldRequirement> requirements) and,
-    required TResult Function(List<FieldRequirement> requirements) or,
+    required TResult Function(BasicInfoType type) basicInfo,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
   }) {
     return or(requirements);
   }
@@ -1161,9 +1355,13 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DocumentField field)? single,
-    TResult? Function(List<FieldRequirement> requirements)? and,
-    TResult? Function(List<FieldRequirement> requirements)? or,
+    TResult? Function(BasicInfoType type)? basicInfo,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
   }) {
     return or?.call(requirements);
   }
@@ -1171,9 +1369,13 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DocumentField field)? single,
-    TResult Function(List<FieldRequirement> requirements)? and,
-    TResult Function(List<FieldRequirement> requirements)? or,
+    TResult Function(BasicInfoType type)? basicInfo,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
     required TResult orElse(),
   }) {
     if (or != null) {
@@ -1185,9 +1387,13 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SingleFieldRequirement value) single,
-    required TResult Function(AndFieldRequirement value) and,
-    required TResult Function(OrFieldRequirement value) or,
+    required TResult Function(BasicInfoRequirement value) basicInfo,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
   }) {
     return or(this);
   }
@@ -1195,9 +1401,13 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SingleFieldRequirement value)? single,
-    TResult? Function(AndFieldRequirement value)? and,
-    TResult? Function(OrFieldRequirement value)? or,
+    TResult? Function(BasicInfoRequirement value)? basicInfo,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
   }) {
     return or?.call(this);
   }
@@ -1205,9 +1415,13 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SingleFieldRequirement value)? single,
-    TResult Function(AndFieldRequirement value)? and,
-    TResult Function(OrFieldRequirement value)? or,
+    TResult Function(BasicInfoRequirement value)? basicInfo,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
     required TResult orElse(),
   }) {
     if (or != null) {
@@ -1218,25 +1432,227 @@ class _$OrFieldRequirementImpl implements OrFieldRequirement {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OrFieldRequirementImplToJson(
+    return _$$OrRequirementImplToJson(
       this,
     );
   }
 }
 
-abstract class OrFieldRequirement implements FieldRequirement {
-  const factory OrFieldRequirement(
-          {required final List<FieldRequirement> requirements}) =
-      _$OrFieldRequirementImpl;
+abstract class OrRequirement implements Requirement {
+  const factory OrRequirement({required final List<Requirement> requirements}) =
+      _$OrRequirementImpl;
 
-  factory OrFieldRequirement.fromJson(Map<String, dynamic> json) =
-      _$OrFieldRequirementImpl.fromJson;
+  factory OrRequirement.fromJson(Map<String, dynamic> json) =
+      _$OrRequirementImpl.fromJson;
 
-  List<FieldRequirement> get requirements;
+  List<Requirement> get requirements;
 
-  /// Create a copy of FieldRequirement
+  /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OrFieldRequirementImplCopyWith<_$OrFieldRequirementImpl> get copyWith =>
+  _$$OrRequirementImplCopyWith<_$OrRequirementImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NotRequirementImplCopyWith<$Res> {
+  factory _$$NotRequirementImplCopyWith(_$NotRequirementImpl value,
+          $Res Function(_$NotRequirementImpl) then) =
+      __$$NotRequirementImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Requirement requirement});
+
+  $RequirementCopyWith<$Res> get requirement;
+}
+
+/// @nodoc
+class __$$NotRequirementImplCopyWithImpl<$Res>
+    extends _$RequirementCopyWithImpl<$Res, _$NotRequirementImpl>
+    implements _$$NotRequirementImplCopyWith<$Res> {
+  __$$NotRequirementImplCopyWithImpl(
+      _$NotRequirementImpl _value, $Res Function(_$NotRequirementImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Requirement
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? requirement = null,
+  }) {
+    return _then(_$NotRequirementImpl(
+      requirement: null == requirement
+          ? _value.requirement
+          : requirement // ignore: cast_nullable_to_non_nullable
+              as Requirement,
+    ));
+  }
+
+  /// Create a copy of Requirement
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RequirementCopyWith<$Res> get requirement {
+    return $RequirementCopyWith<$Res>(_value.requirement, (value) {
+      return _then(_value.copyWith(requirement: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NotRequirementImpl implements NotRequirement {
+  const _$NotRequirementImpl({required this.requirement, final String? $type})
+      : $type = $type ?? 'not';
+
+  factory _$NotRequirementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NotRequirementImplFromJson(json);
+
+  @override
+  final Requirement requirement;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'Requirement.not(requirement: $requirement)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NotRequirementImpl &&
+            (identical(other.requirement, requirement) ||
+                other.requirement == requirement));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, requirement);
+
+  /// Create a copy of Requirement
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NotRequirementImplCopyWith<_$NotRequirementImpl> get copyWith =>
+      __$$NotRequirementImplCopyWithImpl<_$NotRequirementImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(BasicInfoType type) basicInfo,
+    required TResult Function(String code) countryCode,
+    required TResult Function(IdType type) documentType,
+    required TResult Function(DocumentField field) documentField,
+    required TResult Function(List<Requirement> requirements) and,
+    required TResult Function(List<Requirement> requirements) or,
+    required TResult Function(Requirement requirement) not,
+  }) {
+    return not(requirement);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BasicInfoType type)? basicInfo,
+    TResult? Function(String code)? countryCode,
+    TResult? Function(IdType type)? documentType,
+    TResult? Function(DocumentField field)? documentField,
+    TResult? Function(List<Requirement> requirements)? and,
+    TResult? Function(List<Requirement> requirements)? or,
+    TResult? Function(Requirement requirement)? not,
+  }) {
+    return not?.call(requirement);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BasicInfoType type)? basicInfo,
+    TResult Function(String code)? countryCode,
+    TResult Function(IdType type)? documentType,
+    TResult Function(DocumentField field)? documentField,
+    TResult Function(List<Requirement> requirements)? and,
+    TResult Function(List<Requirement> requirements)? or,
+    TResult Function(Requirement requirement)? not,
+    required TResult orElse(),
+  }) {
+    if (not != null) {
+      return not(requirement);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BasicInfoRequirement value) basicInfo,
+    required TResult Function(CountryCodeRequirement value) countryCode,
+    required TResult Function(DocumentTypeRequirement value) documentType,
+    required TResult Function(DocumentFieldRequirement value) documentField,
+    required TResult Function(AndRequirement value) and,
+    required TResult Function(OrRequirement value) or,
+    required TResult Function(NotRequirement value) not,
+  }) {
+    return not(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BasicInfoRequirement value)? basicInfo,
+    TResult? Function(CountryCodeRequirement value)? countryCode,
+    TResult? Function(DocumentTypeRequirement value)? documentType,
+    TResult? Function(DocumentFieldRequirement value)? documentField,
+    TResult? Function(AndRequirement value)? and,
+    TResult? Function(OrRequirement value)? or,
+    TResult? Function(NotRequirement value)? not,
+  }) {
+    return not?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BasicInfoRequirement value)? basicInfo,
+    TResult Function(CountryCodeRequirement value)? countryCode,
+    TResult Function(DocumentTypeRequirement value)? documentType,
+    TResult Function(DocumentFieldRequirement value)? documentField,
+    TResult Function(AndRequirement value)? and,
+    TResult Function(OrRequirement value)? or,
+    TResult Function(NotRequirement value)? not,
+    required TResult orElse(),
+  }) {
+    if (not != null) {
+      return not(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NotRequirementImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class NotRequirement implements Requirement {
+  const factory NotRequirement({required final Requirement requirement}) =
+      _$NotRequirementImpl;
+
+  factory NotRequirement.fromJson(Map<String, dynamic> json) =
+      _$NotRequirementImpl.fromJson;
+
+  Requirement get requirement;
+
+  /// Create a copy of Requirement
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NotRequirementImplCopyWith<_$NotRequirementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

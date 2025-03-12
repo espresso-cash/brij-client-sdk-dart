@@ -25,22 +25,31 @@ const _$BasicInfoTypeEnumMap = {
   BasicInfoType.phone: 'phone',
 };
 
-_$DocumentRequirementImpl _$$DocumentRequirementImplFromJson(
+_$CountryCodeRequirementImpl _$$CountryCodeRequirementImplFromJson(
         Map<String, dynamic> json) =>
-    _$DocumentRequirementImpl(
-      countryCode: json['countryCode'] as String,
-      documentType: $enumDecode(_$IdTypeEnumMap, json['documentType']),
-      fieldRequirement: FieldRequirement.fromJson(
-          json['fieldRequirement'] as Map<String, dynamic>),
+    _$CountryCodeRequirementImpl(
+      code: json['code'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$DocumentRequirementImplToJson(
-        _$DocumentRequirementImpl instance) =>
+Map<String, dynamic> _$$CountryCodeRequirementImplToJson(
+        _$CountryCodeRequirementImpl instance) =>
     <String, dynamic>{
-      'countryCode': instance.countryCode,
-      'documentType': _$IdTypeEnumMap[instance.documentType]!,
-      'fieldRequirement': instance.fieldRequirement,
+      'code': instance.code,
+      'runtimeType': instance.$type,
+    };
+
+_$DocumentTypeRequirementImpl _$$DocumentTypeRequirementImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DocumentTypeRequirementImpl(
+      type: $enumDecode(_$IdTypeEnumMap, json['type']),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$DocumentTypeRequirementImplToJson(
+        _$DocumentTypeRequirementImpl instance) =>
+    <String, dynamic>{
+      'type': _$IdTypeEnumMap[instance.type]!,
       'runtimeType': instance.$type,
     };
 
@@ -50,15 +59,15 @@ const _$IdTypeEnumMap = {
   IdType.other: 'other',
 };
 
-_$SingleFieldRequirementImpl _$$SingleFieldRequirementImplFromJson(
+_$DocumentFieldRequirementImpl _$$DocumentFieldRequirementImplFromJson(
         Map<String, dynamic> json) =>
-    _$SingleFieldRequirementImpl(
+    _$DocumentFieldRequirementImpl(
       field: $enumDecode(_$DocumentFieldEnumMap, json['field']),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SingleFieldRequirementImplToJson(
-        _$SingleFieldRequirementImpl instance) =>
+Map<String, dynamic> _$$DocumentFieldRequirementImplToJson(
+        _$DocumentFieldRequirementImpl instance) =>
     <String, dynamic>{
       'field': _$DocumentFieldEnumMap[instance.field]!,
       'runtimeType': instance.$type,
@@ -71,34 +80,45 @@ const _$DocumentFieldEnumMap = {
   DocumentField.other: 'other',
 };
 
-_$AndFieldRequirementImpl _$$AndFieldRequirementImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AndFieldRequirementImpl(
+_$AndRequirementImpl _$$AndRequirementImplFromJson(Map<String, dynamic> json) =>
+    _$AndRequirementImpl(
       requirements: (json['requirements'] as List<dynamic>)
-          .map((e) => FieldRequirement.fromJson(e as Map<String, dynamic>))
+          .map((e) => Requirement.fromJson(e as Map<String, dynamic>))
           .toList(),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$AndFieldRequirementImplToJson(
-        _$AndFieldRequirementImpl instance) =>
+Map<String, dynamic> _$$AndRequirementImplToJson(
+        _$AndRequirementImpl instance) =>
     <String, dynamic>{
       'requirements': instance.requirements,
       'runtimeType': instance.$type,
     };
 
-_$OrFieldRequirementImpl _$$OrFieldRequirementImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OrFieldRequirementImpl(
+_$OrRequirementImpl _$$OrRequirementImplFromJson(Map<String, dynamic> json) =>
+    _$OrRequirementImpl(
       requirements: (json['requirements'] as List<dynamic>)
-          .map((e) => FieldRequirement.fromJson(e as Map<String, dynamic>))
+          .map((e) => Requirement.fromJson(e as Map<String, dynamic>))
           .toList(),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$OrFieldRequirementImplToJson(
-        _$OrFieldRequirementImpl instance) =>
+Map<String, dynamic> _$$OrRequirementImplToJson(_$OrRequirementImpl instance) =>
     <String, dynamic>{
       'requirements': instance.requirements,
+      'runtimeType': instance.$type,
+    };
+
+_$NotRequirementImpl _$$NotRequirementImplFromJson(Map<String, dynamic> json) =>
+    _$NotRequirementImpl(
+      requirement:
+          Requirement.fromJson(json['requirement'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$NotRequirementImplToJson(
+        _$NotRequirementImpl instance) =>
+    <String, dynamic>{
+      'requirement': instance.requirement,
       'runtimeType': instance.$type,
     };

@@ -25,39 +25,30 @@ enum DocumentField {
 class KycRequirement with _$KycRequirement {
   const factory KycRequirement({
     required String country,
-    required List<RequirementItem> requirements,
+    required List<Requirement> requirements,
   }) = _KycRequirement;
 
   factory KycRequirement.fromProto(V1GetKycRequirementsResponse response) {
     final country = response.country;
-    final requirements = response.requirements.map((req) {
+    final requirements = <Requirement>[];
+
+    for (final req in response.requirements) {
       final type = req.type;
       final formula = req.formula;
 
       if (type == V1DataType.dataTypeEmail) {
-        return const RequirementItem.basicInfo(type: BasicInfoType.email);
+        requirements
+            .add(const Requirement.basicInfo(type: BasicInfoType.email));
       } else if (type == V1DataType.dataTypePhone) {
-        return const RequirementItem.basicInfo(type: BasicInfoType.phone);
+        requirements
+            .add(const Requirement.basicInfo(type: BasicInfoType.phone));
       } else if (type == V1DataType.dataTypeDocument) {
-        String countryCode = '';
-        IdType documentType = IdType.voterId;
-
-        _extractDocumentMetadata(formula, (code, type) {
-          if (code != null) countryCode = code;
-          if (type != null) documentType = type;
-        });
-
-        final fieldRequirement = _extractFieldRequirements(formula);
-
-        return RequirementItem.document(
-          countryCode: countryCode,
-          documentType: documentType,
-          fieldRequirement: fieldRequirement,
-        );
+        final docReq = _parseFormula(formula);
+        if (docReq != null) {
+          requirements.add(docReq);
+        }
       }
-
-      return const RequirementItem.basicInfo(type: BasicInfoType.email);
-    }).toList();
+    }
 
     return KycRequirement(
       country: country,
@@ -65,90 +56,51 @@ class KycRequirement with _$KycRequirement {
     );
   }
 
-  static void _extractDocumentMetadata(
-    V1Formula formula,
-    void Function(String?, IdType?) onMetadata,
-  ) {
-    if (formula.and != null) {
-      for (final nestedFormula in formula.and?.formulas ?? []) {
-        _extractDocumentMetadata(nestedFormula as V1Formula, onMetadata);
+  static Requirement? _parseFormula(V1Formula formula) {
+    // Handle AND case
+    if (formula.and != null && formula.and!.formulas.isNotEmpty) {
+      final requirements = <Requirement>[];
+      for (final andFormula in formula.and!.formulas) {
+        final req = _parseFormula(andFormula);
+        if (req != null) {
+          requirements.add(req);
+        }
       }
-    } else if (formula.or != null) {
-      for (final nestedFormula in formula.or?.formulas ?? []) {
-        _extractDocumentMetadata(nestedFormula as V1Formula, onMetadata);
+      if (requirements.isNotEmpty) {
+        return Requirement.and(requirements: requirements);
       }
-    } else if (formula.not != null) {
-      _extractDocumentMetadata(formula.not!, onMetadata);
-    } else if (formula.condition != null) {
+    }
+    // Handle OR case
+    else if (formula.or != null && formula.or!.formulas.isNotEmpty) {
+      final requirements = <Requirement>[];
+      for (final orFormula in formula.or!.formulas) {
+        final req = _parseFormula(orFormula);
+        if (req != null) {
+          requirements.add(req);
+        }
+      }
+      if (requirements.isNotEmpty) {
+        return Requirement.or(requirements: requirements);
+      }
+    }
+    // Handle condition case
+    else if (formula.condition != null) {
       final condition = formula.condition!;
-      String? countryCode;
-      IdType? documentType;
-
       if (condition.countryCode != null) {
-        countryCode = condition.countryCode;
-      } else if (condition.documentType != null) {
-        documentType = _mapDocumentType(condition.documentType!);
+        return Requirement.countryCode(code: condition.countryCode!);
       }
-
-      onMetadata(countryCode, documentType);
-    }
-  }
-
-  static FieldRequirement _extractFieldRequirements(V1Formula formula) {
-    final andFormulas = formula.and;
-    if (andFormulas != null && andFormulas.formulas.isNotEmpty) {
-      final requirements = <FieldRequirement>[];
-
-      for (final nestedFormula in andFormulas.formulas) {
-        final requirement = _extractFieldRequirements(nestedFormula);
-        if (requirement is AndFieldRequirement) {
-          requirements.addAll(requirement.requirements);
-        } else {
-          requirements.add(requirement);
-        }
+      if (condition.documentType != null) {
+        return Requirement.documentType(
+          type: _mapDocumentType(condition.documentType!),
+        );
       }
-
-      if (requirements.length == 1) {
-        return requirements.first;
-      }
-      return FieldRequirement.and(requirements: requirements);
-    }
-
-    final orFormulas = formula.or;
-    if (orFormulas != null && orFormulas.formulas.isNotEmpty) {
-      final requirements = <FieldRequirement>[];
-
-      for (final nestedFormula in orFormulas.formulas) {
-        final requirement = _extractFieldRequirements(nestedFormula);
-        if (requirement is OrFieldRequirement) {
-          requirements.addAll(requirement.requirements);
-        } else {
-          requirements.add(requirement);
-        }
-      }
-
-      if (requirements.length == 1) {
-        return requirements.first;
-      }
-      return FieldRequirement.or(requirements: requirements);
-    }
-
-    final notFormula = formula.not;
-    if (notFormula != null) {
-      return _extractFieldRequirements(notFormula);
-    }
-
-    final condition = formula.condition;
-    if (condition?.documentField != null) {
-      final documentField = condition?.documentField;
-      if (documentField != null) {
-        return FieldRequirement.single(
-          field: _mapDocumentField(documentField),
+      if (condition.documentField != null) {
+        return Requirement.documentField(
+          field: _mapDocumentField(condition.documentField!),
         );
       }
     }
-
-    return const FieldRequirement.and(requirements: []);
+    return null;
   }
 
   static IdType _mapDocumentType(V1DocumentType protoType) =>
@@ -160,9 +112,7 @@ class KycRequirement with _$KycRequirement {
           IdType.other,
       };
 
-  static DocumentField _mapDocumentField(
-    V1DocumentFieldType protoField,
-  ) =>
+  static DocumentField _mapDocumentField(V1DocumentFieldType protoField) =>
       switch (protoField) {
         V1DocumentFieldType.documentFieldTypeIDNumber => DocumentField.idNumber,
         V1DocumentFieldType.documentFieldTypePhotoFront =>
@@ -176,35 +126,35 @@ class KycRequirement with _$KycRequirement {
 }
 
 @freezed
-class RequirementItem with _$RequirementItem {
-  const factory RequirementItem.basicInfo({
+class Requirement with _$Requirement {
+  const factory Requirement.basicInfo({
     required BasicInfoType type,
   }) = BasicInfoRequirement;
 
-  const factory RequirementItem.document({
-    required String countryCode,
-    required IdType documentType,
-    required FieldRequirement fieldRequirement,
-  }) = DocumentRequirement;
+  const factory Requirement.countryCode({
+    required String code,
+  }) = CountryCodeRequirement;
 
-  factory RequirementItem.fromJson(Map<String, dynamic> json) =>
-      _$RequirementItemFromJson(json);
-}
+  const factory Requirement.documentType({
+    required IdType type,
+  }) = DocumentTypeRequirement;
 
-@freezed
-class FieldRequirement with _$FieldRequirement {
-  const factory FieldRequirement.single({
+  const factory Requirement.documentField({
     required DocumentField field,
-  }) = SingleFieldRequirement;
+  }) = DocumentFieldRequirement;
 
-  const factory FieldRequirement.and({
-    required List<FieldRequirement> requirements,
-  }) = AndFieldRequirement;
+  const factory Requirement.and({
+    required List<Requirement> requirements,
+  }) = AndRequirement;
 
-  const factory FieldRequirement.or({
-    required List<FieldRequirement> requirements,
-  }) = OrFieldRequirement;
+  const factory Requirement.or({
+    required List<Requirement> requirements,
+  }) = OrRequirement;
 
-  factory FieldRequirement.fromJson(Map<String, dynamic> json) =>
-      _$FieldRequirementFromJson(json);
+  const factory Requirement.not({
+    required Requirement requirement,
+  }) = NotRequirement;
+
+  factory Requirement.fromJson(Map<String, dynamic> json) =>
+      _$RequirementFromJson(json);
 }
