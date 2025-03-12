@@ -22,14 +22,14 @@ class _VerifierServiceClient implements VerifierServiceClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> verifierServiceGetKycRequirements(
+  Future<V1GetKycRequirementsResponse> verifierServiceGetKycRequirements(
       {required V1GetKycRequirementsRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<V1GetKycRequirementsResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -45,37 +45,14 @@ class _VerifierServiceClient implements VerifierServiceClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
-    return _value;
-  }
-
-  @override
-  Future<dynamic> verifierServiceInitDocumentValidation(
-      {required V1InitDocumentValidationRequest body}) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
-    final _options = _setStreamType<dynamic>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/v1/initDocumentValidation',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late V1GetKycRequirementsResponse _value;
+    try {
+      _value = V1GetKycRequirementsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 

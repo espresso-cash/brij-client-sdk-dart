@@ -48,38 +48,6 @@
         ]
       }
     },
-    "/v1/initDocumentValidation": {
-      "post": {
-        "operationId": "VerifierService_InitDocumentValidation",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetKycRequirementsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1GetKycRequirementsRequest"
-            }
-          }
-        ],
-        "tags": [
-          "VerifierService"
-        ]
-      }
-    },
     "/v1/initEmailValidation": {
       "post": {
         "operationId": "VerifierService_InitEmailValidation",
@@ -371,17 +339,6 @@
           }
         }
       }
-    },
-    "v1InitDocumentValidationRequest": {
-      "type": "object",
-      "properties": {
-        "country": {
-          "type": "string"
-        }
-      }
-    },
-    "v1GetKycRequirementsResponse": {
-      "type": "object"
     },
     "v1InitEmailValidationRequest": {
       "type": "object",

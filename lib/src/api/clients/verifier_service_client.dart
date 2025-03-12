@@ -22,8 +22,7 @@ part 'verifier_service_client.g.dart';
 
 @RestApi()
 abstract class VerifierServiceClient {
-  factory VerifierServiceClient(Dio dio, {String? baseUrl}) =
-      _VerifierServiceClient;
+  factory VerifierServiceClient(Dio dio, {String? baseUrl}) = _VerifierServiceClient;
 
   @POST('/v1/getKycRequirements')
   Future<V1GetKycRequirementsResponse> verifierServiceGetKycRequirements({
