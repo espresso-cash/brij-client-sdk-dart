@@ -23,9 +23,10 @@ mixin _$UserData {
   Email? get email => throw _privateConstructorUsedError;
   Phone? get phone => throw _privateConstructorUsedError;
   Name? get name => throw _privateConstructorUsedError;
+  Citizenship? get citizenship => throw _privateConstructorUsedError;
   BirthDate? get birthDate => throw _privateConstructorUsedError;
-  Document? get document => throw _privateConstructorUsedError;
-  BankInfo? get bankInfo => throw _privateConstructorUsedError;
+  List<Document>? get documents => throw _privateConstructorUsedError;
+  List<BankInfo>? get bankInfos => throw _privateConstructorUsedError;
   Selfie? get selfie => throw _privateConstructorUsedError;
   Map<String, dynamic>? get custom => throw _privateConstructorUsedError;
 
@@ -48,18 +49,18 @@ abstract class $UserDataCopyWith<$Res> {
       {Email? email,
       Phone? phone,
       Name? name,
+      Citizenship? citizenship,
       BirthDate? birthDate,
-      Document? document,
-      BankInfo? bankInfo,
+      List<Document>? documents,
+      List<BankInfo>? bankInfos,
       Selfie? selfie,
       Map<String, dynamic>? custom});
 
   $EmailCopyWith<$Res>? get email;
   $PhoneCopyWith<$Res>? get phone;
   $NameCopyWith<$Res>? get name;
+  $CitizenshipCopyWith<$Res>? get citizenship;
   $BirthDateCopyWith<$Res>? get birthDate;
-  $DocumentCopyWith<$Res>? get document;
-  $BankInfoCopyWith<$Res>? get bankInfo;
   $SelfieCopyWith<$Res>? get selfie;
 }
 
@@ -81,9 +82,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? email = freezed,
     Object? phone = freezed,
     Object? name = freezed,
+    Object? citizenship = freezed,
     Object? birthDate = freezed,
-    Object? document = freezed,
-    Object? bankInfo = freezed,
+    Object? documents = freezed,
+    Object? bankInfos = freezed,
     Object? selfie = freezed,
     Object? custom = freezed,
   }) {
@@ -100,18 +102,22 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name?,
+      citizenship: freezed == citizenship
+          ? _value.citizenship
+          : citizenship // ignore: cast_nullable_to_non_nullable
+              as Citizenship?,
       birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
               as BirthDate?,
-      document: freezed == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as Document?,
-      bankInfo: freezed == bankInfo
-          ? _value.bankInfo
-          : bankInfo // ignore: cast_nullable_to_non_nullable
-              as BankInfo?,
+      documents: freezed == documents
+          ? _value.documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Document>?,
+      bankInfos: freezed == bankInfos
+          ? _value.bankInfos
+          : bankInfos // ignore: cast_nullable_to_non_nullable
+              as List<BankInfo>?,
       selfie: freezed == selfie
           ? _value.selfie
           : selfie // ignore: cast_nullable_to_non_nullable
@@ -169,6 +175,20 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $CitizenshipCopyWith<$Res>? get citizenship {
+    if (_value.citizenship == null) {
+      return null;
+    }
+
+    return $CitizenshipCopyWith<$Res>(_value.citizenship!, (value) {
+      return _then(_value.copyWith(citizenship: value) as $Val);
+    });
+  }
+
+  /// Create a copy of UserData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $BirthDateCopyWith<$Res>? get birthDate {
     if (_value.birthDate == null) {
       return null;
@@ -176,34 +196,6 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
 
     return $BirthDateCopyWith<$Res>(_value.birthDate!, (value) {
       return _then(_value.copyWith(birthDate: value) as $Val);
-    });
-  }
-
-  /// Create a copy of UserData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DocumentCopyWith<$Res>? get document {
-    if (_value.document == null) {
-      return null;
-    }
-
-    return $DocumentCopyWith<$Res>(_value.document!, (value) {
-      return _then(_value.copyWith(document: value) as $Val);
-    });
-  }
-
-  /// Create a copy of UserData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BankInfoCopyWith<$Res>? get bankInfo {
-    if (_value.bankInfo == null) {
-      return null;
-    }
-
-    return $BankInfoCopyWith<$Res>(_value.bankInfo!, (value) {
-      return _then(_value.copyWith(bankInfo: value) as $Val);
     });
   }
 
@@ -234,9 +226,10 @@ abstract class _$$UserDataImplCopyWith<$Res>
       {Email? email,
       Phone? phone,
       Name? name,
+      Citizenship? citizenship,
       BirthDate? birthDate,
-      Document? document,
-      BankInfo? bankInfo,
+      List<Document>? documents,
+      List<BankInfo>? bankInfos,
       Selfie? selfie,
       Map<String, dynamic>? custom});
 
@@ -247,11 +240,9 @@ abstract class _$$UserDataImplCopyWith<$Res>
   @override
   $NameCopyWith<$Res>? get name;
   @override
+  $CitizenshipCopyWith<$Res>? get citizenship;
+  @override
   $BirthDateCopyWith<$Res>? get birthDate;
-  @override
-  $DocumentCopyWith<$Res>? get document;
-  @override
-  $BankInfoCopyWith<$Res>? get bankInfo;
   @override
   $SelfieCopyWith<$Res>? get selfie;
 }
@@ -272,9 +263,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? email = freezed,
     Object? phone = freezed,
     Object? name = freezed,
+    Object? citizenship = freezed,
     Object? birthDate = freezed,
-    Object? document = freezed,
-    Object? bankInfo = freezed,
+    Object? documents = freezed,
+    Object? bankInfos = freezed,
     Object? selfie = freezed,
     Object? custom = freezed,
   }) {
@@ -291,18 +283,22 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name?,
+      citizenship: freezed == citizenship
+          ? _value.citizenship
+          : citizenship // ignore: cast_nullable_to_non_nullable
+              as Citizenship?,
       birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
               as BirthDate?,
-      document: freezed == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as Document?,
-      bankInfo: freezed == bankInfo
-          ? _value.bankInfo
-          : bankInfo // ignore: cast_nullable_to_non_nullable
-              as BankInfo?,
+      documents: freezed == documents
+          ? _value._documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Document>?,
+      bankInfos: freezed == bankInfos
+          ? _value._bankInfos
+          : bankInfos // ignore: cast_nullable_to_non_nullable
+              as List<BankInfo>?,
       selfie: freezed == selfie
           ? _value.selfie
           : selfie // ignore: cast_nullable_to_non_nullable
@@ -322,12 +318,15 @@ class _$UserDataImpl implements _UserData {
       {this.email,
       this.phone,
       this.name,
+      this.citizenship,
       this.birthDate,
-      this.document,
-      this.bankInfo,
+      final List<Document>? documents,
+      final List<BankInfo>? bankInfos,
       this.selfie,
       final Map<String, dynamic>? custom})
-      : _custom = custom;
+      : _documents = documents,
+        _bankInfos = bankInfos,
+        _custom = custom;
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
@@ -339,11 +338,29 @@ class _$UserDataImpl implements _UserData {
   @override
   final Name? name;
   @override
+  final Citizenship? citizenship;
+  @override
   final BirthDate? birthDate;
+  final List<Document>? _documents;
   @override
-  final Document? document;
+  List<Document>? get documents {
+    final value = _documents;
+    if (value == null) return null;
+    if (_documents is EqualUnmodifiableListView) return _documents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<BankInfo>? _bankInfos;
   @override
-  final BankInfo? bankInfo;
+  List<BankInfo>? get bankInfos {
+    final value = _bankInfos;
+    if (value == null) return null;
+    if (_bankInfos is EqualUnmodifiableListView) return _bankInfos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Selfie? selfie;
   final Map<String, dynamic>? _custom;
@@ -358,7 +375,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(email: $email, phone: $phone, name: $name, birthDate: $birthDate, document: $document, bankInfo: $bankInfo, selfie: $selfie, custom: $custom)';
+    return 'UserData(email: $email, phone: $phone, name: $name, citizenship: $citizenship, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfie: $selfie, custom: $custom)';
   }
 
   @override
@@ -369,20 +386,31 @@ class _$UserDataImpl implements _UserData {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.citizenship, citizenship) ||
+                other.citizenship == citizenship) &&
             (identical(other.birthDate, birthDate) ||
                 other.birthDate == birthDate) &&
-            (identical(other.document, document) ||
-                other.document == document) &&
-            (identical(other.bankInfo, bankInfo) ||
-                other.bankInfo == bankInfo) &&
+            const DeepCollectionEquality()
+                .equals(other._documents, _documents) &&
+            const DeepCollectionEquality()
+                .equals(other._bankInfos, _bankInfos) &&
             (identical(other.selfie, selfie) || other.selfie == selfie) &&
             const DeepCollectionEquality().equals(other._custom, _custom));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, phone, name, birthDate,
-      document, bankInfo, selfie, const DeepCollectionEquality().hash(_custom));
+  int get hashCode => Object.hash(
+      runtimeType,
+      email,
+      phone,
+      name,
+      citizenship,
+      birthDate,
+      const DeepCollectionEquality().hash(_documents),
+      const DeepCollectionEquality().hash(_bankInfos),
+      selfie,
+      const DeepCollectionEquality().hash(_custom));
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -405,9 +433,10 @@ abstract class _UserData implements UserData {
       {final Email? email,
       final Phone? phone,
       final Name? name,
+      final Citizenship? citizenship,
       final BirthDate? birthDate,
-      final Document? document,
-      final BankInfo? bankInfo,
+      final List<Document>? documents,
+      final List<BankInfo>? bankInfos,
       final Selfie? selfie,
       final Map<String, dynamic>? custom}) = _$UserDataImpl;
 
@@ -421,11 +450,13 @@ abstract class _UserData implements UserData {
   @override
   Name? get name;
   @override
+  Citizenship? get citizenship;
+  @override
   BirthDate? get birthDate;
   @override
-  Document? get document;
+  List<Document>? get documents;
   @override
-  BankInfo? get bankInfo;
+  List<BankInfo>? get bankInfos;
   @override
   Selfie? get selfie;
   @override
@@ -1291,6 +1322,213 @@ abstract class _Name implements Name {
       throw _privateConstructorUsedError;
 }
 
+Citizenship _$CitizenshipFromJson(Map<String, dynamic> json) {
+  return _Citizenship.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Citizenship {
+  String get value => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String? get hash => throw _privateConstructorUsedError;
+  ValidationStatus get status => throw _privateConstructorUsedError;
+
+  /// Serializes this Citizenship to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CitizenshipCopyWith<Citizenship> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CitizenshipCopyWith<$Res> {
+  factory $CitizenshipCopyWith(
+          Citizenship value, $Res Function(Citizenship) then) =
+      _$CitizenshipCopyWithImpl<$Res, Citizenship>;
+  @useResult
+  $Res call({String value, String id, String? hash, ValidationStatus status});
+}
+
+/// @nodoc
+class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
+    implements $CitizenshipCopyWith<$Res> {
+  _$CitizenshipCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+    Object? id = null,
+    Object? hash = freezed,
+    Object? status = null,
+  }) {
+    return _then(_value.copyWith(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      hash: freezed == hash
+          ? _value.hash
+          : hash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ValidationStatus,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CitizenshipImplCopyWith<$Res>
+    implements $CitizenshipCopyWith<$Res> {
+  factory _$$CitizenshipImplCopyWith(
+          _$CitizenshipImpl value, $Res Function(_$CitizenshipImpl) then) =
+      __$$CitizenshipImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String value, String id, String? hash, ValidationStatus status});
+}
+
+/// @nodoc
+class __$$CitizenshipImplCopyWithImpl<$Res>
+    extends _$CitizenshipCopyWithImpl<$Res, _$CitizenshipImpl>
+    implements _$$CitizenshipImplCopyWith<$Res> {
+  __$$CitizenshipImplCopyWithImpl(
+      _$CitizenshipImpl _value, $Res Function(_$CitizenshipImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+    Object? id = null,
+    Object? hash = freezed,
+    Object? status = null,
+  }) {
+    return _then(_$CitizenshipImpl(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      hash: freezed == hash
+          ? _value.hash
+          : hash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ValidationStatus,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CitizenshipImpl implements _Citizenship {
+  const _$CitizenshipImpl(
+      {required this.value,
+      this.id = '',
+      this.hash,
+      this.status = ValidationStatus.unspecified});
+
+  factory _$CitizenshipImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CitizenshipImplFromJson(json);
+
+  @override
+  final String value;
+  @override
+  @JsonKey()
+  final String id;
+  @override
+  final String? hash;
+  @override
+  @JsonKey()
+  final ValidationStatus status;
+
+  @override
+  String toString() {
+    return 'Citizenship(value: $value, id: $id, hash: $hash, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CitizenshipImpl &&
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.hash, hash) || other.hash == hash) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, value, id, hash, status);
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith =>
+      __$$CitizenshipImplCopyWithImpl<_$CitizenshipImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CitizenshipImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Citizenship implements Citizenship {
+  const factory _Citizenship(
+      {required final String value,
+      final String id,
+      final String? hash,
+      final ValidationStatus status}) = _$CitizenshipImpl;
+
+  factory _Citizenship.fromJson(Map<String, dynamic> json) =
+      _$CitizenshipImpl.fromJson;
+
+  @override
+  String get value;
+  @override
+  String get id;
+  @override
+  String? get hash;
+  @override
+  ValidationStatus get status;
+
+  /// Create a copy of Citizenship
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 BirthDate _$BirthDateFromJson(Map<String, dynamic> json) {
   return _BirthDate.fromJson(json);
 }
@@ -1506,6 +1744,9 @@ mixin _$Document {
   IdType get type => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
   String get countryCode => throw _privateConstructorUsedError;
+  DateTime? get expirationDate => throw _privateConstructorUsedError;
+  List<int>? get frontImage => throw _privateConstructorUsedError;
+  List<int>? get backImage => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
   ValidationStatus get status => throw _privateConstructorUsedError;
@@ -1529,6 +1770,9 @@ abstract class $DocumentCopyWith<$Res> {
       {IdType type,
       String number,
       String countryCode,
+      DateTime? expirationDate,
+      List<int>? frontImage,
+      List<int>? backImage,
       String id,
       String? hash,
       ValidationStatus status});
@@ -1552,6 +1796,9 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? type = null,
     Object? number = null,
     Object? countryCode = null,
+    Object? expirationDate = freezed,
+    Object? frontImage = freezed,
+    Object? backImage = freezed,
     Object? id = null,
     Object? hash = freezed,
     Object? status = null,
@@ -1569,6 +1816,18 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      expirationDate: freezed == expirationDate
+          ? _value.expirationDate
+          : expirationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      frontImage: freezed == frontImage
+          ? _value.frontImage
+          : frontImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+      backImage: freezed == backImage
+          ? _value.backImage
+          : backImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1597,6 +1856,9 @@ abstract class _$$DocumentImplCopyWith<$Res>
       {IdType type,
       String number,
       String countryCode,
+      DateTime? expirationDate,
+      List<int>? frontImage,
+      List<int>? backImage,
       String id,
       String? hash,
       ValidationStatus status});
@@ -1618,6 +1880,9 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? type = null,
     Object? number = null,
     Object? countryCode = null,
+    Object? expirationDate = freezed,
+    Object? frontImage = freezed,
+    Object? backImage = freezed,
     Object? id = null,
     Object? hash = freezed,
     Object? status = null,
@@ -1635,6 +1900,18 @@ class __$$DocumentImplCopyWithImpl<$Res>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      expirationDate: freezed == expirationDate
+          ? _value.expirationDate
+          : expirationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      frontImage: freezed == frontImage
+          ? _value._frontImage
+          : frontImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+      backImage: freezed == backImage
+          ? _value._backImage
+          : backImage // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1658,9 +1935,14 @@ class _$DocumentImpl implements _Document {
       {required this.type,
       required this.number,
       required this.countryCode,
+      this.expirationDate,
+      final List<int>? frontImage,
+      final List<int>? backImage,
       this.id = '',
       this.hash,
-      this.status = ValidationStatus.unspecified});
+      this.status = ValidationStatus.unspecified})
+      : _frontImage = frontImage,
+        _backImage = backImage;
 
   factory _$DocumentImpl.fromJson(Map<String, dynamic> json) =>
       _$$DocumentImplFromJson(json);
@@ -1672,6 +1954,28 @@ class _$DocumentImpl implements _Document {
   @override
   final String countryCode;
   @override
+  final DateTime? expirationDate;
+  final List<int>? _frontImage;
+  @override
+  List<int>? get frontImage {
+    final value = _frontImage;
+    if (value == null) return null;
+    if (_frontImage is EqualUnmodifiableListView) return _frontImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<int>? _backImage;
+  @override
+  List<int>? get backImage {
+    final value = _backImage;
+    if (value == null) return null;
+    if (_backImage is EqualUnmodifiableListView) return _backImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
   @JsonKey()
   final String id;
   @override
@@ -1682,7 +1986,7 @@ class _$DocumentImpl implements _Document {
 
   @override
   String toString() {
-    return 'Document(type: $type, number: $number, countryCode: $countryCode, id: $id, hash: $hash, status: $status)';
+    return 'Document(type: $type, number: $number, countryCode: $countryCode, expirationDate: $expirationDate, frontImage: $frontImage, backImage: $backImage, id: $id, hash: $hash, status: $status)';
   }
 
   @override
@@ -1694,6 +1998,12 @@ class _$DocumentImpl implements _Document {
             (identical(other.number, number) || other.number == number) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
+            (identical(other.expirationDate, expirationDate) ||
+                other.expirationDate == expirationDate) &&
+            const DeepCollectionEquality()
+                .equals(other._frontImage, _frontImage) &&
+            const DeepCollectionEquality()
+                .equals(other._backImage, _backImage) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.hash, hash) || other.hash == hash) &&
             (identical(other.status, status) || other.status == status));
@@ -1701,8 +2011,17 @@ class _$DocumentImpl implements _Document {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, type, number, countryCode, id, hash, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      type,
+      number,
+      countryCode,
+      expirationDate,
+      const DeepCollectionEquality().hash(_frontImage),
+      const DeepCollectionEquality().hash(_backImage),
+      id,
+      hash,
+      status);
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -1725,6 +2044,9 @@ abstract class _Document implements Document {
       {required final IdType type,
       required final String number,
       required final String countryCode,
+      final DateTime? expirationDate,
+      final List<int>? frontImage,
+      final List<int>? backImage,
       final String id,
       final String? hash,
       final ValidationStatus status}) = _$DocumentImpl;
@@ -1738,6 +2060,12 @@ abstract class _Document implements Document {
   String get number;
   @override
   String get countryCode;
+  @override
+  DateTime? get expirationDate;
+  @override
+  List<int>? get frontImage;
+  @override
+  List<int>? get backImage;
   @override
   String get id;
   @override
@@ -1762,6 +2090,7 @@ mixin _$BankInfo {
   String get bankName => throw _privateConstructorUsedError;
   String get bankCode => throw _privateConstructorUsedError;
   String get accountNumber => throw _privateConstructorUsedError;
+  String get countryCode => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
   ValidationStatus get status => throw _privateConstructorUsedError;
@@ -1785,6 +2114,7 @@ abstract class $BankInfoCopyWith<$Res> {
       {String bankName,
       String bankCode,
       String accountNumber,
+      String countryCode,
       String id,
       String? hash,
       ValidationStatus status});
@@ -1808,6 +2138,7 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
     Object? bankName = null,
     Object? bankCode = null,
     Object? accountNumber = null,
+    Object? countryCode = null,
     Object? id = null,
     Object? hash = freezed,
     Object? status = null,
@@ -1824,6 +2155,10 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
       accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -1853,6 +2188,7 @@ abstract class _$$BankInfoImplCopyWith<$Res>
       {String bankName,
       String bankCode,
       String accountNumber,
+      String countryCode,
       String id,
       String? hash,
       ValidationStatus status});
@@ -1874,6 +2210,7 @@ class __$$BankInfoImplCopyWithImpl<$Res>
     Object? bankName = null,
     Object? bankCode = null,
     Object? accountNumber = null,
+    Object? countryCode = null,
     Object? id = null,
     Object? hash = freezed,
     Object? status = null,
@@ -1890,6 +2227,10 @@ class __$$BankInfoImplCopyWithImpl<$Res>
       accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -1914,6 +2255,7 @@ class _$BankInfoImpl implements _BankInfo {
       {required this.bankName,
       required this.bankCode,
       required this.accountNumber,
+      required this.countryCode,
       this.id = '',
       this.hash,
       this.status = ValidationStatus.unspecified});
@@ -1928,6 +2270,8 @@ class _$BankInfoImpl implements _BankInfo {
   @override
   final String accountNumber;
   @override
+  final String countryCode;
+  @override
   @JsonKey()
   final String id;
   @override
@@ -1938,7 +2282,7 @@ class _$BankInfoImpl implements _BankInfo {
 
   @override
   String toString() {
-    return 'BankInfo(bankName: $bankName, bankCode: $bankCode, accountNumber: $accountNumber, id: $id, hash: $hash, status: $status)';
+    return 'BankInfo(bankName: $bankName, bankCode: $bankCode, accountNumber: $accountNumber, countryCode: $countryCode, id: $id, hash: $hash, status: $status)';
   }
 
   @override
@@ -1952,6 +2296,8 @@ class _$BankInfoImpl implements _BankInfo {
                 other.bankCode == bankCode) &&
             (identical(other.accountNumber, accountNumber) ||
                 other.accountNumber == accountNumber) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.hash, hash) || other.hash == hash) &&
             (identical(other.status, status) || other.status == status));
@@ -1959,8 +2305,8 @@ class _$BankInfoImpl implements _BankInfo {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, bankName, bankCode, accountNumber, id, hash, status);
+  int get hashCode => Object.hash(runtimeType, bankName, bankCode,
+      accountNumber, countryCode, id, hash, status);
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1983,6 +2329,7 @@ abstract class _BankInfo implements BankInfo {
       {required final String bankName,
       required final String bankCode,
       required final String accountNumber,
+      required final String countryCode,
       final String id,
       final String? hash,
       final ValidationStatus status}) = _$BankInfoImpl;
@@ -1996,6 +2343,8 @@ abstract class _BankInfo implements BankInfo {
   String get bankCode;
   @override
   String get accountNumber;
+  @override
+  String get countryCode;
   @override
   String get id;
   @override
