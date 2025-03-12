@@ -15,6 +15,7 @@ class V1GetKycRequirementsResponse with _$V1GetKycRequirementsResponse {
     required String country,
     required List<V1Requirement> requirements,
   }) = _V1GetKycRequirementsResponse;
-  
-  factory V1GetKycRequirementsResponse.fromJson(Map<String, Object?> json) => _$V1GetKycRequirementsResponseFromJson(json);
+
+  factory V1GetKycRequirementsResponse.fromJson(Map<String, Object?> json) =>
+      _$V1GetKycRequirementsResponseFromJson(json);
 }

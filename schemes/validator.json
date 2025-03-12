@@ -55,7 +55,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1InitDocumentValidationResponse"
+              "$ref": "#/definitions/v1GetKycRequirementsResponse"
             }
           },
           "default": {
@@ -71,7 +71,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1InitDocumentValidationRequest"
+              "$ref": "#/definitions/v1GetKycRequirementsRequest"
             }
           }
         ],
@@ -375,21 +375,12 @@
     "v1InitDocumentValidationRequest": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "document": {
-          "type": "string"
-        },
-        "birthDate": {
-          "type": "string"
-        },
-        "selfieImage": {
+        "country": {
           "type": "string"
         }
       }
     },
-    "v1InitDocumentValidationResponse": {
+    "v1GetKycRequirementsResponse": {
       "type": "object"
     },
     "v1InitEmailValidationRequest": {

@@ -7,8 +7,6 @@ import 'package:retrofit/retrofit.dart';
 
 import '../models/v1_get_kyc_requirements_request.dart';
 import '../models/v1_get_kyc_requirements_response.dart';
-import '../models/v1_init_document_validation_request.dart';
-import '../models/v1_init_document_validation_response.dart';
 import '../models/v1_init_email_validation_request.dart';
 import '../models/v1_init_email_validation_response.dart';
 import '../models/v1_init_phone_validation_request.dart';
@@ -24,16 +22,12 @@ part 'verifier_service_client.g.dart';
 
 @RestApi()
 abstract class VerifierServiceClient {
-  factory VerifierServiceClient(Dio dio, {String? baseUrl}) = _VerifierServiceClient;
+  factory VerifierServiceClient(Dio dio, {String? baseUrl}) =
+      _VerifierServiceClient;
 
   @POST('/v1/getKycRequirements')
   Future<V1GetKycRequirementsResponse> verifierServiceGetKycRequirements({
     @Body() required V1GetKycRequirementsRequest body,
-  });
-
-  @POST('/v1/initDocumentValidation')
-  Future<V1InitDocumentValidationResponse> verifierServiceInitDocumentValidation({
-    @Body() required V1InitDocumentValidationRequest body,
   });
 
   @POST('/v1/initEmailValidation')
