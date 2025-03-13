@@ -139,6 +139,8 @@ class Document extends $pb.GeneratedMessage {
     DocumentType? type,
     $core.String? number,
     $core.String? countryCode,
+    $0.Timestamp? expirationDate,
+    DocumentPhoto? photo,
   }) {
     final $result = create();
     if (type != null) {
@@ -150,6 +152,12 @@ class Document extends $pb.GeneratedMessage {
     if (countryCode != null) {
       $result.countryCode = countryCode;
     }
+    if (expirationDate != null) {
+      $result.expirationDate = expirationDate;
+    }
+    if (photo != null) {
+      $result.photo = photo;
+    }
     return $result;
   }
   Document._() : super();
@@ -160,6 +168,8 @@ class Document extends $pb.GeneratedMessage {
     ..e<DocumentType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: DocumentType.DOCUMENT_TYPE_UNSPECIFIED, valueOf: DocumentType.valueOf, enumValues: DocumentType.values)
     ..aOS(2, _omitFieldNames ? '' : 'number')
     ..aOS(3, _omitFieldNames ? '' : 'countryCode')
+    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'expirationDate', subBuilder: $0.Timestamp.create)
+    ..aOM<DocumentPhoto>(5, _omitFieldNames ? '' : 'photo', subBuilder: DocumentPhoto.create)
     ..hasRequiredFields = false
   ;
 
@@ -210,6 +220,92 @@ class Document extends $pb.GeneratedMessage {
   $core.bool hasCountryCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearCountryCode() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Timestamp get expirationDate => $_getN(3);
+  @$pb.TagNumber(4)
+  set expirationDate($0.Timestamp v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasExpirationDate() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExpirationDate() => clearField(4);
+  @$pb.TagNumber(4)
+  $0.Timestamp ensureExpirationDate() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  DocumentPhoto get photo => $_getN(4);
+  @$pb.TagNumber(5)
+  set photo(DocumentPhoto v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasPhoto() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPhoto() => clearField(5);
+  @$pb.TagNumber(5)
+  DocumentPhoto ensurePhoto() => $_ensure(4);
+}
+
+class DocumentPhoto extends $pb.GeneratedMessage {
+  factory DocumentPhoto({
+    $core.List<$core.int>? frontImage,
+    $core.List<$core.int>? backImage,
+  }) {
+    final $result = create();
+    if (frontImage != null) {
+      $result.frontImage = frontImage;
+    }
+    if (backImage != null) {
+      $result.backImage = backImage;
+    }
+    return $result;
+  }
+  DocumentPhoto._() : super();
+  factory DocumentPhoto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DocumentPhoto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DocumentPhoto', package: const $pb.PackageName(_omitMessageNames ? '' : 'brij.storage.v1'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'frontImage', $pb.PbFieldType.OY)
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'backImage', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DocumentPhoto clone() => DocumentPhoto()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DocumentPhoto copyWith(void Function(DocumentPhoto) updates) => super.copyWith((message) => updates(message as DocumentPhoto)) as DocumentPhoto;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DocumentPhoto create() => DocumentPhoto._();
+  DocumentPhoto createEmptyInstance() => create();
+  static $pb.PbList<DocumentPhoto> createRepeated() => $pb.PbList<DocumentPhoto>();
+  @$core.pragma('dart2js:noInline')
+  static DocumentPhoto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DocumentPhoto>(create);
+  static DocumentPhoto? _defaultInstance;
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get frontImage => $_getN(0);
+  @$pb.TagNumber(4)
+  set frontImage($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFrontImage() => $_has(0);
+  @$pb.TagNumber(4)
+  void clearFrontImage() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.List<$core.int> get backImage => $_getN(1);
+  @$pb.TagNumber(5)
+  set backImage($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBackImage() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearBackImage() => clearField(5);
 }
 
 class BankInfo extends $pb.GeneratedMessage {
@@ -217,6 +313,7 @@ class BankInfo extends $pb.GeneratedMessage {
     $core.String? accountNumber,
     $core.String? bankCode,
     $core.String? bankName,
+    $core.String? countryCode,
   }) {
     final $result = create();
     if (accountNumber != null) {
@@ -228,6 +325,9 @@ class BankInfo extends $pb.GeneratedMessage {
     if (bankName != null) {
       $result.bankName = bankName;
     }
+    if (countryCode != null) {
+      $result.countryCode = countryCode;
+    }
     return $result;
   }
   BankInfo._() : super();
@@ -238,6 +338,7 @@ class BankInfo extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'accountNumber')
     ..aOS(2, _omitFieldNames ? '' : 'bankCode')
     ..aOS(3, _omitFieldNames ? '' : 'bankName')
+    ..aOS(4, _omitFieldNames ? '' : 'countryCode')
     ..hasRequiredFields = false
   ;
 
@@ -288,6 +389,15 @@ class BankInfo extends $pb.GeneratedMessage {
   $core.bool hasBankName() => $_has(2);
   @$pb.TagNumber(3)
   void clearBankName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get countryCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set countryCode($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCountryCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCountryCode() => clearField(4);
 }
 
 class Email extends $pb.GeneratedMessage {
@@ -429,6 +539,56 @@ class Phone extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Phone getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Phone>(create);
   static Phone? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get value => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set value($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasValue() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearValue() => clearField(1);
+}
+
+class Citizenship extends $pb.GeneratedMessage {
+  factory Citizenship({
+    $core.String? value,
+  }) {
+    final $result = create();
+    if (value != null) {
+      $result.value = value;
+    }
+    return $result;
+  }
+  Citizenship._() : super();
+  factory Citizenship.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Citizenship.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Citizenship', package: const $pb.PackageName(_omitMessageNames ? '' : 'brij.storage.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'value')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Citizenship clone() => Citizenship()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Citizenship copyWith(void Function(Citizenship) updates) => super.copyWith((message) => updates(message as Citizenship)) as Citizenship;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Citizenship create() => Citizenship._();
+  Citizenship createEmptyInstance() => create();
+  static $pb.PbList<Citizenship> createRepeated() => $pb.PbList<Citizenship>();
+  @$core.pragma('dart2js:noInline')
+  static Citizenship getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Citizenship>(create);
+  static Citizenship? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get value => $_getSZ(0);

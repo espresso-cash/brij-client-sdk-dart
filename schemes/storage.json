@@ -601,7 +601,8 @@
         "DATA_TYPE_BIRTH_DATE",
         "DATA_TYPE_DOCUMENT",
         "DATA_TYPE_BANK_INFO",
-        "DATA_TYPE_SELFIE_IMAGE"
+        "DATA_TYPE_SELFIE_IMAGE",
+        "DATA_TYPE_CITIZENSHIP"
       ],
       "default": "DATA_TYPE_UNSPECIFIED"
     },
