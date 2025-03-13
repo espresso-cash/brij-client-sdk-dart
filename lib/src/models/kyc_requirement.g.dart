@@ -23,6 +23,7 @@ Map<String, dynamic> _$$BasicInfoRequirementImplToJson(
 const _$BasicInfoTypeEnumMap = {
   BasicInfoType.email: 'email',
   BasicInfoType.phone: 'phone',
+  BasicInfoType.selfie: 'selfie',
 };
 
 _$CountryCodeRequirementImpl _$$CountryCodeRequirementImplFromJson(
@@ -77,7 +78,6 @@ const _$DocumentFieldEnumMap = {
   DocumentField.idNumber: 'idNumber',
   DocumentField.photoFront: 'photoFront',
   DocumentField.photoBack: 'photoBack',
-  DocumentField.other: 'other',
 };
 
 _$AndRequirementImpl _$$AndRequirementImplFromJson(Map<String, dynamic> json) =>

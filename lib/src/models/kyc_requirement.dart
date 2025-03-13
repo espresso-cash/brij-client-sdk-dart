@@ -19,7 +19,6 @@ enum DocumentField {
   idNumber,
   photoFront,
   photoBack,
-  other,
 }
 
 @freezed
@@ -111,9 +110,9 @@ class KycRequirement with _$KycRequirement {
       switch (protoType) {
         V1DocumentType.documentTypeVoterID => IdType.voterId,
         V1DocumentType.documentTypeNinV2 => IdType.ninV2,
-        V1DocumentType.documentTypeUnspecified ||
-        V1DocumentType.$unknown =>
-          IdType.other,
+        V1DocumentType.documentTypeUnspecified =>
+          throw Exception('Unspecified document type is not supported'),
+        V1DocumentType.$unknown => throw Exception('Unknown document type'),
       };
 
   static DocumentField _mapDocumentField(V1DocumentFieldType protoField) =>
@@ -123,9 +122,10 @@ class KycRequirement with _$KycRequirement {
           DocumentField.photoFront,
         V1DocumentFieldType.documentFieldTypePhotoBack =>
           DocumentField.photoBack,
-        V1DocumentFieldType.documentFieldTypeUnspecified ||
+        V1DocumentFieldType.documentFieldTypeUnspecified =>
+          throw Exception('Unspecified document field type is not supported'),
         V1DocumentFieldType.$unknown =>
-          DocumentField.other,
+          throw Exception('Unknown document field type'),
       };
 }
 
