@@ -47,9 +47,8 @@ class KycRequirement with _$KycRequirement {
             .add(const Requirement.basicInfo(type: BasicInfoType.selfie));
       } else if (type == V1DataType.dataTypeDocument) {
         final docReq = _parseFormula(formula);
-        if (docReq != null) {
-          requirements.add(docReq);
-        }
+
+        requirements.add(docReq);
       }
     }
 
@@ -59,32 +58,22 @@ class KycRequirement with _$KycRequirement {
     );
   }
 
-  static Requirement? _parseFormula(V1Formula formula) {
+  static Requirement _parseFormula(V1Formula formula) {
     // Handle AND case
     if (formula.and != null && formula.and!.formulas.isNotEmpty) {
       final requirements = <Requirement>[];
       for (final andFormula in formula.and!.formulas) {
-        final req = _parseFormula(andFormula);
-        if (req != null) {
-          requirements.add(req);
-        }
+        requirements.add(_parseFormula(andFormula));
       }
-      if (requirements.isNotEmpty) {
-        return Requirement.and(requirements: requirements);
-      }
+      return Requirement.and(requirements: requirements);
     }
     // Handle OR case
     else if (formula.or != null && formula.or!.formulas.isNotEmpty) {
       final requirements = <Requirement>[];
       for (final orFormula in formula.or!.formulas) {
-        final req = _parseFormula(orFormula);
-        if (req != null) {
-          requirements.add(req);
-        }
+        requirements.add(_parseFormula(orFormula));
       }
-      if (requirements.isNotEmpty) {
-        return Requirement.or(requirements: requirements);
-      }
+      return Requirement.or(requirements: requirements);
     }
     // Handle condition case
     else if (formula.condition != null) {
@@ -102,8 +91,9 @@ class KycRequirement with _$KycRequirement {
           field: _mapDocumentField(condition.documentField!),
         );
       }
+      throw Exception('Invalid condition: no valid field set');
     }
-    return null;
+    throw Exception('Invalid formula: neither AND, OR, nor condition is set');
   }
 
   static IdType _mapDocumentType(V1DocumentType protoType) =>
