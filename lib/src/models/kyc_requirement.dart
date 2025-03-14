@@ -47,8 +47,9 @@ class KycRequirement with _$KycRequirement {
             .add(const Requirement.basicInfo(type: BasicInfoType.selfie));
       } else if (type == V1DataType.dataTypeDocument) {
         final docReq = _parseFormula(formula);
-
         requirements.add(docReq);
+      } else {
+        throw Exception('Unsupported data type: $type');
       }
     }
 
