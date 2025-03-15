@@ -210,6 +210,32 @@
     }
   },
   "definitions": {
+    "FormulaCondition": {
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string"
+        },
+        "documentType": {
+          "$ref": "#/definitions/v1DocumentType"
+        },
+        "documentField": {
+          "$ref": "#/definitions/v1DocumentFieldType"
+        }
+      }
+    },
+    "FormulaNested": {
+      "type": "object",
+      "properties": {
+        "formulas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Formula"
+          }
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -238,6 +264,59 @@
         }
       }
     },
+    "v1DataType": {
+      "type": "string",
+      "enum": [
+        "DATA_TYPE_UNSPECIFIED",
+        "DATA_TYPE_PHONE",
+        "DATA_TYPE_EMAIL",
+        "DATA_TYPE_NAME",
+        "DATA_TYPE_BIRTH_DATE",
+        "DATA_TYPE_DOCUMENT",
+        "DATA_TYPE_BANK_INFO",
+        "DATA_TYPE_SELFIE_IMAGE"
+      ],
+      "default": "DATA_TYPE_UNSPECIFIED"
+    },
+    "v1DocumentFieldType": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT_FIELD_TYPE_UNSPECIFIED",
+        "DOCUMENT_FIELD_TYPE_ID_NUMBER",
+        "DOCUMENT_FIELD_TYPE_PHOTO_FRONT",
+        "DOCUMENT_FIELD_TYPE_PHOTO_BACK"
+      ],
+      "default": "DOCUMENT_FIELD_TYPE_UNSPECIFIED"
+    },
+    "v1DocumentType": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT_TYPE_UNSPECIFIED",
+        "DOCUMENT_TYPE_VOTER_ID",
+        "DOCUMENT_TYPE_NIN_V2"
+      ],
+      "default": "DOCUMENT_TYPE_UNSPECIFIED"
+    },
+    "v1Formula": {
+      "type": "object",
+      "properties": {
+        "and": {
+          "$ref": "#/definitions/FormulaNested"
+        },
+        "or": {
+          "$ref": "#/definitions/FormulaNested"
+        },
+        "not": {
+          "$ref": "#/definitions/v1Formula"
+        },
+        "constant": {
+          "type": "boolean"
+        },
+        "condition": {
+          "$ref": "#/definitions/FormulaCondition"
+        }
+      }
+    },
     "v1GetKycRequirementsRequest": {
       "type": "object",
       "properties": {
@@ -247,7 +326,19 @@
       }
     },
     "v1GetKycRequirementsResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Requirement"
+          }
+        }
+      }
     },
     "v1InitEmailValidationRequest": {
       "type": "object",
@@ -270,6 +361,17 @@
     },
     "v1InitPhoneValidationResponse": {
       "type": "object"
+    },
+    "v1Requirement": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1DataType"
+        },
+        "formula": {
+          "$ref": "#/definitions/v1Formula"
+        }
+      }
     },
     "v1StartKycRequest": {
       "type": "object",
