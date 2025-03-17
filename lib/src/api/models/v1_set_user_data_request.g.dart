@@ -33,5 +33,6 @@ const _$V1DataTypeEnumMap = {
   V1DataType.dataTypeDocument: 'DATA_TYPE_DOCUMENT',
   V1DataType.dataTypeBankInfo: 'DATA_TYPE_BANK_INFO',
   V1DataType.dataTypeSelfieImage: 'DATA_TYPE_SELFIE_IMAGE',
+  V1DataType.dataTypeCitizenship: 'DATA_TYPE_CITIZENSHIP',
   V1DataType.$unknown: r'$unknown',
 };

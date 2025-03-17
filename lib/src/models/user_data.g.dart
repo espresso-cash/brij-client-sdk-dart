@@ -17,15 +17,18 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] == null
           ? null
           : Name.fromJson(json['name'] as Map<String, dynamic>),
+      citizenship: json['citizenship'] == null
+          ? null
+          : Citizenship.fromJson(json['citizenship'] as Map<String, dynamic>),
       birthDate: json['birthDate'] == null
           ? null
           : BirthDate.fromJson(json['birthDate'] as Map<String, dynamic>),
-      document: json['document'] == null
-          ? null
-          : Document.fromJson(json['document'] as Map<String, dynamic>),
-      bankInfo: json['bankInfo'] == null
-          ? null
-          : BankInfo.fromJson(json['bankInfo'] as Map<String, dynamic>),
+      documents: (json['documents'] as List<dynamic>?)
+          ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      bankInfos: (json['bankInfos'] as List<dynamic>?)
+          ?.map((e) => BankInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
       selfie: json['selfie'] == null
           ? null
           : Selfie.fromJson(json['selfie'] as Map<String, dynamic>),
@@ -37,9 +40,10 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'name': instance.name,
+      'citizenship': instance.citizenship,
       'birthDate': instance.birthDate,
-      'document': instance.document,
-      'bankInfo': instance.bankInfo,
+      'documents': instance.documents,
+      'bankInfos': instance.bankInfos,
       'selfie': instance.selfie,
       'custom': instance.custom,
     };
@@ -120,6 +124,23 @@ Map<String, dynamic> _$$NameImplToJson(_$NameImpl instance) =>
       'status': _$ValidationStatusEnumMap[instance.status]!,
     };
 
+_$CitizenshipImpl _$$CitizenshipImplFromJson(Map<String, dynamic> json) =>
+    _$CitizenshipImpl(
+      value: json['value'] as String,
+      id: json['id'] as String? ?? '',
+      hash: json['hash'] as String?,
+      status: $enumDecodeNullable(_$ValidationStatusEnumMap, json['status']) ??
+          ValidationStatus.unspecified,
+    );
+
+Map<String, dynamic> _$$CitizenshipImplToJson(_$CitizenshipImpl instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'id': instance.id,
+      'hash': instance.hash,
+      'status': _$ValidationStatusEnumMap[instance.status]!,
+    };
+
 _$BirthDateImpl _$$BirthDateImplFromJson(Map<String, dynamic> json) =>
     _$BirthDateImpl(
       value: DateTime.parse(json['value'] as String),
@@ -142,6 +163,15 @@ _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$IdTypeEnumMap, json['type']),
       number: json['number'] as String,
       countryCode: json['countryCode'] as String,
+      expirationDate: json['expirationDate'] == null
+          ? null
+          : DateTime.parse(json['expirationDate'] as String),
+      frontImage: (json['frontImage'] as List<dynamic>?)
+          ?.map((e) => (e as num).toInt())
+          .toList(),
+      backImage: (json['backImage'] as List<dynamic>?)
+          ?.map((e) => (e as num).toInt())
+          .toList(),
       id: json['id'] as String? ?? '',
       hash: json['hash'] as String?,
       status: $enumDecodeNullable(_$ValidationStatusEnumMap, json['status']) ??
@@ -153,6 +183,9 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
       'type': _$IdTypeEnumMap[instance.type]!,
       'number': instance.number,
       'countryCode': instance.countryCode,
+      'expirationDate': instance.expirationDate?.toIso8601String(),
+      'frontImage': instance.frontImage,
+      'backImage': instance.backImage,
       'id': instance.id,
       'hash': instance.hash,
       'status': _$ValidationStatusEnumMap[instance.status]!,
@@ -169,6 +202,7 @@ _$BankInfoImpl _$$BankInfoImplFromJson(Map<String, dynamic> json) =>
       bankName: json['bankName'] as String,
       bankCode: json['bankCode'] as String,
       accountNumber: json['accountNumber'] as String,
+      countryCode: json['countryCode'] as String,
       id: json['id'] as String? ?? '',
       hash: json['hash'] as String?,
       status: $enumDecodeNullable(_$ValidationStatusEnumMap, json['status']) ??
@@ -180,6 +214,7 @@ Map<String, dynamic> _$$BankInfoImplToJson(_$BankInfoImpl instance) =>
       'bankName': instance.bankName,
       'bankCode': instance.bankCode,
       'accountNumber': instance.accountNumber,
+      'countryCode': instance.countryCode,
       'id': instance.id,
       'hash': instance.hash,
       'status': _$ValidationStatusEnumMap[instance.status]!,
