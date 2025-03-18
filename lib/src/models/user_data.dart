@@ -11,9 +11,10 @@ class UserData with _$UserData {
     Email? email,
     Phone? phone,
     Name? name,
+    Citizenship? citizenship,
     BirthDate? birthDate,
-    Document? document,
-    BankInfo? bankInfo,
+    List<Document>? documents,
+    List<BankInfo>? bankInfos,
     Selfie? selfie,
     Map<String, dynamic>? custom,
   }) = _UserData;
@@ -27,6 +28,7 @@ class Email with _$Email {
   const factory Email({
     required String value,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Email;
 
@@ -38,6 +40,7 @@ class Phone with _$Phone {
   const factory Phone({
     required String value,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Phone;
 
@@ -49,6 +52,7 @@ class Selfie with _$Selfie {
   const factory Selfie({
     required List<int> value,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Selfie;
 
@@ -61,6 +65,7 @@ class Name with _$Name {
     required String firstName,
     required String lastName,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Name;
 
@@ -68,10 +73,24 @@ class Name with _$Name {
 }
 
 @freezed
+class Citizenship with _$Citizenship {
+  const factory Citizenship({
+    required String value,
+    @Default('') String id,
+    String? hash,
+    @Default(ValidationStatus.unspecified) ValidationStatus status,
+  }) = _Citizenship;
+
+  factory Citizenship.fromJson(Map<String, dynamic> json) =>
+      _$CitizenshipFromJson(json);
+}
+
+@freezed
 class BirthDate with _$BirthDate {
   const factory BirthDate({
     required DateTime value,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _BirthDate;
 
@@ -85,7 +104,11 @@ class Document with _$Document {
     required IdType type,
     required String number,
     required String countryCode,
+    DateTime? expirationDate,
+    List<int>? frontImage,
+    List<int>? backImage,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Document;
 
@@ -99,7 +122,9 @@ class BankInfo with _$BankInfo {
     required String bankName,
     required String bankCode,
     required String accountNumber,
+    required String countryCode,
     @Default('') String id,
+    String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _BankInfo;
 

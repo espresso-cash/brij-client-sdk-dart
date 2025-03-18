@@ -11,11 +11,12 @@ part 'v1_create_on_ramp_order_request.g.dart';
 class V1CreateOnRampOrderRequest with _$V1CreateOnRampOrderRequest {
   const factory V1CreateOnRampOrderRequest({
     required String partnerPublicKey,
-    required String cryptoAmount,
+    required double cryptoAmount,
     required String cryptoCurrency,
-    required String fiatAmount,
+    required double fiatAmount,
     required String fiatCurrency,
     required String userSignature,
+    required String cryptoWalletAddress,
   }) = _V1CreateOnRampOrderRequest;
   
   factory V1CreateOnRampOrderRequest.fromJson(Map<String, Object?> json) => _$V1CreateOnRampOrderRequestFromJson(json);

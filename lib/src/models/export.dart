@@ -1,4 +1,6 @@
 export 'id_type.dart';
+export 'kyc_item.dart';
+export 'kyc_requirement.dart';
 export 'order.dart';
 export 'order_id.dart';
 export 'partner_data.dart';

@@ -121,6 +121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.3"
+  dfunc:
+    dependency: transitive
+    description:
+      name: dfunc
+      sha256: c6469b5fc6efc8b59d3446ab438e357d9ff47611e566df57dcd979a615dc33f3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.0"
   dio:
     dependency: transitive
     description:
@@ -257,7 +265,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.4"
   material_color_utilities:
     dependency: transitive
     description:

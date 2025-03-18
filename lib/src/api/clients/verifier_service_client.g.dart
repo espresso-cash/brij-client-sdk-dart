@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'validator_service_client.dart';
+part of 'verifier_service_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'validator_service_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
-class _ValidatorServiceClient implements ValidatorServiceClient {
-  _ValidatorServiceClient(
+class _VerifierServiceClient implements VerifierServiceClient {
+  _VerifierServiceClient(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
@@ -22,21 +22,21 @@ class _ValidatorServiceClient implements ValidatorServiceClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> validatorServiceInitDocumentValidation(
-      {required V1InitDocumentValidationRequest body}) async {
+  Future<V1GetKycRequirementsResponse> verifierServiceGetKycRequirements(
+      {required V1GetKycRequirementsRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<V1GetKycRequirementsResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/v1/initDocumentValidation',
+          '/v1/getKycRequirements',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -45,13 +45,19 @@ class _ValidatorServiceClient implements ValidatorServiceClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late V1GetKycRequirementsResponse _value;
+    try {
+      _value = V1GetKycRequirementsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 
   @override
-  Future<dynamic> validatorServiceInitEmailValidation(
+  Future<dynamic> verifierServiceInitEmailValidation(
       {required V1InitEmailValidationRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -80,7 +86,7 @@ class _ValidatorServiceClient implements ValidatorServiceClient {
   }
 
   @override
-  Future<dynamic> validatorServiceInitPhoneValidation(
+  Future<dynamic> verifierServiceInitPhoneValidation(
       {required V1InitPhoneValidationRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -109,7 +115,42 @@ class _ValidatorServiceClient implements ValidatorServiceClient {
   }
 
   @override
-  Future<dynamic> validatorServiceValidateEmail(
+  Future<V1StartKycResponse> verifierServiceStartKyc(
+      {required V1StartKycRequest body}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<V1StartKycResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/v1/startKyc',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late V1StartKycResponse _value;
+    try {
+      _value = V1StartKycResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<dynamic> verifierServiceValidateEmail(
       {required V1ValidateEmailRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -138,7 +179,7 @@ class _ValidatorServiceClient implements ValidatorServiceClient {
   }
 
   @override
-  Future<dynamic> validatorServiceValidatePhone(
+  Future<dynamic> verifierServiceValidatePhone(
       {required V1ValidatePhoneRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
