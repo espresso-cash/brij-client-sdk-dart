@@ -52,8 +52,8 @@ class KycUserClient {
   static const _seedMessage = 'hello';
   static const _proofMessage = 'walletProofMessage';
 
-  late final SimpleKeyPair _authKeyPair;
-  late final String _authPublicKey;
+  late SimpleKeyPair _authKeyPair;
+  late String _authPublicKey;
   late final PrivateKey _encryptionSecretKey;
   late final SecretKey _secretKey;
   late final String _encryptedSecretKey;
@@ -73,29 +73,43 @@ class KycUserClient {
     final seed = await _generateSeed();
     await _initializeKeys(seed);
     await _initializeStorageClient();
-    await _initializeValidatorClient();
-    await _initializeOrderClient();
 
     try {
       final getInfo = await _storageClient.storageServiceGetInfo(
-        body: V1GetInfoRequest(publicKey: _authPublicKey),
+        body: V1GetInfoRequest(
+          publicKey: _authPublicKey,
+          walletAddress: walletAddress,
+        ),
       );
+
+      if (getInfo.publicKey != _authPublicKey) {
+        final seed = await _generateSeed(message: getInfo.message);
+        await _initializeKeys(seed);
+        await _initializeStorageClient();
+      }
+
       await _initializeEncryption(
         encryptedSecretKey: getInfo.encryptedSecretKey,
       );
     } on DioException catch (e) {
-      if (e.response?.data is! Map<String, dynamic> ||
-          (e.response?.data as Map<String, dynamic>)['message'] !=
-              'user not initialized') {
+      if (!_isUserNotInitialized(e)) {
         rethrow;
       }
       await _initializeEncryption();
       await _initStorage(walletAddress: walletAddress);
+    } finally {
+      await _initializeValidatorClient();
+      await _initializeOrderClient();
     }
   }
 
-  Future<Uint8List> _generateSeed() async {
-    final signature = await sign(utf8.encode(_seedMessage));
+  bool _isUserNotInitialized(DioException e) =>
+      e.response?.data is Map<String, dynamic> &&
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'user not initialized';
+
+  Future<Uint8List> _generateSeed({String? message}) async {
+    final signature = await sign(utf8.encode(message ?? _seedMessage));
     return Uint8List.fromList(signature.bytes.sublist(0, 32));
   }
 
