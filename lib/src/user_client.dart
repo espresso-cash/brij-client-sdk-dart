@@ -513,16 +513,29 @@ class KycUserClient {
     required String userPK,
     required String country,
   }) async {
-    final response = await _storageClient.storageServiceGetKycStatus(
-      body: V1GetKycStatusRequest(
-        userPublicKey: userPK,
-        country: country,
-        validatorPublicKey: config.verifierAuthPk,
-      ),
-    );
+    try {
+      final response = await _storageClient.storageServiceGetKycStatus(
+        body: V1GetKycStatusRequest(
+          userPublicKey: userPK,
+          country: country,
+          validatorPublicKey: config.verifierAuthPk,
+        ),
+      );
 
-    return KycStatusDetails.fromJson(response.toJson());
+      return KycStatusDetails.fromJson(response.toJson());
+    } on DioException catch (e) {
+      if (_isKycDataNotFound(e)) {
+        return const KycStatusDetails(status: KycStatus.unspecified);
+      }
+
+      rethrow;
+    }
   }
+
+  bool _isKycDataNotFound(DioException e) =>
+      e.response?.data is Map<String, dynamic> &&
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'kyc data not found';
 
   Future<String> startKycRequest({
     required String country,
