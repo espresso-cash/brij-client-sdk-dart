@@ -12,8 +12,9 @@ part 'kyc_requirement.g.dart';
 enum BasicInfoType {
   email,
   phone,
-  selfie,
+  name,
   dob,
+  selfie,
 }
 
 enum DocumentField {
@@ -46,6 +47,8 @@ class KycRequirement with _$KycRequirement {
       } else if (type == V1DataType.dataTypeSelfieImage) {
         requirements
             .add(const Requirement.basicInfo(type: BasicInfoType.selfie));
+      } else if (type == V1DataType.dataTypeName) {
+        requirements.add(const Requirement.basicInfo(type: BasicInfoType.name));
       } else if (type == V1DataType.dataTypeBirthDate) {
         requirements.add(const Requirement.basicInfo(type: BasicInfoType.dob));
       } else if (type == V1DataType.dataTypeDocument) {
