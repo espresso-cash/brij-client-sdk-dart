@@ -3,26 +3,30 @@ import 'dart:convert';
 import 'package:bs58/bs58.dart';
 import 'package:cryptography/cryptography.dart' hide PublicKey, SecretBox;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
+import 'package:dfunc/dfunc.dart';
 import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/src/api/clients/order_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
-import 'package:kyc_client_dart/src/api/clients/validator_service_client.dart';
+import 'package:kyc_client_dart/src/api/clients/verifier_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
+import 'package:kyc_client_dart/src/api/models/v1_check_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_partner_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_wallet_proof_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_grant_access_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_init_document_validation_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_email_validation_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_phone_validation_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_storage_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_user_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_start_kyc_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_email_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_phone_request.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
@@ -30,6 +34,7 @@ import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart
 import 'package:kyc_client_dart/src/common.dart';
 import 'package:kyc_client_dart/src/config/config.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
+import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart' hide Signature;
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
@@ -47,8 +52,8 @@ class KycUserClient {
 
   static const _seedMessage = 'hello';
 
-  late final SimpleKeyPair _authKeyPair;
-  late final String _authPublicKey;
+  late SimpleKeyPair _authKeyPair;
+  late String _authPublicKey;
   late final PrivateKey _encryptionSecretKey;
   late final SecretKey _secretKey;
   late final String _encryptedSecretKey;
@@ -57,7 +62,7 @@ class KycUserClient {
   late final SigningKey _signingKey;
 
   late final StorageServiceClient _storageClient;
-  late final ValidatorServiceClient _validatorClient;
+  late final VerifierServiceClient _validatorClient;
   late final OrderServiceClient _orderClient;
 
   String get authPublicKey => _authPublicKey;
@@ -68,29 +73,43 @@ class KycUserClient {
     final seed = await _generateSeed();
     await _initializeKeys(seed);
     await _initializeStorageClient();
-    await _initializeValidatorClient();
-    await _initializeOrderClient();
 
     try {
       final getInfo = await _storageClient.storageServiceGetInfo(
-        body: V1GetInfoRequest(publicKey: _authPublicKey),
+        body: V1GetInfoRequest(
+          publicKey: _authPublicKey,
+          walletAddress: walletAddress,
+        ),
       );
+
+      if (getInfo.publicKey != _authPublicKey) {
+        final seed = await _generateSeed(message: getInfo.message);
+        await _initializeKeys(seed);
+        await _initializeStorageClient();
+      }
+
       await _initializeEncryption(
         encryptedSecretKey: getInfo.encryptedSecretKey,
       );
     } on DioException catch (e) {
-      if (e.response?.data is! Map<String, dynamic> ||
-          (e.response?.data as Map<String, dynamic>)['message'] !=
-              'user not initialized') {
+      if (!_isUserNotInitialized(e)) {
         rethrow;
       }
       await _initializeEncryption();
       await _initStorage(walletAddress: walletAddress);
+    } finally {
+      await _initializeValidatorClient();
+      await _initializeOrderClient();
     }
   }
 
-  Future<Uint8List> _generateSeed() async {
-    final signature = await sign(utf8.encode(_seedMessage));
+  bool _isUserNotInitialized(DioException e) =>
+      e.response?.data is Map<String, dynamic> &&
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'user not initialized';
+
+  Future<Uint8List> _generateSeed({String? message}) async {
+    final signature = await sign(utf8.encode(message ?? _seedMessage));
     return Uint8List.fromList(signature.bytes.sublist(0, 32));
   }
 
@@ -111,7 +130,7 @@ class KycUserClient {
   Future<void> _initializeValidatorClient() async {
     final dio = await _createAuthenticatedClient('verifier.brij.fi');
     _validatorClient =
-        ValidatorServiceClient(dio, baseUrl: config.validatorBaseUrl);
+        VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
   }
 
   Future<void> _initializeOrderClient() async {
@@ -217,6 +236,7 @@ class KycUserClient {
     Phone? phone,
     Name? name,
     Document? document,
+    Citizenship? citizenship,
     BankInfo? bankInfo,
     BirthDate? dob,
     Selfie? selfie,
@@ -249,6 +269,15 @@ class KycUserClient {
             number: document.number,
             type: document.type.toDocumentType(),
             countryCode: document.countryCode,
+            expirationDate: document.expirationDate?.let(
+              (date) => Timestamp.fromDateTime(
+                DateTime.utc(date.year, date.month, date.day),
+              ),
+            ),
+            photo: proto.DocumentPhoto(
+              frontImage: document.frontImage,
+              backImage: document.backImage,
+            ),
           ),
           type: V1DataType.dataTypeDocument,
           id: document.id,
@@ -259,6 +288,7 @@ class KycUserClient {
             bankName: bankInfo.bankName,
             accountNumber: bankInfo.accountNumber,
             bankCode: bankInfo.bankCode,
+            countryCode: bankInfo.countryCode,
           ),
           type: V1DataType.dataTypeBankInfo,
           id: bankInfo.id,
@@ -273,6 +303,14 @@ class KycUserClient {
           type: V1DataType.dataTypeBirthDate,
           id: dob.id
         ),
+      if (citizenship != null)
+        (
+          data: proto.Citizenship(
+            value: citizenship.value,
+          ),
+          type: V1DataType.dataTypeCitizenship,
+          id: citizenship.id,
+        ),
       if (selfie != null)
         (
           data: proto.SelfieImage(value: selfie.value),
@@ -282,13 +320,13 @@ class KycUserClient {
     ];
 
     for (final item in dataList) {
-      final protoData = item.data.writeToBuffer();
+      final protoData = serializeProto(item.data);
       final encryptedData = encrypt(
         data: protoData,
         secretBox: _secretBox,
       );
 
-      final hash = generateHash(item.data);
+      final hash = generateHash(encryptedData);
       final message = '${item.type}|$hash';
       final signature = _signingKey.sign(utf8.encode(message));
 
@@ -328,24 +366,8 @@ class KycUserClient {
     );
   }
 
-  Future<void> initDocumentValidation({
-    required String nameId,
-    required String birthDateId,
-    required String documentId,
-    required String selfieImageId,
-  }) async {
-    await _validatorClient.validatorServiceInitDocumentValidation(
-      body: V1InitDocumentValidationRequest(
-        name: nameId,
-        birthDate: birthDateId,
-        document: documentId,
-        selfieImage: selfieImageId,
-      ),
-    );
-  }
-
   Future<void> initEmailValidation({required String dataId}) async {
-    await _validatorClient.validatorServiceInitEmailValidation(
+    await _validatorClient.verifierServiceInitEmailValidation(
       body: V1InitEmailValidationRequest(dataId: dataId),
     );
   }
@@ -354,13 +376,13 @@ class KycUserClient {
     required String code,
     required String dataId,
   }) async {
-    await _validatorClient.validatorServiceValidateEmail(
+    await _validatorClient.verifierServiceValidateEmail(
       body: V1ValidateEmailRequest(code: code, dataId: dataId),
     );
   }
 
   Future<void> initPhoneValidation({required String dataId}) async {
-    await _validatorClient.validatorServiceInitPhoneValidation(
+    await _validatorClient.verifierServiceInitPhoneValidation(
       body: V1InitPhoneValidationRequest(dataId: dataId),
     );
   }
@@ -369,17 +391,18 @@ class KycUserClient {
     required String code,
     required String dataId,
   }) async {
-    await _validatorClient.validatorServiceValidatePhone(
+    await _validatorClient.verifierServiceValidatePhone(
       body: V1ValidatePhoneRequest(code: code, dataId: dataId),
     );
   }
 
   Future<String> createOnRampOrder({
     required String partnerPK,
-    required String cryptoAmount,
+    required double cryptoAmount,
     required String cryptoCurrency,
-    required String fiatAmount,
+    required double fiatAmount,
     required String fiatCurrency,
+    required String cryptoWalletAddress,
   }) async {
     final signatureMessage = createUserOnRampMessage(
       cryptoAmount: cryptoAmount,
@@ -396,6 +419,7 @@ class KycUserClient {
         cryptoCurrency: cryptoCurrency,
         fiatAmount: fiatAmount,
         fiatCurrency: fiatCurrency,
+        cryptoWalletAddress: cryptoWalletAddress,
         userSignature: base58.encode(signature.signature.asTypedList),
       ),
     );
@@ -405,9 +429,9 @@ class KycUserClient {
 
   Future<String> createOffRampOrder({
     required String partnerPK,
-    required String cryptoAmount,
+    required double cryptoAmount,
     required String cryptoCurrency,
-    required String fiatAmount,
+    required double fiatAmount,
     required String fiatCurrency,
     required String bankName,
     required String bankAccount,
@@ -479,5 +503,61 @@ class KycUserClient {
           ),
         )
         .toList();
+  }
+
+  Future<bool> hasGrantedAccess(String partnerPK) async => _storageClient
+      .storageServiceCheckAccess(
+        body: V1CheckAccessRequest(partnerPublicKey: partnerPK),
+      )
+      .then((e) => e.hasAccess);
+
+  Future<KycStatusDetails> getKycStatusDetails({
+    required String userPK,
+    required String country,
+  }) async {
+    try {
+      final response = await _storageClient.storageServiceGetKycStatus(
+        body: V1GetKycStatusRequest(
+          userPublicKey: userPK,
+          country: country,
+          validatorPublicKey: config.verifierAuthPk,
+        ),
+      );
+
+      return KycStatusDetails.fromJson(response.toJson());
+    } on DioException catch (e) {
+      if (_isKycDataNotFound(e)) {
+        return const KycStatusDetails(status: KycStatus.unspecified);
+      }
+
+      rethrow;
+    }
+  }
+
+  bool _isKycDataNotFound(DioException e) =>
+      e.response?.data is Map<String, dynamic> &&
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'kyc data not found';
+
+  Future<String> startKycRequest({
+    required String country,
+    required List<String> dataHashes,
+  }) async {
+    final response = await _validatorClient.verifierServiceStartKyc(
+      body: V1StartKycRequest(
+        country: country,
+        dataHashes: dataHashes,
+      ),
+    );
+
+    return response.kycId;
+  }
+
+  Future<KycRequirement> getKycRequirements({required String country}) async {
+    final response = await _validatorClient.verifierServiceGetKycRequirements(
+      body: V1GetKycRequirementsRequest(country: country),
+    );
+
+    return KycRequirement.fromProto(response);
   }
 }

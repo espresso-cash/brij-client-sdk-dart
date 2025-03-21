@@ -11,9 +11,9 @@ part 'v1_create_off_ramp_order_request.g.dart';
 class V1CreateOffRampOrderRequest with _$V1CreateOffRampOrderRequest {
   const factory V1CreateOffRampOrderRequest({
     required String partnerPublicKey,
-    required String cryptoAmount,
+    required double cryptoAmount,
     required String cryptoCurrency,
-    required String fiatAmount,
+    required double fiatAmount,
     required String fiatCurrency,
     required String bankName,
     required String bankAccount,

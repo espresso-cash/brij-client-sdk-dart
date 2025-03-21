@@ -22,6 +22,8 @@ PartnerModel _$PartnerModelFromJson(Map<String, dynamic> json) {
 mixin _$PartnerModel {
   String get name => throw _privateConstructorUsedError;
   String get publicKey => throw _privateConstructorUsedError;
+  String get privacyUrl => throw _privateConstructorUsedError;
+  String get termsUrl => throw _privateConstructorUsedError;
 
   /// Serializes this PartnerModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +41,8 @@ abstract class $PartnerModelCopyWith<$Res> {
           PartnerModel value, $Res Function(PartnerModel) then) =
       _$PartnerModelCopyWithImpl<$Res, PartnerModel>;
   @useResult
-  $Res call({String name, String publicKey});
+  $Res call(
+      {String name, String publicKey, String privacyUrl, String termsUrl});
 }
 
 /// @nodoc
@@ -59,6 +62,8 @@ class _$PartnerModelCopyWithImpl<$Res, $Val extends PartnerModel>
   $Res call({
     Object? name = null,
     Object? publicKey = null,
+    Object? privacyUrl = null,
+    Object? termsUrl = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -68,6 +73,14 @@ class _$PartnerModelCopyWithImpl<$Res, $Val extends PartnerModel>
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      privacyUrl: null == privacyUrl
+          ? _value.privacyUrl
+          : privacyUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      termsUrl: null == termsUrl
+          ? _value.termsUrl
+          : termsUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,7 +94,8 @@ abstract class _$$PartnerModelImplCopyWith<$Res>
       __$$PartnerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String publicKey});
+  $Res call(
+      {String name, String publicKey, String privacyUrl, String termsUrl});
 }
 
 /// @nodoc
@@ -99,6 +113,8 @@ class __$$PartnerModelImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? publicKey = null,
+    Object? privacyUrl = null,
+    Object? termsUrl = null,
   }) {
     return _then(_$PartnerModelImpl(
       name: null == name
@@ -109,6 +125,14 @@ class __$$PartnerModelImplCopyWithImpl<$Res>
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
               as String,
+      privacyUrl: null == privacyUrl
+          ? _value.privacyUrl
+          : privacyUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      termsUrl: null == termsUrl
+          ? _value.termsUrl
+          : termsUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,7 +140,11 @@ class __$$PartnerModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PartnerModelImpl implements _PartnerModel {
-  _$PartnerModelImpl({required this.name, required this.publicKey});
+  _$PartnerModelImpl(
+      {required this.name,
+      required this.publicKey,
+      required this.privacyUrl,
+      required this.termsUrl});
 
   factory _$PartnerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartnerModelImplFromJson(json);
@@ -125,10 +153,14 @@ class _$PartnerModelImpl implements _PartnerModel {
   final String name;
   @override
   final String publicKey;
+  @override
+  final String privacyUrl;
+  @override
+  final String termsUrl;
 
   @override
   String toString() {
-    return 'PartnerModel(name: $name, publicKey: $publicKey)';
+    return 'PartnerModel(name: $name, publicKey: $publicKey, privacyUrl: $privacyUrl, termsUrl: $termsUrl)';
   }
 
   @override
@@ -138,12 +170,17 @@ class _$PartnerModelImpl implements _PartnerModel {
             other is _$PartnerModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.publicKey, publicKey) ||
-                other.publicKey == publicKey));
+                other.publicKey == publicKey) &&
+            (identical(other.privacyUrl, privacyUrl) ||
+                other.privacyUrl == privacyUrl) &&
+            (identical(other.termsUrl, termsUrl) ||
+                other.termsUrl == termsUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, publicKey);
+  int get hashCode =>
+      Object.hash(runtimeType, name, publicKey, privacyUrl, termsUrl);
 
   /// Create a copy of PartnerModel
   /// with the given fields replaced by the non-null parameter values.
@@ -164,7 +201,9 @@ class _$PartnerModelImpl implements _PartnerModel {
 abstract class _PartnerModel implements PartnerModel {
   factory _PartnerModel(
       {required final String name,
-      required final String publicKey}) = _$PartnerModelImpl;
+      required final String publicKey,
+      required final String privacyUrl,
+      required final String termsUrl}) = _$PartnerModelImpl;
 
   factory _PartnerModel.fromJson(Map<String, dynamic> json) =
       _$PartnerModelImpl.fromJson;
@@ -173,6 +212,10 @@ abstract class _PartnerModel implements PartnerModel {
   String get name;
   @override
   String get publicKey;
+  @override
+  String get privacyUrl;
+  @override
+  String get termsUrl;
 
   /// Create a copy of PartnerModel
   /// with the given fields replaced by the non-null parameter values.

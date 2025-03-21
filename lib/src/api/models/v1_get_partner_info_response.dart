@@ -12,6 +12,8 @@ class V1GetPartnerInfoResponse with _$V1GetPartnerInfoResponse {
   const factory V1GetPartnerInfoResponse({
     required String name,
     required String publicKey,
+    required String privacyUrl,
+    required String termsUrl,
   }) = _V1GetPartnerInfoResponse;
   
   factory V1GetPartnerInfoResponse.fromJson(Map<String, Object?> json) => _$V1GetPartnerInfoResponseFromJson(json);

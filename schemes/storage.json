@@ -16,6 +16,70 @@
     "application/json"
   ],
   "paths": {
+    "/v1/checkAccess": {
+      "post": {
+        "operationId": "StorageService_CheckAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/v1/createKycStatus": {
+      "post": {
+        "operationId": "StorageService_CreateKycStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateKycStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateKycStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
     "/v1/getInfo": {
       "post": {
         "operationId": "StorageService_GetInfo",
@@ -40,6 +104,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/v1GetInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/v1/getKycStatus": {
+      "post": {
+        "operationId": "StorageService_GetKycStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetKycStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetKycStatusRequest"
             }
           }
         ],
@@ -399,6 +495,38 @@
           "StorageService"
         ]
       }
+    },
+    "/v1/updateKycStatus": {
+      "post": {
+        "operationId": "StorageService_UpdateKycStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateKycStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateKycStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -427,6 +555,43 @@
             "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1CheckAccessRequest": {
+      "type": "object",
+      "properties": {
+        "partnerPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CheckAccessResponse": {
+      "type": "object",
+      "properties": {
+        "hasAccess": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CreateKycStatusRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v1CreateKycStatusResponse": {
+      "type": "object",
+      "properties": {
+        "kycId": {
+          "type": "string"
         }
       }
     },
@@ -468,7 +633,8 @@
         "DATA_TYPE_BIRTH_DATE",
         "DATA_TYPE_DOCUMENT",
         "DATA_TYPE_BANK_INFO",
-        "DATA_TYPE_SELFIE_IMAGE"
+        "DATA_TYPE_SELFIE_IMAGE",
+        "DATA_TYPE_CITIZENSHIP"
       ],
       "default": "DATA_TYPE_UNSPECIFIED"
     },
@@ -477,6 +643,10 @@
       "properties": {
         "publicKey": {
           "type": "string"
+        },
+        "walletAddress": {
+          "type": "string",
+          "nullable": true
         }
       }
     },
@@ -497,6 +667,36 @@
         }
       }
     },
+    "v1GetKycStatusRequest": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "validatorPublicKey": {
+          "type": "string"
+        },
+        "userPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetKycStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1KycStatus"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "v1GetPartnerInfoRequest": {
       "type": "object",
       "properties": {
@@ -512,6 +712,12 @@
           "type": "string"
         },
         "publicKey": {
+          "type": "string"
+        },
+        "privacyUrl": {
+          "type": "string"
+        },
+        "termsUrl": {
           "type": "string"
         }
       }
@@ -602,6 +808,16 @@
     },
     "v1InitStorageResponse": {
       "type": "object"
+    },
+    "v1KycStatus": {
+      "type": "string",
+      "enum": [
+        "KYC_STATUS_UNSPECIFIED",
+        "KYC_STATUS_PENDING",
+        "KYC_STATUS_APPROVED",
+        "KYC_STATUS_REJECTED"
+      ],
+      "default": "KYC_STATUS_UNSPECIFIED"
     },
     "v1RemoveCustomValidationDataRequest": {
       "type": "object",
@@ -699,6 +915,25 @@
       }
     },
     "v1SetValidationDataResponse": {
+      "type": "object"
+    },
+    "v1UpdateKycStatusRequest": {
+      "type": "object",
+      "properties": {
+        "kycId": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v1UpdateKycStatusResponse": {
       "type": "object"
     },
     "v1UserDataField": {

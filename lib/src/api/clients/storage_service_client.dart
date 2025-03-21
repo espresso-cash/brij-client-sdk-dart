@@ -5,8 +5,14 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../models/v1_check_access_request.dart';
+import '../models/v1_check_access_response.dart';
+import '../models/v1_create_kyc_status_request.dart';
+import '../models/v1_create_kyc_status_response.dart';
 import '../models/v1_get_info_request.dart';
 import '../models/v1_get_info_response.dart';
+import '../models/v1_get_kyc_status_request.dart';
+import '../models/v1_get_kyc_status_response.dart';
 import '../models/v1_get_partner_info_request.dart';
 import '../models/v1_get_partner_info_response.dart';
 import '../models/v1_get_user_data_request.dart';
@@ -29,6 +35,8 @@ import '../models/v1_set_user_data_request.dart';
 import '../models/v1_set_user_data_response.dart';
 import '../models/v1_set_validation_data_request.dart';
 import '../models/v1_set_validation_data_response.dart';
+import '../models/v1_update_kyc_status_request.dart';
+import '../models/v1_update_kyc_status_response.dart';
 
 part 'storage_service_client.g.dart';
 
@@ -36,9 +44,24 @@ part 'storage_service_client.g.dart';
 abstract class StorageServiceClient {
   factory StorageServiceClient(Dio dio, {String? baseUrl}) = _StorageServiceClient;
 
+  @POST('/v1/checkAccess')
+  Future<V1CheckAccessResponse> storageServiceCheckAccess({
+    @Body() required V1CheckAccessRequest body,
+  });
+
+  @POST('/v1/createKycStatus')
+  Future<V1CreateKycStatusResponse> storageServiceCreateKycStatus({
+    @Body() required V1CreateKycStatusRequest body,
+  });
+
   @POST('/v1/getInfo')
   Future<V1GetInfoResponse> storageServiceGetInfo({
     @Body() required V1GetInfoRequest body,
+  });
+
+  @POST('/v1/getKycStatus')
+  Future<V1GetKycStatusResponse> storageServiceGetKycStatus({
+    @Body() required V1GetKycStatusRequest body,
   });
 
   @POST('/v1/getPartnerInfo')
@@ -94,5 +117,10 @@ abstract class StorageServiceClient {
   @POST('/v1/setValidationData')
   Future<V1SetValidationDataResponse> storageServiceSetValidationData({
     @Body() required V1SetValidationDataRequest body,
+  });
+
+  @POST('/v1/updateKycStatus')
+  Future<V1UpdateKycStatusResponse> storageServiceUpdateKycStatus({
+    @Body() required V1UpdateKycStatusRequest body,
   });
 }
