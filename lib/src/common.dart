@@ -177,6 +177,7 @@ UserData _processUserData({
             expirationDate: wrappedData.expirationDate.toDateTime(),
             frontImage: wrappedData.photo.frontImage,
             backImage: wrappedData.photo.backImage,
+            hash: hash,
           ),
         );
       case V1DataType.dataTypeBankInfo:
