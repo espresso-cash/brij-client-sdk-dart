@@ -24,7 +24,6 @@ mixin _$V1InitStorageRequest {
   String get message => throw _privateConstructorUsedError;
   String get encryptedSecretKey => throw _privateConstructorUsedError;
   String get walletProofSignature => throw _privateConstructorUsedError;
-  String get walletProofMessage => throw _privateConstructorUsedError;
 
   /// Serializes this V1InitStorageRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,8 +45,7 @@ abstract class $V1InitStorageRequestCopyWith<$Res> {
       {String walletAddress,
       String message,
       String encryptedSecretKey,
-      String walletProofSignature,
-      String walletProofMessage});
+      String walletProofSignature});
 }
 
 /// @nodoc
@@ -70,7 +68,6 @@ class _$V1InitStorageRequestCopyWithImpl<$Res,
     Object? message = null,
     Object? encryptedSecretKey = null,
     Object? walletProofSignature = null,
-    Object? walletProofMessage = null,
   }) {
     return _then(_value.copyWith(
       walletAddress: null == walletAddress
@@ -89,10 +86,6 @@ class _$V1InitStorageRequestCopyWithImpl<$Res,
           ? _value.walletProofSignature
           : walletProofSignature // ignore: cast_nullable_to_non_nullable
               as String,
-      walletProofMessage: null == walletProofMessage
-          ? _value.walletProofMessage
-          : walletProofMessage // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -109,8 +102,7 @@ abstract class _$$V1InitStorageRequestImplCopyWith<$Res>
       {String walletAddress,
       String message,
       String encryptedSecretKey,
-      String walletProofSignature,
-      String walletProofMessage});
+      String walletProofSignature});
 }
 
 /// @nodoc
@@ -130,7 +122,6 @@ class __$$V1InitStorageRequestImplCopyWithImpl<$Res>
     Object? message = null,
     Object? encryptedSecretKey = null,
     Object? walletProofSignature = null,
-    Object? walletProofMessage = null,
   }) {
     return _then(_$V1InitStorageRequestImpl(
       walletAddress: null == walletAddress
@@ -149,10 +140,6 @@ class __$$V1InitStorageRequestImplCopyWithImpl<$Res>
           ? _value.walletProofSignature
           : walletProofSignature // ignore: cast_nullable_to_non_nullable
               as String,
-      walletProofMessage: null == walletProofMessage
-          ? _value.walletProofMessage
-          : walletProofMessage // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -164,8 +151,7 @@ class _$V1InitStorageRequestImpl implements _V1InitStorageRequest {
       {required this.walletAddress,
       required this.message,
       required this.encryptedSecretKey,
-      required this.walletProofSignature,
-      required this.walletProofMessage});
+      required this.walletProofSignature});
 
   factory _$V1InitStorageRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$V1InitStorageRequestImplFromJson(json);
@@ -178,12 +164,10 @@ class _$V1InitStorageRequestImpl implements _V1InitStorageRequest {
   final String encryptedSecretKey;
   @override
   final String walletProofSignature;
-  @override
-  final String walletProofMessage;
 
   @override
   String toString() {
-    return 'V1InitStorageRequest(walletAddress: $walletAddress, message: $message, encryptedSecretKey: $encryptedSecretKey, walletProofSignature: $walletProofSignature, walletProofMessage: $walletProofMessage)';
+    return 'V1InitStorageRequest(walletAddress: $walletAddress, message: $message, encryptedSecretKey: $encryptedSecretKey, walletProofSignature: $walletProofSignature)';
   }
 
   @override
@@ -197,15 +181,13 @@ class _$V1InitStorageRequestImpl implements _V1InitStorageRequest {
             (identical(other.encryptedSecretKey, encryptedSecretKey) ||
                 other.encryptedSecretKey == encryptedSecretKey) &&
             (identical(other.walletProofSignature, walletProofSignature) ||
-                other.walletProofSignature == walletProofSignature) &&
-            (identical(other.walletProofMessage, walletProofMessage) ||
-                other.walletProofMessage == walletProofMessage));
+                other.walletProofSignature == walletProofSignature));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, walletAddress, message,
-      encryptedSecretKey, walletProofSignature, walletProofMessage);
+      encryptedSecretKey, walletProofSignature);
 
   /// Create a copy of V1InitStorageRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -230,8 +212,7 @@ abstract class _V1InitStorageRequest implements V1InitStorageRequest {
       {required final String walletAddress,
       required final String message,
       required final String encryptedSecretKey,
-      required final String walletProofSignature,
-      required final String walletProofMessage}) = _$V1InitStorageRequestImpl;
+      required final String walletProofSignature}) = _$V1InitStorageRequestImpl;
 
   factory _V1InitStorageRequest.fromJson(Map<String, dynamic> json) =
       _$V1InitStorageRequestImpl.fromJson;
@@ -244,8 +225,6 @@ abstract class _V1InitStorageRequest implements V1InitStorageRequest {
   String get encryptedSecretKey;
   @override
   String get walletProofSignature;
-  @override
-  String get walletProofMessage;
 
   /// Create a copy of V1InitStorageRequest
   /// with the given fields replaced by the non-null parameter values.

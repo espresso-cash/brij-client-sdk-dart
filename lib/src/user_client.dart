@@ -19,6 +19,7 @@ import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_partner_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_get_wallet_proof_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_grant_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_email_validation_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_phone_validation_request.dart';
@@ -50,7 +51,6 @@ class KycUserClient {
   final SignRequest sign;
 
   static const _seedMessage = 'hello';
-  static const _proofMessage = 'walletProofMessage';
 
   late SimpleKeyPair _authKeyPair;
   late String _authPublicKey;
@@ -185,13 +185,15 @@ class KycUserClient {
   }
 
   Future<void> _initStorage({required String walletAddress}) async {
-    final proofSignature = await sign(utf8.encode(_proofMessage));
+    final proofMessage = await _storageClient.storageServiceGetWalletProof(
+      body: V1GetWalletProofRequest(walletAddress: walletAddress),
+    );
+    final proofSignature = await sign(utf8.encode(proofMessage.proofMessage));
     await _storageClient.storageServiceInitStorage(
       body: V1InitStorageRequest(
         walletAddress: walletAddress,
         message: _seedMessage,
         encryptedSecretKey: _encryptedSecretKey,
-        walletProofMessage: _proofMessage,
         walletProofSignature:
             base58.encode(Uint8List.fromList(proofSignature.bytes)),
       ),

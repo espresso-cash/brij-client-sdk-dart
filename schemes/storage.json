@@ -208,6 +208,38 @@
         ]
       }
     },
+    "/v1/getWalletProof": {
+      "post": {
+        "operationId": "StorageService_GetWalletProof",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetWalletProofResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetWalletProofRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
     "/v1/grantAccess": {
       "post": {
         "operationId": "StorageService_GrantAccess",
@@ -727,6 +759,22 @@
         }
       }
     },
+    "v1GetWalletProofRequest": {
+      "type": "object",
+      "properties": {
+        "walletAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetWalletProofResponse": {
+      "type": "object",
+      "properties": {
+        "proofMessage": {
+          "type": "string"
+        }
+      }
+    },
     "v1GrantAccessRequest": {
       "type": "object",
       "properties": {
@@ -754,9 +802,6 @@
           "type": "string"
         },
         "walletProofSignature": {
-          "type": "string"
-        },
-        "walletProofMessage": {
           "type": "string"
         }
       }
