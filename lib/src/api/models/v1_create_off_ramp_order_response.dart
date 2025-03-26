@@ -11,6 +11,7 @@ part 'v1_create_off_ramp_order_response.g.dart';
 class V1CreateOffRampOrderResponse with _$V1CreateOffRampOrderResponse {
   const factory V1CreateOffRampOrderResponse({
     required String orderId,
+    required String transaction,
   }) = _V1CreateOffRampOrderResponse;
   
   factory V1CreateOffRampOrderResponse.fromJson(Map<String, Object?> json) => _$V1CreateOffRampOrderResponseFromJson(json);

@@ -22,14 +22,14 @@ class _OrderServiceClient implements OrderServiceClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> orderServiceAcceptOrder(
+  Future<V1AcceptOrderResponse> orderServiceAcceptOrder(
       {required V1AcceptOrderRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<V1AcceptOrderResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -45,8 +45,14 @@ class _OrderServiceClient implements OrderServiceClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late V1AcceptOrderResponse _value;
+    try {
+      _value = V1AcceptOrderResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 

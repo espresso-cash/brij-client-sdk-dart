@@ -23,6 +23,8 @@ Map<String, dynamic> _$$BasicInfoRequirementImplToJson(
 const _$BasicInfoTypeEnumMap = {
   BasicInfoType.email: 'email',
   BasicInfoType.phone: 'phone',
+  BasicInfoType.name: 'name',
+  BasicInfoType.dob: 'dob',
   BasicInfoType.selfie: 'selfie',
 };
 

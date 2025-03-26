@@ -22,6 +22,7 @@ V1CreateOffRampOrderResponse _$V1CreateOffRampOrderResponseFromJson(
 /// @nodoc
 mixin _$V1CreateOffRampOrderResponse {
   String get orderId => throw _privateConstructorUsedError;
+  String get transaction => throw _privateConstructorUsedError;
 
   /// Serializes this V1CreateOffRampOrderResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +42,7 @@ abstract class $V1CreateOffRampOrderResponseCopyWith<$Res> {
       _$V1CreateOffRampOrderResponseCopyWithImpl<$Res,
           V1CreateOffRampOrderResponse>;
   @useResult
-  $Res call({String orderId});
+  $Res call({String orderId, String transaction});
 }
 
 /// @nodoc
@@ -61,11 +62,16 @@ class _$V1CreateOffRampOrderResponseCopyWithImpl<$Res,
   @override
   $Res call({
     Object? orderId = null,
+    Object? transaction = null,
   }) {
     return _then(_value.copyWith(
       orderId: null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      transaction: null == transaction
+          ? _value.transaction
+          : transaction // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -80,7 +86,7 @@ abstract class _$$V1CreateOffRampOrderResponseImplCopyWith<$Res>
       __$$V1CreateOffRampOrderResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String orderId});
+  $Res call({String orderId, String transaction});
 }
 
 /// @nodoc
@@ -99,11 +105,16 @@ class __$$V1CreateOffRampOrderResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? orderId = null,
+    Object? transaction = null,
   }) {
     return _then(_$V1CreateOffRampOrderResponseImpl(
       orderId: null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      transaction: null == transaction
+          ? _value.transaction
+          : transaction // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -113,7 +124,8 @@ class __$$V1CreateOffRampOrderResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$V1CreateOffRampOrderResponseImpl
     implements _V1CreateOffRampOrderResponse {
-  const _$V1CreateOffRampOrderResponseImpl({required this.orderId});
+  const _$V1CreateOffRampOrderResponseImpl(
+      {required this.orderId, required this.transaction});
 
   factory _$V1CreateOffRampOrderResponseImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -121,10 +133,12 @@ class _$V1CreateOffRampOrderResponseImpl
 
   @override
   final String orderId;
+  @override
+  final String transaction;
 
   @override
   String toString() {
-    return 'V1CreateOffRampOrderResponse(orderId: $orderId)';
+    return 'V1CreateOffRampOrderResponse(orderId: $orderId, transaction: $transaction)';
   }
 
   @override
@@ -132,12 +146,14 @@ class _$V1CreateOffRampOrderResponseImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$V1CreateOffRampOrderResponseImpl &&
-            (identical(other.orderId, orderId) || other.orderId == orderId));
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.transaction, transaction) ||
+                other.transaction == transaction));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, orderId);
+  int get hashCode => Object.hash(runtimeType, orderId, transaction);
 
   /// Create a copy of V1CreateOffRampOrderResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -159,14 +175,17 @@ class _$V1CreateOffRampOrderResponseImpl
 
 abstract class _V1CreateOffRampOrderResponse
     implements V1CreateOffRampOrderResponse {
-  const factory _V1CreateOffRampOrderResponse({required final String orderId}) =
-      _$V1CreateOffRampOrderResponseImpl;
+  const factory _V1CreateOffRampOrderResponse(
+      {required final String orderId,
+      required final String transaction}) = _$V1CreateOffRampOrderResponseImpl;
 
   factory _V1CreateOffRampOrderResponse.fromJson(Map<String, dynamic> json) =
       _$V1CreateOffRampOrderResponseImpl.fromJson;
 
   @override
   String get orderId;
+  @override
+  String get transaction;
 
   /// Create a copy of V1CreateOffRampOrderResponse
   /// with the given fields replaced by the non-null parameter values.

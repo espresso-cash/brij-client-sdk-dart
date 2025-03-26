@@ -358,7 +358,12 @@
       }
     },
     "v1AcceptOrderResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        }
+      }
     },
     "v1CompleteOrderRequest": {
       "type": "object",
@@ -412,6 +417,9 @@
       "type": "object",
       "properties": {
         "orderId": {
+          "type": "string"
+        },
+        "transaction": {
           "type": "string"
         }
       }
