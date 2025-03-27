@@ -23,6 +23,8 @@ Map<String, dynamic> _$$BasicInfoRequirementImplToJson(
 const _$BasicInfoTypeEnumMap = {
   BasicInfoType.email: 'email',
   BasicInfoType.phone: 'phone',
+  BasicInfoType.name: 'name',
+  BasicInfoType.dob: 'dob',
   BasicInfoType.selfie: 'selfie',
 };
 
@@ -57,6 +59,8 @@ Map<String, dynamic> _$$DocumentTypeRequirementImplToJson(
 const _$IdTypeEnumMap = {
   IdType.voterId: 'voterId',
   IdType.ninV2: 'ninV2',
+  IdType.passport: 'passport',
+  IdType.idCard: 'idCard',
   IdType.other: 'other',
 };
 
