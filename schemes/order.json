@@ -405,6 +405,9 @@
         },
         "userSignature": {
           "type": "string"
+        },
+        "userWalletAddress": {
+          "type": "string"
         }
       }
     },
@@ -439,7 +442,7 @@
         "userSignature": {
           "type": "string"
         },
-        "cryptoWalletAddress": {
+        "userWalletAddress": {
           "type": "string"
         }
       }
@@ -540,6 +543,9 @@
           "type": "string"
         },
         "partnerSignature": {
+          "type": "string"
+        },
+        "userWalletAddress": {
           "type": "string"
         }
       }

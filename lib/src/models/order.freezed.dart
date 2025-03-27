@@ -37,6 +37,7 @@ mixin _$Order {
   String get transaction => throw _privateConstructorUsedError;
   String get transactionId => throw _privateConstructorUsedError;
   String get externalId => throw _privateConstructorUsedError;
+  String get userWalletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this Order to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -69,7 +70,8 @@ abstract class $OrderCopyWith<$Res> {
       String cryptoWalletAddress,
       String transaction,
       String transactionId,
-      String externalId});
+      String externalId,
+      String userWalletAddress});
 }
 
 /// @nodoc
@@ -104,6 +106,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? transaction = null,
     Object? transactionId = null,
     Object? externalId = null,
+    Object? userWalletAddress = null,
   }) {
     return _then(_value.copyWith(
       orderId: null == orderId
@@ -174,6 +177,10 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
               as String,
+      userWalletAddress: null == userWalletAddress
+          ? _value.userWalletAddress
+          : userWalletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -202,7 +209,8 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       String cryptoWalletAddress,
       String transaction,
       String transactionId,
-      String externalId});
+      String externalId,
+      String userWalletAddress});
 }
 
 /// @nodoc
@@ -235,6 +243,7 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? transaction = null,
     Object? transactionId = null,
     Object? externalId = null,
+    Object? userWalletAddress = null,
   }) {
     return _then(_$OrderImpl(
       orderId: null == orderId
@@ -305,6 +314,10 @@ class __$$OrderImplCopyWithImpl<$Res>
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
               as String,
+      userWalletAddress: null == userWalletAddress
+          ? _value.userWalletAddress
+          : userWalletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -329,7 +342,8 @@ class _$OrderImpl implements _Order {
       required this.cryptoWalletAddress,
       required this.transaction,
       required this.transactionId,
-      required this.externalId});
+      required this.externalId,
+      required this.userWalletAddress});
 
   factory _$OrderImpl.fromJson(Map<String, dynamic> json) =>
       _$$OrderImplFromJson(json);
@@ -368,10 +382,12 @@ class _$OrderImpl implements _Order {
   final String transactionId;
   @override
   final String externalId;
+  @override
+  final String userWalletAddress;
 
   @override
   String toString() {
-    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId)';
+    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress)';
   }
 
   @override
@@ -407,7 +423,9 @@ class _$OrderImpl implements _Order {
             (identical(other.transactionId, transactionId) ||
                 other.transactionId == transactionId) &&
             (identical(other.externalId, externalId) ||
-                other.externalId == externalId));
+                other.externalId == externalId) &&
+            (identical(other.userWalletAddress, userWalletAddress) ||
+                other.userWalletAddress == userWalletAddress));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -430,7 +448,8 @@ class _$OrderImpl implements _Order {
       cryptoWalletAddress,
       transaction,
       transactionId,
-      externalId);
+      externalId,
+      userWalletAddress);
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -466,7 +485,8 @@ abstract class _Order implements Order {
       required final String cryptoWalletAddress,
       required final String transaction,
       required final String transactionId,
-      required final String externalId}) = _$OrderImpl;
+      required final String externalId,
+      required final String userWalletAddress}) = _$OrderImpl;
 
   factory _Order.fromJson(Map<String, dynamic> json) = _$OrderImpl.fromJson;
 
@@ -504,6 +524,8 @@ abstract class _Order implements Order {
   String get transactionId;
   @override
   String get externalId;
+  @override
+  String get userWalletAddress;
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.

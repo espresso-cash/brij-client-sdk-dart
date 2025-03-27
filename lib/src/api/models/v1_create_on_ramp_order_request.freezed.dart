@@ -27,7 +27,7 @@ mixin _$V1CreateOnRampOrderRequest {
   double get fiatAmount => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
   String get userSignature => throw _privateConstructorUsedError;
-  String get cryptoWalletAddress => throw _privateConstructorUsedError;
+  String get userWalletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this V1CreateOnRampOrderRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ abstract class $V1CreateOnRampOrderRequestCopyWith<$Res> {
       double fiatAmount,
       String fiatCurrency,
       String userSignature,
-      String cryptoWalletAddress});
+      String userWalletAddress});
 }
 
 /// @nodoc
@@ -78,7 +78,7 @@ class _$V1CreateOnRampOrderRequestCopyWithImpl<$Res,
     Object? fiatAmount = null,
     Object? fiatCurrency = null,
     Object? userSignature = null,
-    Object? cryptoWalletAddress = null,
+    Object? userWalletAddress = null,
   }) {
     return _then(_value.copyWith(
       partnerPublicKey: null == partnerPublicKey
@@ -105,9 +105,9 @@ class _$V1CreateOnRampOrderRequestCopyWithImpl<$Res,
           ? _value.userSignature
           : userSignature // ignore: cast_nullable_to_non_nullable
               as String,
-      cryptoWalletAddress: null == cryptoWalletAddress
-          ? _value.cryptoWalletAddress
-          : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
+      userWalletAddress: null == userWalletAddress
+          ? _value.userWalletAddress
+          : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -129,7 +129,7 @@ abstract class _$$V1CreateOnRampOrderRequestImplCopyWith<$Res>
       double fiatAmount,
       String fiatCurrency,
       String userSignature,
-      String cryptoWalletAddress});
+      String userWalletAddress});
 }
 
 /// @nodoc
@@ -153,7 +153,7 @@ class __$$V1CreateOnRampOrderRequestImplCopyWithImpl<$Res>
     Object? fiatAmount = null,
     Object? fiatCurrency = null,
     Object? userSignature = null,
-    Object? cryptoWalletAddress = null,
+    Object? userWalletAddress = null,
   }) {
     return _then(_$V1CreateOnRampOrderRequestImpl(
       partnerPublicKey: null == partnerPublicKey
@@ -180,9 +180,9 @@ class __$$V1CreateOnRampOrderRequestImplCopyWithImpl<$Res>
           ? _value.userSignature
           : userSignature // ignore: cast_nullable_to_non_nullable
               as String,
-      cryptoWalletAddress: null == cryptoWalletAddress
-          ? _value.cryptoWalletAddress
-          : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
+      userWalletAddress: null == userWalletAddress
+          ? _value.userWalletAddress
+          : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -198,7 +198,7 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
       required this.fiatAmount,
       required this.fiatCurrency,
       required this.userSignature,
-      required this.cryptoWalletAddress});
+      required this.userWalletAddress});
 
   factory _$V1CreateOnRampOrderRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -217,11 +217,11 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
   @override
   final String userSignature;
   @override
-  final String cryptoWalletAddress;
+  final String userWalletAddress;
 
   @override
   String toString() {
-    return 'V1CreateOnRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, userSignature: $userSignature, cryptoWalletAddress: $cryptoWalletAddress)';
+    return 'V1CreateOnRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, userSignature: $userSignature, userWalletAddress: $userWalletAddress)';
   }
 
   @override
@@ -241,8 +241,8 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
                 other.fiatCurrency == fiatCurrency) &&
             (identical(other.userSignature, userSignature) ||
                 other.userSignature == userSignature) &&
-            (identical(other.cryptoWalletAddress, cryptoWalletAddress) ||
-                other.cryptoWalletAddress == cryptoWalletAddress));
+            (identical(other.userWalletAddress, userWalletAddress) ||
+                other.userWalletAddress == userWalletAddress));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -255,7 +255,7 @@ class _$V1CreateOnRampOrderRequestImpl implements _V1CreateOnRampOrderRequest {
       fiatAmount,
       fiatCurrency,
       userSignature,
-      cryptoWalletAddress);
+      userWalletAddress);
 
   /// Create a copy of V1CreateOnRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -283,7 +283,7 @@ abstract class _V1CreateOnRampOrderRequest
           required final double fiatAmount,
           required final String fiatCurrency,
           required final String userSignature,
-          required final String cryptoWalletAddress}) =
+          required final String userWalletAddress}) =
       _$V1CreateOnRampOrderRequestImpl;
 
   factory _V1CreateOnRampOrderRequest.fromJson(Map<String, dynamic> json) =
@@ -302,7 +302,7 @@ abstract class _V1CreateOnRampOrderRequest
   @override
   String get userSignature;
   @override
-  String get cryptoWalletAddress;
+  String get userWalletAddress;
 
   /// Create a copy of V1CreateOnRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.

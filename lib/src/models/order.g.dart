@@ -24,6 +24,7 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       transaction: json['transaction'] as String,
       transactionId: json['transactionId'] as String,
       externalId: json['externalId'] as String,
+      userWalletAddress: json['userWalletAddress'] as String,
     );
 
 Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
@@ -45,4 +46,5 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'transaction': instance.transaction,
       'transactionId': instance.transactionId,
       'externalId': instance.externalId,
+      'userWalletAddress': instance.userWalletAddress,
     };
