@@ -176,6 +176,38 @@
         ]
       }
     },
+    "/v1/generateTransaction": {
+      "post": {
+        "operationId": "OrderService_GenerateTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GenerateTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GenerateTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
     "/v1/getOrder": {
       "post": {
         "operationId": "OrderService_GetOrder",
@@ -468,6 +500,28 @@
     },
     "v1FailOrderResponse": {
       "type": "object"
+    },
+    "v1GenerateTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "fundingWalletAddress": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GenerateTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        }
+      }
     },
     "v1GetOrderRequest": {
       "type": "object",
