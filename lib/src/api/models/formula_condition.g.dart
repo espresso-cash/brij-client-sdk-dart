@@ -30,6 +30,8 @@ const _$V1DocumentTypeEnumMap = {
   V1DocumentType.documentTypeUnspecified: 'DOCUMENT_TYPE_UNSPECIFIED',
   V1DocumentType.documentTypeVoterID: 'DOCUMENT_TYPE_VOTER_ID',
   V1DocumentType.documentTypeNinV2: 'DOCUMENT_TYPE_NIN_V2',
+  V1DocumentType.documentTypePassport: 'DOCUMENT_TYPE_PASSPORT',
+  V1DocumentType.documentTypeIDCard: 'DOCUMENT_TYPE_ID_CARD',
   V1DocumentType.$unknown: r'$unknown',
 };
 

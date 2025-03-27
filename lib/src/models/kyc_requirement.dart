@@ -107,6 +107,8 @@ class KycRequirement with _$KycRequirement {
       switch (protoType) {
         V1DocumentType.documentTypeVoterID => IdType.voterId,
         V1DocumentType.documentTypeNinV2 => IdType.ninV2,
+        V1DocumentType.documentTypePassport => IdType.passport,
+        V1DocumentType.documentTypeIDCard => IdType.idCard,
         V1DocumentType.documentTypeUnspecified =>
           throw Exception('Unspecified document type is not supported'),
         V1DocumentType.$unknown => throw Exception('Unknown document type'),
