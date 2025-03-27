@@ -13,6 +13,7 @@ import 'package:kyc_client_dart/src/api/models/v1_check_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
+import 'package:kyc_client_dart/src/api/models/v1_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
@@ -559,5 +560,17 @@ class KycUserClient {
     );
 
     return KycRequirement.fromProto(response);
+  }
+
+  Future<String> generateTransaction({required OrderId orderId}) async {
+    final response = await _orderClient.orderServiceGenerateTransaction(
+      body: V1GenerateTransactionRequest(
+        orderId: orderId.orderId,
+        fundingWalletAddress: '',
+        externalId: orderId.externalId,
+      ),
+    );
+
+    return response.transaction;
   }
 }
