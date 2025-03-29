@@ -18,6 +18,7 @@ class V1CreateOffRampOrderRequest with _$V1CreateOffRampOrderRequest {
     required String bankName,
     required String bankAccount,
     required String userSignature,
+    required String userWalletAddress,
   }) = _V1CreateOffRampOrderRequest;
   
   factory V1CreateOffRampOrderRequest.fromJson(Map<String, Object?> json) => _$V1CreateOffRampOrderRequestFromJson(json);

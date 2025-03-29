@@ -28,6 +28,7 @@ _$V1GetOrderResponseImpl _$$V1GetOrderResponseImplFromJson(
       externalId: json['externalId'] as String,
       userSignature: json['userSignature'] as String,
       partnerSignature: json['partnerSignature'] as String,
+      userWalletAddress: json['userWalletAddress'] as String,
     );
 
 Map<String, dynamic> _$$V1GetOrderResponseImplToJson(
@@ -52,4 +53,5 @@ Map<String, dynamic> _$$V1GetOrderResponseImplToJson(
       'externalId': instance.externalId,
       'userSignature': instance.userSignature,
       'partnerSignature': instance.partnerSignature,
+      'userWalletAddress': instance.userWalletAddress,
     };

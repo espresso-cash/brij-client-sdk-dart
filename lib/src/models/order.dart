@@ -24,6 +24,7 @@ class Order with _$Order {
     required String transaction,
     required String transactionId,
     required String externalId,
+    required String userWalletAddress,
   }) = _Order;
 
   factory Order.fromJson(Map<String, Object?> json) => _$OrderFromJson(json);
@@ -46,5 +47,6 @@ class Order with _$Order {
         transaction: response.transaction,
         transactionId: response.transactionId,
         externalId: response.externalId,
+        userWalletAddress: response.userWalletAddress,
       );
 }

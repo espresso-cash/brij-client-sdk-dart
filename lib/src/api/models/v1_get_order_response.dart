@@ -29,6 +29,7 @@ class V1GetOrderResponse with _$V1GetOrderResponse {
     required String externalId,
     required String userSignature,
     required String partnerSignature,
+    required String userWalletAddress,
   }) = _V1GetOrderResponse;
   
   factory V1GetOrderResponse.fromJson(Map<String, Object?> json) => _$V1GetOrderResponseFromJson(json);
