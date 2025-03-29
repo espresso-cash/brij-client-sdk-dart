@@ -15,6 +15,8 @@ import '../models/v1_create_on_ramp_order_request.dart';
 import '../models/v1_create_on_ramp_order_response.dart';
 import '../models/v1_fail_order_request.dart';
 import '../models/v1_fail_order_response.dart';
+import '../models/v1_generate_transaction_request.dart';
+import '../models/v1_generate_transaction_response.dart';
 import '../models/v1_get_order_request.dart';
 import '../models/v1_get_order_response.dart';
 import '../models/v1_get_orders_request.dart';
@@ -53,6 +55,11 @@ abstract class OrderServiceClient {
   @POST('/v1/failOrder')
   Future<V1FailOrderResponse> orderServiceFailOrder({
     @Body() required V1FailOrderRequest body,
+  });
+
+  @POST('/v1/generateTransaction')
+  Future<V1GenerateTransactionResponse> orderServiceGenerateTransaction({
+    @Body() required V1GenerateTransactionRequest body,
   });
 
   @POST('/v1/getOrder')

@@ -179,6 +179,41 @@ class _OrderServiceClient implements OrderServiceClient {
   }
 
   @override
+  Future<V1GenerateTransactionResponse> orderServiceGenerateTransaction(
+      {required V1GenerateTransactionRequest body}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<V1GenerateTransactionResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/v1/generateTransaction',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late V1GenerateTransactionResponse _value;
+    try {
+      _value = V1GenerateTransactionResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<V1GetOrderResponse> orderServiceGetOrder(
       {required V1GetOrderRequest body}) async {
     final _extra = <String, dynamic>{};
