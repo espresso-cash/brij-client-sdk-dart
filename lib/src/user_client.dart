@@ -410,6 +410,7 @@ class KycUserClient {
       cryptoCurrency: cryptoCurrency,
       fiatAmount: fiatAmount,
       fiatCurrency: fiatCurrency,
+      walletAddress: cryptoWalletAddress,
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
@@ -420,7 +421,7 @@ class KycUserClient {
         cryptoCurrency: cryptoCurrency,
         fiatAmount: fiatAmount,
         fiatCurrency: fiatCurrency,
-        cryptoWalletAddress: cryptoWalletAddress,
+        userWalletAddress: cryptoWalletAddress,
         userSignature: base58.encode(signature.signature.asTypedList),
       ),
     );
@@ -436,6 +437,7 @@ class KycUserClient {
     required String fiatCurrency,
     required String bankName,
     required String bankAccount,
+    required String cryptoWalletAddress,
   }) async {
     final encryptedBankName = base64Encode(
       encrypt(
@@ -458,6 +460,7 @@ class KycUserClient {
       fiatCurrency: fiatCurrency,
       bankName: bankName,
       bankAccount: bankAccount,
+      walletAddress: cryptoWalletAddress,
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
@@ -471,6 +474,7 @@ class KycUserClient {
         bankName: encryptedBankName,
         bankAccount: encryptedBankAccount,
         userSignature: base58.encode(signature.signature.asTypedList),
+        userWalletAddress: cryptoWalletAddress,
       ),
     );
 

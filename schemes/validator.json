@@ -293,7 +293,9 @@
       "enum": [
         "DOCUMENT_TYPE_UNSPECIFIED",
         "DOCUMENT_TYPE_VOTER_ID",
-        "DOCUMENT_TYPE_NIN_V2"
+        "DOCUMENT_TYPE_NIN_V2",
+        "DOCUMENT_TYPE_PASSPORT",
+        "DOCUMENT_TYPE_ID_CARD"
       ],
       "default": "DOCUMENT_TYPE_UNSPECIFIED"
     },

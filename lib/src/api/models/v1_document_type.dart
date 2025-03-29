@@ -12,6 +12,10 @@ enum V1DocumentType {
   documentTypeVoterID('DOCUMENT_TYPE_VOTER_ID'),
   @JsonValue('DOCUMENT_TYPE_NIN_V2')
   documentTypeNinV2('DOCUMENT_TYPE_NIN_V2'),
+  @JsonValue('DOCUMENT_TYPE_PASSPORT')
+  documentTypePassport('DOCUMENT_TYPE_PASSPORT'),
+  @JsonValue('DOCUMENT_TYPE_ID_CARD')
+  documentTypeIDCard('DOCUMENT_TYPE_ID_CARD'),
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 

@@ -59,6 +59,8 @@ Map<String, dynamic> _$$DocumentTypeRequirementImplToJson(
 const _$IdTypeEnumMap = {
   IdType.voterId: 'voterId',
   IdType.ninV2: 'ninV2',
+  IdType.passport: 'passport',
+  IdType.idCard: 'idCard',
   IdType.other: 'other',
 };
 

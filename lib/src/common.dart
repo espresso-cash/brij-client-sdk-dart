@@ -275,6 +275,7 @@ Order processOrderData({
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
             fiatCurrency: order.fiatCurrency,
+            walletAddress: order.userWalletAddress,
           )
         : createUserOffRampMessage(
             cryptoAmount: order.cryptoAmount,
@@ -283,6 +284,7 @@ Order processOrderData({
             fiatCurrency: order.fiatCurrency,
             bankName: bankName,
             bankAccount: bankAccount,
+            walletAddress: order.userWalletAddress,
           );
 
     if (!verifyKey.verify(
@@ -334,13 +336,14 @@ String createUserOnRampMessage({
   required String cryptoCurrency,
   required double fiatAmount,
   required String fiatCurrency,
+  required String walletAddress,
 }) {
   final cryptoAmountDecimals =
       convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
   final fiatAmountDecimals =
       convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
-  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency';
+  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$walletAddress';
 }
 
 String createUserOffRampMessage({
@@ -350,13 +353,14 @@ String createUserOffRampMessage({
   required String fiatCurrency,
   required String bankName,
   required String bankAccount,
+  required String walletAddress,
 }) {
   final cryptoAmountDecimals =
       convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
   final fiatAmountDecimals =
       convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
-  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
+  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount|$walletAddress';
 }
 
 String createPartnerOnRampMessage({

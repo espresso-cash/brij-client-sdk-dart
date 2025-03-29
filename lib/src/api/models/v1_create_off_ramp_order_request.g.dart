@@ -17,6 +17,7 @@ _$V1CreateOffRampOrderRequestImpl _$$V1CreateOffRampOrderRequestImplFromJson(
       bankName: json['bankName'] as String,
       bankAccount: json['bankAccount'] as String,
       userSignature: json['userSignature'] as String,
+      userWalletAddress: json['userWalletAddress'] as String,
     );
 
 Map<String, dynamic> _$$V1CreateOffRampOrderRequestImplToJson(
@@ -30,4 +31,5 @@ Map<String, dynamic> _$$V1CreateOffRampOrderRequestImplToJson(
       'bankName': instance.bankName,
       'bankAccount': instance.bankAccount,
       'userSignature': instance.userSignature,
+      'userWalletAddress': instance.userWalletAddress,
     };
