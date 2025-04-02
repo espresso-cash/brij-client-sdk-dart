@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: kyc_item.proto
 //
-// @dart = 3.3
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
 // ignore_for_file: constant_identifier_names, library_prefixes
@@ -15,8 +15,6 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'kyc_item.pbenum.dart';
 
-export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
-
 export 'kyc_item.pbenum.dart';
 
 class KycItem extends $pb.GeneratedMessage {
@@ -26,7 +24,7 @@ class KycItem extends $pb.GeneratedMessage {
     $core.String? provider,
     $core.String? userPublicKey,
     $core.Iterable<$core.String>? hashes,
-    $pb.PbMap<$core.String, $core.List<$core.int>>? additionalData,
+    $core.Map<$core.String, $core.List<$core.int>>? additionalData,
   }) {
     final $result = create();
     if (countries != null) {
@@ -85,16 +83,16 @@ class KycItem extends $pb.GeneratedMessage {
   static KycItem? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $pb.PbList<$core.String> get countries => $_getList(0);
+  $core.List<$core.String> get countries => $_getList(0);
 
   @$pb.TagNumber(2)
   KycStatus get status => $_getN(1);
   @$pb.TagNumber(2)
-  set status(KycStatus v) { $_setField(2, v); }
+  set status(KycStatus v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasStatus() => $_has(1);
   @$pb.TagNumber(2)
-  void clearStatus() => $_clearField(2);
+  void clearStatus() => clearField(2);
 
   @$pb.TagNumber(3)
   $core.String get provider => $_getSZ(2);
@@ -103,7 +101,7 @@ class KycItem extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool hasProvider() => $_has(2);
   @$pb.TagNumber(3)
-  void clearProvider() => $_clearField(3);
+  void clearProvider() => clearField(3);
 
   @$pb.TagNumber(4)
   $core.String get userPublicKey => $_getSZ(3);
@@ -112,13 +110,13 @@ class KycItem extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool hasUserPublicKey() => $_has(3);
   @$pb.TagNumber(4)
-  void clearUserPublicKey() => $_clearField(4);
+  void clearUserPublicKey() => clearField(4);
 
   @$pb.TagNumber(5)
-  $pb.PbList<$core.String> get hashes => $_getList(4);
+  $core.List<$core.String> get hashes => $_getList(4);
 
   @$pb.TagNumber(6)
-  $pb.PbMap<$core.String, $core.List<$core.int>> get additionalData => $_getMap(5);
+  $core.Map<$core.String, $core.List<$core.int>> get additionalData => $_getMap(5);
 }
 
 
