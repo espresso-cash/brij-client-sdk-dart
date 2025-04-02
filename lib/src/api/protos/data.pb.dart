@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: data.proto
 //
-// @dart = 3.3
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
 // ignore_for_file: constant_identifier_names, library_prefixes
@@ -15,8 +15,6 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'data.pbenum.dart';
 import 'google/protobuf/timestamp.pb.dart' as $0;
-
-export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'data.pbenum.dart';
 
@@ -72,7 +70,7 @@ class Name extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasFirstName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFirstName() => $_clearField(1);
+  void clearFirstName() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get lastName => $_getSZ(1);
@@ -81,7 +79,7 @@ class Name extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.bool hasLastName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearLastName() => $_clearField(2);
+  void clearLastName() => clearField(2);
 }
 
 class BirthDate extends $pb.GeneratedMessage {
@@ -127,11 +125,11 @@ class BirthDate extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $0.Timestamp get value => $_getN(0);
   @$pb.TagNumber(1)
-  set value($0.Timestamp v) { $_setField(1, v); }
+  set value($0.Timestamp v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearValue() => $_clearField(1);
+  void clearValue() => clearField(1);
   @$pb.TagNumber(1)
   $0.Timestamp ensureValue() => $_ensure(0);
 }
@@ -199,11 +197,11 @@ class Document extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   DocumentType get type => $_getN(0);
   @$pb.TagNumber(1)
-  set type(DocumentType v) { $_setField(1, v); }
+  set type(DocumentType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasType() => $_has(0);
   @$pb.TagNumber(1)
-  void clearType() => $_clearField(1);
+  void clearType() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get number => $_getSZ(1);
@@ -212,7 +210,7 @@ class Document extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.bool hasNumber() => $_has(1);
   @$pb.TagNumber(2)
-  void clearNumber() => $_clearField(2);
+  void clearNumber() => clearField(2);
 
   @$pb.TagNumber(3)
   $core.String get countryCode => $_getSZ(2);
@@ -221,27 +219,27 @@ class Document extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool hasCountryCode() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCountryCode() => $_clearField(3);
+  void clearCountryCode() => clearField(3);
 
   @$pb.TagNumber(4)
   $0.Timestamp get expirationDate => $_getN(3);
   @$pb.TagNumber(4)
-  set expirationDate($0.Timestamp v) { $_setField(4, v); }
+  set expirationDate($0.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasExpirationDate() => $_has(3);
   @$pb.TagNumber(4)
-  void clearExpirationDate() => $_clearField(4);
+  void clearExpirationDate() => clearField(4);
   @$pb.TagNumber(4)
   $0.Timestamp ensureExpirationDate() => $_ensure(3);
 
   @$pb.TagNumber(5)
   DocumentPhoto get photo => $_getN(4);
   @$pb.TagNumber(5)
-  set photo(DocumentPhoto v) { $_setField(5, v); }
+  set photo(DocumentPhoto v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasPhoto() => $_has(4);
   @$pb.TagNumber(5)
-  void clearPhoto() => $_clearField(5);
+  void clearPhoto() => clearField(5);
   @$pb.TagNumber(5)
   DocumentPhoto ensurePhoto() => $_ensure(4);
 }
@@ -298,7 +296,7 @@ class DocumentPhoto extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool hasFrontImage() => $_has(0);
   @$pb.TagNumber(4)
-  void clearFrontImage() => $_clearField(4);
+  void clearFrontImage() => clearField(4);
 
   @$pb.TagNumber(5)
   $core.List<$core.int> get backImage => $_getN(1);
@@ -307,7 +305,7 @@ class DocumentPhoto extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.bool hasBackImage() => $_has(1);
   @$pb.TagNumber(5)
-  void clearBackImage() => $_clearField(5);
+  void clearBackImage() => clearField(5);
 }
 
 class BankInfo extends $pb.GeneratedMessage {
@@ -372,7 +370,7 @@ class BankInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasAccountNumber() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAccountNumber() => $_clearField(1);
+  void clearAccountNumber() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get bankCode => $_getSZ(1);
@@ -381,7 +379,7 @@ class BankInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.bool hasBankCode() => $_has(1);
   @$pb.TagNumber(2)
-  void clearBankCode() => $_clearField(2);
+  void clearBankCode() => clearField(2);
 
   @$pb.TagNumber(3)
   $core.String get bankName => $_getSZ(2);
@@ -390,7 +388,7 @@ class BankInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool hasBankName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearBankName() => $_clearField(3);
+  void clearBankName() => clearField(3);
 
   @$pb.TagNumber(4)
   $core.String get countryCode => $_getSZ(3);
@@ -399,7 +397,7 @@ class BankInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool hasCountryCode() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCountryCode() => $_clearField(4);
+  void clearCountryCode() => clearField(4);
 }
 
 class Email extends $pb.GeneratedMessage {
@@ -449,7 +447,7 @@ class Email extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearValue() => $_clearField(1);
+  void clearValue() => clearField(1);
 }
 
 class SelfieImage extends $pb.GeneratedMessage {
@@ -499,7 +497,7 @@ class SelfieImage extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearValue() => $_clearField(1);
+  void clearValue() => clearField(1);
 }
 
 class Phone extends $pb.GeneratedMessage {
@@ -549,7 +547,7 @@ class Phone extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearValue() => $_clearField(1);
+  void clearValue() => clearField(1);
 }
 
 class Citizenship extends $pb.GeneratedMessage {
@@ -599,7 +597,7 @@ class Citizenship extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearValue() => $_clearField(1);
+  void clearValue() => clearField(1);
 }
 
 
