@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: validation_status.proto
 //
-// @dart = 2.12
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
 // ignore_for_file: constant_identifier_names, library_prefixes
@@ -29,7 +29,7 @@ class ValidationStatus extends $pb.ProtobufEnum {
   static final $core.Map<$core.int, ValidationStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
   static ValidationStatus? valueOf($core.int value) => _byValue[value];
 
-  const ValidationStatus._($core.int v, $core.String n) : super(v, n);
+  const ValidationStatus._(super.v, super.n);
 }
 
 
