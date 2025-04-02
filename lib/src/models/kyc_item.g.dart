@@ -8,7 +8,8 @@ part of 'kyc_item.dart';
 
 _$KycItemImpl _$$KycItemImplFromJson(Map<String, dynamic> json) =>
     _$KycItemImpl(
-      country: json['country'] as String,
+      countries:
+          (json['countries'] as List<dynamic>).map((e) => e as String).toList(),
       status: $enumDecode(_$KycStatusEnumMap, json['status']),
       provider: json['provider'] as String,
       userPublicKey: json['userPublicKey'] as String,
@@ -22,7 +23,7 @@ _$KycItemImpl _$$KycItemImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$KycItemImplToJson(_$KycItemImpl instance) =>
     <String, dynamic>{
-      'country': instance.country,
+      'countries': instance.countries,
       'status': _$KycStatusEnumMap[instance.status]!,
       'provider': instance.provider,
       'userPublicKey': instance.userPublicKey,

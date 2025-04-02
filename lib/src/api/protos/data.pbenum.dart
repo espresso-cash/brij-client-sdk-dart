@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: data.proto
 //
-// @dart = 2.12
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
 // ignore_for_file: constant_identifier_names, library_prefixes
@@ -39,7 +39,7 @@ class DataType extends $pb.ProtobufEnum {
   static final $core.Map<$core.int, DataType> _byValue = $pb.ProtobufEnum.initByValue(values);
   static DataType? valueOf($core.int value) => _byValue[value];
 
-  const DataType._($core.int v, $core.String n) : super(v, n);
+  const DataType._(super.v, super.n);
 }
 
 class DocumentType extends $pb.ProtobufEnum {
@@ -60,7 +60,7 @@ class DocumentType extends $pb.ProtobufEnum {
   static final $core.Map<$core.int, DocumentType> _byValue = $pb.ProtobufEnum.initByValue(values);
   static DocumentType? valueOf($core.int value) => _byValue[value];
 
-  const DocumentType._($core.int v, $core.String n) : super(v, n);
+  const DocumentType._(super.v, super.n);
 }
 
 
