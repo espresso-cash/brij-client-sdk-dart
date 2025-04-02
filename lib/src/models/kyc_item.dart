@@ -91,18 +91,15 @@ class KycItem with _$KycItem {
       );
 
   proto.KycItem toProto() {
-    final pbMap = PbMap<String, List<int>>(PbFieldType.OS, PbFieldType.OY);
-    additionalData.forEach((key, value) {
-      pbMap[key] = utf8.encode(value.toString());
-    });
-
     final protoMessage = proto.KycItem(
       countries: countries,
       status: status.toProto(),
       provider: provider,
       userPublicKey: userPublicKey,
       hashes: hashes,
-      additionalData: pbMap,
+      additionalData: additionalData.map(
+        (key, value) => MapEntry(key, utf8.encode(value.toString())),
+      ),
     );
 
     return protoMessage;
