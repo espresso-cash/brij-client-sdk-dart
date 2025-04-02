@@ -5,7 +5,7 @@ package brij.storage.v1;
 option go_package = 'brij.fi/storage';
 
 message KycItem {
-  string country = 1;
+  repeated string countries = 1;
   KycStatus status = 2;
   string provider = 3;
   string user_public_key = 4;

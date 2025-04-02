@@ -19,7 +19,7 @@ export 'kyc_item.pbenum.dart';
 
 class KycItem extends $pb.GeneratedMessage {
   factory KycItem({
-    $core.String? country,
+    $core.Iterable<$core.String>? countries,
     KycStatus? status,
     $core.String? provider,
     $core.String? userPublicKey,
@@ -27,8 +27,8 @@ class KycItem extends $pb.GeneratedMessage {
     $core.Map<$core.String, $core.List<$core.int>>? additionalData,
   }) {
     final $result = create();
-    if (country != null) {
-      $result.country = country;
+    if (countries != null) {
+      $result.countries.addAll(countries);
     }
     if (status != null) {
       $result.status = status;
@@ -52,7 +52,7 @@ class KycItem extends $pb.GeneratedMessage {
   factory KycItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'KycItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'brij.storage.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'country')
+    ..pPS(1, _omitFieldNames ? '' : 'countries')
     ..e<KycStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: KycStatus.KYC_STATUS_UNSPECIFIED, valueOf: KycStatus.valueOf, enumValues: KycStatus.values)
     ..aOS(3, _omitFieldNames ? '' : 'provider')
     ..aOS(4, _omitFieldNames ? '' : 'userPublicKey')
@@ -83,13 +83,7 @@ class KycItem extends $pb.GeneratedMessage {
   static KycItem? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get country => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set country($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCountry() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCountry() => clearField(1);
+  $core.List<$core.String> get countries => $_getList(0);
 
   @$pb.TagNumber(2)
   KycStatus get status => $_getN(1);

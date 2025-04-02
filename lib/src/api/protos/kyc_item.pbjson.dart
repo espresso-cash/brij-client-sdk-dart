@@ -34,7 +34,7 @@ final $typed_data.Uint8List kycStatusDescriptor = $convert.base64Decode(
 const KycItem$json = {
   '1': 'KycItem',
   '2': [
-    {'1': 'country', '3': 1, '4': 1, '5': 9, '10': 'country'},
+    {'1': 'countries', '3': 1, '4': 3, '5': 9, '10': 'countries'},
     {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.brij.storage.v1.KycStatus', '10': 'status'},
     {'1': 'provider', '3': 3, '4': 1, '5': 9, '10': 'provider'},
     {'1': 'user_public_key', '3': 4, '4': 1, '5': 9, '10': 'userPublicKey'},
@@ -56,10 +56,11 @@ const KycItem_AdditionalDataEntry$json = {
 
 /// Descriptor for `KycItem`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List kycItemDescriptor = $convert.base64Decode(
-    'CgdLeWNJdGVtEhgKB2NvdW50cnkYASABKAlSB2NvdW50cnkSMgoGc3RhdHVzGAIgASgOMhouYn'
-    'Jpai5zdG9yYWdlLnYxLkt5Y1N0YXR1c1IGc3RhdHVzEhoKCHByb3ZpZGVyGAMgASgJUghwcm92'
-    'aWRlchImCg91c2VyX3B1YmxpY19rZXkYBCABKAlSDXVzZXJQdWJsaWNLZXkSFgoGaGFzaGVzGA'
-    'UgAygJUgZoYXNoZXMSVQoPYWRkaXRpb25hbF9kYXRhGAYgAygLMiwuYnJpai5zdG9yYWdlLnYx'
-    'Lkt5Y0l0ZW0uQWRkaXRpb25hbERhdGFFbnRyeVIOYWRkaXRpb25hbERhdGEaQQoTQWRkaXRpb2'
-    '5hbERhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoDFIFdmFsdWU6AjgB');
+    'CgdLeWNJdGVtEhwKCWNvdW50cmllcxgBIAMoCVIJY291bnRyaWVzEjIKBnN0YXR1cxgCIAEoDj'
+    'IaLmJyaWouc3RvcmFnZS52MS5LeWNTdGF0dXNSBnN0YXR1cxIaCghwcm92aWRlchgDIAEoCVII'
+    'cHJvdmlkZXISJgoPdXNlcl9wdWJsaWNfa2V5GAQgASgJUg11c2VyUHVibGljS2V5EhYKBmhhc2'
+    'hlcxgFIAMoCVIGaGFzaGVzElUKD2FkZGl0aW9uYWxfZGF0YRgGIAMoCzIsLmJyaWouc3RvcmFn'
+    'ZS52MS5LeWNJdGVtLkFkZGl0aW9uYWxEYXRhRW50cnlSDmFkZGl0aW9uYWxEYXRhGkEKE0FkZG'
+    'l0aW9uYWxEYXRhRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAxSBXZhbHVl'
+    'OgI4AQ==');
 

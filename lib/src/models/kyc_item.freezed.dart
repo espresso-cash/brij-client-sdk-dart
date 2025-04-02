@@ -20,7 +20,7 @@ KycItem _$KycItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KycItem {
-  String get country => throw _privateConstructorUsedError;
+  List<String> get countries => throw _privateConstructorUsedError;
   KycStatus get status => throw _privateConstructorUsedError;
   String get provider => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $KycItemCopyWith<$Res> {
       _$KycItemCopyWithImpl<$Res, KycItem>;
   @useResult
   $Res call(
-      {String country,
+      {List<String> countries,
       KycStatus status,
       String provider,
       String userPublicKey,
@@ -65,7 +65,7 @@ class _$KycItemCopyWithImpl<$Res, $Val extends KycItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? country = null,
+    Object? countries = null,
     Object? status = null,
     Object? provider = null,
     Object? userPublicKey = null,
@@ -73,10 +73,10 @@ class _$KycItemCopyWithImpl<$Res, $Val extends KycItem>
     Object? additionalData = null,
   }) {
     return _then(_value.copyWith(
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
+      countries: null == countries
+          ? _value.countries
+          : countries // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ abstract class _$$KycItemImplCopyWith<$Res> implements $KycItemCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String country,
+      {List<String> countries,
       KycStatus status,
       String provider,
       String userPublicKey,
@@ -130,7 +130,7 @@ class __$$KycItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? country = null,
+    Object? countries = null,
     Object? status = null,
     Object? provider = null,
     Object? userPublicKey = null,
@@ -138,10 +138,10 @@ class __$$KycItemImplCopyWithImpl<$Res>
     Object? additionalData = null,
   }) {
     return _then(_$KycItemImpl(
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
+      countries: null == countries
+          ? _value._countries
+          : countries // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -170,21 +170,28 @@ class __$$KycItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$KycItemImpl extends _KycItem {
   const _$KycItemImpl(
-      {required this.country,
+      {required final List<String> countries,
       required this.status,
       required this.provider,
       required this.userPublicKey,
       final List<String> hashes = const [],
       final Map<String, dynamic> additionalData = const {}})
-      : _hashes = hashes,
+      : _countries = countries,
+        _hashes = hashes,
         _additionalData = additionalData,
         super._();
 
   factory _$KycItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$KycItemImplFromJson(json);
 
+  final List<String> _countries;
   @override
-  final String country;
+  List<String> get countries {
+    if (_countries is EqualUnmodifiableListView) return _countries;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_countries);
+  }
+
   @override
   final KycStatus status;
   @override
@@ -211,7 +218,7 @@ class _$KycItemImpl extends _KycItem {
 
   @override
   String toString() {
-    return 'KycItem(country: $country, status: $status, provider: $provider, userPublicKey: $userPublicKey, hashes: $hashes, additionalData: $additionalData)';
+    return 'KycItem(countries: $countries, status: $status, provider: $provider, userPublicKey: $userPublicKey, hashes: $hashes, additionalData: $additionalData)';
   }
 
   @override
@@ -219,7 +226,8 @@ class _$KycItemImpl extends _KycItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KycItemImpl &&
-            (identical(other.country, country) || other.country == country) &&
+            const DeepCollectionEquality()
+                .equals(other._countries, _countries) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.provider, provider) ||
                 other.provider == provider) &&
@@ -234,7 +242,7 @@ class _$KycItemImpl extends _KycItem {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      country,
+      const DeepCollectionEquality().hash(_countries),
       status,
       provider,
       userPublicKey,
@@ -259,7 +267,7 @@ class _$KycItemImpl extends _KycItem {
 
 abstract class _KycItem extends KycItem {
   const factory _KycItem(
-      {required final String country,
+      {required final List<String> countries,
       required final KycStatus status,
       required final String provider,
       required final String userPublicKey,
@@ -270,7 +278,7 @@ abstract class _KycItem extends KycItem {
   factory _KycItem.fromJson(Map<String, dynamic> json) = _$KycItemImpl.fromJson;
 
   @override
-  String get country;
+  List<String> get countries;
   @override
   KycStatus get status;
   @override
