@@ -19,7 +19,7 @@ class _UserViewState extends State<UserView> {
   final _phoneVerificationController = TextEditingController();
   final _amountController = TextEditingController();
   final _currencyController = TextEditingController();
-  final _cryptoQuoteCurrencyController = TextEditingController();
+  final _cryptoQuoteAmountController = TextEditingController();
   final _fiatQuoteCurrencyController = TextEditingController();
   XFile? _file;
 
@@ -46,7 +46,7 @@ class _UserViewState extends State<UserView> {
     _phoneVerificationController.dispose();
     _amountController.dispose();
     _currencyController.dispose();
-    _cryptoQuoteCurrencyController.dispose();
+    _cryptoQuoteAmountController.dispose();
     _fiatQuoteCurrencyController.dispose();
     context.read<WalletAppState>().removeListener(_updateControllers);
     super.dispose();
@@ -371,7 +371,7 @@ class _UserViewState extends State<UserView> {
           ),
           const SizedBox(height: 32),
           ValueTextfield(
-            controller: _cryptoQuoteCurrencyController,
+            controller: _cryptoQuoteAmountController,
             title: 'Crypto amount',
           ),
           const SizedBox(height: 8),
@@ -390,8 +390,8 @@ class _UserViewState extends State<UserView> {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
               await context.read<WalletAppState>().getOnRampQuote(
                     partnerPK: partnerPk,
-                    cryptoAmount: _amountController.text,
-                    fiatCurrency: _currencyController.text,
+                    cryptoAmount: _cryptoQuoteAmountController.text,
+                    fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
             },
             child: const Text('Fetch onramp quote'),
@@ -402,7 +402,7 @@ class _UserViewState extends State<UserView> {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
               await context.read<WalletAppState>().getOffRampQuote(
                     partnerPK: partnerPk,
-                    cryptoAmount: _cryptoQuoteCurrencyController.text,
+                    cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
             },

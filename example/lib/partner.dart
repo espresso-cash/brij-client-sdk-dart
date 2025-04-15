@@ -489,6 +489,9 @@ class _PartnerViewState extends State<PartnerView> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  const CustomDivider(),
+                  const SizedBox(height: 16),
                 ],
               );
             },
