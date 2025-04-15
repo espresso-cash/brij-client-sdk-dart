@@ -33,6 +33,10 @@ class WalletAppState extends ChangeNotifier {
   String? get offRampOrderId => _offRampOrderId;
   List<String>? _orders;
 
+  String? _quote;
+
+  String? get quote => _quote;
+
   Future<void> createWallet() async {
     _wallet = await Ed25519HDKeyPair.random();
 
@@ -85,9 +89,7 @@ class WalletAppState extends ChangeNotifier {
     await _client.setData(
       email: Email(value: email, id: _emailId),
       phone: Phone(value: phone, id: _phoneId),
-      selfie: file != null
-          ? Selfie(value: await file.readAsBytes(), id: _selfieId)
-          : null,
+      selfie: file != null ? Selfie(value: await file.readAsBytes(), id: _selfieId) : null,
     );
 
     await fetchData();
@@ -182,6 +184,38 @@ class WalletAppState extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> getOnRampQuote({
+    required String partnerPK,
+    required String cryptoAmount,
+    required String fiatCurrency,
+  }) async {
+    final response = await _client.getQuote(
+      partnerPK: partnerPK,
+      cryptoAmount: double.parse(cryptoAmount),
+      rampType: RampType.onRamp,
+      fiatCurrency: fiatCurrency,
+    );
+
+    _quote = response.toJson().toString();
+    notifyListeners();
+  }
+
+  Future<void> getOffRampQuote({
+    required String partnerPK,
+    required String cryptoAmount,
+    required String fiatCurrency,
+  }) async {
+    final response = await _client.getQuote(
+      partnerPK: partnerPK,
+      cryptoAmount: double.parse(cryptoAmount),
+      rampType: RampType.offRamp,
+      fiatCurrency: fiatCurrency,
+    );
+
+    _quote = response.toJson().toString();
+    notifyListeners();
+  }
 }
 
 class PartnerAppState extends ChangeNotifier {
@@ -229,10 +263,7 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair
-        .extractPublicKey()
-        .then((value) => value.bytes)
-        .then(base58encode);
+    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
@@ -367,5 +398,37 @@ class PartnerAppState extends ChangeNotifier {
     required String reason,
   }) async {
     await _client.rejectOrder(orderId: orderId, reason: reason);
+  }
+
+  Future<void> updateFees({
+    required String onRampFixedFee,
+    required String onRampPercentageFee,
+    required String onRampRate,
+    required String onRampFiatCurrency,
+    required String offRampFixedFee,
+    required String offRampPercentageFee,
+    required String offRampRate,
+    required String offRampFiatCurrency,
+  }) async {
+    await _client.updateFees(
+      onRampFee: RampFeeUpdate(
+        fixedFee: double.parse(onRampFixedFee),
+        percentageFee: double.parse(onRampPercentageFee),
+        conversionRates: ConversionRate(
+          cryptoCurrency: 'USDC',
+          fiatCurrency: onRampFiatCurrency,
+          rate: double.parse(onRampRate),
+        ),
+      ),
+      offRampFee: RampFeeUpdate(
+        fixedFee: double.parse(offRampFixedFee),
+        percentageFee: double.parse(offRampPercentageFee),
+        conversionRates: ConversionRate(
+          cryptoCurrency: 'USDC',
+          fiatCurrency: offRampFiatCurrency,
+          rate: double.parse(offRampRate),
+        ),
+      ),
+    );
   }
 }

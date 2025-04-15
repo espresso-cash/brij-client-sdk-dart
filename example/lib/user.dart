@@ -1,5 +1,6 @@
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
+import 'package:kyc_client_dart/kyc_client_dart.dart';
 import 'package:kyc_sharing_client/shared.dart';
 import 'package:kyc_sharing_client/state.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,8 @@ class _UserViewState extends State<UserView> {
   final _phoneVerificationController = TextEditingController();
   final _amountController = TextEditingController();
   final _currencyController = TextEditingController();
+  final _cryptoQuoteCurrencyController = TextEditingController();
+  final _fiatQuoteCurrencyController = TextEditingController();
   XFile? _file;
 
   @override
@@ -43,6 +46,8 @@ class _UserViewState extends State<UserView> {
     _phoneVerificationController.dispose();
     _amountController.dispose();
     _currencyController.dispose();
+    _cryptoQuoteCurrencyController.dispose();
+    _fiatQuoteCurrencyController.dispose();
     context.read<WalletAppState>().removeListener(_updateControllers);
     super.dispose();
   }
@@ -61,6 +66,7 @@ class _UserViewState extends State<UserView> {
               _buildVerificationSection(),
               _buildOnRampOrderSection(state),
               _buildUserOrdersSection(state),
+              _buildQuoteSection(state),
             ],
           ),
         ),
@@ -160,8 +166,7 @@ class _UserViewState extends State<UserView> {
                     if (!context.mounted) return;
                     showSnackBar(
                       context,
-                      message:
-                          'Verification code has been sent to ${_emailController.text}',
+                      message: 'Verification code has been sent to ${_emailController.text}',
                     );
                   },
             child: const Text('Start email verification'),
@@ -175,8 +180,7 @@ class _UserViewState extends State<UserView> {
                     if (!context.mounted) return;
                     showSnackBar(
                       context,
-                      message:
-                          'Verification code has been sent to ${_phoneController.text}',
+                      message: 'Verification code has been sent to ${_phoneController.text}',
                     );
                   },
             child: const Text('Start phone verification'),
@@ -197,9 +201,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: _emailVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context
-                              .read<WalletAppState>()
-                              .validateEmail(_emailVerificationController.text);
+                          await context.read<WalletAppState>().validateEmail(_emailVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -227,9 +229,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: _phoneVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context
-                              .read<WalletAppState>()
-                              .validatePhone(_phoneVerificationController.text);
+                          await context.read<WalletAppState>().validatePhone(_phoneVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -271,9 +271,7 @@ class _UserViewState extends State<UserView> {
         children: [
           ValueField(
             title: 'Partner Info',
-            value: state.partnerInfo != null
-                ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})'
-                : '',
+            value: state.partnerInfo != null ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})' : '',
           ),
           Consumer<PartnerAppState>(
             builder: (context, partnerState, _) => ElevatedButton(
@@ -356,6 +354,59 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: state.fetchUserOrders,
             child: const Text('Fetch user orders'),
+          ),
+        ],
+      );
+
+  Widget _buildQuoteSection(WalletAppState state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const CustomDivider(thickness: 6),
+          const SizedBox(height: 16),
+          Center(
+            child: Text(
+              'Quote',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          const SizedBox(height: 32),
+          ValueTextfield(
+            controller: _cryptoQuoteCurrencyController,
+            title: 'Crypto amount',
+          ),
+          const SizedBox(height: 8),
+          ValueTextfield(
+            controller: _fiatQuoteCurrencyController,
+            title: 'Fiat currency',
+          ),
+          const SizedBox(height: 16),
+          ValueField(
+            title: 'Quote:',
+            value: state.quote ?? '',
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              final partnerPk = context.read<PartnerAppState>().authPublicKey;
+              await context.read<WalletAppState>().getOnRampQuote(
+                    partnerPK: partnerPk,
+                    cryptoAmount: _amountController.text,
+                    fiatCurrency: _currencyController.text,
+                  );
+            },
+            child: const Text('Fetch onramp quote'),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              final partnerPk = context.read<PartnerAppState>().authPublicKey;
+              await context.read<WalletAppState>().getOffRampQuote(
+                    partnerPK: partnerPk,
+                    cryptoAmount: _cryptoQuoteCurrencyController.text,
+                    fiatCurrency: _fiatQuoteCurrencyController.text,
+                  );
+            },
+            child: const Text('Fetch offramp quote'),
           ),
         ],
       );

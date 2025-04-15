@@ -563,14 +563,14 @@ class KycUserClient {
   Future<Quote> getQuote({
     required String partnerPK,
     required double cryptoAmount,
-    required V1RampType rampType,
+    required RampType rampType,
     required String fiatCurrency,
   }) async {
     final response = await _orderClient.orderServiceGetQuote(
       body: V1GetQuoteRequest(
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
-        rampType: rampType,
+        rampType: rampType.toProto(),
         fiatCurrency: fiatCurrency,
       ),
     );
