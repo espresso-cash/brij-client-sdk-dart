@@ -13,6 +13,8 @@ class FeeUpdate with _$FeeUpdate {
     required RampFeeUpdate offRampFee,
   }) = _FeeUpdate;
 
+  const FeeUpdate._();
+
   factory FeeUpdate.fromJson(Map<String, Object?> json) => _$FeeUpdateFromJson(json);
 
   V1UpdateFeesRequest toProto() => V1UpdateFeesRequest(
@@ -28,6 +30,8 @@ class RampFeeUpdate with _$RampFeeUpdate {
     required double percentageFee,
     required ConversionRate conversionRates,
   }) = _RampFeeUpdate;
+
+  const RampFeeUpdate._();
 
   factory RampFeeUpdate.fromJson(Map<String, Object?> json) => _$RampFeeUpdateFromJson(json);
 
@@ -46,8 +50,9 @@ class ConversionRate with _$ConversionRate {
     required double rate,
   }) = _ConversionRate;
 
-  factory ConversionRate.fromJson(Map<String, Object?> json) => 
-      _$ConversionRateFromJson(json);
+  const ConversionRate._();
+
+  factory ConversionRate.fromJson(Map<String, Object?> json) => _$ConversionRateFromJson(json);
 
   V1ConversionRate toProto() => V1ConversionRate(
         cryptoCurrency: cryptoCurrency,

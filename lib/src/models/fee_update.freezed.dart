@@ -142,8 +142,9 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FeeUpdateImpl implements _FeeUpdate {
-  const _$FeeUpdateImpl({required this.onRampFee, required this.offRampFee});
+class _$FeeUpdateImpl extends _FeeUpdate {
+  const _$FeeUpdateImpl({required this.onRampFee, required this.offRampFee})
+      : super._();
 
   factory _$FeeUpdateImpl.fromJson(Map<String, dynamic> json) =>
       _$$FeeUpdateImplFromJson(json);
@@ -189,10 +190,11 @@ class _$FeeUpdateImpl implements _FeeUpdate {
   }
 }
 
-abstract class _FeeUpdate implements FeeUpdate {
+abstract class _FeeUpdate extends FeeUpdate {
   const factory _FeeUpdate(
       {required final RampFeeUpdate onRampFee,
       required final RampFeeUpdate offRampFee}) = _$FeeUpdateImpl;
+  const _FeeUpdate._() : super._();
 
   factory _FeeUpdate.fromJson(Map<String, dynamic> json) =
       _$FeeUpdateImpl.fromJson;
@@ -339,11 +341,12 @@ class __$$RampFeeUpdateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RampFeeUpdateImpl implements _RampFeeUpdate {
+class _$RampFeeUpdateImpl extends _RampFeeUpdate {
   const _$RampFeeUpdateImpl(
       {required this.fixedFee,
       required this.percentageFee,
-      required this.conversionRates});
+      required this.conversionRates})
+      : super._();
 
   factory _$RampFeeUpdateImpl.fromJson(Map<String, dynamic> json) =>
       _$$RampFeeUpdateImplFromJson(json);
@@ -394,11 +397,12 @@ class _$RampFeeUpdateImpl implements _RampFeeUpdate {
   }
 }
 
-abstract class _RampFeeUpdate implements RampFeeUpdate {
+abstract class _RampFeeUpdate extends RampFeeUpdate {
   const factory _RampFeeUpdate(
       {required final double fixedFee,
       required final double percentageFee,
       required final ConversionRate conversionRates}) = _$RampFeeUpdateImpl;
+  const _RampFeeUpdate._() : super._();
 
   factory _RampFeeUpdate.fromJson(Map<String, dynamic> json) =
       _$RampFeeUpdateImpl.fromJson;
@@ -530,11 +534,12 @@ class __$$ConversionRateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ConversionRateImpl implements _ConversionRate {
+class _$ConversionRateImpl extends _ConversionRate {
   const _$ConversionRateImpl(
       {required this.cryptoCurrency,
       required this.fiatCurrency,
-      required this.rate});
+      required this.rate})
+      : super._();
 
   factory _$ConversionRateImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversionRateImplFromJson(json);
@@ -585,11 +590,12 @@ class _$ConversionRateImpl implements _ConversionRate {
   }
 }
 
-abstract class _ConversionRate implements ConversionRate {
+abstract class _ConversionRate extends ConversionRate {
   const factory _ConversionRate(
       {required final String cryptoCurrency,
       required final String fiatCurrency,
       required final double rate}) = _$ConversionRateImpl;
+  const _ConversionRate._() : super._();
 
   factory _ConversionRate.fromJson(Map<String, dynamic> json) =
       _$ConversionRateImpl.fromJson;
