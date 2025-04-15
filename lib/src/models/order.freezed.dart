@@ -26,7 +26,7 @@ mixin _$Order {
   String get partnerPublicKey => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  RampType get type => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
   double get fiatAmount => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $OrderCopyWith<$Res> {
       String partnerPublicKey,
       String userPublicKey,
       String comment,
-      String type,
+      RampType type,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -136,7 +136,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RampType,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
@@ -199,7 +199,7 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       String partnerPublicKey,
       String userPublicKey,
       String comment,
-      String type,
+      RampType type,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -273,7 +273,7 @@ class __$$OrderImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RampType,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
@@ -361,7 +361,7 @@ class _$OrderImpl implements _Order {
   @override
   final String comment;
   @override
-  final String type;
+  final RampType type;
   @override
   final double cryptoAmount;
   @override
@@ -475,7 +475,7 @@ abstract class _Order implements Order {
       required final String partnerPublicKey,
       required final String userPublicKey,
       required final String comment,
-      required final String type,
+      required final RampType type,
       required final double cryptoAmount,
       required final String cryptoCurrency,
       required final double fiatAmount,
@@ -503,7 +503,7 @@ abstract class _Order implements Order {
   @override
   String get comment;
   @override
-  String get type;
+  RampType get type;
   @override
   double get cryptoAmount;
   @override

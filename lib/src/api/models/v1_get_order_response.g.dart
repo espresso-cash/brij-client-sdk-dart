@@ -15,7 +15,7 @@ _$V1GetOrderResponseImpl _$$V1GetOrderResponseImplFromJson(
       partnerPublicKey: json['partnerPublicKey'] as String,
       userPublicKey: json['userPublicKey'] as String,
       comment: json['comment'] as String,
-      type: json['type'] as String,
+      type: V1RampType.fromJson(json['type'] as String),
       cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
       cryptoCurrency: json['cryptoCurrency'] as String,
       fiatAmount: (json['fiatAmount'] as num).toDouble(),
@@ -40,7 +40,7 @@ Map<String, dynamic> _$$V1GetOrderResponseImplToJson(
       'partnerPublicKey': instance.partnerPublicKey,
       'userPublicKey': instance.userPublicKey,
       'comment': instance.comment,
-      'type': instance.type,
+      'type': _$V1RampTypeEnumMap[instance.type]!,
       'cryptoAmount': instance.cryptoAmount,
       'cryptoCurrency': instance.cryptoCurrency,
       'fiatAmount': instance.fiatAmount,
@@ -55,3 +55,10 @@ Map<String, dynamic> _$$V1GetOrderResponseImplToJson(
       'partnerSignature': instance.partnerSignature,
       'userWalletAddress': instance.userWalletAddress,
     };
+
+const _$V1RampTypeEnumMap = {
+  V1RampType.rampTypeUnspecified: 'RAMP_TYPE_UNSPECIFIED',
+  V1RampType.rampTypeONRamp: 'RAMP_TYPE_ON_RAMP',
+  V1RampType.rampTypeOffRamp: 'RAMP_TYPE_OFF_RAMP',
+  V1RampType.$unknown: r'$unknown',
+};

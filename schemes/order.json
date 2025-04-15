@@ -272,6 +272,38 @@
         ]
       }
     },
+    "/v1/getQuote": {
+      "post": {
+        "operationId": "OrderService_GetQuote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetQuoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetQuoteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
     "/v1/rejectOrder": {
       "post": {
         "operationId": "OrderService_RejectOrder",
@@ -296,6 +328,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/v1RejectOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/v1/updateFees": {
+      "post": {
+        "operationId": "OrderService_UpdateFees",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateFeesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateFeesRequest"
             }
           }
         ],
@@ -376,6 +440,21 @@
     },
     "v1CompleteOrderResponse": {
       "type": "object"
+    },
+    "v1ConversionRate": {
+      "type": "object",
+      "properties": {
+        "cryptoCurrency": {
+          "type": "string"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number",
+          "format": "double"
+        }
+      }
     },
     "v1CreateOffRampOrderRequest": {
       "type": "object",
@@ -505,7 +584,7 @@
           "type": "string"
         },
         "type": {
-          "type": "string"
+          "$ref": "#/definitions/v1RampType"
         },
         "cryptoAmount": {
           "type": "number",
@@ -580,6 +659,94 @@
         }
       }
     },
+    "v1GetQuoteRequest": {
+      "type": "object",
+      "properties": {
+        "partnerPublicKey": {
+          "type": "string"
+        },
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "rampType": {
+          "$ref": "#/definitions/v1RampType"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetQuoteResponse": {
+      "type": "object",
+      "properties": {
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "rampType": {
+          "$ref": "#/definitions/v1RampType"
+        },
+        "conversionRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "partnerFee": {
+          "$ref": "#/definitions/v1RampFee"
+        },
+        "walletFee": {
+          "$ref": "#/definitions/v1RampFee"
+        },
+        "platformFee": {
+          "$ref": "#/definitions/v1RampFee"
+        }
+      }
+    },
+    "v1RampFee": {
+      "type": "object",
+      "properties": {
+        "fixedFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentageFee": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "v1RampFeeUpdateData": {
+      "type": "object",
+      "properties": {
+        "fixedFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentageFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "conversionRates": {
+          "$ref": "#/definitions/v1ConversionRate"
+        }
+      }
+    },
+    "v1RampType": {
+      "type": "string",
+      "enum": [
+        "RAMP_TYPE_UNSPECIFIED",
+        "RAMP_TYPE_ON_RAMP",
+        "RAMP_TYPE_OFF_RAMP"
+      ],
+      "default": "RAMP_TYPE_UNSPECIFIED"
+    },
     "v1RejectOrderRequest": {
       "type": "object",
       "properties": {
@@ -592,6 +759,20 @@
       }
     },
     "v1RejectOrderResponse": {
+      "type": "object"
+    },
+    "v1UpdateFeesRequest": {
+      "type": "object",
+      "properties": {
+        "onRampFee": {
+          "$ref": "#/definitions/v1RampFeeUpdateData"
+        },
+        "offRampFee": {
+          "$ref": "#/definitions/v1RampFeeUpdateData"
+        }
+      }
+    },
+    "v1UpdateFeesResponse": {
       "type": "object"
     }
   },

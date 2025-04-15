@@ -21,8 +21,12 @@ import '../models/v1_get_orders_request.dart';
 import '../models/v1_get_orders_response.dart';
 import '../models/v1_get_partner_orders_request.dart';
 import '../models/v1_get_partner_orders_response.dart';
+import '../models/v1_get_quote_request.dart';
+import '../models/v1_get_quote_response.dart';
 import '../models/v1_reject_order_request.dart';
 import '../models/v1_reject_order_response.dart';
+import '../models/v1_update_fees_request.dart';
+import '../models/v1_update_fees_response.dart';
 
 part 'order_service_client.g.dart';
 
@@ -66,8 +70,18 @@ abstract class OrderServiceClient {
   @POST('/v1/getPartnerOrders')
   Future<V1GetPartnerOrdersResponse> orderServiceGetPartnerOrders();
 
+  @POST('/v1/getQuote')
+  Future<V1GetQuoteResponse> orderServiceGetQuote({
+    @Body() required V1GetQuoteRequest body,
+  });
+
   @POST('/v1/rejectOrder')
   Future<V1RejectOrderResponse> orderServiceRejectOrder({
     @Body() required V1RejectOrderRequest body,
+  });
+
+  @POST('/v1/updateFees')
+  Future<V1UpdateFeesResponse> orderServiceUpdateFees({
+    @Body() required V1UpdateFeesRequest body,
   });
 }

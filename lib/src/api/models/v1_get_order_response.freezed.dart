@@ -26,7 +26,7 @@ mixin _$V1GetOrderResponse {
   String get partnerPublicKey => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  V1RampType get type => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
   double get fiatAmount => throw _privateConstructorUsedError;
@@ -64,7 +64,7 @@ abstract class $V1GetOrderResponseCopyWith<$Res> {
       String partnerPublicKey,
       String userPublicKey,
       String comment,
-      String type,
+      V1RampType type,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -144,7 +144,7 @@ class _$V1GetOrderResponseCopyWithImpl<$Res, $Val extends V1GetOrderResponse>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as V1RampType,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
@@ -216,7 +216,7 @@ abstract class _$$V1GetOrderResponseImplCopyWith<$Res>
       String partnerPublicKey,
       String userPublicKey,
       String comment,
-      String type,
+      V1RampType type,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -294,7 +294,7 @@ class __$$V1GetOrderResponseImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as V1RampType,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
@@ -392,7 +392,7 @@ class _$V1GetOrderResponseImpl implements _V1GetOrderResponse {
   @override
   final String comment;
   @override
-  final String type;
+  final V1RampType type;
   @override
   final double cryptoAmount;
   @override
@@ -518,7 +518,7 @@ abstract class _V1GetOrderResponse implements V1GetOrderResponse {
       required final String partnerPublicKey,
       required final String userPublicKey,
       required final String comment,
-      required final String type,
+      required final V1RampType type,
       required final double cryptoAmount,
       required final String cryptoCurrency,
       required final double fiatAmount,
@@ -549,7 +549,7 @@ abstract class _V1GetOrderResponse implements V1GetOrderResponse {
   @override
   String get comment;
   @override
-  String get type;
+  V1RampType get type;
   @override
   double get cryptoAmount;
   @override
