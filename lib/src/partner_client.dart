@@ -21,8 +21,10 @@ import 'package:kyc_client_dart/src/api/models/v1_remove_custom_validation_data_
 import 'package:kyc_client_dart/src/api/models/v1_remove_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_custom_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_validation_data_request.dart';
+import 'package:kyc_client_dart/src/api/models/v1_update_fees_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_update_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/common.dart';
+import 'package:kyc_client_dart/src/models/fee_update.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
@@ -53,17 +55,14 @@ class KycPartnerClient {
   Future<void> _initializeEncryption() async {
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
-        await authKeyPair.extractPrivateKeyBytes() +
-            base58.decode(_authPublicKey),
+        await authKeyPair.extractPrivateKeyBytes() + base58.decode(_authPublicKey),
       ),
     );
   }
 
   Future<void> _generateAuthToken() async {
-    _authPublicKey = await authKeyPair
-        .extractPublicKey()
-        .then((value) => Uint8List.fromList(value.bytes))
-        .then(base58.encode);
+    _authPublicKey =
+        await authKeyPair.extractPublicKey().then((value) => Uint8List.fromList(value.bytes)).then(base58.encode);
 
     await _initializeStorageClient();
     await _initializeOrderClient();
@@ -89,8 +88,7 @@ class KycPartnerClient {
 
     final token = payload.sign(
       jwt.EdDSAPrivateKey(
-        await authKeyPair.extractPrivateKeyBytes() +
-            base58.decode(_authPublicKey),
+        await authKeyPair.extractPrivateKeyBytes() + base58.decode(_authPublicKey),
       ),
       algorithm: jwt.JWTAlgorithm.EdDSA,
     );
@@ -243,8 +241,7 @@ class KycPartnerClient {
     required String bankAccount,
     required String userSecretKey,
   }) async {
-    final secretBox =
-        SecretBox(Uint8List.fromList(base58.decode(userSecretKey)));
+    final secretBox = SecretBox(Uint8List.fromList(base58.decode(userSecretKey)));
 
     final encryptedBankName = base64Encode(
       encrypt(
@@ -399,4 +396,15 @@ class KycPartnerClient {
       ),
     );
   }
+
+  Future<void> updateFees({
+    required RampFeeUpdate onRampFee,
+    required RampFeeUpdate offRampFee,
+  }) async =>
+      _orderClient.orderServiceUpdateFees(
+        body: V1UpdateFeesRequest(
+          onRampFee: onRampFee.toProto(),
+          offRampFee: offRampFee.toProto(),
+        ),
+      );
 }
