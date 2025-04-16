@@ -26,14 +26,15 @@ class _UserViewState extends State<UserView> {
   @override
   void initState() {
     super.initState();
-    final walletState = context.read<WalletAppState>();
+    final userState = context.read<UserAppState>();
     context.read<PartnerAppState>().createPartner();
-    walletState.addListener(_updateControllers);
+    context.read<WalletAppState>().createWallet();
+    userState.addListener(_updateControllers);
     _updateControllers();
   }
 
   void _updateControllers() {
-    final state = context.read<WalletAppState>();
+    final state = context.read<UserAppState>();
     _emailController.text = state.email ?? '';
     _phoneController.text = state.phone ?? '';
   }
@@ -48,14 +49,14 @@ class _UserViewState extends State<UserView> {
     _currencyController.dispose();
     _cryptoQuoteAmountController.dispose();
     _fiatQuoteCurrencyController.dispose();
-    context.read<WalletAppState>().removeListener(_updateControllers);
+    context.read<UserAppState>().removeListener(_updateControllers);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Consumer<WalletAppState>(
+        child: Consumer<UserAppState>(
           builder: (context, state, _) => Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -72,16 +73,16 @@ class _UserViewState extends State<UserView> {
         ),
       );
 
-  Widget _buildWalletSection(WalletAppState state) => Column(
+  Widget _buildWalletSection(UserAppState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Wallet',
+            'User',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () => context.read<WalletAppState>().createWallet(),
+            onPressed: () => context.read<UserAppState>().createWallet(),
             child: const Text('Init wallet'),
           ),
           const SizedBox(height: 16),
@@ -102,7 +103,7 @@ class _UserViewState extends State<UserView> {
         ],
       );
 
-  Widget _buildUserDataSection(WalletAppState state) => Column(
+  Widget _buildUserDataSection(UserAppState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const CustomDivider(thickness: 6),
@@ -132,7 +133,7 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               showSnackBar(context, message: 'Updating...');
-              await context.read<WalletAppState>().updateData(
+              await context.read<UserAppState>().updateData(
                     email: _emailController.text,
                     phone: _phoneController.text,
                     file: _file,
@@ -162,7 +163,7 @@ class _UserViewState extends State<UserView> {
             onPressed: _emailController.text.isEmpty
                 ? null
                 : () async {
-                    await context.read<WalletAppState>().initEmailValidation();
+                    await context.read<UserAppState>().initEmailValidation();
                     if (!context.mounted) return;
                     showSnackBar(
                       context,
@@ -176,7 +177,7 @@ class _UserViewState extends State<UserView> {
             onPressed: _phoneController.text.isEmpty
                 ? null
                 : () async {
-                    await context.read<WalletAppState>().initPhoneValidation();
+                    await context.read<UserAppState>().initPhoneValidation();
                     if (!context.mounted) return;
                     showSnackBar(
                       context,
@@ -201,7 +202,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: _emailVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context.read<WalletAppState>().validateEmail(_emailVerificationController.text);
+                          await context.read<UserAppState>().validateEmail(_emailVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -229,7 +230,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: _phoneVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context.read<WalletAppState>().validatePhone(_phoneVerificationController.text);
+                          await context.read<UserAppState>().validatePhone(_phoneVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -251,7 +252,7 @@ class _UserViewState extends State<UserView> {
           Consumer<PartnerAppState>(
             builder: (context, partnerState, _) => ElevatedButton(
               onPressed: () async {
-                await context.read<WalletAppState>().grantPartnerAccess(
+                await context.read<UserAppState>().grantPartnerAccess(
                       partnerState.authPublicKey,
                     );
                 if (!context.mounted) return;
@@ -266,7 +267,7 @@ class _UserViewState extends State<UserView> {
         ],
       );
 
-  Widget _buildPartnerInfoSection(WalletAppState state) => Column(
+  Widget _buildPartnerInfoSection(UserAppState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ValueField(
@@ -275,7 +276,7 @@ class _UserViewState extends State<UserView> {
           ),
           Consumer<PartnerAppState>(
             builder: (context, partnerState, _) => ElevatedButton(
-              onPressed: () => context.read<WalletAppState>().fetchPartnerInfo(
+              onPressed: () => context.read<UserAppState>().fetchPartnerInfo(
                     partnerState.authPublicKey,
                   ),
               child: const Text('Fetch partner info'),
@@ -285,7 +286,7 @@ class _UserViewState extends State<UserView> {
         ],
       );
 
-  Widget _buildOnRampOrderSection(WalletAppState state) => Column(
+  Widget _buildOnRampOrderSection(UserAppState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const CustomDivider(thickness: 6),
@@ -310,7 +311,7 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
-              await context.read<WalletAppState>().createOnRampOrder(
+              await context.read<UserAppState>().createOnRampOrder(
                     amount: _amountController.text,
                     currency: _currencyController.text,
                     partnerPK: partnerPk,
@@ -325,7 +326,7 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
-              await context.read<WalletAppState>().createOffRampOrder(
+              await context.read<UserAppState>().createOffRampOrder(
                     amount: _amountController.text,
                     currency: _currencyController.text,
                     partnerPK: partnerPk,
@@ -344,7 +345,7 @@ class _UserViewState extends State<UserView> {
         ],
       );
 
-  Widget _buildUserOrdersSection(WalletAppState state) => Column(
+  Widget _buildUserOrdersSection(UserAppState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ValueField(
@@ -358,7 +359,7 @@ class _UserViewState extends State<UserView> {
         ],
       );
 
-  Widget _buildQuoteSection(WalletAppState state) => Column(
+  Widget _buildQuoteSection(UserAppState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const CustomDivider(thickness: 6),
@@ -388,8 +389,11 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
-              await context.read<WalletAppState>().getOnRampQuote(
+              final walletPk = context.read<WalletAppState>().authPublicKey;
+
+              await context.read<UserAppState>().getOnRampQuote(
                     partnerPK: partnerPk,
+                    walletPK: walletPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
@@ -400,8 +404,11 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
-              await context.read<WalletAppState>().getOffRampQuote(
+              final walletPk = context.read<WalletAppState>().authPublicKey;
+
+              await context.read<UserAppState>().getOffRampQuote(
                     partnerPK: partnerPk,
+                    walletPK: walletPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );

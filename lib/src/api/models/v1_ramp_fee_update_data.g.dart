@@ -11,8 +11,10 @@ _$V1RampFeeUpdateDataImpl _$$V1RampFeeUpdateDataImplFromJson(
     _$V1RampFeeUpdateDataImpl(
       fixedFee: (json['fixedFee'] as num).toDouble(),
       percentageFee: (json['percentageFee'] as num).toDouble(),
-      conversionRates: V1ConversionRate.fromJson(
-          json['conversionRates'] as Map<String, dynamic>),
+      conversionRates: json['conversionRates'] == null
+          ? null
+          : V1ConversionRate.fromJson(
+              json['conversionRates'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$V1RampFeeUpdateDataImplToJson(

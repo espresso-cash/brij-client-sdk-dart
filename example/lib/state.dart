@@ -6,7 +6,7 @@ import 'package:solana/base58.dart';
 import 'package:solana/solana.dart';
 import 'package:uuid/uuid.dart';
 
-class WalletAppState extends ChangeNotifier {
+class UserAppState extends ChangeNotifier {
   Ed25519HDKeyPair? get wallet => _wallet;
   String get authPublicKey => _authPublicKey;
   String get rawSecretKey => _rawSecretKey;
@@ -189,11 +189,11 @@ class WalletAppState extends ChangeNotifier {
     required String partnerPK,
     required String cryptoAmount,
     required String fiatCurrency,
+    required String walletPK,
   }) async {
     final response = await _client.getQuote(
       partnerPK: partnerPK,
-      // TODO: add wallet to example
-      walletPK: "walletPK",
+      walletPK: walletPK,
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.onRamp,
       fiatCurrency: fiatCurrency,
@@ -207,11 +207,11 @@ class WalletAppState extends ChangeNotifier {
     required String partnerPK,
     required String cryptoAmount,
     required String fiatCurrency,
+    required String walletPK,
   }) async {
     final response = await _client.getQuote(
       partnerPK: partnerPK,
-      // TODO: add wallet to example
-      walletPK: "walletPK",
+      walletPK: walletPK,
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.offRamp,
       fiatCurrency: fiatCurrency,
@@ -225,6 +225,7 @@ class WalletAppState extends ChangeNotifier {
 class PartnerAppState extends ChangeNotifier {
   String get authPublicKey => _authPublicKey;
   String get userSecretKey => _userSecretKey;
+  String get walletAddress => _walletAddress;
   Map<String, dynamic>? get userData => _userData;
 
   String? get onRampOrderData => _onRampOrderData;
@@ -246,6 +247,9 @@ class PartnerAppState extends ChangeNotifier {
 
   late String _authPublicKey = '';
   late String _userSecretKey = '';
+
+  // hardcoded wallet address
+  final String _walletAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
   Map<String, dynamic>? _userData;
 
@@ -413,6 +417,7 @@ class PartnerAppState extends ChangeNotifier {
     required String offRampPercentageFee,
     required String offRampRate,
     required String offRampFiatCurrency,
+    required String walletAddress,
   }) async {
     await _client.updateFees(
       onRampFee: RampFeeUpdate(
@@ -433,8 +438,51 @@ class PartnerAppState extends ChangeNotifier {
           rate: double.parse(offRampRate),
         ),
       ),
-      // TODO: add wallet to example
-      walletAddress: "walletAddress",
+      walletAddress: walletAddress,
+    );
+  }
+}
+
+class WalletAppState extends ChangeNotifier {
+  String get authPublicKey => _authPublicKey;
+  String get walletAddress => _walletAddress;
+
+  late String _authPublicKey = '';
+
+  // hardcoded wallet address
+  final String _walletAddress = 'DfgHyGD4kSzxGsUxj7YtREHwuW1mPTgkn6bXVxoJsGQt';
+
+  late KycWalletClient _client;
+
+  Future<void> createWallet() async {
+    final keyPair = await Ed25519().newKeyPairFromSeed(
+      base58decode('5ZWj16Hq8hUz2jQJHKkc46Zb3v2mGQP4HfQpQCzJxoAM'),
+    );
+    _client = KycWalletClient(authKeyPair: keyPair);
+
+    await _client.init();
+
+    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
+
+    notifyListeners();
+  }
+
+  Future<void> updateFees({
+    required String onRampFixedFee,
+    required String onRampPercentageFee,
+    required String offRampFixedFee,
+    required String offRampPercentageFee,
+  }) async {
+    await _client.updateFees(
+      onRampFee: RampFeeUpdate(
+        fixedFee: double.parse(onRampFixedFee),
+        percentageFee: double.parse(onRampPercentageFee),
+      ),
+      offRampFee: RampFeeUpdate(
+        fixedFee: double.parse(offRampFixedFee),
+        percentageFee: double.parse(offRampPercentageFee),
+      ),
+      walletAddress: _walletAddress,
     );
   }
 }

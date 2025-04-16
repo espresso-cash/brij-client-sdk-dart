@@ -14,8 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => WalletAppState()),
+          ChangeNotifierProvider(create: (context) => UserAppState()),
           ChangeNotifierProvider(create: (context) => PartnerAppState()),
+          ChangeNotifierProvider(create: (context) => WalletAppState()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_json_view/flutter_json_view.dart';
 import 'package:kyc_sharing_client/shared.dart';
 import 'package:kyc_sharing_client/state.dart';
+import 'package:kyc_sharing_client/wallet.dart';
 import 'package:provider/provider.dart';
 
 class PartnerView extends StatefulWidget {
@@ -54,6 +55,7 @@ class _PartnerViewState extends State<PartnerView> {
               _buildOnRampOrderSection(state),
               _buildOffRampOrderSection(state),
               _buildUpdateFeesSection(state),
+              const WalletView(),
             ],
           ),
         ),
@@ -79,9 +81,9 @@ class _PartnerViewState extends State<PartnerView> {
           ),
           ElevatedButton(
             onPressed: () async {
-              final walletState = context.read<WalletAppState>();
+              final userState = context.read<UserAppState>();
 
-              await state.getUserSecretKey(walletState.authPublicKey);
+              await state.getUserSecretKey(userState.authPublicKey);
             },
             child: const Text('Get User SecretKey'),
           ),
@@ -110,11 +112,11 @@ class _PartnerViewState extends State<PartnerView> {
               ),
             ),
           const SizedBox(height: 16),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) => ElevatedButton(
+          Consumer<UserAppState>(
+            builder: (context, userState, child) => ElevatedButton(
               onPressed: () => context.read<PartnerAppState>().fetchData(
-                    walletState.rawSecretKey,
-                    walletState.authPublicKey,
+                    userState.rawSecretKey,
+                    userState.authPublicKey,
                   ),
               child: const Text('Fetch User Data'),
             ),
@@ -165,8 +167,8 @@ class _PartnerViewState extends State<PartnerView> {
                       await context.read<PartnerAppState>().createCustomValidationResult(
                             type: _validationTypeController.text,
                             result: _validationResultController.text,
-                            userPK: context.read<WalletAppState>().authPublicKey,
-                            secretKey: context.read<WalletAppState>().rawSecretKey,
+                            userPK: context.read<UserAppState>().authPublicKey,
+                            secretKey: context.read<UserAppState>().rawSecretKey,
                           );
 
                       if (!context.mounted) return;
@@ -199,8 +201,8 @@ class _PartnerViewState extends State<PartnerView> {
             title: 'Partner Orders:',
             value: state.orders ?? '',
           ),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) => ElevatedButton(
+          Consumer<UserAppState>(
+            builder: (context, userState, child) => ElevatedButton(
               onPressed: context.read<PartnerAppState>().fetchPartnerOrders,
               child: const Text('Fetch partner orders'),
             ),
@@ -218,9 +220,9 @@ class _PartnerViewState extends State<PartnerView> {
             title: 'OnRamp Order Data',
             value: partnerState.onRampOrderData ?? '',
           ),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) {
-              final orderId = partnerState.onRampUseExternalId ? null : walletState.onRampOrderId;
+          Consumer<UserAppState>(
+            builder: (context, userState, child) {
+              final orderId = partnerState.onRampUseExternalId ? null : userState.onRampOrderId;
               final externalId = partnerState.onRampUseExternalId ? partnerState.onRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
@@ -264,7 +266,7 @@ class _PartnerViewState extends State<PartnerView> {
                                   orderId: orderId!,
                                   bankName: 'bankName',
                                   bankAccount: '123456789',
-                                  secretKey: walletState.rawSecretKey,
+                                  secretKey: userState.rawSecretKey,
                                 );
                                 await partnerState.fetchOnRampOrder(
                                   orderId: orderId,
@@ -364,9 +366,9 @@ class _PartnerViewState extends State<PartnerView> {
             title: 'OffRamp Order Data',
             value: partnerState.offRampOrderData ?? '',
           ),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) {
-              final orderId = partnerState.offRampUseExternalId ? null : walletState.offRampOrderId;
+          Consumer<UserAppState>(
+            builder: (context, userState, child) {
+              final orderId = partnerState.offRampUseExternalId ? null : userState.offRampOrderId;
               final externalId = partnerState.offRampUseExternalId ? partnerState.offRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
@@ -591,9 +593,11 @@ class _PartnerViewState extends State<PartnerView> {
               offRampPercentageFee: _offRampPercentageFeeController.text,
               offRampRate: _offRampRateController.text,
               offRampFiatCurrency: _offRampFiatCurrencyController.text,
+              walletAddress: context.read<PartnerAppState>().walletAddress,
             ),
             child: const Text('Update Fees'),
           ),
+          const SizedBox(height: 16),
         ],
       );
 }

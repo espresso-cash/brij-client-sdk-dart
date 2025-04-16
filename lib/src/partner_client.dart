@@ -24,7 +24,6 @@ import 'package:kyc_client_dart/src/api/models/v1_set_validation_data_request.da
 import 'package:kyc_client_dart/src/api/models/v1_update_fees_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_update_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/common.dart';
-import 'package:kyc_client_dart/src/models/fee_update.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
