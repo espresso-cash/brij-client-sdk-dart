@@ -12,12 +12,14 @@ _$FeeUpdateImpl _$$FeeUpdateImplFromJson(Map<String, dynamic> json) =>
           RampFeeUpdate.fromJson(json['onRampFee'] as Map<String, dynamic>),
       offRampFee:
           RampFeeUpdate.fromJson(json['offRampFee'] as Map<String, dynamic>),
+      walletAddress: json['walletAddress'] as String,
     );
 
 Map<String, dynamic> _$$FeeUpdateImplToJson(_$FeeUpdateImpl instance) =>
     <String, dynamic>{
       'onRampFee': instance.onRampFee,
       'offRampFee': instance.offRampFee,
+      'walletAddress': instance.walletAddress,
     };
 
 _$RampFeeUpdateImpl _$$RampFeeUpdateImplFromJson(Map<String, dynamic> json) =>

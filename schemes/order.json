@@ -665,6 +665,9 @@
         "partnerPublicKey": {
           "type": "string"
         },
+        "walletPublicKey": {
+          "type": "string"
+        },
         "cryptoAmount": {
           "type": "number",
           "format": "double"
@@ -769,6 +772,9 @@
         },
         "offRampFee": {
           "$ref": "#/definitions/v1RampFeeUpdateData"
+        },
+        "walletAddress": {
+          "type": "string"
         }
       }
     },

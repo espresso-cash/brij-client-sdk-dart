@@ -192,6 +192,8 @@ class WalletAppState extends ChangeNotifier {
   }) async {
     final response = await _client.getQuote(
       partnerPK: partnerPK,
+      // TODO: add wallet to example
+      walletPK: "walletPK",
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.onRamp,
       fiatCurrency: fiatCurrency,
@@ -208,6 +210,8 @@ class WalletAppState extends ChangeNotifier {
   }) async {
     final response = await _client.getQuote(
       partnerPK: partnerPK,
+      // TODO: add wallet to example
+      walletPK: "walletPK",
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.offRamp,
       fiatCurrency: fiatCurrency,
@@ -429,6 +433,8 @@ class PartnerAppState extends ChangeNotifier {
           rate: double.parse(offRampRate),
         ),
       ),
+      // TODO: add wallet to example
+      walletAddress: "walletAddress",
     );
   }
 }

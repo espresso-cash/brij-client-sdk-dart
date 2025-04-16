@@ -11,6 +11,7 @@ class FeeUpdate with _$FeeUpdate {
   const factory FeeUpdate({
     required RampFeeUpdate onRampFee,
     required RampFeeUpdate offRampFee,
+    required String walletAddress,
   }) = _FeeUpdate;
 
   const FeeUpdate._();
@@ -20,6 +21,7 @@ class FeeUpdate with _$FeeUpdate {
   V1UpdateFeesRequest toProto() => V1UpdateFeesRequest(
         onRampFee: onRampFee.toProto(),
         offRampFee: offRampFee.toProto(),
+        walletAddress: walletAddress,
       );
 }
 

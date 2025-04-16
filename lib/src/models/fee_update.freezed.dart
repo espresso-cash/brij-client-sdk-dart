@@ -22,6 +22,7 @@ FeeUpdate _$FeeUpdateFromJson(Map<String, dynamic> json) {
 mixin _$FeeUpdate {
   RampFeeUpdate get onRampFee => throw _privateConstructorUsedError;
   RampFeeUpdate get offRampFee => throw _privateConstructorUsedError;
+  String get walletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this FeeUpdate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,10 @@ abstract class $FeeUpdateCopyWith<$Res> {
   factory $FeeUpdateCopyWith(FeeUpdate value, $Res Function(FeeUpdate) then) =
       _$FeeUpdateCopyWithImpl<$Res, FeeUpdate>;
   @useResult
-  $Res call({RampFeeUpdate onRampFee, RampFeeUpdate offRampFee});
+  $Res call(
+      {RampFeeUpdate onRampFee,
+      RampFeeUpdate offRampFee,
+      String walletAddress});
 
   $RampFeeUpdateCopyWith<$Res> get onRampFee;
   $RampFeeUpdateCopyWith<$Res> get offRampFee;
@@ -61,6 +65,7 @@ class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
   $Res call({
     Object? onRampFee = null,
     Object? offRampFee = null,
+    Object? walletAddress = null,
   }) {
     return _then(_value.copyWith(
       onRampFee: null == onRampFee
@@ -71,6 +76,10 @@ class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
           ? _value.offRampFee
           : offRampFee // ignore: cast_nullable_to_non_nullable
               as RampFeeUpdate,
+      walletAddress: null == walletAddress
+          ? _value.walletAddress
+          : walletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -103,7 +112,10 @@ abstract class _$$FeeUpdateImplCopyWith<$Res>
       __$$FeeUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RampFeeUpdate onRampFee, RampFeeUpdate offRampFee});
+  $Res call(
+      {RampFeeUpdate onRampFee,
+      RampFeeUpdate offRampFee,
+      String walletAddress});
 
   @override
   $RampFeeUpdateCopyWith<$Res> get onRampFee;
@@ -126,6 +138,7 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
   $Res call({
     Object? onRampFee = null,
     Object? offRampFee = null,
+    Object? walletAddress = null,
   }) {
     return _then(_$FeeUpdateImpl(
       onRampFee: null == onRampFee
@@ -136,6 +149,10 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
           ? _value.offRampFee
           : offRampFee // ignore: cast_nullable_to_non_nullable
               as RampFeeUpdate,
+      walletAddress: null == walletAddress
+          ? _value.walletAddress
+          : walletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -143,7 +160,10 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$FeeUpdateImpl extends _FeeUpdate {
-  const _$FeeUpdateImpl({required this.onRampFee, required this.offRampFee})
+  const _$FeeUpdateImpl(
+      {required this.onRampFee,
+      required this.offRampFee,
+      required this.walletAddress})
       : super._();
 
   factory _$FeeUpdateImpl.fromJson(Map<String, dynamic> json) =>
@@ -153,10 +173,12 @@ class _$FeeUpdateImpl extends _FeeUpdate {
   final RampFeeUpdate onRampFee;
   @override
   final RampFeeUpdate offRampFee;
+  @override
+  final String walletAddress;
 
   @override
   String toString() {
-    return 'FeeUpdate(onRampFee: $onRampFee, offRampFee: $offRampFee)';
+    return 'FeeUpdate(onRampFee: $onRampFee, offRampFee: $offRampFee, walletAddress: $walletAddress)';
   }
 
   @override
@@ -167,12 +189,15 @@ class _$FeeUpdateImpl extends _FeeUpdate {
             (identical(other.onRampFee, onRampFee) ||
                 other.onRampFee == onRampFee) &&
             (identical(other.offRampFee, offRampFee) ||
-                other.offRampFee == offRampFee));
+                other.offRampFee == offRampFee) &&
+            (identical(other.walletAddress, walletAddress) ||
+                other.walletAddress == walletAddress));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, onRampFee, offRampFee);
+  int get hashCode =>
+      Object.hash(runtimeType, onRampFee, offRampFee, walletAddress);
 
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -193,7 +218,8 @@ class _$FeeUpdateImpl extends _FeeUpdate {
 abstract class _FeeUpdate extends FeeUpdate {
   const factory _FeeUpdate(
       {required final RampFeeUpdate onRampFee,
-      required final RampFeeUpdate offRampFee}) = _$FeeUpdateImpl;
+      required final RampFeeUpdate offRampFee,
+      required final String walletAddress}) = _$FeeUpdateImpl;
   const _FeeUpdate._() : super._();
 
   factory _FeeUpdate.fromJson(Map<String, dynamic> json) =
@@ -203,6 +229,8 @@ abstract class _FeeUpdate extends FeeUpdate {
   RampFeeUpdate get onRampFee;
   @override
   RampFeeUpdate get offRampFee;
+  @override
+  String get walletAddress;
 
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.

@@ -14,6 +14,7 @@ class V1UpdateFeesRequest with _$V1UpdateFeesRequest {
   const factory V1UpdateFeesRequest({
     required V1RampFeeUpdateData onRampFee,
     required V1RampFeeUpdateData offRampFee,
+    required String walletAddress,
   }) = _V1UpdateFeesRequest;
   
   factory V1UpdateFeesRequest.fromJson(Map<String, Object?> json) => _$V1UpdateFeesRequestFromJson(json);

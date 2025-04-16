@@ -400,11 +400,13 @@ class KycPartnerClient {
   Future<void> updateFees({
     required RampFeeUpdate onRampFee,
     required RampFeeUpdate offRampFee,
+    required String walletAddress,
   }) async =>
       _orderClient.orderServiceUpdateFees(
         body: V1UpdateFeesRequest(
           onRampFee: onRampFee.toProto(),
           offRampFee: offRampFee.toProto(),
+          walletAddress: walletAddress,
         ),
       );
 }

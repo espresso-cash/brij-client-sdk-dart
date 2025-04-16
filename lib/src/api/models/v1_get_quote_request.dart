@@ -13,6 +13,7 @@ part 'v1_get_quote_request.g.dart';
 class V1GetQuoteRequest with _$V1GetQuoteRequest {
   const factory V1GetQuoteRequest({
     required String partnerPublicKey,
+    required String walletPublicKey,
     required double cryptoAmount,
     required V1RampType rampType,
     required String fiatCurrency,

@@ -13,6 +13,7 @@ _$V1UpdateFeesRequestImpl _$$V1UpdateFeesRequestImplFromJson(
           json['onRampFee'] as Map<String, dynamic>),
       offRampFee: V1RampFeeUpdateData.fromJson(
           json['offRampFee'] as Map<String, dynamic>),
+      walletAddress: json['walletAddress'] as String,
     );
 
 Map<String, dynamic> _$$V1UpdateFeesRequestImplToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$V1UpdateFeesRequestImplToJson(
     <String, dynamic>{
       'onRampFee': instance.onRampFee,
       'offRampFee': instance.offRampFee,
+      'walletAddress': instance.walletAddress,
     };

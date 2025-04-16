@@ -10,6 +10,7 @@ _$V1GetQuoteRequestImpl _$$V1GetQuoteRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$V1GetQuoteRequestImpl(
       partnerPublicKey: json['partnerPublicKey'] as String,
+      walletPublicKey: json['walletPublicKey'] as String,
       cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
       rampType: V1RampType.fromJson(json['rampType'] as String),
       fiatCurrency: json['fiatCurrency'] as String,
@@ -19,6 +20,7 @@ Map<String, dynamic> _$$V1GetQuoteRequestImplToJson(
         _$V1GetQuoteRequestImpl instance) =>
     <String, dynamic>{
       'partnerPublicKey': instance.partnerPublicKey,
+      'walletPublicKey': instance.walletPublicKey,
       'cryptoAmount': instance.cryptoAmount,
       'rampType': _$V1RampTypeEnumMap[instance.rampType]!,
       'fiatCurrency': instance.fiatCurrency,

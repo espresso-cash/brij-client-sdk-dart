@@ -22,6 +22,7 @@ V1UpdateFeesRequest _$V1UpdateFeesRequestFromJson(Map<String, dynamic> json) {
 mixin _$V1UpdateFeesRequest {
   V1RampFeeUpdateData get onRampFee => throw _privateConstructorUsedError;
   V1RampFeeUpdateData get offRampFee => throw _privateConstructorUsedError;
+  String get walletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this V1UpdateFeesRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +40,10 @@ abstract class $V1UpdateFeesRequestCopyWith<$Res> {
           V1UpdateFeesRequest value, $Res Function(V1UpdateFeesRequest) then) =
       _$V1UpdateFeesRequestCopyWithImpl<$Res, V1UpdateFeesRequest>;
   @useResult
-  $Res call({V1RampFeeUpdateData onRampFee, V1RampFeeUpdateData offRampFee});
+  $Res call(
+      {V1RampFeeUpdateData onRampFee,
+      V1RampFeeUpdateData offRampFee,
+      String walletAddress});
 
   $V1RampFeeUpdateDataCopyWith<$Res> get onRampFee;
   $V1RampFeeUpdateDataCopyWith<$Res> get offRampFee;
@@ -62,6 +66,7 @@ class _$V1UpdateFeesRequestCopyWithImpl<$Res, $Val extends V1UpdateFeesRequest>
   $Res call({
     Object? onRampFee = null,
     Object? offRampFee = null,
+    Object? walletAddress = null,
   }) {
     return _then(_value.copyWith(
       onRampFee: null == onRampFee
@@ -72,6 +77,10 @@ class _$V1UpdateFeesRequestCopyWithImpl<$Res, $Val extends V1UpdateFeesRequest>
           ? _value.offRampFee
           : offRampFee // ignore: cast_nullable_to_non_nullable
               as V1RampFeeUpdateData,
+      walletAddress: null == walletAddress
+          ? _value.walletAddress
+          : walletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -104,7 +113,10 @@ abstract class _$$V1UpdateFeesRequestImplCopyWith<$Res>
       __$$V1UpdateFeesRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({V1RampFeeUpdateData onRampFee, V1RampFeeUpdateData offRampFee});
+  $Res call(
+      {V1RampFeeUpdateData onRampFee,
+      V1RampFeeUpdateData offRampFee,
+      String walletAddress});
 
   @override
   $V1RampFeeUpdateDataCopyWith<$Res> get onRampFee;
@@ -127,6 +139,7 @@ class __$$V1UpdateFeesRequestImplCopyWithImpl<$Res>
   $Res call({
     Object? onRampFee = null,
     Object? offRampFee = null,
+    Object? walletAddress = null,
   }) {
     return _then(_$V1UpdateFeesRequestImpl(
       onRampFee: null == onRampFee
@@ -137,6 +150,10 @@ class __$$V1UpdateFeesRequestImplCopyWithImpl<$Res>
           ? _value.offRampFee
           : offRampFee // ignore: cast_nullable_to_non_nullable
               as V1RampFeeUpdateData,
+      walletAddress: null == walletAddress
+          ? _value.walletAddress
+          : walletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -145,7 +162,9 @@ class __$$V1UpdateFeesRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$V1UpdateFeesRequestImpl implements _V1UpdateFeesRequest {
   const _$V1UpdateFeesRequestImpl(
-      {required this.onRampFee, required this.offRampFee});
+      {required this.onRampFee,
+      required this.offRampFee,
+      required this.walletAddress});
 
   factory _$V1UpdateFeesRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$V1UpdateFeesRequestImplFromJson(json);
@@ -154,10 +173,12 @@ class _$V1UpdateFeesRequestImpl implements _V1UpdateFeesRequest {
   final V1RampFeeUpdateData onRampFee;
   @override
   final V1RampFeeUpdateData offRampFee;
+  @override
+  final String walletAddress;
 
   @override
   String toString() {
-    return 'V1UpdateFeesRequest(onRampFee: $onRampFee, offRampFee: $offRampFee)';
+    return 'V1UpdateFeesRequest(onRampFee: $onRampFee, offRampFee: $offRampFee, walletAddress: $walletAddress)';
   }
 
   @override
@@ -168,12 +189,15 @@ class _$V1UpdateFeesRequestImpl implements _V1UpdateFeesRequest {
             (identical(other.onRampFee, onRampFee) ||
                 other.onRampFee == onRampFee) &&
             (identical(other.offRampFee, offRampFee) ||
-                other.offRampFee == offRampFee));
+                other.offRampFee == offRampFee) &&
+            (identical(other.walletAddress, walletAddress) ||
+                other.walletAddress == walletAddress));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, onRampFee, offRampFee);
+  int get hashCode =>
+      Object.hash(runtimeType, onRampFee, offRampFee, walletAddress);
 
   /// Create a copy of V1UpdateFeesRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -194,9 +218,9 @@ class _$V1UpdateFeesRequestImpl implements _V1UpdateFeesRequest {
 
 abstract class _V1UpdateFeesRequest implements V1UpdateFeesRequest {
   const factory _V1UpdateFeesRequest(
-          {required final V1RampFeeUpdateData onRampFee,
-          required final V1RampFeeUpdateData offRampFee}) =
-      _$V1UpdateFeesRequestImpl;
+      {required final V1RampFeeUpdateData onRampFee,
+      required final V1RampFeeUpdateData offRampFee,
+      required final String walletAddress}) = _$V1UpdateFeesRequestImpl;
 
   factory _V1UpdateFeesRequest.fromJson(Map<String, dynamic> json) =
       _$V1UpdateFeesRequestImpl.fromJson;
@@ -205,6 +229,8 @@ abstract class _V1UpdateFeesRequest implements V1UpdateFeesRequest {
   V1RampFeeUpdateData get onRampFee;
   @override
   V1RampFeeUpdateData get offRampFee;
+  @override
+  String get walletAddress;
 
   /// Create a copy of V1UpdateFeesRequest
   /// with the given fields replaced by the non-null parameter values.

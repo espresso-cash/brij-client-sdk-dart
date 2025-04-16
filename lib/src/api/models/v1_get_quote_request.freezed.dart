@@ -21,6 +21,7 @@ V1GetQuoteRequest _$V1GetQuoteRequestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$V1GetQuoteRequest {
   String get partnerPublicKey => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   V1RampType get rampType => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $V1GetQuoteRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {String partnerPublicKey,
+      String walletPublicKey,
       double cryptoAmount,
       V1RampType rampType,
       String fiatCurrency});
@@ -64,6 +66,7 @@ class _$V1GetQuoteRequestCopyWithImpl<$Res, $Val extends V1GetQuoteRequest>
   @override
   $Res call({
     Object? partnerPublicKey = null,
+    Object? walletPublicKey = null,
     Object? cryptoAmount = null,
     Object? rampType = null,
     Object? fiatCurrency = null,
@@ -72,6 +75,10 @@ class _$V1GetQuoteRequestCopyWithImpl<$Res, $Val extends V1GetQuoteRequest>
       partnerPublicKey: null == partnerPublicKey
           ? _value.partnerPublicKey
           : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
               as String,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
@@ -99,6 +106,7 @@ abstract class _$$V1GetQuoteRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {String partnerPublicKey,
+      String walletPublicKey,
       double cryptoAmount,
       V1RampType rampType,
       String fiatCurrency});
@@ -118,6 +126,7 @@ class __$$V1GetQuoteRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? partnerPublicKey = null,
+    Object? walletPublicKey = null,
     Object? cryptoAmount = null,
     Object? rampType = null,
     Object? fiatCurrency = null,
@@ -126,6 +135,10 @@ class __$$V1GetQuoteRequestImplCopyWithImpl<$Res>
       partnerPublicKey: null == partnerPublicKey
           ? _value.partnerPublicKey
           : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
               as String,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
@@ -148,6 +161,7 @@ class __$$V1GetQuoteRequestImplCopyWithImpl<$Res>
 class _$V1GetQuoteRequestImpl implements _V1GetQuoteRequest {
   const _$V1GetQuoteRequestImpl(
       {required this.partnerPublicKey,
+      required this.walletPublicKey,
       required this.cryptoAmount,
       required this.rampType,
       required this.fiatCurrency});
@@ -158,6 +172,8 @@ class _$V1GetQuoteRequestImpl implements _V1GetQuoteRequest {
   @override
   final String partnerPublicKey;
   @override
+  final String walletPublicKey;
+  @override
   final double cryptoAmount;
   @override
   final V1RampType rampType;
@@ -166,7 +182,7 @@ class _$V1GetQuoteRequestImpl implements _V1GetQuoteRequest {
 
   @override
   String toString() {
-    return 'V1GetQuoteRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, rampType: $rampType, fiatCurrency: $fiatCurrency)';
+    return 'V1GetQuoteRequest(partnerPublicKey: $partnerPublicKey, walletPublicKey: $walletPublicKey, cryptoAmount: $cryptoAmount, rampType: $rampType, fiatCurrency: $fiatCurrency)';
   }
 
   @override
@@ -176,6 +192,8 @@ class _$V1GetQuoteRequestImpl implements _V1GetQuoteRequest {
             other is _$V1GetQuoteRequestImpl &&
             (identical(other.partnerPublicKey, partnerPublicKey) ||
                 other.partnerPublicKey == partnerPublicKey) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey) &&
             (identical(other.cryptoAmount, cryptoAmount) ||
                 other.cryptoAmount == cryptoAmount) &&
             (identical(other.rampType, rampType) ||
@@ -186,8 +204,8 @@ class _$V1GetQuoteRequestImpl implements _V1GetQuoteRequest {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, partnerPublicKey, cryptoAmount, rampType, fiatCurrency);
+  int get hashCode => Object.hash(runtimeType, partnerPublicKey,
+      walletPublicKey, cryptoAmount, rampType, fiatCurrency);
 
   /// Create a copy of V1GetQuoteRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -209,6 +227,7 @@ class _$V1GetQuoteRequestImpl implements _V1GetQuoteRequest {
 abstract class _V1GetQuoteRequest implements V1GetQuoteRequest {
   const factory _V1GetQuoteRequest(
       {required final String partnerPublicKey,
+      required final String walletPublicKey,
       required final double cryptoAmount,
       required final V1RampType rampType,
       required final String fiatCurrency}) = _$V1GetQuoteRequestImpl;
@@ -218,6 +237,8 @@ abstract class _V1GetQuoteRequest implements V1GetQuoteRequest {
 
   @override
   String get partnerPublicKey;
+  @override
+  String get walletPublicKey;
   @override
   double get cryptoAmount;
   @override

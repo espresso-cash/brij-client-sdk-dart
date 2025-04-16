@@ -562,6 +562,7 @@ class KycUserClient {
 
   Future<Quote> getQuote({
     required String partnerPK,
+    required String walletPK,
     required double cryptoAmount,
     required RampType rampType,
     required String fiatCurrency,
@@ -572,6 +573,7 @@ class KycUserClient {
         cryptoAmount: cryptoAmount,
         rampType: rampType.toProto(),
         fiatCurrency: fiatCurrency,
+        walletPublicKey: walletPK,
       ),
     );
 
