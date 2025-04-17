@@ -15,6 +15,30 @@ class _PartnerViewState extends State<PartnerView> {
   final _validationTypeController = TextEditingController();
   final _validationResultController = TextEditingController();
 
+  final _onRampFixedFeeController = TextEditingController();
+  final _onRampPercentageFeeController = TextEditingController();
+  final _onRampRateController = TextEditingController();
+  final _onRampFiatCurrencyController = TextEditingController();
+  final _offRampFixedFeeController = TextEditingController();
+  final _offRampPercentageFeeController = TextEditingController();
+  final _offRampRateController = TextEditingController();
+  final _offRampFiatCurrencyController = TextEditingController();
+
+  @override
+  void dispose() {
+    _validationTypeController.dispose();
+    _validationResultController.dispose();
+    _onRampFixedFeeController.dispose();
+    _onRampPercentageFeeController.dispose();
+    _onRampRateController.dispose();
+    _onRampFiatCurrencyController.dispose();
+    _offRampFixedFeeController.dispose();
+    _offRampPercentageFeeController.dispose();
+    _offRampRateController.dispose();
+    _offRampFiatCurrencyController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -29,6 +53,7 @@ class _PartnerViewState extends State<PartnerView> {
               _buildPartnerOrdersSection(state),
               _buildOnRampOrderSection(state),
               _buildOffRampOrderSection(state),
+              _buildUpdateFeesSection(state),
             ],
           ),
         ),
@@ -54,9 +79,9 @@ class _PartnerViewState extends State<PartnerView> {
           ),
           ElevatedButton(
             onPressed: () async {
-              final walletState = context.read<WalletAppState>();
+              final userState = context.read<UserAppState>();
 
-              await state.getUserSecretKey(walletState.authPublicKey);
+              await state.getUserSecretKey(userState.authPublicKey);
             },
             child: const Text('Get User SecretKey'),
           ),
@@ -85,11 +110,11 @@ class _PartnerViewState extends State<PartnerView> {
               ),
             ),
           const SizedBox(height: 16),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) => ElevatedButton(
+          Consumer<UserAppState>(
+            builder: (context, userState, child) => ElevatedButton(
               onPressed: () => context.read<PartnerAppState>().fetchData(
-                    walletState.rawSecretKey,
-                    walletState.authPublicKey,
+                    userState.rawSecretKey,
+                    userState.authPublicKey,
                   ),
               child: const Text('Fetch User Data'),
             ),
@@ -134,19 +159,14 @@ class _PartnerViewState extends State<PartnerView> {
               [_validationTypeController, _validationResultController],
             ),
             builder: (context, child) => ElevatedButton(
-              onPressed: _validationResultController.text.isEmpty &&
-                      _validationTypeController.text.isEmpty
+              onPressed: _validationResultController.text.isEmpty && _validationTypeController.text.isEmpty
                   ? null
                   : () async {
-                      await context
-                          .read<PartnerAppState>()
-                          .createCustomValidationResult(
+                      await context.read<PartnerAppState>().createCustomValidationResult(
                             type: _validationTypeController.text,
                             result: _validationResultController.text,
-                            userPK:
-                                context.read<WalletAppState>().authPublicKey,
-                            secretKey:
-                                context.read<WalletAppState>().rawSecretKey,
+                            userPK: context.read<UserAppState>().authPublicKey,
+                            secretKey: context.read<UserAppState>().rawSecretKey,
                           );
 
                       if (!context.mounted) return;
@@ -179,8 +199,8 @@ class _PartnerViewState extends State<PartnerView> {
             title: 'Partner Orders:',
             value: state.orders ?? '',
           ),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) => ElevatedButton(
+          Consumer<UserAppState>(
+            builder: (context, userState, child) => ElevatedButton(
               onPressed: context.read<PartnerAppState>().fetchPartnerOrders,
               child: const Text('Fetch partner orders'),
             ),
@@ -198,14 +218,10 @@ class _PartnerViewState extends State<PartnerView> {
             title: 'OnRamp Order Data',
             value: partnerState.onRampOrderData ?? '',
           ),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) {
-              final orderId = partnerState.onRampUseExternalId
-                  ? null
-                  : walletState.onRampOrderId;
-              final externalId = partnerState.onRampUseExternalId
-                  ? partnerState.onRampExternalId
-                  : null;
+          Consumer<UserAppState>(
+            builder: (context, userState, child) {
+              final orderId = partnerState.onRampUseExternalId ? null : userState.onRampOrderId;
+              final externalId = partnerState.onRampUseExternalId ? partnerState.onRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
               return Column(
@@ -248,7 +264,7 @@ class _PartnerViewState extends State<PartnerView> {
                                   orderId: orderId!,
                                   bankName: 'bankName',
                                   bankAccount: '123456789',
-                                  secretKey: walletState.rawSecretKey,
+                                  secretKey: userState.rawSecretKey,
                                 );
                                 await partnerState.fetchOnRampOrder(
                                   orderId: orderId,
@@ -348,14 +364,10 @@ class _PartnerViewState extends State<PartnerView> {
             title: 'OffRamp Order Data',
             value: partnerState.offRampOrderData ?? '',
           ),
-          Consumer<WalletAppState>(
-            builder: (context, walletState, child) {
-              final orderId = partnerState.offRampUseExternalId
-                  ? null
-                  : walletState.offRampOrderId;
-              final externalId = partnerState.offRampUseExternalId
-                  ? partnerState.offRampExternalId
-                  : null;
+          Consumer<UserAppState>(
+            builder: (context, userState, child) {
+              final orderId = partnerState.offRampUseExternalId ? null : userState.offRampOrderId;
+              final externalId = partnerState.offRampUseExternalId ? partnerState.offRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
               return Column(
@@ -396,8 +408,7 @@ class _PartnerViewState extends State<PartnerView> {
                             ? () async {
                                 await partnerState.acceptOffRampOrder(
                                   orderId: orderId!,
-                                  cryptoWalletAddress:
-                                      '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx',
+                                  cryptoWalletAddress: '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx',
                                 );
                                 await partnerState.fetchOffRampOrder(
                                   orderId: orderId,
@@ -478,10 +489,113 @@ class _PartnerViewState extends State<PartnerView> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  const CustomDivider(),
+                  const SizedBox(height: 16),
                 ],
               );
             },
           ),
+        ],
+      );
+
+  Widget _buildUpdateFeesSection(PartnerAppState partnerState) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              'Update Fees',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            children: [
+              Expanded(
+                child: ValueTextfield(
+                  controller: _onRampRateController,
+                  title: 'OnRamp Rate',
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ValueTextfield(
+                  controller: _onRampFiatCurrencyController,
+                  title: 'OnRamp Fiat Currency',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ValueTextfield(
+                  controller: _onRampFixedFeeController,
+                  title: 'OnRamp Fixed Fee',
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ValueTextfield(
+                  controller: _onRampPercentageFeeController,
+                  title: 'OnRamp Percentage Fee',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ValueTextfield(
+                  controller: _offRampRateController,
+                  title: 'OffRamp Rate',
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ValueTextfield(
+                  controller: _offRampFiatCurrencyController,
+                  title: 'OffRamp Fiat Currency',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ValueTextfield(
+                  controller: _offRampFixedFeeController,
+                  title: 'OffRamp Fixed Fee',
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ValueTextfield(
+                  controller: _offRampPercentageFeeController,
+                  title: 'OffRamp Percentage Fee',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () => partnerState.updateFees(
+              onRampFixedFee: _onRampFixedFeeController.text,
+              onRampPercentageFee: _onRampPercentageFeeController.text,
+              onRampRate: _onRampRateController.text,
+              onRampFiatCurrency: _onRampFiatCurrencyController.text,
+              offRampFixedFee: _offRampFixedFeeController.text,
+              offRampPercentageFee: _offRampPercentageFeeController.text,
+              offRampRate: _offRampRateController.text,
+              offRampFiatCurrency: _offRampFiatCurrencyController.text,
+              walletAddress: context.read<PartnerAppState>().partnerFeesAddress,
+            ),
+            child: const Text('Update Fees'),
+          ),
+          const SizedBox(height: 16),
         ],
       );
 }

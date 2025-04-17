@@ -4,6 +4,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'v1_ramp_type.dart';
+
 part 'v1_get_order_response.freezed.dart';
 part 'v1_get_order_response.g.dart';
 
@@ -16,7 +18,7 @@ class V1GetOrderResponse with _$V1GetOrderResponse {
     required String partnerPublicKey,
     required String userPublicKey,
     required String comment,
-    required String type,
+    required V1RampType type,
     required double cryptoAmount,
     required String cryptoCurrency,
     required double fiatAmount,

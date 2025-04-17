@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
+import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'order.freezed.dart';
 part 'order.g.dart';
@@ -13,7 +15,7 @@ class Order with _$Order {
     required String partnerPublicKey,
     required String userPublicKey,
     required String comment,
-    required String type,
+    required RampType type,
     required double cryptoAmount,
     required String cryptoCurrency,
     required double fiatAmount,
@@ -36,7 +38,7 @@ class Order with _$Order {
         partnerPublicKey: response.partnerPublicKey,
         userPublicKey: response.userPublicKey,
         comment: response.comment,
-        type: response.type,
+        type: response.type.fromProto(),
         cryptoAmount: response.cryptoAmount,
         cryptoCurrency: response.cryptoCurrency,
         fiatAmount: response.fiatAmount,

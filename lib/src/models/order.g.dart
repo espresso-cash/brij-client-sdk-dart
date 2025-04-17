@@ -13,7 +13,7 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       partnerPublicKey: json['partnerPublicKey'] as String,
       userPublicKey: json['userPublicKey'] as String,
       comment: json['comment'] as String,
-      type: json['type'] as String,
+      type: $enumDecode(_$RampTypeEnumMap, json['type']),
       cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
       cryptoCurrency: json['cryptoCurrency'] as String,
       fiatAmount: (json['fiatAmount'] as num).toDouble(),
@@ -35,7 +35,7 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'partnerPublicKey': instance.partnerPublicKey,
       'userPublicKey': instance.userPublicKey,
       'comment': instance.comment,
-      'type': instance.type,
+      'type': _$RampTypeEnumMap[instance.type]!,
       'cryptoAmount': instance.cryptoAmount,
       'cryptoCurrency': instance.cryptoCurrency,
       'fiatAmount': instance.fiatAmount,
@@ -48,3 +48,9 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'externalId': instance.externalId,
       'userWalletAddress': instance.userWalletAddress,
     };
+
+const _$RampTypeEnumMap = {
+  RampType.onRamp: 'onRamp',
+  RampType.offRamp: 'offRamp',
+  RampType.unspecified: 'unspecified',
+};
