@@ -14,7 +14,7 @@ class V1RampFeeUpdateData with _$V1RampFeeUpdateData {
   const factory V1RampFeeUpdateData({
     required double fixedFee,
     required double percentageFee,
-    V1ConversionRate? conversionRates,
+    required V1ConversionRate conversionRates,
   }) = _V1RampFeeUpdateData;
   
   factory V1RampFeeUpdateData.fromJson(Map<String, Object?> json) => _$V1RampFeeUpdateDataFromJson(json);

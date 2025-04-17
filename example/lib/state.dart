@@ -225,7 +225,7 @@ class UserAppState extends ChangeNotifier {
 class PartnerAppState extends ChangeNotifier {
   String get authPublicKey => _authPublicKey;
   String get userSecretKey => _userSecretKey;
-  String get walletAddress => _walletAddress;
+  String get partnerFeesAddress => _partnerFeesAddress;
   Map<String, dynamic>? get userData => _userData;
 
   String? get onRampOrderData => _onRampOrderData;
@@ -248,8 +248,7 @@ class PartnerAppState extends ChangeNotifier {
   late String _authPublicKey = '';
   late String _userSecretKey = '';
 
-  // hardcoded wallet address
-  final String _walletAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
+  final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
   Map<String, dynamic>? _userData;
 
@@ -443,46 +442,5 @@ class PartnerAppState extends ChangeNotifier {
   }
 }
 
-class WalletAppState extends ChangeNotifier {
-  String get authPublicKey => _authPublicKey;
-  String get walletAddress => _walletAddress;
-
-  late String _authPublicKey = '';
-
-  // hardcoded wallet address
-  final String _walletAddress = 'DfgHyGD4kSzxGsUxj7YtREHwuW1mPTgkn6bXVxoJsGQt';
-
-  late KycWalletClient _client;
-
-  Future<void> createWallet() async {
-    final keyPair = await Ed25519().newKeyPairFromSeed(
-      base58decode('5ZWj16Hq8hUz2jQJHKkc46Zb3v2mGQP4HfQpQCzJxoAM'),
-    );
-    _client = KycWalletClient(authKeyPair: keyPair);
-
-    await _client.init();
-
-    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
-
-    notifyListeners();
-  }
-
-  Future<void> updateFees({
-    required String onRampFixedFee,
-    required String onRampPercentageFee,
-    required String offRampFixedFee,
-    required String offRampPercentageFee,
-  }) async {
-    await _client.updateFees(
-      onRampFee: RampFeeUpdate(
-        fixedFee: double.parse(onRampFixedFee),
-        percentageFee: double.parse(onRampPercentageFee),
-      ),
-      offRampFee: RampFeeUpdate(
-        fixedFee: double.parse(offRampFixedFee),
-        percentageFee: double.parse(offRampPercentageFee),
-      ),
-      walletAddress: _walletAddress,
-    );
-  }
-}
+const walletAuthPk = 'DA71MeXeEwuM2FzWj8Bki6XTBTYC9TUsXspzPoNy2yEQ';
+const walletFeesAddress = 'DfgHyGD4kSzxGsUxj7YtREHwuW1mPTgkn6bXVxoJsGQt';

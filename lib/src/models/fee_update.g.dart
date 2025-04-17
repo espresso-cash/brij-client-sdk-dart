@@ -26,10 +26,8 @@ _$RampFeeUpdateImpl _$$RampFeeUpdateImplFromJson(Map<String, dynamic> json) =>
     _$RampFeeUpdateImpl(
       fixedFee: (json['fixedFee'] as num).toDouble(),
       percentageFee: (json['percentageFee'] as num).toDouble(),
-      conversionRates: json['conversionRates'] == null
-          ? null
-          : ConversionRate.fromJson(
-              json['conversionRates'] as Map<String, dynamic>),
+      conversionRates: ConversionRate.fromJson(
+          json['conversionRates'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$RampFeeUpdateImplToJson(_$RampFeeUpdateImpl instance) =>

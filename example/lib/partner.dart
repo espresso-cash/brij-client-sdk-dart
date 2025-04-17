@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_json_view/flutter_json_view.dart';
 import 'package:kyc_sharing_client/shared.dart';
 import 'package:kyc_sharing_client/state.dart';
-import 'package:kyc_sharing_client/wallet.dart';
 import 'package:provider/provider.dart';
 
 class PartnerView extends StatefulWidget {
@@ -55,7 +54,6 @@ class _PartnerViewState extends State<PartnerView> {
               _buildOnRampOrderSection(state),
               _buildOffRampOrderSection(state),
               _buildUpdateFeesSection(state),
-              const WalletView(),
             ],
           ),
         ),
@@ -593,7 +591,7 @@ class _PartnerViewState extends State<PartnerView> {
               offRampPercentageFee: _offRampPercentageFeeController.text,
               offRampRate: _offRampRateController.text,
               offRampFiatCurrency: _offRampFiatCurrencyController.text,
-              walletAddress: context.read<PartnerAppState>().walletAddress,
+              walletAddress: context.read<PartnerAppState>().partnerFeesAddress,
             ),
             child: const Text('Update Fees'),
           ),

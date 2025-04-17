@@ -1,6 +1,5 @@
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
-import 'package:kyc_client_dart/kyc_client_dart.dart';
 import 'package:kyc_sharing_client/shared.dart';
 import 'package:kyc_sharing_client/state.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +27,6 @@ class _UserViewState extends State<UserView> {
     super.initState();
     final userState = context.read<UserAppState>();
     context.read<PartnerAppState>().createPartner();
-    context.read<WalletAppState>().createWallet();
     userState.addListener(_updateControllers);
     _updateControllers();
   }
@@ -389,11 +387,10 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
-              final walletPk = context.read<WalletAppState>().authPublicKey;
 
               await context.read<UserAppState>().getOnRampQuote(
                     partnerPK: partnerPk,
-                    walletPK: walletPk,
+                    walletPK: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
@@ -404,11 +401,10 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
-              final walletPk = context.read<WalletAppState>().authPublicKey;
 
               await context.read<UserAppState>().getOffRampQuote(
                     partnerPK: partnerPk,
-                    walletPK: walletPk,
+                    walletPK: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );

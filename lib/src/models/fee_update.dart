@@ -30,7 +30,7 @@ class RampFeeUpdate with _$RampFeeUpdate {
   const factory RampFeeUpdate({
     required double fixedFee,
     required double percentageFee,
-    ConversionRate? conversionRates,
+    required ConversionRate conversionRates,
   }) = _RampFeeUpdate;
 
   const RampFeeUpdate._();
@@ -40,7 +40,7 @@ class RampFeeUpdate with _$RampFeeUpdate {
   V1RampFeeUpdateData toProto() => V1RampFeeUpdateData(
         fixedFee: fixedFee,
         percentageFee: percentageFee,
-        conversionRates: conversionRates?.toProto(),
+        conversionRates: conversionRates.toProto(),
       );
 }
 

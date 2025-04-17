@@ -22,7 +22,7 @@ V1RampFeeUpdateData _$V1RampFeeUpdateDataFromJson(Map<String, dynamic> json) {
 mixin _$V1RampFeeUpdateData {
   double get fixedFee => throw _privateConstructorUsedError;
   double get percentageFee => throw _privateConstructorUsedError;
-  V1ConversionRate? get conversionRates => throw _privateConstructorUsedError;
+  V1ConversionRate get conversionRates => throw _privateConstructorUsedError;
 
   /// Serializes this V1RampFeeUpdateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,9 +43,9 @@ abstract class $V1RampFeeUpdateDataCopyWith<$Res> {
   $Res call(
       {double fixedFee,
       double percentageFee,
-      V1ConversionRate? conversionRates});
+      V1ConversionRate conversionRates});
 
-  $V1ConversionRateCopyWith<$Res>? get conversionRates;
+  $V1ConversionRateCopyWith<$Res> get conversionRates;
 }
 
 /// @nodoc
@@ -65,7 +65,7 @@ class _$V1RampFeeUpdateDataCopyWithImpl<$Res, $Val extends V1RampFeeUpdateData>
   $Res call({
     Object? fixedFee = null,
     Object? percentageFee = null,
-    Object? conversionRates = freezed,
+    Object? conversionRates = null,
   }) {
     return _then(_value.copyWith(
       fixedFee: null == fixedFee
@@ -76,10 +76,10 @@ class _$V1RampFeeUpdateDataCopyWithImpl<$Res, $Val extends V1RampFeeUpdateData>
           ? _value.percentageFee
           : percentageFee // ignore: cast_nullable_to_non_nullable
               as double,
-      conversionRates: freezed == conversionRates
+      conversionRates: null == conversionRates
           ? _value.conversionRates
           : conversionRates // ignore: cast_nullable_to_non_nullable
-              as V1ConversionRate?,
+              as V1ConversionRate,
     ) as $Val);
   }
 
@@ -87,12 +87,8 @@ class _$V1RampFeeUpdateDataCopyWithImpl<$Res, $Val extends V1RampFeeUpdateData>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $V1ConversionRateCopyWith<$Res>? get conversionRates {
-    if (_value.conversionRates == null) {
-      return null;
-    }
-
-    return $V1ConversionRateCopyWith<$Res>(_value.conversionRates!, (value) {
+  $V1ConversionRateCopyWith<$Res> get conversionRates {
+    return $V1ConversionRateCopyWith<$Res>(_value.conversionRates, (value) {
       return _then(_value.copyWith(conversionRates: value) as $Val);
     });
   }
@@ -109,10 +105,10 @@ abstract class _$$V1RampFeeUpdateDataImplCopyWith<$Res>
   $Res call(
       {double fixedFee,
       double percentageFee,
-      V1ConversionRate? conversionRates});
+      V1ConversionRate conversionRates});
 
   @override
-  $V1ConversionRateCopyWith<$Res>? get conversionRates;
+  $V1ConversionRateCopyWith<$Res> get conversionRates;
 }
 
 /// @nodoc
@@ -130,7 +126,7 @@ class __$$V1RampFeeUpdateDataImplCopyWithImpl<$Res>
   $Res call({
     Object? fixedFee = null,
     Object? percentageFee = null,
-    Object? conversionRates = freezed,
+    Object? conversionRates = null,
   }) {
     return _then(_$V1RampFeeUpdateDataImpl(
       fixedFee: null == fixedFee
@@ -141,10 +137,10 @@ class __$$V1RampFeeUpdateDataImplCopyWithImpl<$Res>
           ? _value.percentageFee
           : percentageFee // ignore: cast_nullable_to_non_nullable
               as double,
-      conversionRates: freezed == conversionRates
+      conversionRates: null == conversionRates
           ? _value.conversionRates
           : conversionRates // ignore: cast_nullable_to_non_nullable
-              as V1ConversionRate?,
+              as V1ConversionRate,
     ));
   }
 }
@@ -155,7 +151,7 @@ class _$V1RampFeeUpdateDataImpl implements _V1RampFeeUpdateData {
   const _$V1RampFeeUpdateDataImpl(
       {required this.fixedFee,
       required this.percentageFee,
-      this.conversionRates});
+      required this.conversionRates});
 
   factory _$V1RampFeeUpdateDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$V1RampFeeUpdateDataImplFromJson(json);
@@ -165,7 +161,7 @@ class _$V1RampFeeUpdateDataImpl implements _V1RampFeeUpdateData {
   @override
   final double percentageFee;
   @override
-  final V1ConversionRate? conversionRates;
+  final V1ConversionRate conversionRates;
 
   @override
   String toString() {
@@ -209,9 +205,10 @@ class _$V1RampFeeUpdateDataImpl implements _V1RampFeeUpdateData {
 
 abstract class _V1RampFeeUpdateData implements V1RampFeeUpdateData {
   const factory _V1RampFeeUpdateData(
-      {required final double fixedFee,
-      required final double percentageFee,
-      final V1ConversionRate? conversionRates}) = _$V1RampFeeUpdateDataImpl;
+          {required final double fixedFee,
+          required final double percentageFee,
+          required final V1ConversionRate conversionRates}) =
+      _$V1RampFeeUpdateDataImpl;
 
   factory _V1RampFeeUpdateData.fromJson(Map<String, dynamic> json) =
       _$V1RampFeeUpdateDataImpl.fromJson;
@@ -221,7 +218,7 @@ abstract class _V1RampFeeUpdateData implements V1RampFeeUpdateData {
   @override
   double get percentageFee;
   @override
-  V1ConversionRate? get conversionRates;
+  V1ConversionRate get conversionRates;
 
   /// Create a copy of V1RampFeeUpdateData
   /// with the given fields replaced by the non-null parameter values.
