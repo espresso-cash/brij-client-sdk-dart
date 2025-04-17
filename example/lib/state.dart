@@ -442,5 +442,5 @@ class PartnerAppState extends ChangeNotifier {
   }
 }
 
+// TODO(vsumin): Replace it with real one
 const walletAuthPk = 'DA71MeXeEwuM2FzWj8Bki6XTBTYC9TUsXspzPoNy2yEQ';
-const walletFeesAddress = 'DfgHyGD4kSzxGsUxj7YtREHwuW1mPTgkn6bXVxoJsGQt';
