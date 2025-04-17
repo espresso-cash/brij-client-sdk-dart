@@ -6,6 +6,7 @@ import 'package:convert/convert.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_response.dart';
+import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
 import 'package:kyc_client_dart/src/currency/currency_list.dart';
@@ -267,9 +268,8 @@ Order processOrderData({
   }
 
   if (order.userSignature.isNotEmpty) {
-    final verifyKey =
-        VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage = order.type == 'ON_RAMP'
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
+    final userMessage = order.type == V1RampType.rampTypeONRamp
         ? createUserOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -296,9 +296,8 @@ Order processOrderData({
   }
 
   if (order.partnerSignature.isNotEmpty) {
-    final verifyKey =
-        VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage = order.type == 'ON_RAMP'
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
+    final partnerMessage = order.type == V1RampType.rampTypeONRamp
         ? createPartnerOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -338,10 +337,8 @@ String createUserOnRampMessage({
   required String fiatCurrency,
   required String walletAddress,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$walletAddress';
 }
@@ -355,10 +352,8 @@ String createUserOffRampMessage({
   required String bankAccount,
   required String walletAddress,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount|$walletAddress';
 }
@@ -371,10 +366,8 @@ String createPartnerOnRampMessage({
   required String bankName,
   required String bankAccount,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
 }
@@ -386,10 +379,8 @@ String createPartnerOffRampMessage({
   required String fiatCurrency,
   required String cryptoWalletAddress,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$cryptoWalletAddress';
 }
