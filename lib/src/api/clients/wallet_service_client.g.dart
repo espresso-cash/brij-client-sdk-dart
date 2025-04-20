@@ -127,12 +127,11 @@ class _WalletServiceClient implements WalletServiceClient {
   }
 
   @override
-  Future<WalletGetOrdersResponse> walletServiceGetOrders(
-      {required dynamic body}) async {
+  Future<WalletGetOrdersResponse> walletServiceGetOrders() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = body;
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<WalletGetOrdersResponse>(Options(
       method: 'POST',
       headers: _headers,

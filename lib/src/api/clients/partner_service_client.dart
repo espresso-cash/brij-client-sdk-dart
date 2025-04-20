@@ -47,9 +47,7 @@ abstract class PartnerServiceClient {
   });
 
   @POST('/v1/partner/getOrders')
-  Future<PartnerGetOrdersResponse> partnerServiceGetOrders({
-    @Body() required PartnerGetOrdersRequest body,
-  });
+  Future<PartnerGetOrdersResponse> partnerServiceGetOrders();
 
   @POST('/v1/partner/rejectOrder')
   Future<PartnerRejectOrderResponse> partnerServiceRejectOrder({

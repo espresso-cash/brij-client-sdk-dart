@@ -38,9 +38,7 @@ abstract class WalletServiceClient {
   });
 
   @POST('/v1/wallet/getOrders')
-  Future<WalletGetOrdersResponse> walletServiceGetOrders({
-    @Body() required WalletGetOrdersRequest body,
-  });
+  Future<WalletGetOrdersResponse> walletServiceGetOrders();
 
   @POST('/v1/wallet/getQuote')
   Future<WalletGetQuoteResponse> walletServiceGetQuote({

@@ -144,12 +144,11 @@ class _PartnerServiceClient implements PartnerServiceClient {
   }
 
   @override
-  Future<PartnerGetOrdersResponse> partnerServiceGetOrders(
-      {required dynamic body}) async {
+  Future<PartnerGetOrdersResponse> partnerServiceGetOrders() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = body;
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<PartnerGetOrdersResponse>(Options(
       method: 'POST',
       headers: _headers,
