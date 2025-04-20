@@ -45,8 +45,15 @@ swagger_parser:
       put_in_folder: true
       put_clients_in_folder: true
       export_file: false
+    
+    - schema_path: schemes/orders/wallet/wallet.json
+      json_serializer: freezed
+      root_client: false
+      put_in_folder: true
+      put_clients_in_folder: true
+      export_file: false
 
-    - schema_path: schemes/order.json
+    - schema_path: schemes/orders/partner/partner.json
       json_serializer: freezed
       root_client: false
       put_in_folder: true
