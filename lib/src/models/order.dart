@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
-import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
+import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
 import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'order.freezed.dart';
@@ -31,7 +31,28 @@ class Order with _$Order {
 
   factory Order.fromJson(Map<String, Object?> json) => _$OrderFromJson(json);
 
-  factory Order.fromV1GetOrderResponse(V1GetOrderResponse response) => Order(
+  factory Order.fromWalletGetOrderResponse(WalletGetOrderResponse response) => Order(
+        orderId: response.orderId,
+        created: response.created,
+        status: response.status,
+        partnerPublicKey: response.partnerPublicKey,
+        userPublicKey: response.userPublicKey,
+        comment: response.comment,
+        type: response.type.fromProto(),
+        cryptoAmount: response.cryptoAmount,
+        cryptoCurrency: response.cryptoCurrency,
+        fiatAmount: response.fiatAmount,
+        fiatCurrency: response.fiatCurrency,
+        bankName: response.bankName,
+        bankAccount: response.bankAccount,
+        cryptoWalletAddress: response.cryptoWalletAddress,
+        transaction: response.transaction,
+        transactionId: response.transactionId,
+        externalId: '',
+        userWalletAddress: response.userWalletAddress,
+      );
+
+  factory Order.fromPartnerGetOrderResponse(PartnerGetOrderResponse response) => Order(
         orderId: response.orderId,
         created: response.created,
         status: response.status,

@@ -3,10 +3,11 @@ import 'dart:isolate';
 
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
+import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
 import 'package:kyc_client_dart/src/currency/currency_list.dart';
@@ -242,8 +243,8 @@ UserData _processUserData({
   );
 }
 
-Order processOrderData({
-  required V1GetOrderResponse order,
+Order processWalletOrderData({
+  required WalletGetOrderResponse order,
   required String secretKey,
 }) {
   String bankName = order.bankName;
@@ -322,7 +323,95 @@ Order processOrderData({
     }
   }
 
-  return Order.fromV1GetOrderResponse(
+  return Order.fromWalletGetOrderResponse(
+    order.copyWith(
+      bankName: bankName,
+      bankAccount: bankAccount,
+    ),
+  );
+}
+
+Order processPartnerOrderData({
+  required PartnerGetOrderResponse order,
+  required String secretKey,
+}) {
+  String bankName = order.bankName;
+  String bankAccount = order.bankAccount;
+
+  if (bankName.isNotEmpty) {
+    bankName = utf8.decode(
+      decrypt(
+        encryptedData: bankName,
+        secretKey: secretKey,
+      ),
+    );
+  }
+
+  if (bankAccount.isNotEmpty) {
+    bankAccount = utf8.decode(
+      decrypt(
+        encryptedData: bankAccount,
+        secretKey: secretKey,
+      ),
+    );
+  }
+
+  if (order.userSignature.isNotEmpty) {
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
+    final userMessage = order.type == V1RampType.rampTypeONRamp
+        ? createUserOnRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            walletAddress: order.userWalletAddress,
+          )
+        : createUserOffRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            bankName: bankName,
+            bankAccount: bankAccount,
+            walletAddress: order.userWalletAddress,
+          );
+
+    if (!verifyKey.verify(
+      signature: Signature(base58.decode(order.userSignature)),
+      message: Uint8List.fromList(utf8.encode(userMessage)),
+    )) {
+      throw Exception('Invalid user signature');
+    }
+  }
+
+  if (order.partnerSignature.isNotEmpty) {
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
+    final partnerMessage = order.type == V1RampType.rampTypeONRamp
+        ? createPartnerOnRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            bankName: bankName,
+            bankAccount: bankAccount,
+          )
+        : createPartnerOffRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            cryptoWalletAddress: order.cryptoWalletAddress,
+          );
+
+    if (!verifyKey.verify(
+      signature: Signature(base58.decode(order.partnerSignature)),
+      message: Uint8List.fromList(utf8.encode(partnerMessage)),
+    )) {
+      throw Exception('Invalid partner signature');
+    }
+  }
+
+  return Order.fromPartnerGetOrderResponse(
     order.copyWith(
       bankName: bankName,
       bankAccount: bankAccount,

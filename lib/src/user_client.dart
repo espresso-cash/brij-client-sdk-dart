@@ -5,39 +5,37 @@ import 'package:cryptography/cryptography.dart' hide PublicKey, SecretBox;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dfunc/dfunc.dart';
 import 'package:dio/dio.dart';
-import 'package:kyc_client_dart/src/api/clients/order_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/verifier_service_client.dart';
+import 'package:kyc_client_dart/src/api/clients/wallet_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
 import 'package:kyc_client_dart/src/api/models/v1_check_access_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_create_off_ramp_order_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_partner_info_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_quote_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_wallet_proof_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_grant_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_email_validation_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_phone_validation_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_init_storage_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_start_kyc_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_email_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_phone_request.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_create_off_ramp_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_create_on_ramp_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_quote_request.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
 import 'package:kyc_client_dart/src/common.dart';
 import 'package:kyc_client_dart/src/config/config.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
-import 'package:kyc_client_dart/src/models/quote.dart';
 import 'package:pinenacl/ed25519.dart' hide Signature;
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
@@ -66,7 +64,7 @@ class KycUserClient {
 
   late final StorageServiceClient _storageClient;
   late final VerifierServiceClient _validatorClient;
-  late final OrderServiceClient _orderClient;
+  late final WalletServiceClient _orderClient;
 
   String get authPublicKey => _authPublicKey;
 
@@ -136,7 +134,7 @@ class KycUserClient {
 
   Future<void> _initializeOrderClient() async {
     final dio = await _createAuthenticatedClient('orders.espressocash.com');
-    _orderClient = OrderServiceClient(dio, baseUrl: config.orderBaseUrl);
+    _orderClient = WalletServiceClient(dio, baseUrl: config.orderBaseUrl);
   }
 
   Future<Dio> _createAuthenticatedClient(String audience) async {
@@ -409,8 +407,8 @@ class KycUserClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    final response = await _orderClient.orderServiceCreateOnRampOrder(
-      body: V1CreateOnRampOrderRequest(
+    final response = await _orderClient.walletServiceCreateOnRampOrder(
+      body: WalletCreateOnRampOrderRequest(
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
         cryptoCurrency: cryptoCurrency,
@@ -459,8 +457,8 @@ class KycUserClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    final response = await _orderClient.orderServiceCreateOffRampOrder(
-      body: V1CreateOffRampOrderRequest(
+    final response = await _orderClient.walletServiceCreateOffRampOrder(
+      body: WalletCreateOffRampOrderRequest(
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
         cryptoCurrency: cryptoCurrency,
@@ -479,25 +477,25 @@ class KycUserClient {
   Future<Order> getOrder({
     required OrderId orderId,
   }) async {
-    final response = await _orderClient.orderServiceGetOrder(
-      body: V1GetOrderRequest(
+    final response = await _orderClient.walletServiceGetOrder(
+      body: WalletGetOrderRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
       ),
     );
 
-    return processOrderData(
+    return processWalletOrderData(
       order: response,
       secretKey: rawSecretKey,
     );
   }
 
   Future<List<Order>> getOrders() async {
-    final response = await _orderClient.orderServiceGetOrders();
+    final response = await _orderClient.walletServiceGetOrders();
 
     return response.orders
         .map(
-          (order) => processOrderData(
+          (order) => processWalletOrderData(
             order: order,
             secretKey: rawSecretKey,
           ),
@@ -567,8 +565,8 @@ class KycUserClient {
     required RampType rampType,
     required String fiatCurrency,
   }) async {
-    final response = await _orderClient.orderServiceGetQuote(
-      body: V1GetQuoteRequest(
+    final response = await _orderClient.walletServiceGetQuote(
+      body: WalletGetQuoteRequest(
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
         rampType: rampType.toProto(),
@@ -577,6 +575,6 @@ class KycUserClient {
       ),
     );
 
-    return Quote.fromV1GetQuoteResponse(response);
+    return Quote.fromWalletGetQuoteResponse(response);
   }
 }

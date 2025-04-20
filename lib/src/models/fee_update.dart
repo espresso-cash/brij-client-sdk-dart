@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/v1_conversion_rate.dart';
-import 'package:kyc_client_dart/src/api/models/v1_ramp_fee_update_data.dart';
-import 'package:kyc_client_dart/src/api/models/v1_update_fees_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_conversion_rate.dart';
+import 'package:kyc_client_dart/src/api/models/partner_ramp_fee_update_data.dart';
+import 'package:kyc_client_dart/src/api/models/partner_update_fees_request.dart';
 
 part 'fee_update.freezed.dart';
 part 'fee_update.g.dart';
@@ -18,7 +18,7 @@ class FeeUpdate with _$FeeUpdate {
 
   factory FeeUpdate.fromJson(Map<String, Object?> json) => _$FeeUpdateFromJson(json);
 
-  V1UpdateFeesRequest toProto() => V1UpdateFeesRequest(
+  PartnerUpdateFeesRequest toProto() => PartnerUpdateFeesRequest(
         onRampFee: onRampFee.toProto(),
         offRampFee: offRampFee.toProto(),
         walletAddress: walletAddress,
@@ -37,7 +37,7 @@ class RampFeeUpdate with _$RampFeeUpdate {
 
   factory RampFeeUpdate.fromJson(Map<String, Object?> json) => _$RampFeeUpdateFromJson(json);
 
-  V1RampFeeUpdateData toProto() => V1RampFeeUpdateData(
+  PartnerRampFeeUpdateData toProto() => PartnerRampFeeUpdateData(
         fixedFee: fixedFee,
         percentageFee: percentageFee,
         conversionRates: conversionRates.toProto(),
@@ -56,7 +56,7 @@ class ConversionRate with _$ConversionRate {
 
   factory ConversionRate.fromJson(Map<String, Object?> json) => _$ConversionRateFromJson(json);
 
-  V1ConversionRate toProto() => V1ConversionRate(
+  PartnerConversionRate toProto() => PartnerConversionRate(
         cryptoCurrency: cryptoCurrency,
         fiatCurrency: fiatCurrency,
         rate: rate,

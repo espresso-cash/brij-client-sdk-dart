@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_quote_response.dart';
-import 'package:kyc_client_dart/src/api/models/v1_ramp_fee.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_quote_response.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_ramp_fee.dart';
 import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'quote.freezed.dart';
@@ -21,15 +21,15 @@ class Quote with _$Quote {
 
   factory Quote.fromJson(Map<String, Object?> json) => _$QuoteFromJson(json);
 
-  factory Quote.fromV1GetQuoteResponse(V1GetQuoteResponse response) => Quote(
+  factory Quote.fromWalletGetQuoteResponse(WalletGetQuoteResponse response) => Quote(
         cryptoAmount: response.cryptoAmount,
         fiatAmount: response.fiatAmount,
         fiatCurrency: response.fiatCurrency,
         type: response.rampType.fromProto(),
         conversionRate: response.conversionRate,
-        partnerFee: RampFee.fromV1RampFee(response.partnerFee),
-        walletFee: RampFee.fromV1RampFee(response.walletFee),
-        platformFee: RampFee.fromV1RampFee(response.platformFee),
+        partnerFee: RampFee.fromWalletRampFee(response.partnerFee),
+        walletFee: RampFee.fromWalletRampFee(response.walletFee),
+        platformFee: RampFee.fromWalletRampFee(response.platformFee),
       );
 }
 
@@ -42,7 +42,7 @@ class RampFee with _$RampFee {
 
   factory RampFee.fromJson(Map<String, Object?> json) => _$RampFeeFromJson(json);
 
-  factory RampFee.fromV1RampFee(V1RampFee fee) => RampFee(
+  factory RampFee.fromWalletRampFee(WalletRampFee fee) => RampFee(
         fixedFee: fee.fixedFee,
         percentageFee: fee.percentageFee,
       );
