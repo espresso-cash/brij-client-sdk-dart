@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "espressocash/orders/v1/common/ramp_type.proto",
+    "title": "brij/orders/v1/common/ramp_type.proto",
     "version": "version not set"
   },
   "consumes": [

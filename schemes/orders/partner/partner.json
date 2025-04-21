@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "espressocash/orders/v1/partner/partner.proto",
+    "title": "brij/orders/v1/partner/partner.proto",
     "version": "version not set"
   },
   "tags": [
