@@ -4,7 +4,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'v1_ramp_type.dart';
+import 'common_ramp_type.dart';
 import 'wallet_ramp_fee.dart';
 
 part 'wallet_get_quote_response.freezed.dart';
@@ -16,7 +16,7 @@ class WalletGetQuoteResponse with _$WalletGetQuoteResponse {
     required double cryptoAmount,
     required double fiatAmount,
     required String fiatCurrency,
-    required V1RampType rampType,
+    required CommonRampType rampType,
     required double conversionRate,
     required WalletRampFee partnerFee,
     required WalletRampFee walletFee,

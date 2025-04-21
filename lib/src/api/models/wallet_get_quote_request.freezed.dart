@@ -24,7 +24,7 @@ mixin _$WalletGetQuoteRequest {
   String get partnerPublicKey => throw _privateConstructorUsedError;
   String get walletPublicKey => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
-  V1RampType get rampType => throw _privateConstructorUsedError;
+  CommonRampType get rampType => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
 
   /// Serializes this WalletGetQuoteRequest to a JSON map.
@@ -47,7 +47,7 @@ abstract class $WalletGetQuoteRequestCopyWith<$Res> {
       {String partnerPublicKey,
       String walletPublicKey,
       double cryptoAmount,
-      V1RampType rampType,
+      CommonRampType rampType,
       String fiatCurrency});
 }
 
@@ -89,7 +89,7 @@ class _$WalletGetQuoteRequestCopyWithImpl<$Res,
       rampType: null == rampType
           ? _value.rampType
           : rampType // ignore: cast_nullable_to_non_nullable
-              as V1RampType,
+              as CommonRampType,
       fiatCurrency: null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ abstract class _$$WalletGetQuoteRequestImplCopyWith<$Res>
       {String partnerPublicKey,
       String walletPublicKey,
       double cryptoAmount,
-      V1RampType rampType,
+      CommonRampType rampType,
       String fiatCurrency});
 }
 
@@ -151,7 +151,7 @@ class __$$WalletGetQuoteRequestImplCopyWithImpl<$Res>
       rampType: null == rampType
           ? _value.rampType
           : rampType // ignore: cast_nullable_to_non_nullable
-              as V1RampType,
+              as CommonRampType,
       fiatCurrency: null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -180,7 +180,7 @@ class _$WalletGetQuoteRequestImpl implements _WalletGetQuoteRequest {
   @override
   final double cryptoAmount;
   @override
-  final V1RampType rampType;
+  final CommonRampType rampType;
   @override
   final String fiatCurrency;
 
@@ -233,7 +233,7 @@ abstract class _WalletGetQuoteRequest implements WalletGetQuoteRequest {
       {required final String partnerPublicKey,
       required final String walletPublicKey,
       required final double cryptoAmount,
-      required final V1RampType rampType,
+      required final CommonRampType rampType,
       required final String fiatCurrency}) = _$WalletGetQuoteRequestImpl;
 
   factory _WalletGetQuoteRequest.fromJson(Map<String, dynamic> json) =
@@ -246,7 +246,7 @@ abstract class _WalletGetQuoteRequest implements WalletGetQuoteRequest {
   @override
   double get cryptoAmount;
   @override
-  V1RampType get rampType;
+  CommonRampType get rampType;
   @override
   String get fiatCurrency;
 

@@ -24,7 +24,7 @@ mixin _$WalletGetQuoteResponse {
   double get cryptoAmount => throw _privateConstructorUsedError;
   double get fiatAmount => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
-  V1RampType get rampType => throw _privateConstructorUsedError;
+  CommonRampType get rampType => throw _privateConstructorUsedError;
   double get conversionRate => throw _privateConstructorUsedError;
   WalletRampFee get partnerFee => throw _privateConstructorUsedError;
   WalletRampFee get walletFee => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $WalletGetQuoteResponseCopyWith<$Res> {
       {double cryptoAmount,
       double fiatAmount,
       String fiatCurrency,
-      V1RampType rampType,
+      CommonRampType rampType,
       double conversionRate,
       WalletRampFee partnerFee,
       WalletRampFee walletFee,
@@ -102,7 +102,7 @@ class _$WalletGetQuoteResponseCopyWithImpl<$Res,
       rampType: null == rampType
           ? _value.rampType
           : rampType // ignore: cast_nullable_to_non_nullable
-              as V1RampType,
+              as CommonRampType,
       conversionRate: null == conversionRate
           ? _value.conversionRate
           : conversionRate // ignore: cast_nullable_to_non_nullable
@@ -166,7 +166,7 @@ abstract class _$$WalletGetQuoteResponseImplCopyWith<$Res>
       {double cryptoAmount,
       double fiatAmount,
       String fiatCurrency,
-      V1RampType rampType,
+      CommonRampType rampType,
       double conversionRate,
       WalletRampFee partnerFee,
       WalletRampFee walletFee,
@@ -220,7 +220,7 @@ class __$$WalletGetQuoteResponseImplCopyWithImpl<$Res>
       rampType: null == rampType
           ? _value.rampType
           : rampType // ignore: cast_nullable_to_non_nullable
-              as V1RampType,
+              as CommonRampType,
       conversionRate: null == conversionRate
           ? _value.conversionRate
           : conversionRate // ignore: cast_nullable_to_non_nullable
@@ -264,7 +264,7 @@ class _$WalletGetQuoteResponseImpl implements _WalletGetQuoteResponse {
   @override
   final String fiatCurrency;
   @override
-  final V1RampType rampType;
+  final CommonRampType rampType;
   @override
   final double conversionRate;
   @override
@@ -337,7 +337,7 @@ abstract class _WalletGetQuoteResponse implements WalletGetQuoteResponse {
       {required final double cryptoAmount,
       required final double fiatAmount,
       required final String fiatCurrency,
-      required final V1RampType rampType,
+      required final CommonRampType rampType,
       required final double conversionRate,
       required final WalletRampFee partnerFee,
       required final WalletRampFee walletFee,
@@ -353,7 +353,7 @@ abstract class _WalletGetQuoteResponse implements WalletGetQuoteResponse {
   @override
   String get fiatCurrency;
   @override
-  V1RampType get rampType;
+  CommonRampType get rampType;
   @override
   double get conversionRate;
   @override

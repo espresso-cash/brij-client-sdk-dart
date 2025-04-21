@@ -1,4 +1,4 @@
-import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
+import 'package:kyc_client_dart/src/api/models/common_ramp_type.dart';
 
 enum RampType {
   onRamp,
@@ -6,19 +6,19 @@ enum RampType {
   unspecified,
 }
 
-extension V1RampTypeExtension on V1RampType {
+extension CommonRampTypeExtension on CommonRampType {
   RampType fromProto() => switch (this) {
-        V1RampType.rampTypeONRamp => RampType.onRamp,
-        V1RampType.rampTypeOffRamp => RampType.offRamp,
-        V1RampType.rampTypeUnspecified => RampType.unspecified,
-        V1RampType.$unknown => RampType.unspecified,
+        CommonRampType.rampTypeONRamp => RampType.onRamp,
+        CommonRampType.rampTypeOffRamp => RampType.offRamp,
+        CommonRampType.rampTypeUnspecified => RampType.unspecified,
+        CommonRampType.$unknown => RampType.unspecified,
       };
 }
 
 extension RampTypeExtension on RampType {
-  V1RampType toProto() => switch (this) {
-        RampType.onRamp => V1RampType.rampTypeONRamp,
-        RampType.offRamp => V1RampType.rampTypeOffRamp,
-        RampType.unspecified => V1RampType.rampTypeUnspecified,
+  CommonRampType toProto() => switch (this) {
+        RampType.onRamp => CommonRampType.rampTypeONRamp,
+        RampType.offRamp => CommonRampType.rampTypeOffRamp,
+        RampType.unspecified => CommonRampType.rampTypeUnspecified,
       };
 }

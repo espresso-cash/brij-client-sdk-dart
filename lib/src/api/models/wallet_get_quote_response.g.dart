@@ -12,7 +12,7 @@ _$WalletGetQuoteResponseImpl _$$WalletGetQuoteResponseImplFromJson(
       cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
       fiatAmount: (json['fiatAmount'] as num).toDouble(),
       fiatCurrency: json['fiatCurrency'] as String,
-      rampType: V1RampType.fromJson(json['rampType'] as String),
+      rampType: CommonRampType.fromJson(json['rampType'] as String),
       conversionRate: (json['conversionRate'] as num).toDouble(),
       partnerFee:
           WalletRampFee.fromJson(json['partnerFee'] as Map<String, dynamic>),
@@ -28,16 +28,16 @@ Map<String, dynamic> _$$WalletGetQuoteResponseImplToJson(
       'cryptoAmount': instance.cryptoAmount,
       'fiatAmount': instance.fiatAmount,
       'fiatCurrency': instance.fiatCurrency,
-      'rampType': _$V1RampTypeEnumMap[instance.rampType]!,
+      'rampType': _$CommonRampTypeEnumMap[instance.rampType]!,
       'conversionRate': instance.conversionRate,
       'partnerFee': instance.partnerFee,
       'walletFee': instance.walletFee,
       'platformFee': instance.platformFee,
     };
 
-const _$V1RampTypeEnumMap = {
-  V1RampType.rampTypeUnspecified: 'RAMP_TYPE_UNSPECIFIED',
-  V1RampType.rampTypeONRamp: 'RAMP_TYPE_ON_RAMP',
-  V1RampType.rampTypeOffRamp: 'RAMP_TYPE_OFF_RAMP',
-  V1RampType.$unknown: r'$unknown',
+const _$CommonRampTypeEnumMap = {
+  CommonRampType.rampTypeUnspecified: 'RAMP_TYPE_UNSPECIFIED',
+  CommonRampType.rampTypeONRamp: 'RAMP_TYPE_ON_RAMP',
+  CommonRampType.rampTypeOffRamp: 'RAMP_TYPE_OFF_RAMP',
+  CommonRampType.$unknown: r'$unknown',
 };

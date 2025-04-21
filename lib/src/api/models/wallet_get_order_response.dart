@@ -4,7 +4,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'v1_ramp_type.dart';
+import 'common_ramp_type.dart';
 
 part 'wallet_get_order_response.freezed.dart';
 part 'wallet_get_order_response.g.dart';
@@ -18,7 +18,7 @@ class WalletGetOrderResponse with _$WalletGetOrderResponse {
     required String partnerPublicKey,
     required String userPublicKey,
     required String comment,
-    required V1RampType type,
+    required CommonRampType type,
     required double cryptoAmount,
     required String cryptoCurrency,
     required double fiatAmount,

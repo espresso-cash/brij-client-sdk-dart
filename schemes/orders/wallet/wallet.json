@@ -178,6 +178,15 @@
     }
   },
   "definitions": {
+    "commonRampType": {
+      "type": "string",
+      "enum": [
+        "RAMP_TYPE_UNSPECIFIED",
+        "RAMP_TYPE_ON_RAMP",
+        "RAMP_TYPE_OFF_RAMP"
+      ],
+      "default": "RAMP_TYPE_UNSPECIFIED"
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -205,15 +214,6 @@
           }
         }
       }
-    },
-    "v1RampType": {
-      "type": "string",
-      "enum": [
-        "RAMP_TYPE_UNSPECIFIED",
-        "RAMP_TYPE_ON_RAMP",
-        "RAMP_TYPE_OFF_RAMP"
-      ],
-      "default": "RAMP_TYPE_UNSPECIFIED"
     },
     "walletCreateOffRampOrderRequest": {
       "type": "object",
@@ -326,7 +326,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/v1RampType"
+          "$ref": "#/definitions/commonRampType"
         },
         "cryptoAmount": {
           "type": "number",
@@ -397,7 +397,7 @@
           "format": "double"
         },
         "rampType": {
-          "$ref": "#/definitions/v1RampType"
+          "$ref": "#/definitions/commonRampType"
         },
         "fiatCurrency": {
           "type": "string"
@@ -419,7 +419,7 @@
           "type": "string"
         },
         "rampType": {
-          "$ref": "#/definitions/v1RampType"
+          "$ref": "#/definitions/commonRampType"
         },
         "conversionRate": {
           "type": "number",

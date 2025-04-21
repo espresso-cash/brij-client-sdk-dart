@@ -4,7 +4,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'v1_ramp_type.dart';
+import 'common_ramp_type.dart';
 
 part 'wallet_get_quote_request.freezed.dart';
 part 'wallet_get_quote_request.g.dart';
@@ -15,7 +15,7 @@ class WalletGetQuoteRequest with _$WalletGetQuoteRequest {
     required String partnerPublicKey,
     required String walletPublicKey,
     required double cryptoAmount,
-    required V1RampType rampType,
+    required CommonRampType rampType,
     required String fiatCurrency,
   }) = _WalletGetQuoteRequest;
   

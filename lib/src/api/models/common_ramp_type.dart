@@ -5,7 +5,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @JsonEnum()
-enum V1RampType {
+enum CommonRampType {
   @JsonValue('RAMP_TYPE_UNSPECIFIED')
   rampTypeUnspecified('RAMP_TYPE_UNSPECIFIED'),
   @JsonValue('RAMP_TYPE_ON_RAMP')
@@ -15,9 +15,9 @@ enum V1RampType {
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
-  const V1RampType(this.json);
+  const CommonRampType(this.json);
 
-  factory V1RampType.fromJson(String json) => values.firstWhere(
+  factory CommonRampType.fromJson(String json) => values.firstWhere(
         (e) => e.json == json,
         orElse: () => $unknown,
       );

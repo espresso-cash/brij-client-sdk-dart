@@ -3,10 +3,10 @@ import 'dart:isolate';
 
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
+import 'package:kyc_client_dart/src/api/models/common_ramp_type.dart';
 import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_response.dart';
-import 'package:kyc_client_dart/src/api/models/v1_ramp_type.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
@@ -270,7 +270,7 @@ Order processWalletOrderData({
 
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage = order.type == V1RampType.rampTypeONRamp
+    final userMessage = order.type == CommonRampType.rampTypeONRamp
         ? createUserOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -298,7 +298,7 @@ Order processWalletOrderData({
 
   if (order.partnerSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage = order.type == V1RampType.rampTypeONRamp
+    final partnerMessage = order.type == CommonRampType.rampTypeONRamp
         ? createPartnerOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -358,7 +358,7 @@ Order processPartnerOrderData({
 
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage = order.type == V1RampType.rampTypeONRamp
+    final userMessage = order.type == CommonRampType.rampTypeONRamp
         ? createUserOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -386,7 +386,7 @@ Order processPartnerOrderData({
 
   if (order.partnerSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage = order.type == V1RampType.rampTypeONRamp
+    final partnerMessage = order.type == CommonRampType.rampTypeONRamp
         ? createPartnerOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,

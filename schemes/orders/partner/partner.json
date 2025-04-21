@@ -242,6 +242,15 @@
     }
   },
   "definitions": {
+    "commonRampType": {
+      "type": "string",
+      "enum": [
+        "RAMP_TYPE_UNSPECIFIED",
+        "RAMP_TYPE_ON_RAMP",
+        "RAMP_TYPE_OFF_RAMP"
+      ],
+      "default": "RAMP_TYPE_UNSPECIFIED"
+    },
     "partnerAcceptOrderRequest": {
       "type": "object",
       "properties": {
@@ -350,7 +359,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/v1RampType"
+          "$ref": "#/definitions/commonRampType"
         },
         "cryptoAmount": {
           "type": "number",
@@ -484,15 +493,6 @@
           }
         }
       }
-    },
-    "v1RampType": {
-      "type": "string",
-      "enum": [
-        "RAMP_TYPE_UNSPECIFIED",
-        "RAMP_TYPE_ON_RAMP",
-        "RAMP_TYPE_OFF_RAMP"
-      ],
-      "default": "RAMP_TYPE_UNSPECIFIED"
     }
   },
   "securityDefinitions": {
