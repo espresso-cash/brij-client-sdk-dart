@@ -73,7 +73,7 @@ class KycPartnerClient {
   }
 
   Future<void> _initializeOrderClient() async {
-    final dio = await _createAuthenticatedClient('orders.espressocash.com');
+    final dio = await _createAuthenticatedClient('orders.brij.fi');
     _orderClient = PartnerServiceClient(dio, baseUrl: config.orderBaseUrl);
   }
 

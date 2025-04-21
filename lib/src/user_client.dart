@@ -133,7 +133,7 @@ class KycUserClient {
   }
 
   Future<void> _initializeOrderClient() async {
-    final dio = await _createAuthenticatedClient('orders.espressocash.com');
+    final dio = await _createAuthenticatedClient('orders.brij.fi');
     _orderClient = WalletServiceClient(dio, baseUrl: config.orderBaseUrl);
   }
 
