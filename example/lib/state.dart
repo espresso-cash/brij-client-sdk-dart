@@ -6,7 +6,7 @@ import 'package:solana/base58.dart';
 import 'package:solana/solana.dart';
 import 'package:uuid/uuid.dart';
 
-class WalletAppState extends ChangeNotifier {
+class UserAppState extends ChangeNotifier {
   Ed25519HDKeyPair? get wallet => _wallet;
   String get authPublicKey => _authPublicKey;
   String get rawSecretKey => _rawSecretKey;
@@ -32,6 +32,10 @@ class WalletAppState extends ChangeNotifier {
   String? get onRampOrderId => _onRampOrderId;
   String? get offRampOrderId => _offRampOrderId;
   List<String>? _orders;
+
+  String? _quote;
+
+  String? get quote => _quote;
 
   Future<void> createWallet() async {
     _wallet = await Ed25519HDKeyPair.random();
@@ -85,9 +89,7 @@ class WalletAppState extends ChangeNotifier {
     await _client.setData(
       email: Email(value: email, id: _emailId),
       phone: Phone(value: phone, id: _phoneId),
-      selfie: file != null
-          ? Selfie(value: await file.readAsBytes(), id: _selfieId)
-          : null,
+      selfie: file != null ? Selfie(value: await file.readAsBytes(), id: _selfieId) : null,
     );
 
     await fetchData();
@@ -182,11 +184,48 @@ class WalletAppState extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> getOnRampQuote({
+    required String partnerPK,
+    required String cryptoAmount,
+    required String fiatCurrency,
+    required String walletPK,
+  }) async {
+    final response = await _client.getQuote(
+      partnerPK: partnerPK,
+      walletPK: walletPK,
+      cryptoAmount: double.parse(cryptoAmount),
+      rampType: RampType.onRamp,
+      fiatCurrency: fiatCurrency,
+    );
+
+    _quote = response.toJson().toString();
+    notifyListeners();
+  }
+
+  Future<void> getOffRampQuote({
+    required String partnerPK,
+    required String cryptoAmount,
+    required String fiatCurrency,
+    required String walletPK,
+  }) async {
+    final response = await _client.getQuote(
+      partnerPK: partnerPK,
+      walletPK: walletPK,
+      cryptoAmount: double.parse(cryptoAmount),
+      rampType: RampType.offRamp,
+      fiatCurrency: fiatCurrency,
+    );
+
+    _quote = response.toJson().toString();
+    notifyListeners();
+  }
 }
 
 class PartnerAppState extends ChangeNotifier {
   String get authPublicKey => _authPublicKey;
   String get userSecretKey => _userSecretKey;
+  String get partnerFeesAddress => _partnerFeesAddress;
   Map<String, dynamic>? get userData => _userData;
 
   String? get onRampOrderData => _onRampOrderData;
@@ -209,6 +248,8 @@ class PartnerAppState extends ChangeNotifier {
   late String _authPublicKey = '';
   late String _userSecretKey = '';
 
+  final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
+
   Map<String, dynamic>? _userData;
 
   String? _onRampOrderData;
@@ -229,10 +270,7 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair
-        .extractPublicKey()
-        .then((value) => value.bytes)
-        .then(base58encode);
+    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
@@ -368,4 +406,41 @@ class PartnerAppState extends ChangeNotifier {
   }) async {
     await _client.rejectOrder(orderId: orderId, reason: reason);
   }
+
+  Future<void> updateFees({
+    required String onRampFixedFee,
+    required String onRampPercentageFee,
+    required String onRampRate,
+    required String onRampFiatCurrency,
+    required String offRampFixedFee,
+    required String offRampPercentageFee,
+    required String offRampRate,
+    required String offRampFiatCurrency,
+    required String walletAddress,
+  }) async {
+    await _client.updateFees(
+      onRampFee: RampFeeUpdate(
+        fixedFee: double.parse(onRampFixedFee),
+        percentageFee: double.parse(onRampPercentageFee),
+        conversionRates: ConversionRate(
+          cryptoCurrency: 'USDC',
+          fiatCurrency: onRampFiatCurrency,
+          rate: double.parse(onRampRate),
+        ),
+      ),
+      offRampFee: RampFeeUpdate(
+        fixedFee: double.parse(offRampFixedFee),
+        percentageFee: double.parse(offRampPercentageFee),
+        conversionRates: ConversionRate(
+          cryptoCurrency: 'USDC',
+          fiatCurrency: offRampFiatCurrency,
+          rate: double.parse(offRampRate),
+        ),
+      ),
+      walletAddress: walletAddress,
+    );
+  }
 }
+
+// TODO(vsumin): Replace it with real one
+const walletAuthPk = 'DA71MeXeEwuM2FzWj8Bki6XTBTYC9TUsXspzPoNy2yEQ';
