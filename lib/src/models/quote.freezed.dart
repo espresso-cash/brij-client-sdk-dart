@@ -28,6 +28,7 @@ mixin _$Quote {
   RampFee get partnerFee => throw _privateConstructorUsedError;
   RampFee get walletFee => throw _privateConstructorUsedError;
   RampFee get platformFee => throw _privateConstructorUsedError;
+  double get totalFee => throw _privateConstructorUsedError;
 
   /// Serializes this Quote to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $QuoteCopyWith<$Res> {
       double conversionRate,
       RampFee partnerFee,
       RampFee walletFee,
-      RampFee platformFee});
+      RampFee platformFee,
+      double totalFee});
 
   $RampFeeCopyWith<$Res> get partnerFee;
   $RampFeeCopyWith<$Res> get walletFee;
@@ -81,6 +83,7 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
     Object? partnerFee = null,
     Object? walletFee = null,
     Object? platformFee = null,
+    Object? totalFee = null,
   }) {
     return _then(_value.copyWith(
       cryptoAmount: null == cryptoAmount
@@ -115,6 +118,10 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
           ? _value.platformFee
           : platformFee // ignore: cast_nullable_to_non_nullable
               as RampFee,
+      totalFee: null == totalFee
+          ? _value.totalFee
+          : totalFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -164,7 +171,8 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
       double conversionRate,
       RampFee partnerFee,
       RampFee walletFee,
-      RampFee platformFee});
+      RampFee platformFee,
+      double totalFee});
 
   @override
   $RampFeeCopyWith<$Res> get partnerFee;
@@ -195,6 +203,7 @@ class __$$QuoteImplCopyWithImpl<$Res>
     Object? partnerFee = null,
     Object? walletFee = null,
     Object? platformFee = null,
+    Object? totalFee = null,
   }) {
     return _then(_$QuoteImpl(
       cryptoAmount: null == cryptoAmount
@@ -229,6 +238,10 @@ class __$$QuoteImplCopyWithImpl<$Res>
           ? _value.platformFee
           : platformFee // ignore: cast_nullable_to_non_nullable
               as RampFee,
+      totalFee: null == totalFee
+          ? _value.totalFee
+          : totalFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -244,7 +257,8 @@ class _$QuoteImpl implements _Quote {
       required this.conversionRate,
       required this.partnerFee,
       required this.walletFee,
-      required this.platformFee});
+      required this.platformFee,
+      required this.totalFee});
 
   factory _$QuoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuoteImplFromJson(json);
@@ -265,10 +279,12 @@ class _$QuoteImpl implements _Quote {
   final RampFee walletFee;
   @override
   final RampFee platformFee;
+  @override
+  final double totalFee;
 
   @override
   String toString() {
-    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee)';
+    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee)';
   }
 
   @override
@@ -290,13 +306,24 @@ class _$QuoteImpl implements _Quote {
             (identical(other.walletFee, walletFee) ||
                 other.walletFee == walletFee) &&
             (identical(other.platformFee, platformFee) ||
-                other.platformFee == platformFee));
+                other.platformFee == platformFee) &&
+            (identical(other.totalFee, totalFee) ||
+                other.totalFee == totalFee));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, cryptoAmount, fiatAmount,
-      fiatCurrency, type, conversionRate, partnerFee, walletFee, platformFee);
+  int get hashCode => Object.hash(
+      runtimeType,
+      cryptoAmount,
+      fiatAmount,
+      fiatCurrency,
+      type,
+      conversionRate,
+      partnerFee,
+      walletFee,
+      platformFee,
+      totalFee);
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -323,7 +350,8 @@ abstract class _Quote implements Quote {
       required final double conversionRate,
       required final RampFee partnerFee,
       required final RampFee walletFee,
-      required final RampFee platformFee}) = _$QuoteImpl;
+      required final RampFee platformFee,
+      required final double totalFee}) = _$QuoteImpl;
 
   factory _Quote.fromJson(Map<String, dynamic> json) = _$QuoteImpl.fromJson;
 
@@ -343,6 +371,8 @@ abstract class _Quote implements Quote {
   RampFee get walletFee;
   @override
   RampFee get platformFee;
+  @override
+  double get totalFee;
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.

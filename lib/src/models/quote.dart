@@ -17,6 +17,7 @@ class Quote with _$Quote {
     required RampFee partnerFee,
     required RampFee walletFee,
     required RampFee platformFee,
+    required double totalFee,
   }) = _Quote;
 
   factory Quote.fromJson(Map<String, Object?> json) => _$QuoteFromJson(json);
@@ -30,6 +31,7 @@ class Quote with _$Quote {
         partnerFee: RampFee.fromWalletRampFee(response.partnerFee),
         walletFee: RampFee.fromWalletRampFee(response.walletFee),
         platformFee: RampFee.fromWalletRampFee(response.platformFee),
+        totalFee: response.totalFee,
       );
 }
 

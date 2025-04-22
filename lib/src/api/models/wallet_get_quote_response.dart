@@ -21,6 +21,7 @@ class WalletGetQuoteResponse with _$WalletGetQuoteResponse {
     required WalletRampFee partnerFee,
     required WalletRampFee walletFee,
     required WalletRampFee platformFee,
+    required double totalFee,
   }) = _WalletGetQuoteResponse;
   
   factory WalletGetQuoteResponse.fromJson(Map<String, Object?> json) => _$WalletGetQuoteResponseFromJson(json);

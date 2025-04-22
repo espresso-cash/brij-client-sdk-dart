@@ -29,6 +29,7 @@ mixin _$WalletGetQuoteResponse {
   WalletRampFee get partnerFee => throw _privateConstructorUsedError;
   WalletRampFee get walletFee => throw _privateConstructorUsedError;
   WalletRampFee get platformFee => throw _privateConstructorUsedError;
+  double get totalFee => throw _privateConstructorUsedError;
 
   /// Serializes this WalletGetQuoteResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,7 +55,8 @@ abstract class $WalletGetQuoteResponseCopyWith<$Res> {
       double conversionRate,
       WalletRampFee partnerFee,
       WalletRampFee walletFee,
-      WalletRampFee platformFee});
+      WalletRampFee platformFee,
+      double totalFee});
 
   $WalletRampFeeCopyWith<$Res> get partnerFee;
   $WalletRampFeeCopyWith<$Res> get walletFee;
@@ -85,6 +87,7 @@ class _$WalletGetQuoteResponseCopyWithImpl<$Res,
     Object? partnerFee = null,
     Object? walletFee = null,
     Object? platformFee = null,
+    Object? totalFee = null,
   }) {
     return _then(_value.copyWith(
       cryptoAmount: null == cryptoAmount
@@ -119,6 +122,10 @@ class _$WalletGetQuoteResponseCopyWithImpl<$Res,
           ? _value.platformFee
           : platformFee // ignore: cast_nullable_to_non_nullable
               as WalletRampFee,
+      totalFee: null == totalFee
+          ? _value.totalFee
+          : totalFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -170,7 +177,8 @@ abstract class _$$WalletGetQuoteResponseImplCopyWith<$Res>
       double conversionRate,
       WalletRampFee partnerFee,
       WalletRampFee walletFee,
-      WalletRampFee platformFee});
+      WalletRampFee platformFee,
+      double totalFee});
 
   @override
   $WalletRampFeeCopyWith<$Res> get partnerFee;
@@ -203,6 +211,7 @@ class __$$WalletGetQuoteResponseImplCopyWithImpl<$Res>
     Object? partnerFee = null,
     Object? walletFee = null,
     Object? platformFee = null,
+    Object? totalFee = null,
   }) {
     return _then(_$WalletGetQuoteResponseImpl(
       cryptoAmount: null == cryptoAmount
@@ -237,6 +246,10 @@ class __$$WalletGetQuoteResponseImplCopyWithImpl<$Res>
           ? _value.platformFee
           : platformFee // ignore: cast_nullable_to_non_nullable
               as WalletRampFee,
+      totalFee: null == totalFee
+          ? _value.totalFee
+          : totalFee // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -252,7 +265,8 @@ class _$WalletGetQuoteResponseImpl implements _WalletGetQuoteResponse {
       required this.conversionRate,
       required this.partnerFee,
       required this.walletFee,
-      required this.platformFee});
+      required this.platformFee,
+      required this.totalFee});
 
   factory _$WalletGetQuoteResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$WalletGetQuoteResponseImplFromJson(json);
@@ -273,10 +287,12 @@ class _$WalletGetQuoteResponseImpl implements _WalletGetQuoteResponse {
   final WalletRampFee walletFee;
   @override
   final WalletRampFee platformFee;
+  @override
+  final double totalFee;
 
   @override
   String toString() {
-    return 'WalletGetQuoteResponse(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, rampType: $rampType, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee)';
+    return 'WalletGetQuoteResponse(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, rampType: $rampType, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee)';
   }
 
   @override
@@ -299,7 +315,9 @@ class _$WalletGetQuoteResponseImpl implements _WalletGetQuoteResponse {
             (identical(other.walletFee, walletFee) ||
                 other.walletFee == walletFee) &&
             (identical(other.platformFee, platformFee) ||
-                other.platformFee == platformFee));
+                other.platformFee == platformFee) &&
+            (identical(other.totalFee, totalFee) ||
+                other.totalFee == totalFee));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -313,7 +331,8 @@ class _$WalletGetQuoteResponseImpl implements _WalletGetQuoteResponse {
       conversionRate,
       partnerFee,
       walletFee,
-      platformFee);
+      platformFee,
+      totalFee);
 
   /// Create a copy of WalletGetQuoteResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -341,7 +360,8 @@ abstract class _WalletGetQuoteResponse implements WalletGetQuoteResponse {
       required final double conversionRate,
       required final WalletRampFee partnerFee,
       required final WalletRampFee walletFee,
-      required final WalletRampFee platformFee}) = _$WalletGetQuoteResponseImpl;
+      required final WalletRampFee platformFee,
+      required final double totalFee}) = _$WalletGetQuoteResponseImpl;
 
   factory _WalletGetQuoteResponse.fromJson(Map<String, dynamic> json) =
       _$WalletGetQuoteResponseImpl.fromJson;
@@ -362,6 +382,8 @@ abstract class _WalletGetQuoteResponse implements WalletGetQuoteResponse {
   WalletRampFee get walletFee;
   @override
   WalletRampFee get platformFee;
+  @override
+  double get totalFee;
 
   /// Create a copy of WalletGetQuoteResponse
   /// with the given fields replaced by the non-null parameter values.

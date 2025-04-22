@@ -433,6 +433,10 @@
         },
         "platformFee": {
           "$ref": "#/definitions/walletRampFee"
+        },
+        "totalFee": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

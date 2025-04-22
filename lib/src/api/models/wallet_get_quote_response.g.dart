@@ -20,6 +20,7 @@ _$WalletGetQuoteResponseImpl _$$WalletGetQuoteResponseImplFromJson(
           WalletRampFee.fromJson(json['walletFee'] as Map<String, dynamic>),
       platformFee:
           WalletRampFee.fromJson(json['platformFee'] as Map<String, dynamic>),
+      totalFee: (json['totalFee'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$WalletGetQuoteResponseImplToJson(
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$WalletGetQuoteResponseImplToJson(
       'partnerFee': instance.partnerFee,
       'walletFee': instance.walletFee,
       'platformFee': instance.platformFee,
+      'totalFee': instance.totalFee,
     };
 
 const _$CommonRampTypeEnumMap = {
