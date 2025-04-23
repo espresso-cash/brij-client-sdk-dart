@@ -106,7 +106,8 @@ class KycUserClient {
 
   bool _isUserNotInitialized(DioException e) =>
       e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] == 'user not initialized';
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'user not initialized';
 
   Future<Uint8List> _generateSeed({String? message}) async {
     final signature = await sign(utf8.encode(message ?? _seedMessage));
@@ -129,7 +130,8 @@ class KycUserClient {
 
   Future<void> _initializeValidatorClient() async {
     final dio = await _createAuthenticatedClient('verifier.brij.fi');
-    _validatorClient = VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
+    _validatorClient =
+        VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
   }
 
   Future<void> _initializeOrderClient() async {
@@ -157,7 +159,8 @@ class KycUserClient {
   }
 
   Future<void> _initializeEncryption({String? encryptedSecretKey}) async {
-    final edSK = Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
+    final edSK =
+        Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
     final xSK = Uint8List(32);
     TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(xSK, edSK);
     _encryptionSecretKey = PrivateKey(xSK);
@@ -168,14 +171,16 @@ class KycUserClient {
         ? await Chacha20.poly1305Aead().newSecretKey()
         : SecretKey(sealedBox.decrypt(base64Decode(encryptedSecretKey)));
 
-    _rawSecretKey = base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
+    _rawSecretKey =
+        base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
     _encryptedSecretKey = base64Encode(
       sealedBox.encrypt(Uint8List.fromList(await _secretKey.extractBytes())),
     );
     _secretBox = SecretBox(Uint8List.fromList(await _secretKey.extractBytes()));
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
-        await _authKeyPair.extractPrivateKeyBytes() + (await _authKeyPair.extractPublicKey()).bytes,
+        await _authKeyPair.extractPrivateKeyBytes() +
+            (await _authKeyPair.extractPublicKey()).bytes,
       ),
     );
   }
@@ -190,16 +195,18 @@ class KycUserClient {
         walletAddress: walletAddress,
         message: _seedMessage,
         encryptedSecretKey: _encryptedSecretKey,
-        walletProofSignature: base58.encode(Uint8List.fromList(proofSignature.bytes)),
+        walletProofSignature:
+            base58.encode(Uint8List.fromList(proofSignature.bytes)),
       ),
     );
   }
 
-  Future<PartnerModel> getPartnerInfo({required String partnerPK}) => _storageClient
-      .storageServiceGetPartnerInfo(
-        body: V1GetPartnerInfoRequest(id: partnerPK),
-      )
-      .then((e) => PartnerModel.fromJson(e.toJson()));
+  Future<PartnerModel> getPartnerInfo({required String partnerPK}) =>
+      _storageClient
+          .storageServiceGetPartnerInfo(
+            body: V1GetPartnerInfoRequest(id: partnerPK),
+          )
+          .then((e) => PartnerModel.fromJson(e.toJson()));
 
   Future<void> grantPartnerAccess(String partnerPK) async {
     final partnerEdPK = Uint8List.fromList(base58.decode(partnerPK));
@@ -397,6 +404,7 @@ class KycUserClient {
     required double fiatAmount,
     required String fiatCurrency,
     required String cryptoWalletAddress,
+    required String walletPK,
   }) async {
     final signatureMessage = createUserOnRampMessage(
       cryptoAmount: cryptoAmount,
@@ -416,6 +424,7 @@ class KycUserClient {
         fiatCurrency: fiatCurrency,
         userWalletAddress: cryptoWalletAddress,
         userSignature: base58.encode(signature.signature.asTypedList),
+        walletPublicKey: walletPK,
       ),
     );
 
@@ -431,6 +440,7 @@ class KycUserClient {
     required String bankName,
     required String bankAccount,
     required String cryptoWalletAddress,
+    required String walletPK,
   }) async {
     final encryptedBankName = base64Encode(
       encrypt(
@@ -468,6 +478,7 @@ class KycUserClient {
         bankAccount: encryptedBankAccount,
         userSignature: base58.encode(signature.signature.asTypedList),
         userWalletAddress: cryptoWalletAddress,
+        walletPublicKey: walletPK,
       ),
     );
 
@@ -534,7 +545,8 @@ class KycUserClient {
 
   bool _isKycDataNotFound(DioException e) =>
       e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] == 'kyc data not found';
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'kyc data not found';
 
   Future<String> startKycRequest({
     required String country,

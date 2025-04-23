@@ -41,6 +41,7 @@ mixin _$PartnerGetOrderResponse {
   String get userSignature => throw _privateConstructorUsedError;
   String get partnerSignature => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
 
   /// Serializes this PartnerGetOrderResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -78,7 +79,8 @@ abstract class $PartnerGetOrderResponseCopyWith<$Res> {
       String externalId,
       String userSignature,
       String partnerSignature,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -117,6 +119,7 @@ class _$PartnerGetOrderResponseCopyWithImpl<$Res,
     Object? userSignature = null,
     Object? partnerSignature = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_value.copyWith(
       orderId: null == orderId
@@ -199,6 +202,10 @@ class _$PartnerGetOrderResponseCopyWithImpl<$Res,
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -232,7 +239,8 @@ abstract class _$$PartnerGetOrderResponseImplCopyWith<$Res>
       String externalId,
       String userSignature,
       String partnerSignature,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -270,6 +278,7 @@ class __$$PartnerGetOrderResponseImplCopyWithImpl<$Res>
     Object? userSignature = null,
     Object? partnerSignature = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_$PartnerGetOrderResponseImpl(
       orderId: null == orderId
@@ -352,6 +361,10 @@ class __$$PartnerGetOrderResponseImplCopyWithImpl<$Res>
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -379,7 +392,8 @@ class _$PartnerGetOrderResponseImpl implements _PartnerGetOrderResponse {
       required this.externalId,
       required this.userSignature,
       required this.partnerSignature,
-      required this.userWalletAddress});
+      required this.userWalletAddress,
+      required this.walletPublicKey});
 
   factory _$PartnerGetOrderResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartnerGetOrderResponseImplFromJson(json);
@@ -424,10 +438,12 @@ class _$PartnerGetOrderResponseImpl implements _PartnerGetOrderResponse {
   final String partnerSignature;
   @override
   final String userWalletAddress;
+  @override
+  final String walletPublicKey;
 
   @override
   String toString() {
-    return 'PartnerGetOrderResponse(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userSignature: $userSignature, partnerSignature: $partnerSignature, userWalletAddress: $userWalletAddress)';
+    return 'PartnerGetOrderResponse(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userSignature: $userSignature, partnerSignature: $partnerSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -469,7 +485,9 @@ class _$PartnerGetOrderResponseImpl implements _PartnerGetOrderResponse {
             (identical(other.partnerSignature, partnerSignature) ||
                 other.partnerSignature == partnerSignature) &&
             (identical(other.userWalletAddress, userWalletAddress) ||
-                other.userWalletAddress == userWalletAddress));
+                other.userWalletAddress == userWalletAddress) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -495,7 +513,8 @@ class _$PartnerGetOrderResponseImpl implements _PartnerGetOrderResponse {
         externalId,
         userSignature,
         partnerSignature,
-        userWalletAddress
+        userWalletAddress,
+        walletPublicKey
       ]);
 
   /// Create a copy of PartnerGetOrderResponse
@@ -536,7 +555,8 @@ abstract class _PartnerGetOrderResponse implements PartnerGetOrderResponse {
       required final String externalId,
       required final String userSignature,
       required final String partnerSignature,
-      required final String userWalletAddress}) = _$PartnerGetOrderResponseImpl;
+      required final String userWalletAddress,
+      required final String walletPublicKey}) = _$PartnerGetOrderResponseImpl;
 
   factory _PartnerGetOrderResponse.fromJson(Map<String, dynamic> json) =
       _$PartnerGetOrderResponseImpl.fromJson;
@@ -581,6 +601,8 @@ abstract class _PartnerGetOrderResponse implements PartnerGetOrderResponse {
   String get partnerSignature;
   @override
   String get userWalletAddress;
+  @override
+  String get walletPublicKey;
 
   /// Create a copy of PartnerGetOrderResponse
   /// with the given fields replaced by the non-null parameter values.

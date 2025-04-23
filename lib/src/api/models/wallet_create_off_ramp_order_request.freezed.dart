@@ -30,6 +30,7 @@ mixin _$WalletCreateOffRampOrderRequest {
   String get bankAccount => throw _privateConstructorUsedError;
   String get userSignature => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
 
   /// Serializes this WalletCreateOffRampOrderRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +59,8 @@ abstract class $WalletCreateOffRampOrderRequestCopyWith<$Res> {
       String bankName,
       String bankAccount,
       String userSignature,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -86,6 +88,7 @@ class _$WalletCreateOffRampOrderRequestCopyWithImpl<$Res,
     Object? bankAccount = null,
     Object? userSignature = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_value.copyWith(
       partnerPublicKey: null == partnerPublicKey
@@ -124,6 +127,10 @@ class _$WalletCreateOffRampOrderRequestCopyWithImpl<$Res,
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -146,7 +153,8 @@ abstract class _$$WalletCreateOffRampOrderRequestImplCopyWith<$Res>
       String bankName,
       String bankAccount,
       String userSignature,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -173,6 +181,7 @@ class __$$WalletCreateOffRampOrderRequestImplCopyWithImpl<$Res>
     Object? bankAccount = null,
     Object? userSignature = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_$WalletCreateOffRampOrderRequestImpl(
       partnerPublicKey: null == partnerPublicKey
@@ -211,6 +220,10 @@ class __$$WalletCreateOffRampOrderRequestImplCopyWithImpl<$Res>
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -228,7 +241,8 @@ class _$WalletCreateOffRampOrderRequestImpl
       required this.bankName,
       required this.bankAccount,
       required this.userSignature,
-      required this.userWalletAddress});
+      required this.userWalletAddress,
+      required this.walletPublicKey});
 
   factory _$WalletCreateOffRampOrderRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -252,10 +266,12 @@ class _$WalletCreateOffRampOrderRequestImpl
   final String userSignature;
   @override
   final String userWalletAddress;
+  @override
+  final String walletPublicKey;
 
   @override
   String toString() {
-    return 'WalletCreateOffRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, userSignature: $userSignature, userWalletAddress: $userWalletAddress)';
+    return 'WalletCreateOffRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, userSignature: $userSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -280,7 +296,9 @@ class _$WalletCreateOffRampOrderRequestImpl
             (identical(other.userSignature, userSignature) ||
                 other.userSignature == userSignature) &&
             (identical(other.userWalletAddress, userWalletAddress) ||
-                other.userWalletAddress == userWalletAddress));
+                other.userWalletAddress == userWalletAddress) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -295,7 +313,8 @@ class _$WalletCreateOffRampOrderRequestImpl
       bankName,
       bankAccount,
       userSignature,
-      userWalletAddress);
+      userWalletAddress,
+      walletPublicKey);
 
   /// Create a copy of WalletCreateOffRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -326,7 +345,8 @@ abstract class _WalletCreateOffRampOrderRequest
           required final String bankName,
           required final String bankAccount,
           required final String userSignature,
-          required final String userWalletAddress}) =
+          required final String userWalletAddress,
+          required final String walletPublicKey}) =
       _$WalletCreateOffRampOrderRequestImpl;
 
   factory _WalletCreateOffRampOrderRequest.fromJson(Map<String, dynamic> json) =
@@ -350,6 +370,8 @@ abstract class _WalletCreateOffRampOrderRequest
   String get userSignature;
   @override
   String get userWalletAddress;
+  @override
+  String get walletPublicKey;
 
   /// Create a copy of WalletCreateOffRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.

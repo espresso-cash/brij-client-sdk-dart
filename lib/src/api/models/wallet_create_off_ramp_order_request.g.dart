@@ -18,6 +18,7 @@ _$WalletCreateOffRampOrderRequestImpl
           bankAccount: json['bankAccount'] as String,
           userSignature: json['userSignature'] as String,
           userWalletAddress: json['userWalletAddress'] as String,
+          walletPublicKey: json['walletPublicKey'] as String,
         );
 
 Map<String, dynamic> _$$WalletCreateOffRampOrderRequestImplToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$WalletCreateOffRampOrderRequestImplToJson(
       'bankAccount': instance.bankAccount,
       'userSignature': instance.userSignature,
       'userWalletAddress': instance.userWalletAddress,
+      'walletPublicKey': instance.walletPublicKey,
     };

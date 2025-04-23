@@ -31,6 +31,7 @@ class WalletGetOrderResponse with _$WalletGetOrderResponse {
     required String userSignature,
     required String partnerSignature,
     required String userWalletAddress,
+    required String walletPublicKey,
   }) = _WalletGetOrderResponse;
   
   factory WalletGetOrderResponse.fromJson(Map<String, Object?> json) => _$WalletGetOrderResponseFromJson(json);

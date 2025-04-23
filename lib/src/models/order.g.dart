@@ -25,6 +25,7 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       transactionId: json['transactionId'] as String,
       externalId: json['externalId'] as String,
       userWalletAddress: json['userWalletAddress'] as String,
+      walletPublicKey: json['walletPublicKey'] as String,
     );
 
 Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'transactionId': instance.transactionId,
       'externalId': instance.externalId,
       'userWalletAddress': instance.userWalletAddress,
+      'walletPublicKey': instance.walletPublicKey,
     };
 
 const _$RampTypeEnumMap = {

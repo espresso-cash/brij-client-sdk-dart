@@ -16,6 +16,7 @@ _$WalletCreateOnRampOrderRequestImpl
           fiatCurrency: json['fiatCurrency'] as String,
           userSignature: json['userSignature'] as String,
           userWalletAddress: json['userWalletAddress'] as String,
+          walletPublicKey: json['walletPublicKey'] as String,
         );
 
 Map<String, dynamic> _$$WalletCreateOnRampOrderRequestImplToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$WalletCreateOnRampOrderRequestImplToJson(
       'fiatCurrency': instance.fiatCurrency,
       'userSignature': instance.userSignature,
       'userWalletAddress': instance.userWalletAddress,
+      'walletPublicKey': instance.walletPublicKey,
     };
