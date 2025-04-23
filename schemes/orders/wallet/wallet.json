@@ -246,6 +246,9 @@
         },
         "userWalletAddress": {
           "type": "string"
+        },
+        "walletPublicKey": {
+          "type": "string"
         }
       }
     },
@@ -281,6 +284,9 @@
           "type": "string"
         },
         "userWalletAddress": {
+          "type": "string"
+        },
+        "walletPublicKey": {
           "type": "string"
         }
       }
@@ -364,6 +370,9 @@
           "type": "string"
         },
         "userWalletAddress": {
+          "type": "string"
+        },
+        "walletPublicKey": {
           "type": "string"
         }
       }

@@ -40,6 +40,7 @@ mixin _$WalletGetOrderResponse {
   String get userSignature => throw _privateConstructorUsedError;
   String get partnerSignature => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
 
   /// Serializes this WalletGetOrderResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -76,7 +77,8 @@ abstract class $WalletGetOrderResponseCopyWith<$Res> {
       String transactionId,
       String userSignature,
       String partnerSignature,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -114,6 +116,7 @@ class _$WalletGetOrderResponseCopyWithImpl<$Res,
     Object? userSignature = null,
     Object? partnerSignature = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_value.copyWith(
       orderId: null == orderId
@@ -192,6 +195,10 @@ class _$WalletGetOrderResponseCopyWithImpl<$Res,
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -224,7 +231,8 @@ abstract class _$$WalletGetOrderResponseImplCopyWith<$Res>
       String transactionId,
       String userSignature,
       String partnerSignature,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -261,6 +269,7 @@ class __$$WalletGetOrderResponseImplCopyWithImpl<$Res>
     Object? userSignature = null,
     Object? partnerSignature = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_$WalletGetOrderResponseImpl(
       orderId: null == orderId
@@ -339,6 +348,10 @@ class __$$WalletGetOrderResponseImplCopyWithImpl<$Res>
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -365,7 +378,8 @@ class _$WalletGetOrderResponseImpl implements _WalletGetOrderResponse {
       required this.transactionId,
       required this.userSignature,
       required this.partnerSignature,
-      required this.userWalletAddress});
+      required this.userWalletAddress,
+      required this.walletPublicKey});
 
   factory _$WalletGetOrderResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$WalletGetOrderResponseImplFromJson(json);
@@ -408,10 +422,12 @@ class _$WalletGetOrderResponseImpl implements _WalletGetOrderResponse {
   final String partnerSignature;
   @override
   final String userWalletAddress;
+  @override
+  final String walletPublicKey;
 
   @override
   String toString() {
-    return 'WalletGetOrderResponse(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, userSignature: $userSignature, partnerSignature: $partnerSignature, userWalletAddress: $userWalletAddress)';
+    return 'WalletGetOrderResponse(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, userSignature: $userSignature, partnerSignature: $partnerSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -451,7 +467,9 @@ class _$WalletGetOrderResponseImpl implements _WalletGetOrderResponse {
             (identical(other.partnerSignature, partnerSignature) ||
                 other.partnerSignature == partnerSignature) &&
             (identical(other.userWalletAddress, userWalletAddress) ||
-                other.userWalletAddress == userWalletAddress));
+                other.userWalletAddress == userWalletAddress) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -476,7 +494,8 @@ class _$WalletGetOrderResponseImpl implements _WalletGetOrderResponse {
         transactionId,
         userSignature,
         partnerSignature,
-        userWalletAddress
+        userWalletAddress,
+        walletPublicKey
       ]);
 
   /// Create a copy of WalletGetOrderResponse
@@ -516,7 +535,8 @@ abstract class _WalletGetOrderResponse implements WalletGetOrderResponse {
       required final String transactionId,
       required final String userSignature,
       required final String partnerSignature,
-      required final String userWalletAddress}) = _$WalletGetOrderResponseImpl;
+      required final String userWalletAddress,
+      required final String walletPublicKey}) = _$WalletGetOrderResponseImpl;
 
   factory _WalletGetOrderResponse.fromJson(Map<String, dynamic> json) =
       _$WalletGetOrderResponseImpl.fromJson;
@@ -559,6 +579,8 @@ abstract class _WalletGetOrderResponse implements WalletGetOrderResponse {
   String get partnerSignature;
   @override
   String get userWalletAddress;
+  @override
+  String get walletPublicKey;
 
   /// Create a copy of WalletGetOrderResponse
   /// with the given fields replaced by the non-null parameter values.

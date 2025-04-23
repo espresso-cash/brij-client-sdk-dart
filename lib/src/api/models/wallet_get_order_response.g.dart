@@ -28,6 +28,7 @@ _$WalletGetOrderResponseImpl _$$WalletGetOrderResponseImplFromJson(
       userSignature: json['userSignature'] as String,
       partnerSignature: json['partnerSignature'] as String,
       userWalletAddress: json['userWalletAddress'] as String,
+      walletPublicKey: json['walletPublicKey'] as String,
     );
 
 Map<String, dynamic> _$$WalletGetOrderResponseImplToJson(
@@ -52,6 +53,7 @@ Map<String, dynamic> _$$WalletGetOrderResponseImplToJson(
       'userSignature': instance.userSignature,
       'partnerSignature': instance.partnerSignature,
       'userWalletAddress': instance.userWalletAddress,
+      'walletPublicKey': instance.walletPublicKey,
     };
 
 const _$CommonRampTypeEnumMap = {

@@ -32,6 +32,7 @@ class PartnerGetOrderResponse with _$PartnerGetOrderResponse {
     required String userSignature,
     required String partnerSignature,
     required String userWalletAddress,
+    required String walletPublicKey,
   }) = _PartnerGetOrderResponse;
   
   factory PartnerGetOrderResponse.fromJson(Map<String, Object?> json) => _$PartnerGetOrderResponseFromJson(json);
