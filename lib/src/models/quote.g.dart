@@ -16,6 +16,7 @@ _$QuoteImpl _$$QuoteImplFromJson(Map<String, dynamic> json) => _$QuoteImpl(
       walletFee: RampFee.fromJson(json['walletFee'] as Map<String, dynamic>),
       platformFee:
           RampFee.fromJson(json['platformFee'] as Map<String, dynamic>),
+      totalFee: (json['totalFee'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$QuoteImplToJson(_$QuoteImpl instance) =>
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$QuoteImplToJson(_$QuoteImpl instance) =>
       'partnerFee': instance.partnerFee,
       'walletFee': instance.walletFee,
       'platformFee': instance.platformFee,
+      'totalFee': instance.totalFee,
     };
 
 const _$RampTypeEnumMap = {
