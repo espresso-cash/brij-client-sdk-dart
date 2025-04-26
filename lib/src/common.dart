@@ -148,7 +148,6 @@ UserData _processUserData({
           firstName: wrappedData.firstName,
           lastName: wrappedData.lastName,
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypeBirthDate:
@@ -156,7 +155,6 @@ UserData _processUserData({
         birthDate = BirthDate(
           value: wrappedData.value.toDateTime(),
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypePhone:
@@ -175,7 +173,6 @@ UserData _processUserData({
             number: wrappedData.number,
             countryCode: wrappedData.countryCode,
             id: id,
-            status: status,
             expirationDate: wrappedData.expirationDate.toDateTime(),
             frontImage: wrappedData.photo.frontImage,
             backImage: wrappedData.photo.backImage,
@@ -191,7 +188,6 @@ UserData _processUserData({
             bankCode: wrappedData.bankCode,
             countryCode: wrappedData.countryCode,
             id: id,
-            status: status,
             hash: hash,
           ),
         );
@@ -200,7 +196,6 @@ UserData _processUserData({
         selfie = Selfie(
           value: wrappedData.value,
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypeCitizenship:
@@ -208,7 +203,6 @@ UserData _processUserData({
         citizenship = Citizenship(
           value: wrappedData.value,
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypeUnspecified:
