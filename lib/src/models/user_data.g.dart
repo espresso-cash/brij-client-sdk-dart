@@ -32,7 +32,6 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       selfie: json['selfie'] == null
           ? null
           : Selfie.fromJson(json['selfie'] as Map<String, dynamic>),
-      custom: json['custom'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
@@ -45,7 +44,6 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'documents': instance.documents,
       'bankInfos': instance.bankInfos,
       'selfie': instance.selfie,
-      'custom': instance.custom,
     };
 
 _$EmailImpl _$$EmailImplFromJson(Map<String, dynamic> json) => _$EmailImpl(

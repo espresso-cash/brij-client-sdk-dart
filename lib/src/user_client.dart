@@ -328,7 +328,7 @@ class KycUserClient {
       );
 
       final hash = generateHash(encryptedData);
-      final message = '${item.type}|$hash';
+      final message = '${item.type.json}|$hash';
       final signature = _signingKey.sign(utf8.encode(message));
 
       if (item.id.isNotEmpty) {

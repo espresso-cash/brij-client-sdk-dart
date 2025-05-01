@@ -16,7 +16,6 @@ class UserData with _$UserData {
     List<Document>? documents,
     List<BankInfo>? bankInfos,
     Selfie? selfie,
-    Map<String, dynamic>? custom,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
