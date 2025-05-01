@@ -210,20 +210,6 @@ UserData _processUserData({
     }
   }
 
-  final customValidationData = {
-    for (final data in response.customValidationData)
-      data.id: CustomValidationResult(
-        id: data.id,
-        type: data.type,
-        value: utf8.decode(
-          decrypt(
-            encryptedData: data.encryptedValue,
-            secretKey: secretKey,
-          ),
-        ),
-      ),
-  };
-
   return UserData(
     email: email,
     phone: phone,
@@ -233,7 +219,6 @@ UserData _processUserData({
     documents: documents,
     bankInfos: bankInfos,
     selfie: selfie,
-    custom: customValidationData,
   );
 }
 
