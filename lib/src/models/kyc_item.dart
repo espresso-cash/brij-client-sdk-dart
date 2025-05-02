@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/v1_kyc_status.dart';
 
 import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
-import 'package:protobuf/protobuf.dart';
+import 'package:kyc_client_dart/src/api/storage/models/common_kyc_status.dart';
 
 part 'kyc_item.freezed.dart';
 part 'kyc_item.g.dart';
@@ -19,17 +18,17 @@ enum KycStatus {
   @JsonValue('KYC_STATUS_REJECTED')
   rejected;
 
-  static KycStatus fromApi(V1KycStatus status) {
+  static KycStatus fromApi(CommonKycStatus status) {
     switch (status) {
-      case V1KycStatus.kycStatusUnspecified:
+      case CommonKycStatus.kycStatusUnspecified:
         return KycStatus.unspecified;
-      case V1KycStatus.kycStatusPending:
+      case CommonKycStatus.kycStatusPending:
         return KycStatus.pending;
-      case V1KycStatus.kycStatusApproved:
+      case CommonKycStatus.kycStatusApproved:
         return KycStatus.approved;
-      case V1KycStatus.kycStatusRejected:
+      case CommonKycStatus.kycStatusRejected:
         return KycStatus.rejected;
-      case V1KycStatus.$unknown:
+      case CommonKycStatus.$unknown:
         return KycStatus.unspecified;
     }
   }
@@ -76,8 +75,7 @@ class KycItem with _$KycItem {
 
   const KycItem._();
 
-  factory KycItem.fromJson(Map<String, dynamic> json) =>
-      _$KycItemFromJson(json);
+  factory KycItem.fromJson(Map<String, dynamic> json) => _$KycItemFromJson(json);
 
   factory KycItem.fromProto(proto.KycItem proto) => KycItem(
         countries: proto.countries,

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
-import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/orders/models/partner_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/orders/models/wallet_get_order_response.dart';
 import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'order.freezed.dart';

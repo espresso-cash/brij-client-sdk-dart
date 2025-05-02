@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/kyc_client_dart.dart';
-import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_document_field_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_document_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_formula.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_response.dart';
+import 'package:kyc_client_dart/src/api/verifier/models/v1_data_type.dart';
+import 'package:kyc_client_dart/src/api/verifier/models/v1_document_field_type.dart';
+import 'package:kyc_client_dart/src/api/verifier/models/v1_document_type.dart';
+import 'package:kyc_client_dart/src/api/verifier/models/v1_formula.dart';
+import 'package:kyc_client_dart/src/api/verifier/models/v1_get_kyc_requirements_response.dart';
 
 part 'kyc_requirement.freezed.dart';
 part 'kyc_requirement.g.dart';
