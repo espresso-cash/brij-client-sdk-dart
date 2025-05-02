@@ -32,12 +32,13 @@ swagger_parser:
   merge_clients: false
 
   schemes:
-    - schema_path: schemes/validator.json
+    - schema_path: schemes/verifier/service.json
       json_serializer: freezed
       root_client: false
       put_in_folder: true
-      put_clients_in_folder: true
+      put_clients_in_folder: false
       export_file: false
+      output_directory: lib/src/api/verifier
 
     - schema_path: schemes/storage/partner/service.json
       json_serializer: freezed
@@ -45,31 +46,36 @@ swagger_parser:
       put_in_folder: true
       put_clients_in_folder: true
       export_file: false
+      output_directory: lib/src/api/storage
 
     - schema_path: schemes/storage/verifier/service.json
       json_serializer: freezed
       root_client: false
       put_in_folder: true
       put_clients_in_folder: true
-      export_file: false  
+      export_file: false
+      output_directory: lib/src/api/storage
 
     - schema_path: schemes/storage/wallet/service.json
       json_serializer: freezed
       root_client: false
       put_in_folder: true
       put_clients_in_folder: true
-      export_file: false  
-      
-    - schema_path: schemes/orders/wallet/wallet.json
-      json_serializer: freezed
-      root_client: false
-      put_in_folder: true
-      put_clients_in_folder: true
       export_file: false
+      output_directory: lib/src/api/storage
 
-    - schema_path: schemes/orders/partner/partner.json
+    - schema_path: schemes/orders/wallet/service.json
       json_serializer: freezed
       root_client: false
       put_in_folder: true
       put_clients_in_folder: true
       export_file: false
+      output_directory: lib/src/api/orders
+
+    - schema_path: schemes/orders/partner/service.json
+      json_serializer: freezed
+      root_client: false
+      put_in_folder: true
+      put_clients_in_folder: true
+      export_file: false
+      output_directory: lib/src/api/orders
