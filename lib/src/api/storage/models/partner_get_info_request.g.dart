@@ -10,12 +10,10 @@ _$PartnerGetInfoRequestImpl _$$PartnerGetInfoRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$PartnerGetInfoRequestImpl(
       publicKey: json['publicKey'] as String,
-      walletAddress: json['walletAddress'] as String,
     );
 
 Map<String, dynamic> _$$PartnerGetInfoRequestImplToJson(
         _$PartnerGetInfoRequestImpl instance) =>
     <String, dynamic>{
       'publicKey': instance.publicKey,
-      'walletAddress': instance.walletAddress,
     };

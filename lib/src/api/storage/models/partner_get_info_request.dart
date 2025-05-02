@@ -11,7 +11,6 @@ part 'partner_get_info_request.g.dart';
 class PartnerGetInfoRequest with _$PartnerGetInfoRequest {
   const factory PartnerGetInfoRequest({
     required String publicKey,
-    required String walletAddress,
   }) = _PartnerGetInfoRequest;
   
   factory PartnerGetInfoRequest.fromJson(Map<String, Object?> json) => _$PartnerGetInfoRequestFromJson(json);

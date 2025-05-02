@@ -11,7 +11,6 @@ part 'verifier_get_info_request.g.dart';
 class VerifierGetInfoRequest with _$VerifierGetInfoRequest {
   const factory VerifierGetInfoRequest({
     required String publicKey,
-    required String walletAddress,
   }) = _VerifierGetInfoRequest;
   
   factory VerifierGetInfoRequest.fromJson(Map<String, Object?> json) => _$VerifierGetInfoRequestFromJson(json);

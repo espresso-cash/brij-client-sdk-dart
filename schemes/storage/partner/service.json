@@ -206,9 +206,6 @@
       "properties": {
         "publicKey": {
           "type": "string"
-        },
-        "walletAddress": {
-          "type": "string"
         }
       }
     },

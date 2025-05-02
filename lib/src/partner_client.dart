@@ -101,13 +101,9 @@ class KycPartnerClient {
     return Dio()..interceptors.add(AuthInterceptor(token));
   }
 
-  // TODO: wallet address param should not be required for wallet/partner (?)
   Future<String> getUserSecretKey(String userPK) async {
     final info = await _storagePartnerClient.partnerServiceGetInfo(
-      body: PartnerGetInfoRequest(
-        publicKey: userPK,
-        walletAddress: '',
-      ),
+      body: PartnerGetInfoRequest(publicKey: userPK),
     );
 
     final edSK = await authKeyPair.extractPrivateKeyBytes();

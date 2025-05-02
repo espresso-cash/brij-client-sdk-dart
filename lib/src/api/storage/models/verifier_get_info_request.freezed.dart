@@ -22,7 +22,6 @@ VerifierGetInfoRequest _$VerifierGetInfoRequestFromJson(
 /// @nodoc
 mixin _$VerifierGetInfoRequest {
   String get publicKey => throw _privateConstructorUsedError;
-  String get walletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this VerifierGetInfoRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +39,7 @@ abstract class $VerifierGetInfoRequestCopyWith<$Res> {
           $Res Function(VerifierGetInfoRequest) then) =
       _$VerifierGetInfoRequestCopyWithImpl<$Res, VerifierGetInfoRequest>;
   @useResult
-  $Res call({String publicKey, String walletAddress});
+  $Res call({String publicKey});
 }
 
 /// @nodoc
@@ -60,16 +59,11 @@ class _$VerifierGetInfoRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? publicKey = null,
-    Object? walletAddress = null,
   }) {
     return _then(_value.copyWith(
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      walletAddress: null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -84,7 +78,7 @@ abstract class _$$VerifierGetInfoRequestImplCopyWith<$Res>
       __$$VerifierGetInfoRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String publicKey, String walletAddress});
+  $Res call({String publicKey});
 }
 
 /// @nodoc
@@ -103,16 +97,11 @@ class __$$VerifierGetInfoRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? publicKey = null,
-    Object? walletAddress = null,
   }) {
     return _then(_$VerifierGetInfoRequestImpl(
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      walletAddress: null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -121,20 +110,17 @@ class __$$VerifierGetInfoRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$VerifierGetInfoRequestImpl implements _VerifierGetInfoRequest {
-  const _$VerifierGetInfoRequestImpl(
-      {required this.publicKey, required this.walletAddress});
+  const _$VerifierGetInfoRequestImpl({required this.publicKey});
 
   factory _$VerifierGetInfoRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$VerifierGetInfoRequestImplFromJson(json);
 
   @override
   final String publicKey;
-  @override
-  final String walletAddress;
 
   @override
   String toString() {
-    return 'VerifierGetInfoRequest(publicKey: $publicKey, walletAddress: $walletAddress)';
+    return 'VerifierGetInfoRequest(publicKey: $publicKey)';
   }
 
   @override
@@ -143,14 +129,12 @@ class _$VerifierGetInfoRequestImpl implements _VerifierGetInfoRequest {
         (other.runtimeType == runtimeType &&
             other is _$VerifierGetInfoRequestImpl &&
             (identical(other.publicKey, publicKey) ||
-                other.publicKey == publicKey) &&
-            (identical(other.walletAddress, walletAddress) ||
-                other.walletAddress == walletAddress));
+                other.publicKey == publicKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, publicKey, walletAddress);
+  int get hashCode => Object.hash(runtimeType, publicKey);
 
   /// Create a copy of VerifierGetInfoRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -170,17 +154,14 @@ class _$VerifierGetInfoRequestImpl implements _VerifierGetInfoRequest {
 }
 
 abstract class _VerifierGetInfoRequest implements VerifierGetInfoRequest {
-  const factory _VerifierGetInfoRequest(
-      {required final String publicKey,
-      required final String walletAddress}) = _$VerifierGetInfoRequestImpl;
+  const factory _VerifierGetInfoRequest({required final String publicKey}) =
+      _$VerifierGetInfoRequestImpl;
 
   factory _VerifierGetInfoRequest.fromJson(Map<String, dynamic> json) =
       _$VerifierGetInfoRequestImpl.fromJson;
 
   @override
   String get publicKey;
-  @override
-  String get walletAddress;
 
   /// Create a copy of VerifierGetInfoRequest
   /// with the given fields replaced by the non-null parameter values.

@@ -22,7 +22,6 @@ PartnerGetInfoRequest _$PartnerGetInfoRequestFromJson(
 /// @nodoc
 mixin _$PartnerGetInfoRequest {
   String get publicKey => throw _privateConstructorUsedError;
-  String get walletAddress => throw _privateConstructorUsedError;
 
   /// Serializes this PartnerGetInfoRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +39,7 @@ abstract class $PartnerGetInfoRequestCopyWith<$Res> {
           $Res Function(PartnerGetInfoRequest) then) =
       _$PartnerGetInfoRequestCopyWithImpl<$Res, PartnerGetInfoRequest>;
   @useResult
-  $Res call({String publicKey, String walletAddress});
+  $Res call({String publicKey});
 }
 
 /// @nodoc
@@ -60,16 +59,11 @@ class _$PartnerGetInfoRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? publicKey = null,
-    Object? walletAddress = null,
   }) {
     return _then(_value.copyWith(
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      walletAddress: null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -84,7 +78,7 @@ abstract class _$$PartnerGetInfoRequestImplCopyWith<$Res>
       __$$PartnerGetInfoRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String publicKey, String walletAddress});
+  $Res call({String publicKey});
 }
 
 /// @nodoc
@@ -102,16 +96,11 @@ class __$$PartnerGetInfoRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? publicKey = null,
-    Object? walletAddress = null,
   }) {
     return _then(_$PartnerGetInfoRequestImpl(
       publicKey: null == publicKey
           ? _value.publicKey
           : publicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      walletAddress: null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -120,20 +109,17 @@ class __$$PartnerGetInfoRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PartnerGetInfoRequestImpl implements _PartnerGetInfoRequest {
-  const _$PartnerGetInfoRequestImpl(
-      {required this.publicKey, required this.walletAddress});
+  const _$PartnerGetInfoRequestImpl({required this.publicKey});
 
   factory _$PartnerGetInfoRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartnerGetInfoRequestImplFromJson(json);
 
   @override
   final String publicKey;
-  @override
-  final String walletAddress;
 
   @override
   String toString() {
-    return 'PartnerGetInfoRequest(publicKey: $publicKey, walletAddress: $walletAddress)';
+    return 'PartnerGetInfoRequest(publicKey: $publicKey)';
   }
 
   @override
@@ -142,14 +128,12 @@ class _$PartnerGetInfoRequestImpl implements _PartnerGetInfoRequest {
         (other.runtimeType == runtimeType &&
             other is _$PartnerGetInfoRequestImpl &&
             (identical(other.publicKey, publicKey) ||
-                other.publicKey == publicKey) &&
-            (identical(other.walletAddress, walletAddress) ||
-                other.walletAddress == walletAddress));
+                other.publicKey == publicKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, publicKey, walletAddress);
+  int get hashCode => Object.hash(runtimeType, publicKey);
 
   /// Create a copy of PartnerGetInfoRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -169,17 +153,14 @@ class _$PartnerGetInfoRequestImpl implements _PartnerGetInfoRequest {
 }
 
 abstract class _PartnerGetInfoRequest implements PartnerGetInfoRequest {
-  const factory _PartnerGetInfoRequest(
-      {required final String publicKey,
-      required final String walletAddress}) = _$PartnerGetInfoRequestImpl;
+  const factory _PartnerGetInfoRequest({required final String publicKey}) =
+      _$PartnerGetInfoRequestImpl;
 
   factory _PartnerGetInfoRequest.fromJson(Map<String, dynamic> json) =
       _$PartnerGetInfoRequestImpl.fromJson;
 
   @override
   String get publicKey;
-  @override
-  String get walletAddress;
 
   /// Create a copy of PartnerGetInfoRequest
   /// with the given fields replaced by the non-null parameter values.
