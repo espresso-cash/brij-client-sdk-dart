@@ -11,6 +11,7 @@ class UserAppState extends ChangeNotifier {
   String get authPublicKey => _authPublicKey;
   String get rawSecretKey => _rawSecretKey;
   PartnerModel? get partnerInfo => _partnerInfo;
+  List<PartnerModel>? get grantedAccessPartners => _grantedAccessPartners;
   String? get orders => _orders?.map((order) => order).join('\n\n');
 
   Ed25519HDKeyPair? _wallet;
@@ -19,6 +20,8 @@ class UserAppState extends ChangeNotifier {
   late String _rawSecretKey = '';
 
   PartnerModel? _partnerInfo;
+
+  List<PartnerModel>? _grantedAccessPartners;
 
   late KycUserClient _client;
 
@@ -71,6 +74,22 @@ class UserAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> getGrantedAccessPartners() async {
+    _grantedAccessPartners = await _client.getGrantedAccessPartners();
+
+    notifyListeners();
+  }
+
+  Future<void> revokePartnerAccess(String partnerPK) async {
+    await _client.revokePartnerAccess(partnerPK);
+    notifyListeners();
+  }
+
+  Future<void> removeAllUserData() async {
+    await _client.removeAllUserData();
+    notifyListeners();
+  }
+
   Future<void> fetchPartnerInfo(String partnerPK) async {
     _partnerInfo = await _client.getPartnerInfo(partnerPK: partnerPK);
 
@@ -89,9 +108,7 @@ class UserAppState extends ChangeNotifier {
     await _client.setData(
       email: Email(value: email, id: _emailId),
       phone: Phone(value: phone, id: _phoneId),
-      selfie: file != null
-          ? Selfie(value: await file.readAsBytes(), id: _selfieId)
-          : null,
+      selfie: file != null ? Selfie(value: await file.readAsBytes(), id: _selfieId) : null,
     );
 
     await fetchData();
@@ -252,8 +269,7 @@ class PartnerAppState extends ChangeNotifier {
   late String _authPublicKey = '';
   late String _userSecretKey = '';
 
-  final String _partnerFeesAddress =
-      '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
+  final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
   Map<String, dynamic>? _userData;
 
@@ -275,10 +291,7 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair
-        .extractPublicKey()
-        .then((value) => value.bytes)
-        .then(base58encode);
+    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
