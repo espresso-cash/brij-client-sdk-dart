@@ -11,6 +11,8 @@ import '../models/partner_complete_order_request.dart';
 import '../models/partner_complete_order_response.dart';
 import '../models/partner_fail_order_request.dart';
 import '../models/partner_fail_order_response.dart';
+import '../models/partner_generate_transaction_request.dart';
+import '../models/partner_generate_transaction_response.dart';
 import '../models/partner_get_order_request.dart';
 import '../models/partner_get_order_response.dart';
 import '../models/partner_get_orders_request.dart';
@@ -24,7 +26,13 @@ part 'partner_service_client.g.dart';
 
 @RestApi()
 abstract class PartnerServiceClient {
-  factory PartnerServiceClient(Dio dio, {String? baseUrl}) = _PartnerServiceClient;
+  factory PartnerServiceClient(Dio dio, {String? baseUrl}) =
+      _PartnerServiceClient;
+
+  @POST('/v1/generateTransaction')
+  Future<PartnerGenerateTransactionResponse> partnerServiceGenerateTransaction({
+    @Body() required PartnerGenerateTransactionRequest body,
+  });
 
   @POST('/v1/partner/acceptOrder')
   Future<PartnerAcceptOrderResponse> partnerServiceAcceptOrder({

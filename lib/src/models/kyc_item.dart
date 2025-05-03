@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/src/api/models/v1_kyc_status.dart';
 
 import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
-import 'package:protobuf/protobuf.dart';
 
 part 'kyc_item.freezed.dart';
 part 'kyc_item.g.dart';
