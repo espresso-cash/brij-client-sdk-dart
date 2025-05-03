@@ -57,6 +57,41 @@ class _WalletServiceClient implements WalletServiceClient {
   }
 
   @override
+  Future<WalletGetGrantedAccessPartnersResponse>
+      walletServiceGetGrantedAccessPartners() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<WalletGetGrantedAccessPartnersResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/v1/wallet/getGrantedAccessPartners',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late WalletGetGrantedAccessPartnersResponse _value;
+    try {
+      _value = WalletGetGrantedAccessPartnersResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<WalletGetInfoResponse> walletServiceGetInfo(
       {required WalletGetInfoRequest body}) async {
     final _extra = <String, dynamic>{};
@@ -290,6 +325,33 @@ class _WalletServiceClient implements WalletServiceClient {
   }
 
   @override
+  Future<dynamic> walletServiceRemoveAllUserData() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/v1/wallet/removeAllUserData',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
   Future<dynamic> walletServiceRemoveUserData(
       {required WalletRemoveUserDataRequest body}) async {
     final _extra = <String, dynamic>{};
@@ -305,6 +367,35 @@ class _WalletServiceClient implements WalletServiceClient {
         .compose(
           _dio.options,
           '/v1/wallet/removeUserData',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> walletServiceRevokeAccess(
+      {required WalletRevokeAccessRequest body}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/v1/wallet/revokeAccess',
           queryParameters: queryParameters,
           data: _data,
         )
