@@ -1,23 +1,26 @@
 import 'dart:convert';
 
 import 'package:bs58/bs58.dart';
-import 'package:cryptography/cryptography.dart' hide Hash, PublicKey, SecretBox;
+import 'package:cryptography/cryptography.dart'
+    hide Hash, PublicKey, SecretBox, Signature;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/kyc_client_dart.dart';
-import 'package:kyc_client_dart/src/api/clients/order_service_client.dart';
+import 'package:kyc_client_dart/src/api/clients/partner_service_client.dart';
 import 'package:kyc_client_dart/src/api/clients/storage_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
-import 'package:kyc_client_dart/src/api/models/v1_accept_order_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_complete_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_accept_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_complete_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_fail_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_get_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_reject_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_update_fees_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_fail_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_reject_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_custom_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_remove_validation_data_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_set_custom_validation_data_request.dart';
@@ -42,7 +45,7 @@ class KycPartnerClient {
   late String _authPublicKey;
 
   late StorageServiceClient _storageClient;
-  late OrderServiceClient _orderClient;
+  late PartnerServiceClient _orderClient;
 
   late SigningKey _signingKey;
 
@@ -76,8 +79,8 @@ class KycPartnerClient {
   }
 
   Future<void> _initializeOrderClient() async {
-    final dio = await _createAuthenticatedClient('orders.espressocash.com');
-    _orderClient = OrderServiceClient(dio, baseUrl: config.orderBaseUrl);
+    final dio = await _createAuthenticatedClient('orders.brij.fi');
+    _orderClient = PartnerServiceClient(dio, baseUrl: config.orderBaseUrl);
   }
 
   Future<Dio> _createAuthenticatedClient(String audience) async {
@@ -206,8 +209,8 @@ class KycPartnerClient {
   }
 
   Future<Order> getOrder({required OrderId orderId}) async {
-    final response = await _orderClient.orderServiceGetOrder(
-      body: V1GetOrderRequest(
+    final response = await _orderClient.partnerServiceGetOrder(
+      body: PartnerGetOrderRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
       ),
@@ -215,21 +218,21 @@ class KycPartnerClient {
 
     final secretKey = await getUserSecretKey(response.userPublicKey);
 
-    return processOrderData(
+    return processPartnerOrderData(
       order: response,
       secretKey: secretKey,
     );
   }
 
   Future<List<Order>> getPartnerOrders() async {
-    final response = await _orderClient.orderServiceGetPartnerOrders();
+    final response = await _orderClient.partnerServiceGetOrders();
 
     return Future.wait(
       response.orders.map(
         (order) async {
           final secretKey = await getUserSecretKey(order.userPublicKey);
 
-          return processOrderData(
+          return processPartnerOrderData(
             order: order,
             secretKey: secretKey,
           );
@@ -273,8 +276,8 @@ class KycPartnerClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    await _orderClient.orderServiceAcceptOrder(
-      body: V1AcceptOrderRequest(
+    await _orderClient.partnerServiceAcceptOrder(
+      body: PartnerAcceptOrderRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
         bankName: encryptedBankName,
@@ -299,8 +302,8 @@ class KycPartnerClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    await _orderClient.orderServiceAcceptOrder(
-      body: V1AcceptOrderRequest(
+    await _orderClient.partnerServiceAcceptOrder(
+      body: PartnerAcceptOrderRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
         cryptoWalletAddress: cryptoWalletAddress,
@@ -315,8 +318,8 @@ class KycPartnerClient {
     required OrderId orderId,
     required String transactionId,
   }) async =>
-      _orderClient.orderServiceCompleteOrder(
-        body: V1CompleteOrderRequest(
+      _orderClient.partnerServiceCompleteOrder(
+        body: PartnerCompleteOrderRequest(
           orderId: orderId.orderId,
           externalId: orderId.externalId,
           transactionId: transactionId,
@@ -326,8 +329,8 @@ class KycPartnerClient {
   Future<void> completeOffRampOrder({
     required OrderId orderId,
   }) async =>
-      _orderClient.orderServiceCompleteOrder(
-        body: V1CompleteOrderRequest(
+      _orderClient.partnerServiceCompleteOrder(
+        body: PartnerCompleteOrderRequest(
           orderId: orderId.orderId,
           externalId: orderId.externalId,
           transactionId: '',
@@ -338,8 +341,8 @@ class KycPartnerClient {
     required OrderId orderId,
     required String reason,
   }) async =>
-      _orderClient.orderServiceFailOrder(
-        body: V1FailOrderRequest(
+      _orderClient.partnerServiceFailOrder(
+        body: PartnerFailOrderRequest(
           orderId: orderId.orderId,
           externalId: orderId.externalId,
           reason: reason,
@@ -350,8 +353,8 @@ class KycPartnerClient {
     required String orderId,
     required String reason,
   }) async =>
-      _orderClient.orderServiceRejectOrder(
-        body: V1RejectOrderRequest(orderId: orderId, reason: reason),
+      _orderClient.partnerServiceRejectOrder(
+        body: PartnerRejectOrderRequest(orderId: orderId, reason: reason),
       );
 
   Future<KycStatusDetails> getKycStatusDetails({
@@ -400,6 +403,19 @@ class KycPartnerClient {
       ),
     );
   }
+
+  Future<void> updateFees({
+    required RampFeeUpdate onRampFee,
+    required RampFeeUpdate offRampFee,
+    required String walletAddress,
+  }) async =>
+      _orderClient.partnerServiceUpdateFees(
+        body: PartnerUpdateFeesRequest(
+          onRampFee: onRampFee.toProto(),
+          offRampFee: offRampFee.toProto(),
+          walletAddress: walletAddress,
+        ),
+      );
 
   Future<String> generateTransaction({
     required OrderId orderId,

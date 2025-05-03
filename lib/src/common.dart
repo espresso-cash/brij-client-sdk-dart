@@ -3,9 +3,11 @@ import 'dart:isolate';
 
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
+import 'package:kyc_client_dart/src/api/models/common_ramp_type.dart';
+import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_response.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
 import 'package:kyc_client_dart/src/currency/currency_list.dart';
@@ -146,7 +148,6 @@ UserData _processUserData({
           firstName: wrappedData.firstName,
           lastName: wrappedData.lastName,
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypeBirthDate:
@@ -154,7 +155,6 @@ UserData _processUserData({
         birthDate = BirthDate(
           value: wrappedData.value.toDateTime(),
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypePhone:
@@ -173,7 +173,6 @@ UserData _processUserData({
             number: wrappedData.number,
             countryCode: wrappedData.countryCode,
             id: id,
-            status: status,
             expirationDate: wrappedData.expirationDate.toDateTime(),
             frontImage: wrappedData.photo.frontImage,
             backImage: wrappedData.photo.backImage,
@@ -189,7 +188,6 @@ UserData _processUserData({
             bankCode: wrappedData.bankCode,
             countryCode: wrappedData.countryCode,
             id: id,
-            status: status,
             hash: hash,
           ),
         );
@@ -198,7 +196,6 @@ UserData _processUserData({
         selfie = Selfie(
           value: wrappedData.value,
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypeCitizenship:
@@ -206,27 +203,12 @@ UserData _processUserData({
         citizenship = Citizenship(
           value: wrappedData.value,
           id: id,
-          status: status,
           hash: hash,
         );
       case V1DataType.dataTypeUnspecified:
       case V1DataType.$unknown:
     }
   }
-
-  final customValidationData = {
-    for (final data in response.customValidationData)
-      data.id: CustomValidationResult(
-        id: data.id,
-        type: data.type,
-        value: utf8.decode(
-          decrypt(
-            encryptedData: data.encryptedValue,
-            secretKey: secretKey,
-          ),
-        ),
-      ),
-  };
 
   return UserData(
     email: email,
@@ -237,12 +219,11 @@ UserData _processUserData({
     documents: documents,
     bankInfos: bankInfos,
     selfie: selfie,
-    custom: customValidationData,
   );
 }
 
-Order processOrderData({
-  required V1GetOrderResponse order,
+Order processWalletOrderData({
+  required WalletGetOrderResponse order,
   required String secretKey,
 }) {
   String bankName = order.bankName;
@@ -267,9 +248,8 @@ Order processOrderData({
   }
 
   if (order.userSignature.isNotEmpty) {
-    final verifyKey =
-        VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage = order.type == 'ON_RAMP'
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
+    final userMessage = order.type == CommonRampType.rampTypeONRamp
         ? createUserOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -296,9 +276,8 @@ Order processOrderData({
   }
 
   if (order.partnerSignature.isNotEmpty) {
-    final verifyKey =
-        VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage = order.type == 'ON_RAMP'
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
+    final partnerMessage = order.type == CommonRampType.rampTypeONRamp
         ? createPartnerOnRampMessage(
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
@@ -323,7 +302,95 @@ Order processOrderData({
     }
   }
 
-  return Order.fromV1GetOrderResponse(
+  return Order.fromWalletGetOrderResponse(
+    order.copyWith(
+      bankName: bankName,
+      bankAccount: bankAccount,
+    ),
+  );
+}
+
+Order processPartnerOrderData({
+  required PartnerGetOrderResponse order,
+  required String secretKey,
+}) {
+  String bankName = order.bankName;
+  String bankAccount = order.bankAccount;
+
+  if (bankName.isNotEmpty) {
+    bankName = utf8.decode(
+      decrypt(
+        encryptedData: bankName,
+        secretKey: secretKey,
+      ),
+    );
+  }
+
+  if (bankAccount.isNotEmpty) {
+    bankAccount = utf8.decode(
+      decrypt(
+        encryptedData: bankAccount,
+        secretKey: secretKey,
+      ),
+    );
+  }
+
+  if (order.userSignature.isNotEmpty) {
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
+    final userMessage = order.type == CommonRampType.rampTypeONRamp
+        ? createUserOnRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            walletAddress: order.userWalletAddress,
+          )
+        : createUserOffRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            bankName: bankName,
+            bankAccount: bankAccount,
+            walletAddress: order.userWalletAddress,
+          );
+
+    if (!verifyKey.verify(
+      signature: Signature(base58.decode(order.userSignature)),
+      message: Uint8List.fromList(utf8.encode(userMessage)),
+    )) {
+      throw Exception('Invalid user signature');
+    }
+  }
+
+  if (order.partnerSignature.isNotEmpty) {
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
+    final partnerMessage = order.type == CommonRampType.rampTypeONRamp
+        ? createPartnerOnRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            bankName: bankName,
+            bankAccount: bankAccount,
+          )
+        : createPartnerOffRampMessage(
+            cryptoAmount: order.cryptoAmount,
+            cryptoCurrency: order.cryptoCurrency,
+            fiatAmount: order.fiatAmount,
+            fiatCurrency: order.fiatCurrency,
+            cryptoWalletAddress: order.cryptoWalletAddress,
+          );
+
+    if (!verifyKey.verify(
+      signature: Signature(base58.decode(order.partnerSignature)),
+      message: Uint8List.fromList(utf8.encode(partnerMessage)),
+    )) {
+      throw Exception('Invalid partner signature');
+    }
+  }
+
+  return Order.fromPartnerGetOrderResponse(
     order.copyWith(
       bankName: bankName,
       bankAccount: bankAccount,
@@ -338,10 +405,8 @@ String createUserOnRampMessage({
   required String fiatCurrency,
   required String walletAddress,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$walletAddress';
 }
@@ -355,10 +420,8 @@ String createUserOffRampMessage({
   required String bankAccount,
   required String walletAddress,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount|$walletAddress';
 }
@@ -371,10 +434,8 @@ String createPartnerOnRampMessage({
   required String bankName,
   required String bankAccount,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
 }
@@ -386,10 +447,8 @@ String createPartnerOffRampMessage({
   required String fiatCurrency,
   required String cryptoWalletAddress,
 }) {
-  final cryptoAmountDecimals =
-      convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals =
-      convertToDecimalPrecision(fiatAmount, fiatCurrency);
+  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
+  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
   return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$cryptoWalletAddress';
 }

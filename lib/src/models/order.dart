@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
+import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'order.freezed.dart';
 part 'order.g.dart';
@@ -13,7 +15,7 @@ class Order with _$Order {
     required String partnerPublicKey,
     required String userPublicKey,
     required String comment,
-    required String type,
+    required RampType type,
     required double cryptoAmount,
     required String cryptoCurrency,
     required double fiatAmount,
@@ -25,18 +27,43 @@ class Order with _$Order {
     required String transactionId,
     required String externalId,
     required String userWalletAddress,
+    required String walletPublicKey,
   }) = _Order;
 
   factory Order.fromJson(Map<String, Object?> json) => _$OrderFromJson(json);
 
-  factory Order.fromV1GetOrderResponse(V1GetOrderResponse response) => Order(
+  factory Order.fromWalletGetOrderResponse(WalletGetOrderResponse response) =>
+      Order(
         orderId: response.orderId,
         created: response.created,
         status: response.status,
         partnerPublicKey: response.partnerPublicKey,
         userPublicKey: response.userPublicKey,
         comment: response.comment,
-        type: response.type,
+        type: response.type.fromProto(),
+        cryptoAmount: response.cryptoAmount,
+        cryptoCurrency: response.cryptoCurrency,
+        fiatAmount: response.fiatAmount,
+        fiatCurrency: response.fiatCurrency,
+        bankName: response.bankName,
+        bankAccount: response.bankAccount,
+        cryptoWalletAddress: response.cryptoWalletAddress,
+        transaction: response.transaction,
+        transactionId: response.transactionId,
+        externalId: '',
+        userWalletAddress: response.userWalletAddress,
+        walletPublicKey: response.walletPublicKey,
+      );
+
+  factory Order.fromPartnerGetOrderResponse(PartnerGetOrderResponse response) =>
+      Order(
+        orderId: response.orderId,
+        created: response.created,
+        status: response.status,
+        partnerPublicKey: response.partnerPublicKey,
+        userPublicKey: response.userPublicKey,
+        comment: response.comment,
+        type: response.type.fromProto(),
         cryptoAmount: response.cryptoAmount,
         cryptoCurrency: response.cryptoCurrency,
         fiatAmount: response.fiatAmount,
@@ -48,5 +75,6 @@ class Order with _$Order {
         transactionId: response.transactionId,
         externalId: response.externalId,
         userWalletAddress: response.userWalletAddress,
+        walletPublicKey: response.walletPublicKey,
       );
 }

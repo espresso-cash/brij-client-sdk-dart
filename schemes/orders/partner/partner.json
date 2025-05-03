@@ -1,0 +1,514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "brij/orders/v1/partner/partner.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PartnerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/partner/acceptOrder": {
+      "post": {
+        "operationId": "PartnerService_AcceptOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerAcceptOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerAcceptOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/completeOrder": {
+      "post": {
+        "operationId": "PartnerService_CompleteOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerCompleteOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerCompleteOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/failOrder": {
+      "post": {
+        "operationId": "PartnerService_FailOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerFailOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerFailOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/getOrder": {
+      "post": {
+        "operationId": "PartnerService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerGetOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerGetOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/getOrders": {
+      "post": {
+        "operationId": "PartnerService_GetOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerGetOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerGetOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/rejectOrder": {
+      "post": {
+        "operationId": "PartnerService_RejectOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerRejectOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerRejectOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/updateFees": {
+      "post": {
+        "operationId": "PartnerService_UpdateFees",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerUpdateFeesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerUpdateFeesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonRampType": {
+      "type": "string",
+      "enum": [
+        "RAMP_TYPE_UNSPECIFIED",
+        "RAMP_TYPE_ON_RAMP",
+        "RAMP_TYPE_OFF_RAMP"
+      ],
+      "default": "RAMP_TYPE_UNSPECIFIED"
+    },
+    "partnerAcceptOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "bankName": {
+          "type": "string"
+        },
+        "bankAccount": {
+          "type": "string"
+        },
+        "cryptoWalletAddress": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "partnerSignature": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerAcceptOrderResponse": {
+      "type": "object"
+    },
+    "partnerCompleteOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerCompleteOrderResponse": {
+      "type": "object"
+    },
+    "partnerConversionRate": {
+      "type": "object",
+      "properties": {
+        "cryptoCurrency": {
+          "type": "string"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "partnerFailOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerFailOrderResponse": {
+      "type": "object"
+    },
+    "partnerGetOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerGetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "partnerPublicKey": {
+          "type": "string"
+        },
+        "userPublicKey": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/commonRampType"
+        },
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "cryptoCurrency": {
+          "type": "string"
+        },
+        "fiatAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "bankName": {
+          "type": "string"
+        },
+        "bankAccount": {
+          "type": "string"
+        },
+        "cryptoWalletAddress": {
+          "type": "string"
+        },
+        "transaction": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "userSignature": {
+          "type": "string"
+        },
+        "partnerSignature": {
+          "type": "string"
+        },
+        "userWalletAddress": {
+          "type": "string"
+        },
+        "walletPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerGetOrdersRequest": {
+      "type": "object"
+    },
+    "partnerGetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/partnerGetOrderResponse"
+          }
+        }
+      }
+    },
+    "partnerRampFeeUpdateData": {
+      "type": "object",
+      "properties": {
+        "fixedFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentageFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "conversionRates": {
+          "$ref": "#/definitions/partnerConversionRate"
+        }
+      }
+    },
+    "partnerRejectOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerRejectOrderResponse": {
+      "type": "object"
+    },
+    "partnerUpdateFeesRequest": {
+      "type": "object",
+      "properties": {
+        "onRampFee": {
+          "$ref": "#/definitions/partnerRampFeeUpdateData"
+        },
+        "offRampFee": {
+          "$ref": "#/definitions/partnerRampFeeUpdateData"
+        },
+        "walletAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerUpdateFeesResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

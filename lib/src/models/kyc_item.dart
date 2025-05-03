@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kyc_client_dart/src/api/models/v1_kyc_status.dart';
 
 import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
+import 'package:protobuf/protobuf.dart';
 
 part 'kyc_item.freezed.dart';
 part 'kyc_item.g.dart';
@@ -65,7 +66,7 @@ enum KycStatus {
 @freezed
 class KycItem with _$KycItem {
   const factory KycItem({
-    required String country,
+    required List<String> countries,
     required KycStatus status,
     required String provider,
     required String userPublicKey,
@@ -79,7 +80,7 @@ class KycItem with _$KycItem {
       _$KycItemFromJson(json);
 
   factory KycItem.fromProto(proto.KycItem proto) => KycItem(
-        country: proto.country,
+        countries: proto.countries,
         status: KycStatus.fromProto(proto.status),
         provider: proto.provider,
         userPublicKey: proto.userPublicKey,
@@ -91,7 +92,7 @@ class KycItem with _$KycItem {
 
   proto.KycItem toProto() {
     final protoMessage = proto.KycItem(
-      country: country,
+      countries: countries,
       status: status.toProto(),
       provider: provider,
       userPublicKey: userPublicKey,

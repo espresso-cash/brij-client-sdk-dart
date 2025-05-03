@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "brij/orders/v1/wallet/wallet.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "WalletService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/wallet/createOffRampOrder": {
+      "post": {
+        "operationId": "WalletService_CreateOffRampOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/walletCreateOffRampOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/walletCreateOffRampOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/v1/wallet/createOnRampOrder": {
+      "post": {
+        "operationId": "WalletService_CreateOnRampOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/walletCreateOnRampOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/walletCreateOnRampOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/v1/wallet/getOrder": {
+      "post": {
+        "operationId": "WalletService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/walletGetOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/walletGetOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/v1/wallet/getOrders": {
+      "post": {
+        "operationId": "WalletService_GetOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/walletGetOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/walletGetOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/v1/wallet/getQuote": {
+      "post": {
+        "operationId": "WalletService_GetQuote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/walletGetQuoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/walletGetQuoteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonRampType": {
+      "type": "string",
+      "enum": [
+        "RAMP_TYPE_UNSPECIFIED",
+        "RAMP_TYPE_ON_RAMP",
+        "RAMP_TYPE_OFF_RAMP"
+      ],
+      "default": "RAMP_TYPE_UNSPECIFIED"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "walletCreateOffRampOrderRequest": {
+      "type": "object",
+      "properties": {
+        "partnerPublicKey": {
+          "type": "string"
+        },
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "cryptoCurrency": {
+          "type": "string"
+        },
+        "fiatAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "bankName": {
+          "type": "string"
+        },
+        "bankAccount": {
+          "type": "string"
+        },
+        "userSignature": {
+          "type": "string"
+        },
+        "userWalletAddress": {
+          "type": "string"
+        },
+        "walletPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "walletCreateOffRampOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
+    "walletCreateOnRampOrderRequest": {
+      "type": "object",
+      "properties": {
+        "partnerPublicKey": {
+          "type": "string"
+        },
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "cryptoCurrency": {
+          "type": "string"
+        },
+        "fiatAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "userSignature": {
+          "type": "string"
+        },
+        "userWalletAddress": {
+          "type": "string"
+        },
+        "walletPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "walletCreateOnRampOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
+    "walletGetOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    },
+    "walletGetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "partnerPublicKey": {
+          "type": "string"
+        },
+        "userPublicKey": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/commonRampType"
+        },
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "cryptoCurrency": {
+          "type": "string"
+        },
+        "fiatAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "bankName": {
+          "type": "string"
+        },
+        "bankAccount": {
+          "type": "string"
+        },
+        "cryptoWalletAddress": {
+          "type": "string"
+        },
+        "transaction": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "userSignature": {
+          "type": "string"
+        },
+        "partnerSignature": {
+          "type": "string"
+        },
+        "userWalletAddress": {
+          "type": "string"
+        },
+        "walletPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "walletGetOrdersRequest": {
+      "type": "object"
+    },
+    "walletGetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/walletGetOrderResponse"
+          }
+        }
+      }
+    },
+    "walletGetQuoteRequest": {
+      "type": "object",
+      "properties": {
+        "partnerPublicKey": {
+          "type": "string"
+        },
+        "walletPublicKey": {
+          "type": "string"
+        },
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "rampType": {
+          "$ref": "#/definitions/commonRampType"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        }
+      }
+    },
+    "walletGetQuoteResponse": {
+      "type": "object",
+      "properties": {
+        "cryptoAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fiatCurrency": {
+          "type": "string"
+        },
+        "rampType": {
+          "$ref": "#/definitions/commonRampType"
+        },
+        "conversionRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "partnerFee": {
+          "$ref": "#/definitions/walletRampFee"
+        },
+        "walletFee": {
+          "$ref": "#/definitions/walletRampFee"
+        },
+        "platformFee": {
+          "$ref": "#/definitions/walletRampFee"
+        },
+        "totalFee": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "walletRampFee": {
+      "type": "object",
+      "properties": {
+        "fixedFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentageFee": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

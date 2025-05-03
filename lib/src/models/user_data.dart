@@ -16,7 +16,6 @@ class UserData with _$UserData {
     List<Document>? documents,
     List<BankInfo>? bankInfos,
     Selfie? selfie,
-    Map<String, dynamic>? custom,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
@@ -53,7 +52,6 @@ class Selfie with _$Selfie {
     required List<int> value,
     @Default('') String id,
     String? hash,
-    @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Selfie;
 
   factory Selfie.fromJson(Map<String, dynamic> json) => _$SelfieFromJson(json);
@@ -66,7 +64,6 @@ class Name with _$Name {
     required String lastName,
     @Default('') String id,
     String? hash,
-    @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Name;
 
   factory Name.fromJson(Map<String, dynamic> json) => _$NameFromJson(json);
@@ -78,7 +75,6 @@ class Citizenship with _$Citizenship {
     required String value,
     @Default('') String id,
     String? hash,
-    @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Citizenship;
 
   factory Citizenship.fromJson(Map<String, dynamic> json) =>
@@ -91,7 +87,6 @@ class BirthDate with _$BirthDate {
     required DateTime value,
     @Default('') String id,
     String? hash,
-    @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _BirthDate;
 
   factory BirthDate.fromJson(Map<String, dynamic> json) =>
@@ -109,7 +104,6 @@ class Document with _$Document {
     List<int>? backImage,
     @Default('') String id,
     String? hash,
-    @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Document;
 
   factory Document.fromJson(Map<String, dynamic> json) =>
@@ -125,7 +119,6 @@ class BankInfo with _$BankInfo {
     required String countryCode,
     @Default('') String id,
     String? hash,
-    @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _BankInfo;
 
   factory BankInfo.fromJson(Map<String, dynamic> json) =>

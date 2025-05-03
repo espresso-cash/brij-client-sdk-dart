@@ -28,7 +28,6 @@ mixin _$UserData {
   List<Document>? get documents => throw _privateConstructorUsedError;
   List<BankInfo>? get bankInfos => throw _privateConstructorUsedError;
   Selfie? get selfie => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get custom => throw _privateConstructorUsedError;
 
   /// Serializes this UserData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,8 +52,7 @@ abstract class $UserDataCopyWith<$Res> {
       BirthDate? birthDate,
       List<Document>? documents,
       List<BankInfo>? bankInfos,
-      Selfie? selfie,
-      Map<String, dynamic>? custom});
+      Selfie? selfie});
 
   $EmailCopyWith<$Res>? get email;
   $PhoneCopyWith<$Res>? get phone;
@@ -87,7 +85,6 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? documents = freezed,
     Object? bankInfos = freezed,
     Object? selfie = freezed,
-    Object? custom = freezed,
   }) {
     return _then(_value.copyWith(
       email: freezed == email
@@ -122,10 +119,6 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.selfie
           : selfie // ignore: cast_nullable_to_non_nullable
               as Selfie?,
-      custom: freezed == custom
-          ? _value.custom
-          : custom // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -230,8 +223,7 @@ abstract class _$$UserDataImplCopyWith<$Res>
       BirthDate? birthDate,
       List<Document>? documents,
       List<BankInfo>? bankInfos,
-      Selfie? selfie,
-      Map<String, dynamic>? custom});
+      Selfie? selfie});
 
   @override
   $EmailCopyWith<$Res>? get email;
@@ -268,7 +260,6 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? documents = freezed,
     Object? bankInfos = freezed,
     Object? selfie = freezed,
-    Object? custom = freezed,
   }) {
     return _then(_$UserDataImpl(
       email: freezed == email
@@ -303,10 +294,6 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.selfie
           : selfie // ignore: cast_nullable_to_non_nullable
               as Selfie?,
-      custom: freezed == custom
-          ? _value._custom
-          : custom // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
     ));
   }
 }
@@ -322,11 +309,9 @@ class _$UserDataImpl implements _UserData {
       this.birthDate,
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
-      this.selfie,
-      final Map<String, dynamic>? custom})
+      this.selfie})
       : _documents = documents,
-        _bankInfos = bankInfos,
-        _custom = custom;
+        _bankInfos = bankInfos;
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
@@ -363,19 +348,10 @@ class _$UserDataImpl implements _UserData {
 
   @override
   final Selfie? selfie;
-  final Map<String, dynamic>? _custom;
-  @override
-  Map<String, dynamic>? get custom {
-    final value = _custom;
-    if (value == null) return null;
-    if (_custom is EqualUnmodifiableMapView) return _custom;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
 
   @override
   String toString() {
-    return 'UserData(email: $email, phone: $phone, name: $name, citizenship: $citizenship, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfie: $selfie, custom: $custom)';
+    return 'UserData(email: $email, phone: $phone, name: $name, citizenship: $citizenship, birthDate: $birthDate, documents: $documents, bankInfos: $bankInfos, selfie: $selfie)';
   }
 
   @override
@@ -394,8 +370,7 @@ class _$UserDataImpl implements _UserData {
                 .equals(other._documents, _documents) &&
             const DeepCollectionEquality()
                 .equals(other._bankInfos, _bankInfos) &&
-            (identical(other.selfie, selfie) || other.selfie == selfie) &&
-            const DeepCollectionEquality().equals(other._custom, _custom));
+            (identical(other.selfie, selfie) || other.selfie == selfie));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -409,8 +384,7 @@ class _$UserDataImpl implements _UserData {
       birthDate,
       const DeepCollectionEquality().hash(_documents),
       const DeepCollectionEquality().hash(_bankInfos),
-      selfie,
-      const DeepCollectionEquality().hash(_custom));
+      selfie);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -437,8 +411,7 @@ abstract class _UserData implements UserData {
       final BirthDate? birthDate,
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
-      final Selfie? selfie,
-      final Map<String, dynamic>? custom}) = _$UserDataImpl;
+      final Selfie? selfie}) = _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
       _$UserDataImpl.fromJson;
@@ -459,8 +432,6 @@ abstract class _UserData implements UserData {
   List<BankInfo>? get bankInfos;
   @override
   Selfie? get selfie;
-  @override
-  Map<String, dynamic>? get custom;
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -885,7 +856,6 @@ mixin _$Selfie {
   List<int> get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-  ValidationStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this Selfie to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -901,8 +871,7 @@ abstract class $SelfieCopyWith<$Res> {
   factory $SelfieCopyWith(Selfie value, $Res Function(Selfie) then) =
       _$SelfieCopyWithImpl<$Res, Selfie>;
   @useResult
-  $Res call(
-      {List<int> value, String id, String? hash, ValidationStatus status});
+  $Res call({List<int> value, String id, String? hash});
 }
 
 /// @nodoc
@@ -923,7 +892,6 @@ class _$SelfieCopyWithImpl<$Res, $Val extends Selfie>
     Object? value = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       value: null == value
@@ -938,10 +906,6 @@ class _$SelfieCopyWithImpl<$Res, $Val extends Selfie>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ) as $Val);
   }
 }
@@ -953,8 +917,7 @@ abstract class _$$SelfieImplCopyWith<$Res> implements $SelfieCopyWith<$Res> {
       __$$SelfieImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<int> value, String id, String? hash, ValidationStatus status});
+  $Res call({List<int> value, String id, String? hash});
 }
 
 /// @nodoc
@@ -973,7 +936,6 @@ class __$$SelfieImplCopyWithImpl<$Res>
     Object? value = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_$SelfieImpl(
       value: null == value
@@ -988,10 +950,6 @@ class __$$SelfieImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ));
   }
 }
@@ -999,11 +957,7 @@ class __$$SelfieImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SelfieImpl implements _Selfie {
-  const _$SelfieImpl(
-      {required final List<int> value,
-      this.id = '',
-      this.hash,
-      this.status = ValidationStatus.unspecified})
+  const _$SelfieImpl({required final List<int> value, this.id = '', this.hash})
       : _value = value;
 
   factory _$SelfieImpl.fromJson(Map<String, dynamic> json) =>
@@ -1022,13 +976,10 @@ class _$SelfieImpl implements _Selfie {
   final String id;
   @override
   final String? hash;
-  @override
-  @JsonKey()
-  final ValidationStatus status;
 
   @override
   String toString() {
-    return 'Selfie(value: $value, id: $id, hash: $hash, status: $status)';
+    return 'Selfie(value: $value, id: $id, hash: $hash)';
   }
 
   @override
@@ -1038,14 +989,13 @@ class _$SelfieImpl implements _Selfie {
             other is _$SelfieImpl &&
             const DeepCollectionEquality().equals(other._value, _value) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.hash, hash) || other.hash == hash) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.hash, hash) || other.hash == hash));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_value), id, hash, status);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_value), id, hash);
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
@@ -1067,8 +1017,7 @@ abstract class _Selfie implements Selfie {
   const factory _Selfie(
       {required final List<int> value,
       final String id,
-      final String? hash,
-      final ValidationStatus status}) = _$SelfieImpl;
+      final String? hash}) = _$SelfieImpl;
 
   factory _Selfie.fromJson(Map<String, dynamic> json) = _$SelfieImpl.fromJson;
 
@@ -1078,8 +1027,6 @@ abstract class _Selfie implements Selfie {
   String get id;
   @override
   String? get hash;
-  @override
-  ValidationStatus get status;
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
@@ -1099,7 +1046,6 @@ mixin _$Name {
   String get lastName => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-  ValidationStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this Name to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1115,12 +1061,7 @@ abstract class $NameCopyWith<$Res> {
   factory $NameCopyWith(Name value, $Res Function(Name) then) =
       _$NameCopyWithImpl<$Res, Name>;
   @useResult
-  $Res call(
-      {String firstName,
-      String lastName,
-      String id,
-      String? hash,
-      ValidationStatus status});
+  $Res call({String firstName, String lastName, String id, String? hash});
 }
 
 /// @nodoc
@@ -1142,7 +1083,6 @@ class _$NameCopyWithImpl<$Res, $Val extends Name>
     Object? lastName = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       firstName: null == firstName
@@ -1161,10 +1101,6 @@ class _$NameCopyWithImpl<$Res, $Val extends Name>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ) as $Val);
   }
 }
@@ -1176,12 +1112,7 @@ abstract class _$$NameImplCopyWith<$Res> implements $NameCopyWith<$Res> {
       __$$NameImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String firstName,
-      String lastName,
-      String id,
-      String? hash,
-      ValidationStatus status});
+  $Res call({String firstName, String lastName, String id, String? hash});
 }
 
 /// @nodoc
@@ -1200,7 +1131,6 @@ class __$$NameImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_$NameImpl(
       firstName: null == firstName
@@ -1219,10 +1149,6 @@ class __$$NameImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ));
   }
 }
@@ -1234,8 +1160,7 @@ class _$NameImpl implements _Name {
       {required this.firstName,
       required this.lastName,
       this.id = '',
-      this.hash,
-      this.status = ValidationStatus.unspecified});
+      this.hash});
 
   factory _$NameImpl.fromJson(Map<String, dynamic> json) =>
       _$$NameImplFromJson(json);
@@ -1249,13 +1174,10 @@ class _$NameImpl implements _Name {
   final String id;
   @override
   final String? hash;
-  @override
-  @JsonKey()
-  final ValidationStatus status;
 
   @override
   String toString() {
-    return 'Name(firstName: $firstName, lastName: $lastName, id: $id, hash: $hash, status: $status)';
+    return 'Name(firstName: $firstName, lastName: $lastName, id: $id, hash: $hash)';
   }
 
   @override
@@ -1268,14 +1190,12 @@ class _$NameImpl implements _Name {
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.hash, hash) || other.hash == hash) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.hash, hash) || other.hash == hash));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, firstName, lastName, id, hash, status);
+  int get hashCode => Object.hash(runtimeType, firstName, lastName, id, hash);
 
   /// Create a copy of Name
   /// with the given fields replaced by the non-null parameter values.
@@ -1298,8 +1218,7 @@ abstract class _Name implements Name {
       {required final String firstName,
       required final String lastName,
       final String id,
-      final String? hash,
-      final ValidationStatus status}) = _$NameImpl;
+      final String? hash}) = _$NameImpl;
 
   factory _Name.fromJson(Map<String, dynamic> json) = _$NameImpl.fromJson;
 
@@ -1311,8 +1230,6 @@ abstract class _Name implements Name {
   String get id;
   @override
   String? get hash;
-  @override
-  ValidationStatus get status;
 
   /// Create a copy of Name
   /// with the given fields replaced by the non-null parameter values.
@@ -1331,7 +1248,6 @@ mixin _$Citizenship {
   String get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-  ValidationStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this Citizenship to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1349,7 +1265,7 @@ abstract class $CitizenshipCopyWith<$Res> {
           Citizenship value, $Res Function(Citizenship) then) =
       _$CitizenshipCopyWithImpl<$Res, Citizenship>;
   @useResult
-  $Res call({String value, String id, String? hash, ValidationStatus status});
+  $Res call({String value, String id, String? hash});
 }
 
 /// @nodoc
@@ -1370,7 +1286,6 @@ class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
     Object? value = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       value: null == value
@@ -1385,10 +1300,6 @@ class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ) as $Val);
   }
 }
@@ -1401,7 +1312,7 @@ abstract class _$$CitizenshipImplCopyWith<$Res>
       __$$CitizenshipImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String value, String id, String? hash, ValidationStatus status});
+  $Res call({String value, String id, String? hash});
 }
 
 /// @nodoc
@@ -1420,7 +1331,6 @@ class __$$CitizenshipImplCopyWithImpl<$Res>
     Object? value = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_$CitizenshipImpl(
       value: null == value
@@ -1435,10 +1345,6 @@ class __$$CitizenshipImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ));
   }
 }
@@ -1446,11 +1352,7 @@ class __$$CitizenshipImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CitizenshipImpl implements _Citizenship {
-  const _$CitizenshipImpl(
-      {required this.value,
-      this.id = '',
-      this.hash,
-      this.status = ValidationStatus.unspecified});
+  const _$CitizenshipImpl({required this.value, this.id = '', this.hash});
 
   factory _$CitizenshipImpl.fromJson(Map<String, dynamic> json) =>
       _$$CitizenshipImplFromJson(json);
@@ -1462,13 +1364,10 @@ class _$CitizenshipImpl implements _Citizenship {
   final String id;
   @override
   final String? hash;
-  @override
-  @JsonKey()
-  final ValidationStatus status;
 
   @override
   String toString() {
-    return 'Citizenship(value: $value, id: $id, hash: $hash, status: $status)';
+    return 'Citizenship(value: $value, id: $id, hash: $hash)';
   }
 
   @override
@@ -1478,13 +1377,12 @@ class _$CitizenshipImpl implements _Citizenship {
             other is _$CitizenshipImpl &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.hash, hash) || other.hash == hash) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.hash, hash) || other.hash == hash));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, value, id, hash, status);
+  int get hashCode => Object.hash(runtimeType, value, id, hash);
 
   /// Create a copy of Citizenship
   /// with the given fields replaced by the non-null parameter values.
@@ -1506,8 +1404,7 @@ abstract class _Citizenship implements Citizenship {
   const factory _Citizenship(
       {required final String value,
       final String id,
-      final String? hash,
-      final ValidationStatus status}) = _$CitizenshipImpl;
+      final String? hash}) = _$CitizenshipImpl;
 
   factory _Citizenship.fromJson(Map<String, dynamic> json) =
       _$CitizenshipImpl.fromJson;
@@ -1518,8 +1415,6 @@ abstract class _Citizenship implements Citizenship {
   String get id;
   @override
   String? get hash;
-  @override
-  ValidationStatus get status;
 
   /// Create a copy of Citizenship
   /// with the given fields replaced by the non-null parameter values.
@@ -1538,7 +1433,6 @@ mixin _$BirthDate {
   DateTime get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-  ValidationStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this BirthDate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1555,7 +1449,7 @@ abstract class $BirthDateCopyWith<$Res> {
   factory $BirthDateCopyWith(BirthDate value, $Res Function(BirthDate) then) =
       _$BirthDateCopyWithImpl<$Res, BirthDate>;
   @useResult
-  $Res call({DateTime value, String id, String? hash, ValidationStatus status});
+  $Res call({DateTime value, String id, String? hash});
 }
 
 /// @nodoc
@@ -1576,7 +1470,6 @@ class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate>
     Object? value = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       value: null == value
@@ -1591,10 +1484,6 @@ class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ) as $Val);
   }
 }
@@ -1607,7 +1496,7 @@ abstract class _$$BirthDateImplCopyWith<$Res>
       __$$BirthDateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DateTime value, String id, String? hash, ValidationStatus status});
+  $Res call({DateTime value, String id, String? hash});
 }
 
 /// @nodoc
@@ -1626,7 +1515,6 @@ class __$$BirthDateImplCopyWithImpl<$Res>
     Object? value = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_$BirthDateImpl(
       value: null == value
@@ -1641,10 +1529,6 @@ class __$$BirthDateImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ));
   }
 }
@@ -1652,11 +1536,7 @@ class __$$BirthDateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$BirthDateImpl implements _BirthDate {
-  const _$BirthDateImpl(
-      {required this.value,
-      this.id = '',
-      this.hash,
-      this.status = ValidationStatus.unspecified});
+  const _$BirthDateImpl({required this.value, this.id = '', this.hash});
 
   factory _$BirthDateImpl.fromJson(Map<String, dynamic> json) =>
       _$$BirthDateImplFromJson(json);
@@ -1668,13 +1548,10 @@ class _$BirthDateImpl implements _BirthDate {
   final String id;
   @override
   final String? hash;
-  @override
-  @JsonKey()
-  final ValidationStatus status;
 
   @override
   String toString() {
-    return 'BirthDate(value: $value, id: $id, hash: $hash, status: $status)';
+    return 'BirthDate(value: $value, id: $id, hash: $hash)';
   }
 
   @override
@@ -1684,13 +1561,12 @@ class _$BirthDateImpl implements _BirthDate {
             other is _$BirthDateImpl &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.hash, hash) || other.hash == hash) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.hash, hash) || other.hash == hash));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, value, id, hash, status);
+  int get hashCode => Object.hash(runtimeType, value, id, hash);
 
   /// Create a copy of BirthDate
   /// with the given fields replaced by the non-null parameter values.
@@ -1712,8 +1588,7 @@ abstract class _BirthDate implements BirthDate {
   const factory _BirthDate(
       {required final DateTime value,
       final String id,
-      final String? hash,
-      final ValidationStatus status}) = _$BirthDateImpl;
+      final String? hash}) = _$BirthDateImpl;
 
   factory _BirthDate.fromJson(Map<String, dynamic> json) =
       _$BirthDateImpl.fromJson;
@@ -1724,8 +1599,6 @@ abstract class _BirthDate implements BirthDate {
   String get id;
   @override
   String? get hash;
-  @override
-  ValidationStatus get status;
 
   /// Create a copy of BirthDate
   /// with the given fields replaced by the non-null parameter values.
@@ -1749,7 +1622,6 @@ mixin _$Document {
   List<int>? get backImage => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-  ValidationStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this Document to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1774,8 +1646,7 @@ abstract class $DocumentCopyWith<$Res> {
       List<int>? frontImage,
       List<int>? backImage,
       String id,
-      String? hash,
-      ValidationStatus status});
+      String? hash});
 }
 
 /// @nodoc
@@ -1801,7 +1672,6 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? backImage = freezed,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -1836,10 +1706,6 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ) as $Val);
   }
 }
@@ -1860,8 +1726,7 @@ abstract class _$$DocumentImplCopyWith<$Res>
       List<int>? frontImage,
       List<int>? backImage,
       String id,
-      String? hash,
-      ValidationStatus status});
+      String? hash});
 }
 
 /// @nodoc
@@ -1885,7 +1750,6 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? backImage = freezed,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_$DocumentImpl(
       type: null == type
@@ -1920,10 +1784,6 @@ class __$$DocumentImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ));
   }
 }
@@ -1939,8 +1799,7 @@ class _$DocumentImpl implements _Document {
       final List<int>? frontImage,
       final List<int>? backImage,
       this.id = '',
-      this.hash,
-      this.status = ValidationStatus.unspecified})
+      this.hash})
       : _frontImage = frontImage,
         _backImage = backImage;
 
@@ -1980,13 +1839,10 @@ class _$DocumentImpl implements _Document {
   final String id;
   @override
   final String? hash;
-  @override
-  @JsonKey()
-  final ValidationStatus status;
 
   @override
   String toString() {
-    return 'Document(type: $type, number: $number, countryCode: $countryCode, expirationDate: $expirationDate, frontImage: $frontImage, backImage: $backImage, id: $id, hash: $hash, status: $status)';
+    return 'Document(type: $type, number: $number, countryCode: $countryCode, expirationDate: $expirationDate, frontImage: $frontImage, backImage: $backImage, id: $id, hash: $hash)';
   }
 
   @override
@@ -2005,8 +1861,7 @@ class _$DocumentImpl implements _Document {
             const DeepCollectionEquality()
                 .equals(other._backImage, _backImage) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.hash, hash) || other.hash == hash) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.hash, hash) || other.hash == hash));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2020,8 +1875,7 @@ class _$DocumentImpl implements _Document {
       const DeepCollectionEquality().hash(_frontImage),
       const DeepCollectionEquality().hash(_backImage),
       id,
-      hash,
-      status);
+      hash);
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -2048,8 +1902,7 @@ abstract class _Document implements Document {
       final List<int>? frontImage,
       final List<int>? backImage,
       final String id,
-      final String? hash,
-      final ValidationStatus status}) = _$DocumentImpl;
+      final String? hash}) = _$DocumentImpl;
 
   factory _Document.fromJson(Map<String, dynamic> json) =
       _$DocumentImpl.fromJson;
@@ -2070,8 +1923,6 @@ abstract class _Document implements Document {
   String get id;
   @override
   String? get hash;
-  @override
-  ValidationStatus get status;
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -2093,7 +1944,6 @@ mixin _$BankInfo {
   String get countryCode => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-  ValidationStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this BankInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2116,8 +1966,7 @@ abstract class $BankInfoCopyWith<$Res> {
       String accountNumber,
       String countryCode,
       String id,
-      String? hash,
-      ValidationStatus status});
+      String? hash});
 }
 
 /// @nodoc
@@ -2141,7 +1990,6 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
     Object? countryCode = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       bankName: null == bankName
@@ -2168,10 +2016,6 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ) as $Val);
   }
 }
@@ -2190,8 +2034,7 @@ abstract class _$$BankInfoImplCopyWith<$Res>
       String accountNumber,
       String countryCode,
       String id,
-      String? hash,
-      ValidationStatus status});
+      String? hash});
 }
 
 /// @nodoc
@@ -2213,7 +2056,6 @@ class __$$BankInfoImplCopyWithImpl<$Res>
     Object? countryCode = null,
     Object? id = null,
     Object? hash = freezed,
-    Object? status = null,
   }) {
     return _then(_$BankInfoImpl(
       bankName: null == bankName
@@ -2240,10 +2082,6 @@ class __$$BankInfoImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
     ));
   }
 }
@@ -2257,8 +2095,7 @@ class _$BankInfoImpl implements _BankInfo {
       required this.accountNumber,
       required this.countryCode,
       this.id = '',
-      this.hash,
-      this.status = ValidationStatus.unspecified});
+      this.hash});
 
   factory _$BankInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$BankInfoImplFromJson(json);
@@ -2276,13 +2113,10 @@ class _$BankInfoImpl implements _BankInfo {
   final String id;
   @override
   final String? hash;
-  @override
-  @JsonKey()
-  final ValidationStatus status;
 
   @override
   String toString() {
-    return 'BankInfo(bankName: $bankName, bankCode: $bankCode, accountNumber: $accountNumber, countryCode: $countryCode, id: $id, hash: $hash, status: $status)';
+    return 'BankInfo(bankName: $bankName, bankCode: $bankCode, accountNumber: $accountNumber, countryCode: $countryCode, id: $id, hash: $hash)';
   }
 
   @override
@@ -2299,14 +2133,13 @@ class _$BankInfoImpl implements _BankInfo {
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.hash, hash) || other.hash == hash) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.hash, hash) || other.hash == hash));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, bankName, bankCode,
-      accountNumber, countryCode, id, hash, status);
+  int get hashCode => Object.hash(
+      runtimeType, bankName, bankCode, accountNumber, countryCode, id, hash);
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2331,8 +2164,7 @@ abstract class _BankInfo implements BankInfo {
       required final String accountNumber,
       required final String countryCode,
       final String id,
-      final String? hash,
-      final ValidationStatus status}) = _$BankInfoImpl;
+      final String? hash}) = _$BankInfoImpl;
 
   factory _BankInfo.fromJson(Map<String, dynamic> json) =
       _$BankInfoImpl.fromJson;
@@ -2349,8 +2181,6 @@ abstract class _BankInfo implements BankInfo {
   String get id;
   @override
   String? get hash;
-  @override
-  ValidationStatus get status;
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.

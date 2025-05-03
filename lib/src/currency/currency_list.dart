@@ -30,5 +30,6 @@ const cryptoCurrencies = <String, int>{
 
 const fiatCurrencies = <String, int>{
   'USD': 2,
+  'EUR': 2,
   'NGN': 2,
 };

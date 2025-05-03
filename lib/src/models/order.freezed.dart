@@ -26,7 +26,7 @@ mixin _$Order {
   String get partnerPublicKey => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  RampType get type => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
   double get fiatAmount => throw _privateConstructorUsedError;
@@ -38,6 +38,7 @@ mixin _$Order {
   String get transactionId => throw _privateConstructorUsedError;
   String get externalId => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
 
   /// Serializes this Order to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,7 +61,7 @@ abstract class $OrderCopyWith<$Res> {
       String partnerPublicKey,
       String userPublicKey,
       String comment,
-      String type,
+      RampType type,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -71,7 +72,8 @@ abstract class $OrderCopyWith<$Res> {
       String transaction,
       String transactionId,
       String externalId,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -107,6 +109,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? transactionId = null,
     Object? externalId = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_value.copyWith(
       orderId: null == orderId
@@ -136,7 +139,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RampType,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
@@ -181,6 +184,10 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -199,7 +206,7 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       String partnerPublicKey,
       String userPublicKey,
       String comment,
-      String type,
+      RampType type,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -210,7 +217,8 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       String transaction,
       String transactionId,
       String externalId,
-      String userWalletAddress});
+      String userWalletAddress,
+      String walletPublicKey});
 }
 
 /// @nodoc
@@ -244,6 +252,7 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? transactionId = null,
     Object? externalId = null,
     Object? userWalletAddress = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(_$OrderImpl(
       orderId: null == orderId
@@ -273,7 +282,7 @@ class __$$OrderImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RampType,
       cryptoAmount: null == cryptoAmount
           ? _value.cryptoAmount
           : cryptoAmount // ignore: cast_nullable_to_non_nullable
@@ -318,6 +327,10 @@ class __$$OrderImplCopyWithImpl<$Res>
           ? _value.userWalletAddress
           : userWalletAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      walletPublicKey: null == walletPublicKey
+          ? _value.walletPublicKey
+          : walletPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -343,7 +356,8 @@ class _$OrderImpl implements _Order {
       required this.transaction,
       required this.transactionId,
       required this.externalId,
-      required this.userWalletAddress});
+      required this.userWalletAddress,
+      required this.walletPublicKey});
 
   factory _$OrderImpl.fromJson(Map<String, dynamic> json) =>
       _$$OrderImplFromJson(json);
@@ -361,7 +375,7 @@ class _$OrderImpl implements _Order {
   @override
   final String comment;
   @override
-  final String type;
+  final RampType type;
   @override
   final double cryptoAmount;
   @override
@@ -384,10 +398,12 @@ class _$OrderImpl implements _Order {
   final String externalId;
   @override
   final String userWalletAddress;
+  @override
+  final String walletPublicKey;
 
   @override
   String toString() {
-    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress)';
+    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -425,31 +441,35 @@ class _$OrderImpl implements _Order {
             (identical(other.externalId, externalId) ||
                 other.externalId == externalId) &&
             (identical(other.userWalletAddress, userWalletAddress) ||
-                other.userWalletAddress == userWalletAddress));
+                other.userWalletAddress == userWalletAddress) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      orderId,
-      created,
-      status,
-      partnerPublicKey,
-      userPublicKey,
-      comment,
-      type,
-      cryptoAmount,
-      cryptoCurrency,
-      fiatAmount,
-      fiatCurrency,
-      bankName,
-      bankAccount,
-      cryptoWalletAddress,
-      transaction,
-      transactionId,
-      externalId,
-      userWalletAddress);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        orderId,
+        created,
+        status,
+        partnerPublicKey,
+        userPublicKey,
+        comment,
+        type,
+        cryptoAmount,
+        cryptoCurrency,
+        fiatAmount,
+        fiatCurrency,
+        bankName,
+        bankAccount,
+        cryptoWalletAddress,
+        transaction,
+        transactionId,
+        externalId,
+        userWalletAddress,
+        walletPublicKey
+      ]);
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -475,7 +495,7 @@ abstract class _Order implements Order {
       required final String partnerPublicKey,
       required final String userPublicKey,
       required final String comment,
-      required final String type,
+      required final RampType type,
       required final double cryptoAmount,
       required final String cryptoCurrency,
       required final double fiatAmount,
@@ -486,7 +506,8 @@ abstract class _Order implements Order {
       required final String transaction,
       required final String transactionId,
       required final String externalId,
-      required final String userWalletAddress}) = _$OrderImpl;
+      required final String userWalletAddress,
+      required final String walletPublicKey}) = _$OrderImpl;
 
   factory _Order.fromJson(Map<String, dynamic> json) = _$OrderImpl.fromJson;
 
@@ -503,7 +524,7 @@ abstract class _Order implements Order {
   @override
   String get comment;
   @override
-  String get type;
+  RampType get type;
   @override
   double get cryptoAmount;
   @override
@@ -526,6 +547,8 @@ abstract class _Order implements Order {
   String get externalId;
   @override
   String get userWalletAddress;
+  @override
+  String get walletPublicKey;
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
