@@ -11,7 +11,6 @@ import 'package:kyc_client_dart/src/api/clients/wallet_service_client.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
 import 'package:kyc_client_dart/src/api/models/v1_check_access_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_requirements_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
@@ -29,6 +28,7 @@ import 'package:kyc_client_dart/src/api/models/v1_validate_email_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_phone_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_create_off_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_create_on_ramp_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/wallet_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_get_quote_request.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
@@ -592,10 +592,9 @@ class KycUserClient {
   }
 
   Future<String> generateTransaction({required OrderId orderId}) async {
-    final response = await _orderClient.orderServiceGenerateTransaction(
-      body: V1GenerateTransactionRequest(
+    final response = await _orderClient.walletServiceGenerateTransaction(
+      body: WalletGenerateTransactionRequest(
         orderId: orderId.orderId,
-        fundingWalletAddress: '',
         externalId: orderId.externalId,
       ),
     );

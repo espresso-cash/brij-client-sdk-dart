@@ -12,12 +12,11 @@ import 'package:kyc_client_dart/src/api/intercetor.dart';
 import 'package:kyc_client_dart/src/api/models/partner_accept_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/partner_complete_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/partner_fail_order_request.dart';
+import 'package:kyc_client_dart/src/api/models/partner_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/partner_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/partner_reject_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/partner_update_fees_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_create_kyc_status_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_fail_order_request.dart';
-import 'package:kyc_client_dart/src/api/models/v1_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_get_user_data_request.dart';
@@ -421,8 +420,8 @@ class KycPartnerClient {
     required OrderId orderId,
     required String fundingWalletAddress,
   }) async {
-    final response = await _orderClient.orderServiceGenerateTransaction(
-      body: V1GenerateTransactionRequest(
+    final response = await _orderClient.partnerServiceGenerateTransaction(
+      body: PartnerGenerateTransactionRequest(
         orderId: orderId.orderId,
         fundingWalletAddress: fundingWalletAddress,
         externalId: orderId.externalId,

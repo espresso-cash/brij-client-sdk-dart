@@ -26,7 +26,8 @@ part 'partner_service_client.g.dart';
 
 @RestApi()
 abstract class PartnerServiceClient {
-  factory PartnerServiceClient(Dio dio, {String? baseUrl}) = _PartnerServiceClient;
+  factory PartnerServiceClient(Dio dio, {String? baseUrl}) =
+      _PartnerServiceClient;
 
   @POST('/v1/generateTransaction')
   Future<PartnerGenerateTransactionResponse> partnerServiceGenerateTransaction({
@@ -54,9 +55,7 @@ abstract class PartnerServiceClient {
   });
 
   @POST('/v1/partner/getOrders')
-  Future<PartnerGetOrdersResponse> partnerServiceGetOrders({
-    @Body() required PartnerGetOrdersRequest body,
-  });
+  Future<PartnerGetOrdersResponse> partnerServiceGetOrders();
 
   @POST('/v1/partner/rejectOrder')
   Future<PartnerRejectOrderResponse> partnerServiceRejectOrder({
