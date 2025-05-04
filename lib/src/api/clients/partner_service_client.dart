@@ -29,11 +29,6 @@ abstract class PartnerServiceClient {
   factory PartnerServiceClient(Dio dio, {String? baseUrl}) =
       _PartnerServiceClient;
 
-  @POST('/v1/generateTransaction')
-  Future<PartnerGenerateTransactionResponse> partnerServiceGenerateTransaction({
-    @Body() required PartnerGenerateTransactionRequest body,
-  });
-
   @POST('/v1/partner/acceptOrder')
   Future<PartnerAcceptOrderResponse> partnerServiceAcceptOrder({
     @Body() required PartnerAcceptOrderRequest body,
@@ -47,6 +42,12 @@ abstract class PartnerServiceClient {
   @POST('/v1/partner/failOrder')
   Future<PartnerFailOrderResponse> partnerServiceFailOrder({
     @Body() required PartnerFailOrderRequest body,
+  });
+
+  @POST('/v1/partner/generateTransaction')
+  Future<PartnerGenerateTransactionResponse>
+      partnerServiceGeneratePartnerTransaction({
+    @Body() required PartnerGenerateTransactionRequest body,
   });
 
   @POST('/v1/partner/getOrder')

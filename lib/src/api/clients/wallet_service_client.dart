@@ -25,11 +25,6 @@ abstract class WalletServiceClient {
   factory WalletServiceClient(Dio dio, {String? baseUrl}) =
       _WalletServiceClient;
 
-  @POST('/v1/generateTransaction')
-  Future<WalletGenerateTransactionResponse> walletServiceGenerateTransaction({
-    @Body() required WalletGenerateTransactionRequest body,
-  });
-
   @POST('/v1/wallet/createOffRampOrder')
   Future<WalletCreateOffRampOrderResponse> walletServiceCreateOffRampOrder({
     @Body() required WalletCreateOffRampOrderRequest body,
@@ -38,6 +33,12 @@ abstract class WalletServiceClient {
   @POST('/v1/wallet/createOnRampOrder')
   Future<WalletCreateOnRampOrderResponse> walletServiceCreateOnRampOrder({
     @Body() required WalletCreateOnRampOrderRequest body,
+  });
+
+  @POST('/v1/wallet/generateTransaction')
+  Future<WalletGenerateTransactionResponse>
+      walletServiceGenerateWalletTransaction({
+    @Body() required WalletGenerateTransactionRequest body,
   });
 
   @POST('/v1/wallet/getOrder')
