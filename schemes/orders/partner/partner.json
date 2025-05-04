@@ -16,38 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/v1/generateTransaction": {
-      "post": {
-        "operationId": "PartnerService_GenerateTransaction",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/partnerGenerateTransactionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/partnerGenerateTransactionRequest"
-            }
-          }
-        ],
-        "tags": [
-          "PartnerService"
-        ]
-      }
-    },
     "/v1/partner/acceptOrder": {
       "post": {
         "operationId": "PartnerService_AcceptOrder",
