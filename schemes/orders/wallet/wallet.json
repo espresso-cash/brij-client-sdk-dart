@@ -16,38 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/v1/generateTransaction": {
-      "post": {
-        "operationId": "WalletService_GenerateTransaction",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/walletGenerateTransactionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/walletGenerateTransactionRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WalletService"
-        ]
-      }
-    },
     "/v1/wallet/createOffRampOrder": {
       "post": {
         "operationId": "WalletService_CreateOffRampOrder",
@@ -104,6 +72,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/walletCreateOnRampOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalletService"
+        ]
+      }
+    },
+    "/v1/wallet/generateTransaction": {
+      "post": {
+        "operationId": "WalletService_GenerateWalletTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/walletGenerateTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/walletGenerateTransactionRequest"
             }
           }
         ],

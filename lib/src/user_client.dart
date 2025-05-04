@@ -592,7 +592,7 @@ class KycUserClient {
   }
 
   Future<String> generateTransaction({required OrderId orderId}) async {
-    final response = await _orderClient.walletServiceGenerateTransaction(
+    final response = await _orderClient.walletServiceGenerateWalletTransaction(
       body: WalletGenerateTransactionRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
