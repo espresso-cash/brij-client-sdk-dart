@@ -45,8 +45,7 @@ abstract class PartnerServiceClient {
   });
 
   @POST('/v1/partner/generateTransaction')
-  Future<PartnerGenerateTransactionResponse>
-      partnerServiceGeneratePartnerTransaction({
+  Future<PartnerGenerateTransactionResponse> partnerServiceGenerateTransaction({
     @Body() required PartnerGenerateTransactionRequest body,
   });
 

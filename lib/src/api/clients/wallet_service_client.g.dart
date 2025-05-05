@@ -92,9 +92,8 @@ class _WalletServiceClient implements WalletServiceClient {
   }
 
   @override
-  Future<WalletGenerateTransactionResponse>
-      walletServiceGenerateWalletTransaction(
-          {required WalletGenerateTransactionRequest body}) async {
+  Future<WalletGenerateTransactionResponse> walletServiceGenerateTransaction(
+      {required WalletGenerateTransactionRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -82,7 +82,7 @@
     },
     "/v1/wallet/generateTransaction": {
       "post": {
-        "operationId": "WalletService_GenerateWalletTransaction",
+        "operationId": "WalletService_GenerateTransaction",
         "responses": {
           "200": {
             "description": "A successful response.",

@@ -109,9 +109,8 @@ class _PartnerServiceClient implements PartnerServiceClient {
   }
 
   @override
-  Future<PartnerGenerateTransactionResponse>
-      partnerServiceGeneratePartnerTransaction(
-          {required PartnerGenerateTransactionRequest body}) async {
+  Future<PartnerGenerateTransactionResponse> partnerServiceGenerateTransaction(
+      {required PartnerGenerateTransactionRequest body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

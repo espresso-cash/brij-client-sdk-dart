@@ -36,8 +36,7 @@ abstract class WalletServiceClient {
   });
 
   @POST('/v1/wallet/generateTransaction')
-  Future<WalletGenerateTransactionResponse>
-      walletServiceGenerateWalletTransaction({
+  Future<WalletGenerateTransactionResponse> walletServiceGenerateTransaction({
     @Body() required WalletGenerateTransactionRequest body,
   });
 
