@@ -1,20 +1,25 @@
 import 'dart:convert';
 
 import 'package:bs58/bs58.dart';
-import 'package:cryptography/cryptography.dart' hide Hash, PublicKey, SecretBox, Signature;
+import 'package:cryptography/cryptography.dart'
+    hide Hash, PublicKey, SecretBox, Signature;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/kyc_client_dart.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
-import 'package:kyc_client_dart/src/api/orders/clients/partner_service_client.dart' as orders;
+import 'package:kyc_client_dart/src/api/orders/clients/partner_service_client.dart'
+    as orders;
 import 'package:kyc_client_dart/src/api/orders/models/partner_accept_order_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/partner_complete_order_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/partner_fail_order_request.dart';
+import 'package:kyc_client_dart/src/api/orders/models/partner_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/partner_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/partner_reject_order_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/partner_update_fees_request.dart';
-import 'package:kyc_client_dart/src/api/storage/clients/partner_service_client.dart' as storage;
-import 'package:kyc_client_dart/src/api/storage/clients/verifier_service_client.dart' as storage;
+import 'package:kyc_client_dart/src/api/storage/clients/partner_service_client.dart'
+    as storage;
+import 'package:kyc_client_dart/src/api/storage/clients/verifier_service_client.dart'
+    as storage;
 import 'package:kyc_client_dart/src/api/storage/models/partner_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/partner_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/partner_get_user_data_request.dart';
@@ -54,14 +59,17 @@ class KycPartnerClient {
   Future<void> _initializeEncryption() async {
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
-        await authKeyPair.extractPrivateKeyBytes() + base58.decode(_authPublicKey),
+        await authKeyPair.extractPrivateKeyBytes() +
+            base58.decode(_authPublicKey),
       ),
     );
   }
 
   Future<void> _generateAuthToken() async {
-    _authPublicKey =
-        await authKeyPair.extractPublicKey().then((value) => Uint8List.fromList(value.bytes)).then(base58.encode);
+    _authPublicKey = await authKeyPair
+        .extractPublicKey()
+        .then((value) => Uint8List.fromList(value.bytes))
+        .then(base58.encode);
 
     await _initializeStoragePartnerClient();
     await _initializeStorageVerifierClient();
@@ -70,12 +78,14 @@ class KycPartnerClient {
 
   Future<void> _initializeStoragePartnerClient() async {
     final dio = await _createAuthenticatedClient('storage.brij.fi');
-    _storagePartnerClient = storage.PartnerServiceClient(dio, baseUrl: config.storageBaseUrl);
+    _storagePartnerClient =
+        storage.PartnerServiceClient(dio, baseUrl: config.storageBaseUrl);
   }
 
   Future<void> _initializeOrderClient() async {
     final dio = await _createAuthenticatedClient('orders.brij.fi');
-    _orderClient = orders.PartnerServiceClient(dio, baseUrl: config.orderBaseUrl);
+    _orderClient =
+        orders.PartnerServiceClient(dio, baseUrl: config.orderBaseUrl);
   }
 
   Future<void> _initializeStorageVerifierClient() async {
@@ -93,7 +103,8 @@ class KycPartnerClient {
 
     final token = payload.sign(
       jwt.EdDSAPrivateKey(
-        await authKeyPair.extractPrivateKeyBytes() + base58.decode(_authPublicKey),
+        await authKeyPair.extractPrivateKeyBytes() +
+            base58.decode(_authPublicKey),
       ),
       algorithm: jwt.JWTAlgorithm.EdDSA,
     );
@@ -220,7 +231,8 @@ class KycPartnerClient {
     required String bankAccount,
     required String userSecretKey,
   }) async {
-    final secretBox = SecretBox(Uint8List.fromList(base58.decode(userSecretKey)));
+    final secretBox =
+        SecretBox(Uint8List.fromList(base58.decode(userSecretKey)));
 
     final encryptedBankName = base64Encode(
       encrypt(
@@ -349,7 +361,8 @@ class KycPartnerClient {
 
     final signature = _signingKey.sign(protoMessage);
 
-    final response = await _storageVerifierClient.verifierServiceCreateKycStatus(
+    final response =
+        await _storageVerifierClient.verifierServiceCreateKycStatus(
       body: VerifierCreateKycStatusRequest(
         data: base64.encode(protoMessage),
         signature: base64.encode(signature.signature.asTypedList),
@@ -388,4 +401,20 @@ class KycPartnerClient {
           walletAddress: walletAddress,
         ),
       );
+
+  Future<String> generateTransaction({
+    required String orderId,
+    required String externalId,
+    required String fundingWalletAddress,
+  }) async {
+    final response = await _orderClient.partnerServiceGenerateTransaction(
+      body: PartnerGenerateTransactionRequest(
+        orderId: orderId,
+        externalId: externalId,
+        fundingWalletAddress: fundingWalletAddress,
+      ),
+    );
+
+    return response.transaction;
+  }
 }
