@@ -9,6 +9,8 @@ import '../models/wallet_create_off_ramp_order_request.dart';
 import '../models/wallet_create_off_ramp_order_response.dart';
 import '../models/wallet_create_on_ramp_order_request.dart';
 import '../models/wallet_create_on_ramp_order_response.dart';
+import '../models/wallet_generate_transaction_request.dart';
+import '../models/wallet_generate_transaction_response.dart';
 import '../models/wallet_get_order_request.dart';
 import '../models/wallet_get_order_response.dart';
 import '../models/wallet_get_orders_request.dart';
@@ -20,7 +22,8 @@ part 'wallet_service_client.g.dart';
 
 @RestApi()
 abstract class WalletServiceClient {
-  factory WalletServiceClient(Dio dio, {String? baseUrl}) = _WalletServiceClient;
+  factory WalletServiceClient(Dio dio, {String? baseUrl}) =
+      _WalletServiceClient;
 
   @POST('/v1/wallet/createOffRampOrder')
   Future<WalletCreateOffRampOrderResponse> walletServiceCreateOffRampOrder({
@@ -30,6 +33,11 @@ abstract class WalletServiceClient {
   @POST('/v1/wallet/createOnRampOrder')
   Future<WalletCreateOnRampOrderResponse> walletServiceCreateOnRampOrder({
     @Body() required WalletCreateOnRampOrderRequest body,
+  });
+
+  @POST('/v1/wallet/generateTransaction')
+  Future<WalletGenerateTransactionResponse> walletServiceGenerateTransaction({
+    @Body() required WalletGenerateTransactionRequest body,
   });
 
   @POST('/v1/wallet/getOrder')
