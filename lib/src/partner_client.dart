@@ -420,8 +420,7 @@ class KycPartnerClient {
     required OrderId orderId,
     required String fundingWalletAddress,
   }) async {
-    final response =
-        await _orderClient.partnerServiceGeneratePartnerTransaction(
+    final response = await _orderClient.partnerServiceGenerateTransaction(
       body: PartnerGenerateTransactionRequest(
         orderId: orderId.orderId,
         fundingWalletAddress: fundingWalletAddress,
