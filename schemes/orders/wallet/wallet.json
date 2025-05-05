@@ -16,38 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/v1/generateTransaction": {
-      "post": {
-        "operationId": "WalletService_GenerateTransaction",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/walletGenerateTransactionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/walletGenerateTransactionRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WalletService"
-        ]
-      }
-    },
     "/v1/wallet/createOffRampOrder": {
       "post": {
         "operationId": "WalletService_CreateOffRampOrder",
@@ -327,25 +295,6 @@
       "type": "object",
       "properties": {
         "orderId": {
-          "type": "string"
-        }
-      }
-    },
-    "walletGenerateTransactionRequest": {
-      "type": "object",
-      "properties": {
-        "orderId": {
-          "type": "string"
-        },
-        "externalId": {
-          "type": "string"
-        }
-      }
-    },
-    "walletGenerateTransactionResponse": {
-      "type": "object",
-      "properties": {
-        "transaction": {
           "type": "string"
         }
       }

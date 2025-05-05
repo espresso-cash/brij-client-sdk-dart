@@ -28,7 +28,6 @@ import 'package:kyc_client_dart/src/api/models/v1_validate_email_request.dart';
 import 'package:kyc_client_dart/src/api/models/v1_validate_phone_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_create_off_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_create_on_ramp_order_request.dart';
-import 'package:kyc_client_dart/src/api/models/wallet_generate_transaction_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_get_order_request.dart';
 import 'package:kyc_client_dart/src/api/models/wallet_get_quote_request.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
@@ -589,16 +588,5 @@ class KycUserClient {
     );
 
     return Quote.fromWalletGetQuoteResponse(response);
-  }
-
-  Future<String> generateTransaction({required OrderId orderId}) async {
-    final response = await _orderClient.walletServiceGenerateTransaction(
-      body: WalletGenerateTransactionRequest(
-        orderId: orderId.orderId,
-        externalId: orderId.externalId,
-      ),
-    );
-
-    return response.transaction;
   }
 }
