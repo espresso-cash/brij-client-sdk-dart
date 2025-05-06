@@ -142,9 +142,8 @@ class KycPartnerClient {
       ),
     );
 
-    return processPartnerUserData(
+    return processUserDataForPartner(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     );
   }
