@@ -48,38 +48,6 @@
         ]
       }
     },
-    "/v1/wallet/getGrantedAccessPartners": {
-      "post": {
-        "operationId": "WalletService_GetGrantedAccessPartners",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/walletGetGrantedAccessPartnersResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/walletGetGrantedAccessPartnersRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WalletService"
-        ]
-      }
-    },
     "/v1/wallet/getInfo": {
       "post": {
         "operationId": "WalletService_GetInfo",
@@ -304,38 +272,6 @@
         ]
       }
     },
-    "/v1/wallet/removeAllUserData": {
-      "post": {
-        "operationId": "WalletService_RemoveAllUserData",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/walletRemoveAllUserDataResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/walletRemoveAllUserDataRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WalletService"
-        ]
-      }
-    },
     "/v1/wallet/removeUserData": {
       "post": {
         "operationId": "WalletService_RemoveUserData",
@@ -360,38 +296,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/walletRemoveUserDataRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WalletService"
-        ]
-      }
-    },
-    "/v1/wallet/revokeAccess": {
-      "post": {
-        "operationId": "WalletService_RevokeAccess",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/walletRevokeAccessResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/walletRevokeAccessRequest"
             }
           }
         ],
@@ -565,21 +469,6 @@
         }
       }
     },
-    "walletGetGrantedAccessPartnersRequest": {
-      "type": "object"
-    },
-    "walletGetGrantedAccessPartnersResponse": {
-      "type": "object",
-      "properties": {
-        "partners": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/walletGetPartnerInfoResponse"
-          }
-        }
-      }
-    },
     "walletGetInfoRequest": {
       "type": "object",
       "properties": {
@@ -729,12 +618,6 @@
     "walletInitStorageResponse": {
       "type": "object"
     },
-    "walletRemoveAllUserDataRequest": {
-      "type": "object"
-    },
-    "walletRemoveAllUserDataResponse": {
-      "type": "object"
-    },
     "walletRemoveUserDataRequest": {
       "type": "object",
       "properties": {
@@ -744,17 +627,6 @@
       }
     },
     "walletRemoveUserDataResponse": {
-      "type": "object"
-    },
-    "walletRevokeAccessRequest": {
-      "type": "object",
-      "properties": {
-        "partnerPublicKey": {
-          "type": "string"
-        }
-      }
-    },
-    "walletRevokeAccessResponse": {
       "type": "object"
     },
     "walletSetUserDataRequest": {

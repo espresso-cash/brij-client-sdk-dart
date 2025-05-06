@@ -117,7 +117,6 @@ class UserAppState extends ChangeNotifier {
   Future<void> fetchData() async {
     try {
       final data = await _client.getUserData(
-        userPK: _authPublicKey,
         secretKey: _rawSecretKey,
       );
 
