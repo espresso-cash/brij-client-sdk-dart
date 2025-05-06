@@ -78,31 +78,27 @@ Uint8List decrypt({
   return decrypted;
 }
 
-Future<UserData> processWalletUserData({
+Future<UserData> processUserDataForWallet({
   required WalletGetUserDataResponse response,
-  required String userPK,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processWalletUserData(
+    return _processUserDataForWallet(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     );
   }
 
   return Isolate.run(
-    () => _processWalletUserData(
+    () => _processUserDataForWallet(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     ),
   );
 }
 
-UserData _processWalletUserData({
+UserData _processUserDataForWallet({
   required WalletGetUserDataResponse response,
-  required String userPK,
   required String secretKey,
 }) {
   final validationMap = {
@@ -223,31 +219,27 @@ UserData _processWalletUserData({
   );
 }
 
-Future<UserData> processPartnerUserData({
+Future<UserData> processUserDataForPartner({
   required PartnerGetUserDataResponse response,
-  required String userPK,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processPartnerUserData(
+    return _processUserDataForPartner(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     );
   }
 
   return Isolate.run(
-    () => _processPartnerUserData(
+    () => _processUserDataForPartner(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     ),
   );
 }
 
-UserData _processPartnerUserData({
+UserData _processUserDataForPartner({
   required PartnerGetUserDataResponse response,
-  required String userPK,
   required String secretKey,
 }) {
   final validationMap = {
