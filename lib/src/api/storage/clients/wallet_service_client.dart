@@ -7,6 +7,8 @@ import 'package:retrofit/retrofit.dart';
 
 import '../models/wallet_check_access_request.dart';
 import '../models/wallet_check_access_response.dart';
+import '../models/wallet_get_granted_access_partners_request.dart';
+import '../models/wallet_get_granted_access_partners_response.dart';
 import '../models/wallet_get_info_request.dart';
 import '../models/wallet_get_info_response.dart';
 import '../models/wallet_get_kyc_status_request.dart';
@@ -21,8 +23,12 @@ import '../models/wallet_grant_access_request.dart';
 import '../models/wallet_grant_access_response.dart';
 import '../models/wallet_init_storage_request.dart';
 import '../models/wallet_init_storage_response.dart';
+import '../models/wallet_remove_all_user_data_request.dart';
+import '../models/wallet_remove_all_user_data_response.dart';
 import '../models/wallet_remove_user_data_request.dart';
 import '../models/wallet_remove_user_data_response.dart';
+import '../models/wallet_revoke_access_request.dart';
+import '../models/wallet_revoke_access_response.dart';
 import '../models/wallet_set_user_data_request.dart';
 import '../models/wallet_set_user_data_response.dart';
 
@@ -36,6 +42,9 @@ abstract class WalletServiceClient {
   Future<WalletCheckAccessResponse> walletServiceCheckAccess({
     @Body() required WalletCheckAccessRequest body,
   });
+
+  @POST('/v1/wallet/getGrantedAccessPartners')
+  Future<WalletGetGrantedAccessPartnersResponse> walletServiceGetGrantedAccessPartners();
 
   @POST('/v1/wallet/getInfo')
   Future<WalletGetInfoResponse> walletServiceGetInfo({
@@ -72,9 +81,17 @@ abstract class WalletServiceClient {
     @Body() required WalletInitStorageRequest body,
   });
 
+  @POST('/v1/wallet/removeAllUserData')
+  Future<WalletRemoveAllUserDataResponse> walletServiceRemoveAllUserData();
+
   @POST('/v1/wallet/removeUserData')
   Future<WalletRemoveUserDataResponse> walletServiceRemoveUserData({
     @Body() required WalletRemoveUserDataRequest body,
+  });
+
+  @POST('/v1/wallet/revokeAccess')
+  Future<WalletRevokeAccessResponse> walletServiceRevokeAccess({
+    @Body() required WalletRevokeAccessRequest body,
   });
 
   @POST('/v1/wallet/setUserData')

@@ -25,6 +25,7 @@ import 'package:kyc_client_dart/src/api/storage/models/wallet_get_wallet_proof_r
 import 'package:kyc_client_dart/src/api/storage/models/wallet_grant_access_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_init_storage_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_remove_user_data_request.dart';
+import 'package:kyc_client_dart/src/api/storage/models/wallet_revoke_access_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_set_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/verifier/models/v1_get_kyc_requirements_request.dart';
 import 'package:kyc_client_dart/src/api/verifier/models/v1_init_email_validation_request.dart';
@@ -202,6 +203,12 @@ class KycUserClient {
       )
       .then((e) => PartnerModel.fromJson(e.toJson()));
 
+  Future<List<PartnerModel>> getGrantedAccessPartners() async {
+    final response = await _storageClient.walletServiceGetGrantedAccessPartners();
+
+    return response.partners.map((e) => PartnerModel.fromJson(e.toJson())).toList();
+  }
+
   Future<void> grantPartnerAccess(String partnerPK) async {
     final partnerEdPK = Uint8List.fromList(base58.decode(partnerPK));
     final partnerXPK = Uint8List(32);
@@ -224,6 +231,16 @@ class KycUserClient {
         encryptedSecretKey: encodedSecretKey,
       ),
     );
+  }
+
+  Future<void> revokePartnerAccess(String partnerPK) async {
+    await _storageClient.walletServiceRevokeAccess(
+      body: WalletRevokeAccessRequest(partnerPublicKey: partnerPK),
+    );
+  }
+
+  Future<void> removeAllUserData() async {
+    await _storageClient.walletServiceRemoveAllUserData();
   }
 
   Future<void> setData({

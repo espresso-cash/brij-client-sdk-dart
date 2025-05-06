@@ -61,8 +61,10 @@ class _UserViewState extends State<UserView> {
               _buildWalletSection(state),
               _buildPartnerAccessSection(),
               _buildPartnerInfoSection(state),
+              _buildGrantedAccessPartnersSection(state),
               _buildUserDataSection(state),
               _buildVerificationSection(),
+              _buildDeleteUserDataSection(state),
               _buildOnRampOrderSection(state),
               _buildUserOrdersSection(state),
               _buildQuoteSection(state),
@@ -244,6 +246,20 @@ class _UserViewState extends State<UserView> {
         ],
       );
 
+  Widget _buildDeleteUserDataSection(UserAppState state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: state.removeAllUserData,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: const Text('Delete All User Data'),
+          ),
+        ],
+      );
+
   Widget _buildPartnerAccessSection() => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -278,6 +294,25 @@ class _UserViewState extends State<UserView> {
                     partnerState.authPublicKey,
                   ),
               child: const Text('Fetch partner info'),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      );
+
+  Widget _buildGrantedAccessPartnersSection(UserAppState state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ValueField(
+            title: 'Granted access partners',
+            value: state.grantedAccessPartners != null
+                ? state.grantedAccessPartners?.map((e) => e.name).join('\n') ?? ''
+                : '',
+          ),
+          Consumer<PartnerAppState>(
+            builder: (context, partnerState, _) => ElevatedButton(
+              onPressed: () => context.read<UserAppState>().getGrantedAccessPartners(),
+              child: const Text('Fetch granted access partners'),
             ),
           ),
           const SizedBox(height: 16),
