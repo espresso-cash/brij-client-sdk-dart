@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/api/models/wallet_get_quote_response.dart';
-import 'package:kyc_client_dart/src/api/models/wallet_ramp_fee.dart';
+import 'package:kyc_client_dart/src/api/orders/models/wallet_get_quote_response.dart';
+import 'package:kyc_client_dart/src/api/orders/models/wallet_ramp_fee.dart';
 import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'quote.freezed.dart';

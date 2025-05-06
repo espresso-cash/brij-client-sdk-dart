@@ -3,13 +3,14 @@ import 'dart:isolate';
 
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
-import 'package:kyc_client_dart/src/api/models/common_ramp_type.dart';
-import 'package:kyc_client_dart/src/api/models/partner_get_order_response.dart';
-import 'package:kyc_client_dart/src/api/models/v1_data_type.dart';
-import 'package:kyc_client_dart/src/api/models/v1_get_user_data_response.dart';
-import 'package:kyc_client_dart/src/api/models/wallet_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/orders/models/common_ramp_type.dart';
+import 'package:kyc_client_dart/src/api/orders/models/partner_get_order_response.dart';
+import 'package:kyc_client_dart/src/api/orders/models/wallet_get_order_response.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
+import 'package:kyc_client_dart/src/api/storage/models/common_data_type.dart';
+import 'package:kyc_client_dart/src/api/storage/models/partner_get_user_data_response.dart';
+import 'package:kyc_client_dart/src/api/storage/models/wallet_get_user_data_response.dart';
 import 'package:kyc_client_dart/src/currency/currency_list.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
 import 'package:pinenacl/digests.dart';
@@ -77,31 +78,27 @@ Uint8List decrypt({
   return decrypted;
 }
 
-Future<UserData> processUserData({
-  required V1GetUserDataResponse response,
-  required String userPK,
+Future<UserData> processUserDataForWallet({
+  required WalletGetUserDataResponse response,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processUserData(
+    return _processUserDataForWallet(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     );
   }
 
   return Isolate.run(
-    () => _processUserData(
+    () => _processUserDataForWallet(
       response: response,
-      userPK: userPK,
       secretKey: secretKey,
     ),
   );
 }
 
-UserData _processUserData({
-  required V1GetUserDataResponse response,
-  required String userPK,
+UserData _processUserDataForWallet({
+  required WalletGetUserDataResponse response,
   required String secretKey,
 }) {
   final validationMap = {
@@ -134,7 +131,7 @@ UserData _processUserData({
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
     switch (encryptedData.type) {
-      case V1DataType.dataTypeEmail:
+      case CommonDataType.dataTypeEmail:
         final wrappedData = proto.Email.fromBuffer(decryptedData);
         email = Email(
           value: wrappedData.value,
@@ -142,7 +139,7 @@ UserData _processUserData({
           status: status,
           hash: hash,
         );
-      case V1DataType.dataTypeName:
+      case CommonDataType.dataTypeName:
         final wrappedData = proto.Name.fromBuffer(decryptedData);
         name = Name(
           firstName: wrappedData.firstName,
@@ -150,14 +147,14 @@ UserData _processUserData({
           id: id,
           hash: hash,
         );
-      case V1DataType.dataTypeBirthDate:
+      case CommonDataType.dataTypeBirthDate:
         final wrappedData = proto.BirthDate.fromBuffer(decryptedData);
         birthDate = BirthDate(
           value: wrappedData.value.toDateTime(),
           id: id,
           hash: hash,
         );
-      case V1DataType.dataTypePhone:
+      case CommonDataType.dataTypePhone:
         final wrappedData = proto.Phone.fromBuffer(decryptedData);
         phone = Phone(
           value: wrappedData.value,
@@ -165,7 +162,7 @@ UserData _processUserData({
           status: status,
           hash: hash,
         );
-      case V1DataType.dataTypeDocument:
+      case CommonDataType.dataTypeDocument:
         final wrappedData = proto.Document.fromBuffer(decryptedData);
         documents.add(
           Document(
@@ -179,7 +176,7 @@ UserData _processUserData({
             hash: hash,
           ),
         );
-      case V1DataType.dataTypeBankInfo:
+      case CommonDataType.dataTypeBankInfo:
         final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
         bankInfos.add(
           BankInfo(
@@ -191,22 +188,163 @@ UserData _processUserData({
             hash: hash,
           ),
         );
-      case V1DataType.dataTypeSelfieImage:
+      case CommonDataType.dataTypeSelfieImage:
         final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
         selfie = Selfie(
           value: wrappedData.value,
           id: id,
           hash: hash,
         );
-      case V1DataType.dataTypeCitizenship:
+      case CommonDataType.dataTypeCitizenship:
         final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
         citizenship = Citizenship(
           value: wrappedData.value,
           id: id,
           hash: hash,
         );
-      case V1DataType.dataTypeUnspecified:
-      case V1DataType.$unknown:
+      case CommonDataType.dataTypeUnspecified:
+      case CommonDataType.$unknown:
+    }
+  }
+
+  return UserData(
+    email: email,
+    phone: phone,
+    name: name,
+    birthDate: birthDate,
+    citizenship: citizenship,
+    documents: documents,
+    bankInfos: bankInfos,
+    selfie: selfie,
+  );
+}
+
+Future<UserData> processUserDataForPartner({
+  required PartnerGetUserDataResponse response,
+  required String secretKey,
+}) async {
+  if (_isWeb) {
+    return _processUserDataForPartner(
+      response: response,
+      secretKey: secretKey,
+    );
+  }
+
+  return Isolate.run(
+    () => _processUserDataForPartner(
+      response: response,
+      secretKey: secretKey,
+    ),
+  );
+}
+
+UserData _processUserDataForPartner({
+  required PartnerGetUserDataResponse response,
+  required String secretKey,
+}) {
+  final validationMap = {
+    for (final data in response.validationData)
+      data.dataId: HashValidationResult(
+        dataId: data.dataId,
+        hash: data.hash,
+        status: data.status.toApiValidationStatus(),
+      ),
+  };
+
+  Email? email;
+  Phone? phone;
+  Name? name;
+  BirthDate? birthDate;
+  Citizenship? citizenship;
+  final List<Document> documents = [];
+  final List<BankInfo> bankInfos = [];
+  Selfie? selfie;
+
+  for (final encryptedData in response.userData) {
+    final decryptedData = decrypt(
+      encryptedData: encryptedData.encryptedValue,
+      secretKey: secretKey,
+    );
+
+    final id = encryptedData.id;
+    final hash = encryptedData.hash;
+    final verificationData = validationMap[id];
+    final status = verificationData?.status ?? ValidationStatus.unspecified;
+
+    switch (encryptedData.type) {
+      case CommonDataType.dataTypeEmail:
+        final wrappedData = proto.Email.fromBuffer(decryptedData);
+        email = Email(
+          value: wrappedData.value,
+          id: id,
+          status: status,
+          hash: hash,
+        );
+      case CommonDataType.dataTypeName:
+        final wrappedData = proto.Name.fromBuffer(decryptedData);
+        name = Name(
+          firstName: wrappedData.firstName,
+          lastName: wrappedData.lastName,
+          id: id,
+          hash: hash,
+        );
+      case CommonDataType.dataTypeBirthDate:
+        final wrappedData = proto.BirthDate.fromBuffer(decryptedData);
+        birthDate = BirthDate(
+          value: wrappedData.value.toDateTime(),
+          id: id,
+          hash: hash,
+        );
+      case CommonDataType.dataTypePhone:
+        final wrappedData = proto.Phone.fromBuffer(decryptedData);
+        phone = Phone(
+          value: wrappedData.value,
+          id: id,
+          status: status,
+          hash: hash,
+        );
+      case CommonDataType.dataTypeDocument:
+        final wrappedData = proto.Document.fromBuffer(decryptedData);
+        documents.add(
+          Document(
+            type: wrappedData.type.toIdType(),
+            number: wrappedData.number,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            expirationDate: wrappedData.expirationDate.toDateTime(),
+            frontImage: wrappedData.photo.frontImage,
+            backImage: wrappedData.photo.backImage,
+            hash: hash,
+          ),
+        );
+      case CommonDataType.dataTypeBankInfo:
+        final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
+        bankInfos.add(
+          BankInfo(
+            bankName: wrappedData.bankName,
+            accountNumber: wrappedData.accountNumber,
+            bankCode: wrappedData.bankCode,
+            countryCode: wrappedData.countryCode,
+            id: id,
+            hash: hash,
+          ),
+        );
+      case CommonDataType.dataTypeSelfieImage:
+        final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
+        selfie = Selfie(
+          value: wrappedData.value,
+          id: id,
+          hash: hash,
+        );
+      case CommonDataType.dataTypeCitizenship:
+        final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
+        citizenship = Citizenship(
+          value: wrappedData.value,
+          id: id,
+          hash: hash,
+        );
+      case CommonDataType.dataTypeUnspecified:
+      case CommonDataType.$unknown:
     }
   }
 

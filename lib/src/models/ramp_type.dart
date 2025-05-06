@@ -1,4 +1,4 @@
-import 'package:kyc_client_dart/src/api/models/common_ramp_type.dart';
+import 'package:kyc_client_dart/src/api/orders/models/common_ramp_type.dart';
 
 enum RampType {
   onRamp,

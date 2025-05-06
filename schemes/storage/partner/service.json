@@ -1,0 +1,527 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "brij/storage/v1/partner/service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PartnerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/partner/createKycStatus": {
+      "post": {
+        "operationId": "PartnerService_CreateKycStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerCreateKycStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerCreateKycStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/getInfo": {
+      "post": {
+        "operationId": "PartnerService_GetInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerGetInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerGetInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/getKycStatus": {
+      "post": {
+        "operationId": "PartnerService_GetKycStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerGetKycStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerGetKycStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/getUserData": {
+      "post": {
+        "operationId": "PartnerService_GetUserData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerGetUserDataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerGetUserDataRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/removeValidationData": {
+      "post": {
+        "operationId": "PartnerService_RemoveValidationData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerRemoveValidationDataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerRemoveValidationDataRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/setValidationData": {
+      "post": {
+        "operationId": "PartnerService_SetValidationData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerSetValidationDataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerSetValidationDataRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    },
+    "/v1/partner/updateKycStatus": {
+      "post": {
+        "operationId": "PartnerService_UpdateKycStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partnerUpdateKycStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerUpdateKycStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartnerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonDataType": {
+      "type": "string",
+      "enum": [
+        "DATA_TYPE_UNSPECIFIED",
+        "DATA_TYPE_PHONE",
+        "DATA_TYPE_EMAIL",
+        "DATA_TYPE_NAME",
+        "DATA_TYPE_BIRTH_DATE",
+        "DATA_TYPE_DOCUMENT",
+        "DATA_TYPE_BANK_INFO",
+        "DATA_TYPE_SELFIE_IMAGE",
+        "DATA_TYPE_CITIZENSHIP"
+      ],
+      "default": "DATA_TYPE_UNSPECIFIED"
+    },
+    "commonKycStatus": {
+      "type": "string",
+      "enum": [
+        "KYC_STATUS_UNSPECIFIED",
+        "KYC_STATUS_PENDING",
+        "KYC_STATUS_APPROVED",
+        "KYC_STATUS_REJECTED"
+      ],
+      "default": "KYC_STATUS_UNSPECIFIED"
+    },
+    "commonUserDataField": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/commonDataType"
+        },
+        "encryptedValue": {
+          "type": "string",
+          "format": "byte"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "commonValidationDataField": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "validatorPublicKey": {
+          "type": "string"
+        },
+        "dataId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/commonValidationStatus"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "validatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "commonValidationStatus": {
+      "type": "string",
+      "enum": [
+        "VALIDATION_STATUS_UNSPECIFIED",
+        "VALIDATION_STATUS_PENDING",
+        "VALIDATION_STATUS_APPROVED",
+        "VALIDATION_STATUS_REJECTED"
+      ],
+      "default": "VALIDATION_STATUS_UNSPECIFIED"
+    },
+    "partnerCreateKycStatusRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "partnerCreateKycStatusResponse": {
+      "type": "object",
+      "properties": {
+        "kycId": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerGetInfoRequest": {
+      "type": "object",
+      "properties": {
+        "publicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerGetInfoResponse": {
+      "type": "object",
+      "properties": {
+        "encryptedSecretKey": {
+          "type": "string"
+        },
+        "publicKey": {
+          "type": "string"
+        },
+        "walletAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerGetKycStatusRequest": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "validatorPublicKey": {
+          "type": "string"
+        },
+        "userPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerGetKycStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/commonKycStatus"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "partnerGetUserDataRequest": {
+      "type": "object",
+      "properties": {
+        "userPublicKey": {
+          "type": "string"
+        },
+        "includeValues": {
+          "type": "boolean"
+        }
+      }
+    },
+    "partnerGetUserDataResponse": {
+      "type": "object",
+      "properties": {
+        "userData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonUserDataField"
+          }
+        },
+        "validationData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonValidationDataField"
+          }
+        }
+      }
+    },
+    "partnerRemoveValidationDataRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerRemoveValidationDataResponse": {
+      "type": "object"
+    },
+    "partnerSetValidationDataRequest": {
+      "type": "object",
+      "properties": {
+        "dataId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/commonValidationStatus"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "partnerSetValidationDataResponse": {
+      "type": "object"
+    },
+    "partnerUpdateKycStatusRequest": {
+      "type": "object",
+      "properties": {
+        "kycId": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "partnerUpdateKycStatusResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'wallet_check_access_response.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+WalletCheckAccessResponse _$WalletCheckAccessResponseFromJson(
+    Map<String, dynamic> json) {
+  return _WalletCheckAccessResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WalletCheckAccessResponse {
+  bool get hasAccess => throw _privateConstructorUsedError;
+
+  /// Serializes this WalletCheckAccessResponse to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of WalletCheckAccessResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WalletCheckAccessResponseCopyWith<WalletCheckAccessResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WalletCheckAccessResponseCopyWith<$Res> {
+  factory $WalletCheckAccessResponseCopyWith(WalletCheckAccessResponse value,
+          $Res Function(WalletCheckAccessResponse) then) =
+      _$WalletCheckAccessResponseCopyWithImpl<$Res, WalletCheckAccessResponse>;
+  @useResult
+  $Res call({bool hasAccess});
+}
+
+/// @nodoc
+class _$WalletCheckAccessResponseCopyWithImpl<$Res,
+        $Val extends WalletCheckAccessResponse>
+    implements $WalletCheckAccessResponseCopyWith<$Res> {
+  _$WalletCheckAccessResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of WalletCheckAccessResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasAccess = null,
+  }) {
+    return _then(_value.copyWith(
+      hasAccess: null == hasAccess
+          ? _value.hasAccess
+          : hasAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WalletCheckAccessResponseImplCopyWith<$Res>
+    implements $WalletCheckAccessResponseCopyWith<$Res> {
+  factory _$$WalletCheckAccessResponseImplCopyWith(
+          _$WalletCheckAccessResponseImpl value,
+          $Res Function(_$WalletCheckAccessResponseImpl) then) =
+      __$$WalletCheckAccessResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool hasAccess});
+}
+
+/// @nodoc
+class __$$WalletCheckAccessResponseImplCopyWithImpl<$Res>
+    extends _$WalletCheckAccessResponseCopyWithImpl<$Res,
+        _$WalletCheckAccessResponseImpl>
+    implements _$$WalletCheckAccessResponseImplCopyWith<$Res> {
+  __$$WalletCheckAccessResponseImplCopyWithImpl(
+      _$WalletCheckAccessResponseImpl _value,
+      $Res Function(_$WalletCheckAccessResponseImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WalletCheckAccessResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasAccess = null,
+  }) {
+    return _then(_$WalletCheckAccessResponseImpl(
+      hasAccess: null == hasAccess
+          ? _value.hasAccess
+          : hasAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WalletCheckAccessResponseImpl implements _WalletCheckAccessResponse {
+  const _$WalletCheckAccessResponseImpl({required this.hasAccess});
+
+  factory _$WalletCheckAccessResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WalletCheckAccessResponseImplFromJson(json);
+
+  @override
+  final bool hasAccess;
+
+  @override
+  String toString() {
+    return 'WalletCheckAccessResponse(hasAccess: $hasAccess)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WalletCheckAccessResponseImpl &&
+            (identical(other.hasAccess, hasAccess) ||
+                other.hasAccess == hasAccess));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, hasAccess);
+
+  /// Create a copy of WalletCheckAccessResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WalletCheckAccessResponseImplCopyWith<_$WalletCheckAccessResponseImpl>
+      get copyWith => __$$WalletCheckAccessResponseImplCopyWithImpl<
+          _$WalletCheckAccessResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WalletCheckAccessResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WalletCheckAccessResponse implements WalletCheckAccessResponse {
+  const factory _WalletCheckAccessResponse({required final bool hasAccess}) =
+      _$WalletCheckAccessResponseImpl;
+
+  factory _WalletCheckAccessResponse.fromJson(Map<String, dynamic> json) =
+      _$WalletCheckAccessResponseImpl.fromJson;
+
+  @override
+  bool get hasAccess;
+
+  /// Create a copy of WalletCheckAccessResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WalletCheckAccessResponseImplCopyWith<_$WalletCheckAccessResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
