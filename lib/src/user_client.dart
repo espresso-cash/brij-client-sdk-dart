@@ -416,6 +416,7 @@ class KycUserClient {
     final orderId = const Uuid().v4();
 
     final signatureMessage = createUserOnRampMessage(
+      orderId: orderId,
       cryptoAmount: cryptoAmount,
       cryptoCurrency: cryptoCurrency,
       fiatAmount: fiatAmount,
@@ -469,6 +470,7 @@ class KycUserClient {
     );
 
     final signatureMessage = createUserOffRampMessage(
+      orderId: orderId,
       cryptoAmount: cryptoAmount,
       cryptoCurrency: cryptoCurrency,
       fiatAmount: fiatAmount,
