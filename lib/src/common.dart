@@ -419,6 +419,7 @@ Order processWalletOrderData({
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
     final partnerMessage = order.type == CommonRampType.rampTypeONRamp
         ? createPartnerOnRampMessage(
+            orderId: order.orderId,
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
@@ -427,6 +428,7 @@ Order processWalletOrderData({
             bankAccount: bankAccount,
           )
         : createPartnerOffRampMessage(
+            orderId: order.orderId,
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
@@ -509,6 +511,7 @@ Order processPartnerOrderData({
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
     final partnerMessage = order.type == CommonRampType.rampTypeONRamp
         ? createPartnerOnRampMessage(
+            orderId: order.orderId,
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
@@ -517,6 +520,7 @@ Order processPartnerOrderData({
             bankAccount: bankAccount,
           )
         : createPartnerOffRampMessage(
+            orderId: order.orderId,
             cryptoAmount: order.cryptoAmount,
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
@@ -571,6 +575,7 @@ String createUserOffRampMessage({
 }
 
 String createPartnerOnRampMessage({
+  required String orderId,
   required double cryptoAmount,
   required String cryptoCurrency,
   required double fiatAmount,
@@ -581,10 +586,11 @@ String createPartnerOnRampMessage({
   final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
   final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
-  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
+  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
 }
 
 String createPartnerOffRampMessage({
+  required String orderId,
   required double cryptoAmount,
   required String cryptoCurrency,
   required double fiatAmount,
@@ -594,7 +600,7 @@ String createPartnerOffRampMessage({
   final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
   final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
-  return '$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$cryptoWalletAddress';
+  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$cryptoWalletAddress';
 }
 
 const bool _isWeb = identical(0, 0.0);

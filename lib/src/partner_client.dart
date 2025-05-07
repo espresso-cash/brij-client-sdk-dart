@@ -231,6 +231,7 @@ class KycPartnerClient {
     final order = await getOrder(orderId: orderId);
 
     final signatureMessage = createPartnerOnRampMessage(
+      orderId: order.orderId,
       cryptoAmount: order.cryptoAmount,
       cryptoCurrency: order.cryptoCurrency,
       fiatAmount: order.fiatAmount,
@@ -258,6 +259,7 @@ class KycPartnerClient {
   }) async {
     final order = await getOrder(orderId: orderId);
     final signatureMessage = createPartnerOffRampMessage(
+      orderId: order.orderId,
       cryptoAmount: order.cryptoAmount,
       cryptoCurrency: order.cryptoCurrency,
       fiatAmount: order.fiatAmount,
