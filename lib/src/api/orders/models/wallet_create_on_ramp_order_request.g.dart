@@ -9,6 +9,7 @@ part of 'wallet_create_on_ramp_order_request.dart';
 _$WalletCreateOnRampOrderRequestImpl
     _$$WalletCreateOnRampOrderRequestImplFromJson(Map<String, dynamic> json) =>
         _$WalletCreateOnRampOrderRequestImpl(
+          orderId: json['orderId'] as String,
           partnerPublicKey: json['partnerPublicKey'] as String,
           cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
           cryptoCurrency: json['cryptoCurrency'] as String,
@@ -22,6 +23,7 @@ _$WalletCreateOnRampOrderRequestImpl
 Map<String, dynamic> _$$WalletCreateOnRampOrderRequestImplToJson(
         _$WalletCreateOnRampOrderRequestImpl instance) =>
     <String, dynamic>{
+      'orderId': instance.orderId,
       'partnerPublicKey': instance.partnerPublicKey,
       'cryptoAmount': instance.cryptoAmount,
       'cryptoCurrency': instance.cryptoCurrency,

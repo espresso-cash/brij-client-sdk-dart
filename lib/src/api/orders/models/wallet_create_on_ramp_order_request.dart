@@ -10,6 +10,7 @@ part 'wallet_create_on_ramp_order_request.g.dart';
 @Freezed()
 class WalletCreateOnRampOrderRequest with _$WalletCreateOnRampOrderRequest {
   const factory WalletCreateOnRampOrderRequest({
+    required String orderId,
     required String partnerPublicKey,
     required double cryptoAmount,
     required String cryptoCurrency,

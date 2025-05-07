@@ -21,6 +21,7 @@ WalletCreateOffRampOrderRequest _$WalletCreateOffRampOrderRequestFromJson(
 
 /// @nodoc
 mixin _$WalletCreateOffRampOrderRequest {
+  String get orderId => throw _privateConstructorUsedError;
   String get partnerPublicKey => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $WalletCreateOffRampOrderRequestCopyWith<$Res> {
           WalletCreateOffRampOrderRequest>;
   @useResult
   $Res call(
-      {String partnerPublicKey,
+      {String orderId,
+      String partnerPublicKey,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -79,6 +81,7 @@ class _$WalletCreateOffRampOrderRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? orderId = null,
     Object? partnerPublicKey = null,
     Object? cryptoAmount = null,
     Object? cryptoCurrency = null,
@@ -91,6 +94,10 @@ class _$WalletCreateOffRampOrderRequestCopyWithImpl<$Res,
     Object? walletPublicKey = null,
   }) {
     return _then(_value.copyWith(
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
       partnerPublicKey: null == partnerPublicKey
           ? _value.partnerPublicKey
           : partnerPublicKey // ignore: cast_nullable_to_non_nullable
@@ -145,7 +152,8 @@ abstract class _$$WalletCreateOffRampOrderRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String partnerPublicKey,
+      {String orderId,
+      String partnerPublicKey,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
@@ -172,6 +180,7 @@ class __$$WalletCreateOffRampOrderRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? orderId = null,
     Object? partnerPublicKey = null,
     Object? cryptoAmount = null,
     Object? cryptoCurrency = null,
@@ -184,6 +193,10 @@ class __$$WalletCreateOffRampOrderRequestImplCopyWithImpl<$Res>
     Object? walletPublicKey = null,
   }) {
     return _then(_$WalletCreateOffRampOrderRequestImpl(
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
       partnerPublicKey: null == partnerPublicKey
           ? _value.partnerPublicKey
           : partnerPublicKey // ignore: cast_nullable_to_non_nullable
@@ -233,7 +246,8 @@ class __$$WalletCreateOffRampOrderRequestImplCopyWithImpl<$Res>
 class _$WalletCreateOffRampOrderRequestImpl
     implements _WalletCreateOffRampOrderRequest {
   const _$WalletCreateOffRampOrderRequestImpl(
-      {required this.partnerPublicKey,
+      {required this.orderId,
+      required this.partnerPublicKey,
       required this.cryptoAmount,
       required this.cryptoCurrency,
       required this.fiatAmount,
@@ -248,6 +262,8 @@ class _$WalletCreateOffRampOrderRequestImpl
           Map<String, dynamic> json) =>
       _$$WalletCreateOffRampOrderRequestImplFromJson(json);
 
+  @override
+  final String orderId;
   @override
   final String partnerPublicKey;
   @override
@@ -271,7 +287,7 @@ class _$WalletCreateOffRampOrderRequestImpl
 
   @override
   String toString() {
-    return 'WalletCreateOffRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, userSignature: $userSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
+    return 'WalletCreateOffRampOrderRequest(orderId: $orderId, partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, userSignature: $userSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -279,6 +295,7 @@ class _$WalletCreateOffRampOrderRequestImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WalletCreateOffRampOrderRequestImpl &&
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.partnerPublicKey, partnerPublicKey) ||
                 other.partnerPublicKey == partnerPublicKey) &&
             (identical(other.cryptoAmount, cryptoAmount) ||
@@ -305,6 +322,7 @@ class _$WalletCreateOffRampOrderRequestImpl
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      orderId,
       partnerPublicKey,
       cryptoAmount,
       cryptoCurrency,
@@ -337,7 +355,8 @@ class _$WalletCreateOffRampOrderRequestImpl
 abstract class _WalletCreateOffRampOrderRequest
     implements WalletCreateOffRampOrderRequest {
   const factory _WalletCreateOffRampOrderRequest(
-          {required final String partnerPublicKey,
+          {required final String orderId,
+          required final String partnerPublicKey,
           required final double cryptoAmount,
           required final String cryptoCurrency,
           required final double fiatAmount,
@@ -352,6 +371,8 @@ abstract class _WalletCreateOffRampOrderRequest
   factory _WalletCreateOffRampOrderRequest.fromJson(Map<String, dynamic> json) =
       _$WalletCreateOffRampOrderRequestImpl.fromJson;
 
+  @override
+  String get orderId;
   @override
   String get partnerPublicKey;
   @override
