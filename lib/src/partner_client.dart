@@ -236,8 +236,8 @@ class KycPartnerClient {
       cryptoCurrency: order.cryptoCurrency,
       fiatAmount: order.fiatAmount,
       fiatCurrency: order.fiatCurrency,
-      bankName: bankName,
-      bankAccount: bankAccount,
+      encryptedBankName: encryptedBankName,
+      encryptedBankAccount: encryptedBankAccount,
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 

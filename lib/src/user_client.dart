@@ -475,8 +475,8 @@ class KycUserClient {
       cryptoCurrency: cryptoCurrency,
       fiatAmount: fiatAmount,
       fiatCurrency: fiatCurrency,
-      bankName: bankName,
-      bankAccount: bankAccount,
+      encryptedBankName: encryptedBankName,
+      encryptedBankAccount: encryptedBankAccount,
       walletAddress: cryptoWalletAddress,
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));

@@ -364,26 +364,11 @@ Order processWalletOrderData({
   required WalletGetOrderResponse order,
   required String secretKey,
 }) {
-  String bankName = order.bankName;
-  String bankAccount = order.bankAccount;
+  final decryptedBankName =
+      order.bankName.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankName, secretKey: secretKey)) : '';
 
-  if (bankName.isNotEmpty) {
-    bankName = utf8.decode(
-      decrypt(
-        encryptedData: bankName,
-        secretKey: secretKey,
-      ),
-    );
-  }
-
-  if (bankAccount.isNotEmpty) {
-    bankAccount = utf8.decode(
-      decrypt(
-        encryptedData: bankAccount,
-        secretKey: secretKey,
-      ),
-    );
-  }
+  final decryptedBankAccount =
+      order.bankAccount.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankAccount, secretKey: secretKey)) : '';
 
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
@@ -402,8 +387,8 @@ Order processWalletOrderData({
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
             fiatCurrency: order.fiatCurrency,
-            bankName: bankName,
-            bankAccount: bankAccount,
+            encryptedBankName: order.bankName,
+            encryptedBankAccount: order.bankAccount,
             walletAddress: order.userWalletAddress,
           );
 
@@ -424,8 +409,8 @@ Order processWalletOrderData({
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
             fiatCurrency: order.fiatCurrency,
-            bankName: bankName,
-            bankAccount: bankAccount,
+            encryptedBankName: order.bankName,
+            encryptedBankAccount: order.bankAccount,
           )
         : createPartnerOffRampMessage(
             orderId: order.orderId,
@@ -446,8 +431,8 @@ Order processWalletOrderData({
 
   return Order.fromWalletGetOrderResponse(
     order.copyWith(
-      bankName: bankName,
-      bankAccount: bankAccount,
+      bankName: decryptedBankName,
+      bankAccount: decryptedBankAccount,
     ),
   );
 }
@@ -456,26 +441,11 @@ Order processPartnerOrderData({
   required PartnerGetOrderResponse order,
   required String secretKey,
 }) {
-  String bankName = order.bankName;
-  String bankAccount = order.bankAccount;
+  final decryptedBankName =
+      order.bankName.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankName, secretKey: secretKey)) : '';
 
-  if (bankName.isNotEmpty) {
-    bankName = utf8.decode(
-      decrypt(
-        encryptedData: bankName,
-        secretKey: secretKey,
-      ),
-    );
-  }
-
-  if (bankAccount.isNotEmpty) {
-    bankAccount = utf8.decode(
-      decrypt(
-        encryptedData: bankAccount,
-        secretKey: secretKey,
-      ),
-    );
-  }
+  final decryptedBankAccount =
+      order.bankAccount.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankAccount, secretKey: secretKey)) : '';
 
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
@@ -494,8 +464,8 @@ Order processPartnerOrderData({
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
             fiatCurrency: order.fiatCurrency,
-            bankName: bankName,
-            bankAccount: bankAccount,
+            encryptedBankName: order.bankName,
+            encryptedBankAccount: order.bankAccount,
             walletAddress: order.userWalletAddress,
           );
 
@@ -516,8 +486,8 @@ Order processPartnerOrderData({
             cryptoCurrency: order.cryptoCurrency,
             fiatAmount: order.fiatAmount,
             fiatCurrency: order.fiatCurrency,
-            bankName: bankName,
-            bankAccount: bankAccount,
+            encryptedBankName: order.bankName,
+            encryptedBankAccount: order.bankAccount,
           )
         : createPartnerOffRampMessage(
             orderId: order.orderId,
@@ -538,8 +508,8 @@ Order processPartnerOrderData({
 
   return Order.fromPartnerGetOrderResponse(
     order.copyWith(
-      bankName: bankName,
-      bankAccount: bankAccount,
+      bankName: decryptedBankName,
+      bankAccount: decryptedBankAccount,
     ),
   );
 }
@@ -564,14 +534,14 @@ String createUserOffRampMessage({
   required String cryptoCurrency,
   required double fiatAmount,
   required String fiatCurrency,
-  required String bankName,
-  required String bankAccount,
+  required String encryptedBankName,
+  required String encryptedBankAccount,
   required String walletAddress,
 }) {
   final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
   final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
-  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount|$walletAddress';
+  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$encryptedBankName|$encryptedBankAccount|$walletAddress';
 }
 
 String createPartnerOnRampMessage({
@@ -580,13 +550,13 @@ String createPartnerOnRampMessage({
   required String cryptoCurrency,
   required double fiatAmount,
   required String fiatCurrency,
-  required String bankName,
-  required String bankAccount,
+  required String encryptedBankName,
+  required String encryptedBankAccount,
 }) {
   final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
   final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
 
-  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$bankName|$bankAccount';
+  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$encryptedBankName|$encryptedBankAccount';
 }
 
 String createPartnerOffRampMessage({
