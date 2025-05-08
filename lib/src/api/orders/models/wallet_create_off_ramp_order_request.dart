@@ -20,6 +20,7 @@ class WalletCreateOffRampOrderRequest with _$WalletCreateOffRampOrderRequest {
     required String userSignature,
     required String userWalletAddress,
     required String walletPublicKey,
+    required String orderId,
   }) = _WalletCreateOffRampOrderRequest;
   
   factory WalletCreateOffRampOrderRequest.fromJson(Map<String, Object?> json) => _$WalletCreateOffRampOrderRequestFromJson(json);

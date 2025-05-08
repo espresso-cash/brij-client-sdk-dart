@@ -231,12 +231,13 @@ class KycPartnerClient {
     final order = await getOrder(orderId: orderId);
 
     final signatureMessage = createPartnerOnRampMessage(
+      orderId: order.orderId,
       cryptoAmount: order.cryptoAmount,
       cryptoCurrency: order.cryptoCurrency,
       fiatAmount: order.fiatAmount,
       fiatCurrency: order.fiatCurrency,
-      bankName: bankName,
-      bankAccount: bankAccount,
+      encryptedBankName: encryptedBankName,
+      encryptedBankAccount: encryptedBankAccount,
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
@@ -258,6 +259,7 @@ class KycPartnerClient {
   }) async {
     final order = await getOrder(orderId: orderId);
     final signatureMessage = createPartnerOffRampMessage(
+      orderId: order.orderId,
       cryptoAmount: order.cryptoAmount,
       cryptoCurrency: order.cryptoCurrency,
       fiatAmount: order.fiatAmount,

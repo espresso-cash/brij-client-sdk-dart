@@ -281,6 +281,9 @@
         },
         "walletPublicKey": {
           "type": "string"
+        },
+        "orderId": {
+          "type": "string"
         }
       }
     },
@@ -319,6 +322,9 @@
           "type": "string"
         },
         "walletPublicKey": {
+          "type": "string"
+        },
+        "orderId": {
           "type": "string"
         }
       }

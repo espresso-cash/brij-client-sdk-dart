@@ -43,6 +43,7 @@ import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart' hide Signature;
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
+import 'package:uuid/uuid.dart';
 
 typedef SignRequest = Future<Signature> Function(Iterable<int> data);
 
@@ -487,7 +488,10 @@ class KycUserClient {
     required String cryptoWalletAddress,
     required String walletPK,
   }) async {
+    final orderId = const Uuid().v4();
+
     final signatureMessage = createUserOnRampMessage(
+      orderId: orderId,
       cryptoAmount: cryptoAmount,
       cryptoCurrency: cryptoCurrency,
       fiatAmount: fiatAmount,
@@ -498,6 +502,7 @@ class KycUserClient {
 
     final response = await _orderClient.walletServiceCreateOnRampOrder(
       body: WalletCreateOnRampOrderRequest(
+        orderId: orderId,
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
         cryptoCurrency: cryptoCurrency,
@@ -523,6 +528,8 @@ class KycUserClient {
     required String cryptoWalletAddress,
     required String walletPK,
   }) async {
+    final orderId = const Uuid().v4();
+
     final encryptedBankName = base64Encode(
       encrypt(
         data: utf8.encode(bankName),
@@ -538,18 +545,20 @@ class KycUserClient {
     );
 
     final signatureMessage = createUserOffRampMessage(
+      orderId: orderId,
       cryptoAmount: cryptoAmount,
       cryptoCurrency: cryptoCurrency,
       fiatAmount: fiatAmount,
       fiatCurrency: fiatCurrency,
-      bankName: bankName,
-      bankAccount: bankAccount,
+      encryptedBankName: encryptedBankName,
+      encryptedBankAccount: encryptedBankAccount,
       walletAddress: cryptoWalletAddress,
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
     final response = await _orderClient.walletServiceCreateOffRampOrder(
       body: WalletCreateOffRampOrderRequest(
+        orderId: orderId,
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
         cryptoCurrency: cryptoCurrency,
