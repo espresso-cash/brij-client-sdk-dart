@@ -6,7 +6,8 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dfunc/dfunc.dart';
 import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/src/api/intercetor.dart';
-import 'package:kyc_client_dart/src/api/orders/clients/wallet_service_client.dart' as order;
+import 'package:kyc_client_dart/src/api/orders/clients/wallet_service_client.dart'
+    as order;
 import 'package:kyc_client_dart/src/api/orders/models/wallet_create_off_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/wallet_create_on_ramp_order_request.dart';
 import 'package:kyc_client_dart/src/api/orders/models/wallet_generate_transaction_request.dart';
@@ -14,12 +15,13 @@ import 'package:kyc_client_dart/src/api/orders/models/wallet_get_order_request.d
 import 'package:kyc_client_dart/src/api/orders/models/wallet_get_quote_request.dart';
 import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
 import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
-import 'package:kyc_client_dart/src/api/storage/clients/wallet_service_client.dart' as storage;
+import 'package:kyc_client_dart/src/api/storage/clients/wallet_service_client.dart'
+    as storage;
 import 'package:kyc_client_dart/src/api/storage/models/common_data_type.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_check_access_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_info_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_get_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_get_partner_info_request.dart';
+import 'package:kyc_client_dart/src/api/storage/models/wallet_get_seed_message_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_get_user_data_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_get_wallet_proof_request.dart';
 import 'package:kyc_client_dart/src/api/storage/models/wallet_grant_access_request.dart';
@@ -74,42 +76,80 @@ class KycUserClient {
   String get rawSecretKey => _rawSecretKey;
 
   Future<void> init({required String walletAddress}) async {
-    final seed = await _generateSeed();
-    await _initializeKeys(seed);
-    await _initializeStorageClient();
-
     try {
-      final getInfo = await _storageClient.walletServiceGetInfo(
-        body: WalletGetInfoRequest(
-          publicKey: _authPublicKey,
+      final initAuthKeyPair = await Ed25519().newKeyPair();
+      final tempStorageClient = await _createTempStorageClient(initAuthKeyPair);
+
+      final proofResponse = await tempStorageClient.walletServiceGetWalletProof(
+        body: WalletGetWalletProofRequest(walletAddress: walletAddress),
+      );
+
+      final proofSignature =
+          await sign(utf8.encode(proofResponse.proofMessage));
+      final encodedProofSignature =
+          base58.encode(Uint8List.fromList(proofSignature.bytes));
+
+      final seedMessageResponse =
+          await tempStorageClient.walletServiceGetSeedMessage(
+        body: WalletGetSeedMessageRequest(
           walletAddress: walletAddress,
+          walletProofSignature: encodedProofSignature,
         ),
       );
 
-      if (getInfo.publicKey != _authPublicKey) {
-        final seed = await _generateSeed(message: getInfo.message);
-        await _initializeKeys(seed);
-        await _initializeStorageClient();
+      final seed = await _generateSeed(message: seedMessageResponse.message);
+      await _initializeKeys(seed);
+
+      if (_authPublicKey != seedMessageResponse.publicKey) {
+        throw Exception(
+          'Authentication keys mismatch: potential security issue or data corruption',
+        );
       }
 
       await _initializeEncryption(
-        encryptedSecretKey: getInfo.encryptedSecretKey,
+        encryptedSecretKey: seedMessageResponse.encryptedSecretKey,
       );
+      await _initializeStorageClient();
     } on DioException catch (e) {
-      if (!_isUserNotInitialized(e)) {
+      if (!(_isUserNotInitialized(e) || _isRestoreAuthError(e))) {
         rethrow;
       }
+
+      final seed = await _generateSeed();
+      await _initializeKeys(seed);
+      await _initializeStorageClient();
       await _initializeEncryption();
-      await _initStorage(walletAddress: walletAddress);
-    } finally {
-      await _initializeValidatorClient();
-      await _initializeOrderClient();
+
+      try {
+        await _initStorage(walletAddress: walletAddress);
+      } on DioException catch (e) {
+        if (_isUserAlreadyInitializedError(e)) {
+          throw Exception(
+            'User already initialized. Please retry the init operation.',
+          );
+        }
+        rethrow;
+      }
     }
+
+    await _initializeValidatorClient();
+    await _initializeOrderClient();
   }
 
   bool _isUserNotInitialized(DioException e) =>
       e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] == 'user not initialized';
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'user not initialized';
+
+  bool _isRestoreAuthError(DioException e) =>
+      e.response?.data is Map<String, dynamic> &&
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'wallet proof signature is invalid';
+
+  bool _isUserAlreadyInitializedError(DioException e) =>
+      e.response?.data is Map<String, dynamic> &&
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'user already exists';
 
   Future<Uint8List> _generateSeed({String? message}) async {
     final signature = await sign(utf8.encode(message ?? _seedMessage));
@@ -125,14 +165,41 @@ class KycUserClient {
     );
   }
 
+  Future<storage.WalletServiceClient> _createTempStorageClient(
+    SimpleKeyPair keyPair,
+  ) async {
+    final publicKeyBytes =
+        await keyPair.extractPublicKey().then((value) => value.bytes);
+    final publicKeyBase58 = base58.encode(Uint8List.fromList(publicKeyBytes));
+
+    final payload = jwt.JWT(
+      <String, dynamic>{
+        'iss': publicKeyBase58,
+        'aud': 'storage.brij.fi',
+      },
+    );
+
+    final token = payload.sign(
+      jwt.EdDSAPrivateKey(
+        await keyPair.extractPrivateKeyBytes() + publicKeyBytes,
+      ),
+      algorithm: jwt.JWTAlgorithm.EdDSA,
+    );
+
+    final dio = Dio()..interceptors.add(AuthInterceptor(token));
+    return storage.WalletServiceClient(dio, baseUrl: config.storageBaseUrl);
+  }
+
   Future<void> _initializeStorageClient() async {
     final dio = await _createAuthenticatedClient('storage.brij.fi');
-    _storageClient = storage.WalletServiceClient(dio, baseUrl: config.storageBaseUrl);
+    _storageClient =
+        storage.WalletServiceClient(dio, baseUrl: config.storageBaseUrl);
   }
 
   Future<void> _initializeValidatorClient() async {
     final dio = await _createAuthenticatedClient('verifier.brij.fi');
-    _validatorClient = VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
+    _validatorClient =
+        VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
   }
 
   Future<void> _initializeOrderClient() async {
@@ -160,7 +227,8 @@ class KycUserClient {
   }
 
   Future<void> _initializeEncryption({String? encryptedSecretKey}) async {
-    final edSK = Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
+    final edSK =
+        Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
     final xSK = Uint8List(32);
     TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(xSK, edSK);
     _encryptionSecretKey = PrivateKey(xSK);
@@ -171,14 +239,16 @@ class KycUserClient {
         ? await Chacha20.poly1305Aead().newSecretKey()
         : SecretKey(sealedBox.decrypt(base64Decode(encryptedSecretKey)));
 
-    _rawSecretKey = base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
+    _rawSecretKey =
+        base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
     _encryptedSecretKey = base64Encode(
       sealedBox.encrypt(Uint8List.fromList(await _secretKey.extractBytes())),
     );
     _secretBox = SecretBox(Uint8List.fromList(await _secretKey.extractBytes()));
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
-        await _authKeyPair.extractPrivateKeyBytes() + (await _authKeyPair.extractPublicKey()).bytes,
+        await _authKeyPair.extractPrivateKeyBytes() +
+            (await _authKeyPair.extractPublicKey()).bytes,
       ),
     );
   }
@@ -193,21 +263,26 @@ class KycUserClient {
         walletAddress: walletAddress,
         message: _seedMessage,
         encryptedSecretKey: _encryptedSecretKey,
-        walletProofSignature: base58.encode(Uint8List.fromList(proofSignature.bytes)),
+        walletProofSignature:
+            base58.encode(Uint8List.fromList(proofSignature.bytes)),
       ),
     );
   }
 
-  Future<PartnerModel> getPartnerInfo({required String partnerPK}) => _storageClient
-      .walletServiceGetPartnerInfo(
-        body: WalletGetPartnerInfoRequest(id: partnerPK),
-      )
-      .then((e) => PartnerModel.fromJson(e.toJson()));
+  Future<PartnerModel> getPartnerInfo({required String partnerPK}) =>
+      _storageClient
+          .walletServiceGetPartnerInfo(
+            body: WalletGetPartnerInfoRequest(id: partnerPK),
+          )
+          .then((e) => PartnerModel.fromJson(e.toJson()));
 
   Future<List<PartnerModel>> getGrantedAccessPartners() async {
-    final response = await _storageClient.walletServiceGetGrantedAccessPartners();
+    final response =
+        await _storageClient.walletServiceGetGrantedAccessPartners();
 
-    return response.partners.map((e) => PartnerModel.fromJson(e.toJson())).toList();
+    return response.partners
+        .map((e) => PartnerModel.fromJson(e.toJson()))
+        .toList();
   }
 
   Future<void> grantPartnerAccess(String partnerPK) async {
@@ -559,7 +634,8 @@ class KycUserClient {
 
   bool _isKycDataNotFound(DioException e) =>
       e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] == 'kyc data not found';
+      (e.response?.data as Map<String, dynamic>)['message'] ==
+          'kyc data not found';
 
   Future<String> startKycRequest({
     required String country,

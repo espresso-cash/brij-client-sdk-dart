@@ -15,6 +15,8 @@ import '../models/wallet_get_kyc_status_request.dart';
 import '../models/wallet_get_kyc_status_response.dart';
 import '../models/wallet_get_partner_info_request.dart';
 import '../models/wallet_get_partner_info_response.dart';
+import '../models/wallet_get_seed_message_request.dart';
+import '../models/wallet_get_seed_message_response.dart';
 import '../models/wallet_get_user_data_request.dart';
 import '../models/wallet_get_user_data_response.dart';
 import '../models/wallet_get_wallet_proof_request.dart';
@@ -36,7 +38,8 @@ part 'wallet_service_client.g.dart';
 
 @RestApi()
 abstract class WalletServiceClient {
-  factory WalletServiceClient(Dio dio, {String? baseUrl}) = _WalletServiceClient;
+  factory WalletServiceClient(Dio dio, {String? baseUrl}) =
+      _WalletServiceClient;
 
   @POST('/v1/wallet/checkAccess')
   Future<WalletCheckAccessResponse> walletServiceCheckAccess({
@@ -44,7 +47,8 @@ abstract class WalletServiceClient {
   });
 
   @POST('/v1/wallet/getGrantedAccessPartners')
-  Future<WalletGetGrantedAccessPartnersResponse> walletServiceGetGrantedAccessPartners();
+  Future<WalletGetGrantedAccessPartnersResponse>
+      walletServiceGetGrantedAccessPartners();
 
   @POST('/v1/wallet/getInfo')
   Future<WalletGetInfoResponse> walletServiceGetInfo({
@@ -59,6 +63,11 @@ abstract class WalletServiceClient {
   @POST('/v1/wallet/getPartnerInfo')
   Future<WalletGetPartnerInfoResponse> walletServiceGetPartnerInfo({
     @Body() required WalletGetPartnerInfoRequest body,
+  });
+
+  @POST('/v1/wallet/getSeedMessage')
+  Future<WalletGetSeedMessageResponse> walletServiceGetSeedMessage({
+    @Body() required WalletGetSeedMessageRequest body,
   });
 
   @POST('/v1/wallet/getUserData')
