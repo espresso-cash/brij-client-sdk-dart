@@ -10,7 +10,6 @@ part 'wallet_create_off_ramp_order_request.g.dart';
 @Freezed()
 class WalletCreateOffRampOrderRequest with _$WalletCreateOffRampOrderRequest {
   const factory WalletCreateOffRampOrderRequest({
-    required String orderId,
     required String partnerPublicKey,
     required double cryptoAmount,
     required String cryptoCurrency,
@@ -21,6 +20,7 @@ class WalletCreateOffRampOrderRequest with _$WalletCreateOffRampOrderRequest {
     required String userSignature,
     required String userWalletAddress,
     required String walletPublicKey,
+    required String orderId,
   }) = _WalletCreateOffRampOrderRequest;
   
   factory WalletCreateOffRampOrderRequest.fromJson(Map<String, Object?> json) => _$WalletCreateOffRampOrderRequestFromJson(json);

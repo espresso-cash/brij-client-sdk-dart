@@ -21,7 +21,6 @@ WalletCreateOnRampOrderRequest _$WalletCreateOnRampOrderRequestFromJson(
 
 /// @nodoc
 mixin _$WalletCreateOnRampOrderRequest {
-  String get orderId => throw _privateConstructorUsedError;
   String get partnerPublicKey => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
@@ -30,6 +29,7 @@ mixin _$WalletCreateOnRampOrderRequest {
   String get userSignature => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
   String get walletPublicKey => throw _privateConstructorUsedError;
+  String get orderId => throw _privateConstructorUsedError;
 
   /// Serializes this WalletCreateOnRampOrderRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,15 +50,15 @@ abstract class $WalletCreateOnRampOrderRequestCopyWith<$Res> {
           WalletCreateOnRampOrderRequest>;
   @useResult
   $Res call(
-      {String orderId,
-      String partnerPublicKey,
+      {String partnerPublicKey,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
       String fiatCurrency,
       String userSignature,
       String userWalletAddress,
-      String walletPublicKey});
+      String walletPublicKey,
+      String orderId});
 }
 
 /// @nodoc
@@ -77,7 +77,6 @@ class _$WalletCreateOnRampOrderRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = null,
     Object? partnerPublicKey = null,
     Object? cryptoAmount = null,
     Object? cryptoCurrency = null,
@@ -86,12 +85,9 @@ class _$WalletCreateOnRampOrderRequestCopyWithImpl<$Res,
     Object? userSignature = null,
     Object? userWalletAddress = null,
     Object? walletPublicKey = null,
+    Object? orderId = null,
   }) {
     return _then(_value.copyWith(
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
       partnerPublicKey: null == partnerPublicKey
           ? _value.partnerPublicKey
           : partnerPublicKey // ignore: cast_nullable_to_non_nullable
@@ -124,6 +120,10 @@ class _$WalletCreateOnRampOrderRequestCopyWithImpl<$Res,
           ? _value.walletPublicKey
           : walletPublicKey // ignore: cast_nullable_to_non_nullable
               as String,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -138,15 +138,15 @@ abstract class _$$WalletCreateOnRampOrderRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String orderId,
-      String partnerPublicKey,
+      {String partnerPublicKey,
       double cryptoAmount,
       String cryptoCurrency,
       double fiatAmount,
       String fiatCurrency,
       String userSignature,
       String userWalletAddress,
-      String walletPublicKey});
+      String walletPublicKey,
+      String orderId});
 }
 
 /// @nodoc
@@ -164,7 +164,6 @@ class __$$WalletCreateOnRampOrderRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = null,
     Object? partnerPublicKey = null,
     Object? cryptoAmount = null,
     Object? cryptoCurrency = null,
@@ -173,12 +172,9 @@ class __$$WalletCreateOnRampOrderRequestImplCopyWithImpl<$Res>
     Object? userSignature = null,
     Object? userWalletAddress = null,
     Object? walletPublicKey = null,
+    Object? orderId = null,
   }) {
     return _then(_$WalletCreateOnRampOrderRequestImpl(
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
       partnerPublicKey: null == partnerPublicKey
           ? _value.partnerPublicKey
           : partnerPublicKey // ignore: cast_nullable_to_non_nullable
@@ -211,6 +207,10 @@ class __$$WalletCreateOnRampOrderRequestImplCopyWithImpl<$Res>
           ? _value.walletPublicKey
           : walletPublicKey // ignore: cast_nullable_to_non_nullable
               as String,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -220,22 +220,20 @@ class __$$WalletCreateOnRampOrderRequestImplCopyWithImpl<$Res>
 class _$WalletCreateOnRampOrderRequestImpl
     implements _WalletCreateOnRampOrderRequest {
   const _$WalletCreateOnRampOrderRequestImpl(
-      {required this.orderId,
-      required this.partnerPublicKey,
+      {required this.partnerPublicKey,
       required this.cryptoAmount,
       required this.cryptoCurrency,
       required this.fiatAmount,
       required this.fiatCurrency,
       required this.userSignature,
       required this.userWalletAddress,
-      required this.walletPublicKey});
+      required this.walletPublicKey,
+      required this.orderId});
 
   factory _$WalletCreateOnRampOrderRequestImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$WalletCreateOnRampOrderRequestImplFromJson(json);
 
-  @override
-  final String orderId;
   @override
   final String partnerPublicKey;
   @override
@@ -252,10 +250,12 @@ class _$WalletCreateOnRampOrderRequestImpl
   final String userWalletAddress;
   @override
   final String walletPublicKey;
+  @override
+  final String orderId;
 
   @override
   String toString() {
-    return 'WalletCreateOnRampOrderRequest(orderId: $orderId, partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, userSignature: $userSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
+    return 'WalletCreateOnRampOrderRequest(partnerPublicKey: $partnerPublicKey, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, userSignature: $userSignature, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey, orderId: $orderId)';
   }
 
   @override
@@ -263,7 +263,6 @@ class _$WalletCreateOnRampOrderRequestImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WalletCreateOnRampOrderRequestImpl &&
-            (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.partnerPublicKey, partnerPublicKey) ||
                 other.partnerPublicKey == partnerPublicKey) &&
             (identical(other.cryptoAmount, cryptoAmount) ||
@@ -279,14 +278,14 @@ class _$WalletCreateOnRampOrderRequestImpl
             (identical(other.userWalletAddress, userWalletAddress) ||
                 other.userWalletAddress == userWalletAddress) &&
             (identical(other.walletPublicKey, walletPublicKey) ||
-                other.walletPublicKey == walletPublicKey));
+                other.walletPublicKey == walletPublicKey) &&
+            (identical(other.orderId, orderId) || other.orderId == orderId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      orderId,
       partnerPublicKey,
       cryptoAmount,
       cryptoCurrency,
@@ -294,7 +293,8 @@ class _$WalletCreateOnRampOrderRequestImpl
       fiatCurrency,
       userSignature,
       userWalletAddress,
-      walletPublicKey);
+      walletPublicKey,
+      orderId);
 
   /// Create a copy of WalletCreateOnRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -317,22 +317,19 @@ class _$WalletCreateOnRampOrderRequestImpl
 abstract class _WalletCreateOnRampOrderRequest
     implements WalletCreateOnRampOrderRequest {
   const factory _WalletCreateOnRampOrderRequest(
-          {required final String orderId,
-          required final String partnerPublicKey,
-          required final double cryptoAmount,
-          required final String cryptoCurrency,
-          required final double fiatAmount,
-          required final String fiatCurrency,
-          required final String userSignature,
-          required final String userWalletAddress,
-          required final String walletPublicKey}) =
-      _$WalletCreateOnRampOrderRequestImpl;
+      {required final String partnerPublicKey,
+      required final double cryptoAmount,
+      required final String cryptoCurrency,
+      required final double fiatAmount,
+      required final String fiatCurrency,
+      required final String userSignature,
+      required final String userWalletAddress,
+      required final String walletPublicKey,
+      required final String orderId}) = _$WalletCreateOnRampOrderRequestImpl;
 
   factory _WalletCreateOnRampOrderRequest.fromJson(Map<String, dynamic> json) =
       _$WalletCreateOnRampOrderRequestImpl.fromJson;
 
-  @override
-  String get orderId;
   @override
   String get partnerPublicKey;
   @override
@@ -349,6 +346,8 @@ abstract class _WalletCreateOnRampOrderRequest
   String get userWalletAddress;
   @override
   String get walletPublicKey;
+  @override
+  String get orderId;
 
   /// Create a copy of WalletCreateOnRampOrderRequest
   /// with the given fields replaced by the non-null parameter values.

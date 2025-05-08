@@ -9,7 +9,6 @@ part of 'wallet_create_off_ramp_order_request.dart';
 _$WalletCreateOffRampOrderRequestImpl
     _$$WalletCreateOffRampOrderRequestImplFromJson(Map<String, dynamic> json) =>
         _$WalletCreateOffRampOrderRequestImpl(
-          orderId: json['orderId'] as String,
           partnerPublicKey: json['partnerPublicKey'] as String,
           cryptoAmount: (json['cryptoAmount'] as num).toDouble(),
           cryptoCurrency: json['cryptoCurrency'] as String,
@@ -20,12 +19,12 @@ _$WalletCreateOffRampOrderRequestImpl
           userSignature: json['userSignature'] as String,
           userWalletAddress: json['userWalletAddress'] as String,
           walletPublicKey: json['walletPublicKey'] as String,
+          orderId: json['orderId'] as String,
         );
 
 Map<String, dynamic> _$$WalletCreateOffRampOrderRequestImplToJson(
         _$WalletCreateOffRampOrderRequestImpl instance) =>
     <String, dynamic>{
-      'orderId': instance.orderId,
       'partnerPublicKey': instance.partnerPublicKey,
       'cryptoAmount': instance.cryptoAmount,
       'cryptoCurrency': instance.cryptoCurrency,
@@ -36,4 +35,5 @@ Map<String, dynamic> _$$WalletCreateOffRampOrderRequestImplToJson(
       'userSignature': instance.userSignature,
       'userWalletAddress': instance.userWalletAddress,
       'walletPublicKey': instance.walletPublicKey,
+      'orderId': instance.orderId,
     };

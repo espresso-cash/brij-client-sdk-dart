@@ -10,7 +10,6 @@ part 'wallet_create_on_ramp_order_request.g.dart';
 @Freezed()
 class WalletCreateOnRampOrderRequest with _$WalletCreateOnRampOrderRequest {
   const factory WalletCreateOnRampOrderRequest({
-    required String orderId,
     required String partnerPublicKey,
     required double cryptoAmount,
     required String cryptoCurrency,
@@ -19,6 +18,7 @@ class WalletCreateOnRampOrderRequest with _$WalletCreateOnRampOrderRequest {
     required String userSignature,
     required String userWalletAddress,
     required String walletPublicKey,
+    required String orderId,
   }) = _WalletCreateOnRampOrderRequest;
   
   factory WalletCreateOnRampOrderRequest.fromJson(Map<String, Object?> json) => _$WalletCreateOnRampOrderRequestFromJson(json);
