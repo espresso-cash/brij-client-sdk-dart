@@ -1,12 +1,7 @@
-import 'dart:convert';
-
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/kyc_item.pb.dart' as proto;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:kyc_client_dart/src/api/protos/kyc_item.pb.dart' as proto;
-import 'package:kyc_client_dart/src/api/storage/models/common_kyc_status.dart';
-
 part 'kyc_item.freezed.dart';
-part 'kyc_item.g.dart';
 
 enum KycStatus {
   @JsonValue('KYC_STATUS_UNSPECIFIED')
@@ -17,21 +12,6 @@ enum KycStatus {
   approved,
   @JsonValue('KYC_STATUS_REJECTED')
   rejected;
-
-  static KycStatus fromApi(CommonKycStatus status) {
-    switch (status) {
-      case CommonKycStatus.kycStatusUnspecified:
-        return KycStatus.unspecified;
-      case CommonKycStatus.kycStatusPending:
-        return KycStatus.pending;
-      case CommonKycStatus.kycStatusApproved:
-        return KycStatus.approved;
-      case CommonKycStatus.kycStatusRejected:
-        return KycStatus.rejected;
-      case CommonKycStatus.$unknown:
-        return KycStatus.unspecified;
-    }
-  }
 
   static KycStatus fromProto(proto.KycStatus status) {
     switch (status) {
@@ -70,23 +50,19 @@ class KycItem with _$KycItem {
     required String provider,
     required String userPublicKey,
     @Default([]) List<String> hashes,
-    @Default({}) Map<String, dynamic> additionalData,
+    @Default({}) Map<String, List<int>> additionalData,
   }) = _KycItem;
 
   const KycItem._();
 
-  factory KycItem.fromJson(Map<String, dynamic> json) => _$KycItemFromJson(json);
-
   factory KycItem.fromProto(proto.KycItem proto) => KycItem(
-        countries: proto.countries,
-        status: KycStatus.fromProto(proto.status),
-        provider: proto.provider,
-        userPublicKey: proto.userPublicKey,
-        hashes: proto.hashes,
-        additionalData: proto.additionalData.map(
-          (key, value) => MapEntry(key, utf8.decode(value)),
-        ),
-      );
+    countries: proto.countries,
+    status: KycStatus.fromProto(proto.status),
+    provider: proto.provider,
+    userPublicKey: proto.userPublicKey,
+    hashes: proto.hashes,
+    additionalData: proto.additionalData,
+  );
 
   proto.KycItem toProto() {
     final protoMessage = proto.KycItem(
@@ -95,9 +71,7 @@ class KycItem with _$KycItem {
       provider: provider,
       userPublicKey: userPublicKey,
       hashes: hashes,
-      additionalData: additionalData.map(
-        (key, value) => MapEntry(key, utf8.encode(value.toString())),
-      ),
+      additionalData: additionalData.entries,
     );
 
     return protoMessage;

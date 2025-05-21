@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Quote _$QuoteFromJson(Map<String, dynamic> json) {
-  return _Quote.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Quote {
   double get cryptoAmount => throw _privateConstructorUsedError;
@@ -29,9 +25,6 @@ mixin _$Quote {
   RampFee get walletFee => throw _privateConstructorUsedError;
   RampFee get platformFee => throw _privateConstructorUsedError;
   double get totalFee => throw _privateConstructorUsedError;
-
-  /// Serializes this Quote to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -247,7 +240,7 @@ class __$$QuoteImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$QuoteImpl implements _Quote {
   const _$QuoteImpl(
       {required this.cryptoAmount,
@@ -259,9 +252,6 @@ class _$QuoteImpl implements _Quote {
       required this.walletFee,
       required this.platformFee,
       required this.totalFee});
-
-  factory _$QuoteImpl.fromJson(Map<String, dynamic> json) =>
-      _$$QuoteImplFromJson(json);
 
   @override
   final double cryptoAmount;
@@ -311,7 +301,6 @@ class _$QuoteImpl implements _Quote {
                 other.totalFee == totalFee));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -332,13 +321,6 @@ class _$QuoteImpl implements _Quote {
   @pragma('vm:prefer-inline')
   _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith =>
       __$$QuoteImplCopyWithImpl<_$QuoteImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$QuoteImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Quote implements Quote {
@@ -352,8 +334,6 @@ abstract class _Quote implements Quote {
       required final RampFee walletFee,
       required final RampFee platformFee,
       required final double totalFee}) = _$QuoteImpl;
-
-  factory _Quote.fromJson(Map<String, dynamic> json) = _$QuoteImpl.fromJson;
 
   @override
   double get cryptoAmount;
@@ -382,17 +362,10 @@ abstract class _Quote implements Quote {
       throw _privateConstructorUsedError;
 }
 
-RampFee _$RampFeeFromJson(Map<String, dynamic> json) {
-  return _RampFee.fromJson(json);
-}
-
 /// @nodoc
 mixin _$RampFee {
   double get fixedFee => throw _privateConstructorUsedError;
   double get percentageFee => throw _privateConstructorUsedError;
-
-  /// Serializes this RampFee to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of RampFee
   /// with the given fields replaced by the non-null parameter values.
@@ -479,12 +452,9 @@ class __$$RampFeeImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$RampFeeImpl implements _RampFee {
   const _$RampFeeImpl({required this.fixedFee, required this.percentageFee});
-
-  factory _$RampFeeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RampFeeImplFromJson(json);
 
   @override
   final double fixedFee;
@@ -507,7 +477,6 @@ class _$RampFeeImpl implements _RampFee {
                 other.percentageFee == percentageFee));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, fixedFee, percentageFee);
 
@@ -518,21 +487,12 @@ class _$RampFeeImpl implements _RampFee {
   @pragma('vm:prefer-inline')
   _$$RampFeeImplCopyWith<_$RampFeeImpl> get copyWith =>
       __$$RampFeeImplCopyWithImpl<_$RampFeeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$RampFeeImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _RampFee implements RampFee {
   const factory _RampFee(
       {required final double fixedFee,
       required final double percentageFee}) = _$RampFeeImpl;
-
-  factory _RampFee.fromJson(Map<String, dynamic> json) = _$RampFeeImpl.fromJson;
 
   @override
   double get fixedFee;

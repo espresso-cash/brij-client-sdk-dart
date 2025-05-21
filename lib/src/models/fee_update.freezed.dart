@@ -14,18 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-FeeUpdate _$FeeUpdateFromJson(Map<String, dynamic> json) {
-  return _FeeUpdate.fromJson(json);
-}
-
 /// @nodoc
 mixin _$FeeUpdate {
   RampFeeUpdate get onRampFee => throw _privateConstructorUsedError;
   RampFeeUpdate get offRampFee => throw _privateConstructorUsedError;
   String get walletAddress => throw _privateConstructorUsedError;
-
-  /// Serializes this FeeUpdate to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -158,16 +151,13 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$FeeUpdateImpl extends _FeeUpdate {
   const _$FeeUpdateImpl(
       {required this.onRampFee,
       required this.offRampFee,
       required this.walletAddress})
       : super._();
-
-  factory _$FeeUpdateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FeeUpdateImplFromJson(json);
 
   @override
   final RampFeeUpdate onRampFee;
@@ -194,7 +184,6 @@ class _$FeeUpdateImpl extends _FeeUpdate {
                 other.walletAddress == walletAddress));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, onRampFee, offRampFee, walletAddress);
@@ -206,13 +195,6 @@ class _$FeeUpdateImpl extends _FeeUpdate {
   @pragma('vm:prefer-inline')
   _$$FeeUpdateImplCopyWith<_$FeeUpdateImpl> get copyWith =>
       __$$FeeUpdateImplCopyWithImpl<_$FeeUpdateImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FeeUpdateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _FeeUpdate extends FeeUpdate {
@@ -221,9 +203,6 @@ abstract class _FeeUpdate extends FeeUpdate {
       required final RampFeeUpdate offRampFee,
       required final String walletAddress}) = _$FeeUpdateImpl;
   const _FeeUpdate._() : super._();
-
-  factory _FeeUpdate.fromJson(Map<String, dynamic> json) =
-      _$FeeUpdateImpl.fromJson;
 
   @override
   RampFeeUpdate get onRampFee;
@@ -240,18 +219,11 @@ abstract class _FeeUpdate extends FeeUpdate {
       throw _privateConstructorUsedError;
 }
 
-RampFeeUpdate _$RampFeeUpdateFromJson(Map<String, dynamic> json) {
-  return _RampFeeUpdate.fromJson(json);
-}
-
 /// @nodoc
 mixin _$RampFeeUpdate {
   double get fixedFee => throw _privateConstructorUsedError;
   double get percentageFee => throw _privateConstructorUsedError;
   ConversionRate get conversionRates => throw _privateConstructorUsedError;
-
-  /// Serializes this RampFeeUpdate to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of RampFeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -368,16 +340,13 @@ class __$$RampFeeUpdateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$RampFeeUpdateImpl extends _RampFeeUpdate {
   const _$RampFeeUpdateImpl(
       {required this.fixedFee,
       required this.percentageFee,
       required this.conversionRates})
       : super._();
-
-  factory _$RampFeeUpdateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RampFeeUpdateImplFromJson(json);
 
   @override
   final double fixedFee;
@@ -404,7 +373,6 @@ class _$RampFeeUpdateImpl extends _RampFeeUpdate {
                 other.conversionRates == conversionRates));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, fixedFee, percentageFee, conversionRates);
@@ -416,13 +384,6 @@ class _$RampFeeUpdateImpl extends _RampFeeUpdate {
   @pragma('vm:prefer-inline')
   _$$RampFeeUpdateImplCopyWith<_$RampFeeUpdateImpl> get copyWith =>
       __$$RampFeeUpdateImplCopyWithImpl<_$RampFeeUpdateImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$RampFeeUpdateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _RampFeeUpdate extends RampFeeUpdate {
@@ -431,9 +392,6 @@ abstract class _RampFeeUpdate extends RampFeeUpdate {
       required final double percentageFee,
       required final ConversionRate conversionRates}) = _$RampFeeUpdateImpl;
   const _RampFeeUpdate._() : super._();
-
-  factory _RampFeeUpdate.fromJson(Map<String, dynamic> json) =
-      _$RampFeeUpdateImpl.fromJson;
 
   @override
   double get fixedFee;
@@ -450,18 +408,11 @@ abstract class _RampFeeUpdate extends RampFeeUpdate {
       throw _privateConstructorUsedError;
 }
 
-ConversionRate _$ConversionRateFromJson(Map<String, dynamic> json) {
-  return _ConversionRate.fromJson(json);
-}
-
 /// @nodoc
 mixin _$ConversionRate {
   String get cryptoCurrency => throw _privateConstructorUsedError;
   String get fiatCurrency => throw _privateConstructorUsedError;
   double get rate => throw _privateConstructorUsedError;
-
-  /// Serializes this ConversionRate to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of ConversionRate
   /// with the given fields replaced by the non-null parameter values.
@@ -561,16 +512,13 @@ class __$$ConversionRateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$ConversionRateImpl extends _ConversionRate {
   const _$ConversionRateImpl(
       {required this.cryptoCurrency,
       required this.fiatCurrency,
       required this.rate})
       : super._();
-
-  factory _$ConversionRateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConversionRateImplFromJson(json);
 
   @override
   final String cryptoCurrency;
@@ -596,7 +544,6 @@ class _$ConversionRateImpl extends _ConversionRate {
             (identical(other.rate, rate) || other.rate == rate));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, cryptoCurrency, fiatCurrency, rate);
@@ -609,13 +556,6 @@ class _$ConversionRateImpl extends _ConversionRate {
   _$$ConversionRateImplCopyWith<_$ConversionRateImpl> get copyWith =>
       __$$ConversionRateImplCopyWithImpl<_$ConversionRateImpl>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConversionRateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _ConversionRate extends ConversionRate {
@@ -624,9 +564,6 @@ abstract class _ConversionRate extends ConversionRate {
       required final String fiatCurrency,
       required final double rate}) = _$ConversionRateImpl;
   const _ConversionRate._() : super._();
-
-  factory _ConversionRate.fromJson(Map<String, dynamic> json) =
-      _$ConversionRateImpl.fromJson;
 
   @override
   String get cryptoCurrency;

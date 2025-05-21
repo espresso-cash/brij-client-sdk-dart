@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_json_view/flutter_json_view.dart';
 import 'package:kyc_sharing_client/shared.dart';
 import 'package:kyc_sharing_client/state.dart';
 import 'package:provider/provider.dart';
@@ -104,10 +103,7 @@ class _PartnerViewState extends State<PartnerView> {
           if (state.userData != null)
             SizedBox(
               height: 350,
-              child: JsonView.map(
-                state.userData ?? {},
-                theme: const JsonViewTheme(viewType: JsonViewType.base),
-              ),
+              child: Text(state.userData.toString()),
             ),
           const SizedBox(height: 16),
           Consumer<UserAppState>(
@@ -159,23 +155,24 @@ class _PartnerViewState extends State<PartnerView> {
               [_validationTypeController, _validationResultController],
             ),
             builder: (context, child) => ElevatedButton(
-              onPressed: _validationResultController.text.isEmpty && _validationTypeController.text.isEmpty
-                  ? null
-                  : () async {
-                      await context.read<PartnerAppState>().createCustomValidationResult(
-                            type: _validationTypeController.text,
-                            result: _validationResultController.text,
-                            userPK: context.read<UserAppState>().authPublicKey,
-                            secretKey: context.read<UserAppState>().rawSecretKey,
+              onPressed:
+                  _validationResultController.text.isEmpty && _validationTypeController.text.isEmpty
+                      ? null
+                      : () async {
+                          await context.read<PartnerAppState>().createCustomValidationResult(
+                                type: _validationTypeController.text,
+                                result: _validationResultController.text,
+                                userPK: context.read<UserAppState>().authPublicKey,
+                                secretKey: context.read<UserAppState>().rawSecretKey,
+                              );
+
+                          if (!context.mounted) return;
+
+                          showSnackBar(
+                            context,
+                            message: 'Validation Result updated',
                           );
-
-                      if (!context.mounted) return;
-
-                      showSnackBar(
-                        context,
-                        message: 'Validation Result updated',
-                      );
-                    },
+                        },
               child: const Text('Add Custom Validation Result'),
             ),
           ),
@@ -221,7 +218,8 @@ class _PartnerViewState extends State<PartnerView> {
           Consumer<UserAppState>(
             builder: (context, userState, child) {
               final orderId = partnerState.onRampUseExternalId ? null : userState.onRampOrderId;
-              final externalId = partnerState.onRampUseExternalId ? partnerState.onRampExternalId : null;
+              final externalId =
+                  partnerState.onRampUseExternalId ? partnerState.onRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
               return Column(
@@ -367,7 +365,8 @@ class _PartnerViewState extends State<PartnerView> {
           Consumer<UserAppState>(
             builder: (context, userState, child) {
               final orderId = partnerState.offRampUseExternalId ? null : userState.offRampOrderId;
-              final externalId = partnerState.offRampUseExternalId ? partnerState.offRampExternalId : null;
+              final externalId =
+                  partnerState.offRampUseExternalId ? partnerState.offRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
               return Column(
@@ -408,7 +407,8 @@ class _PartnerViewState extends State<PartnerView> {
                             ? () async {
                                 await partnerState.acceptOffRampOrder(
                                   orderId: orderId!,
-                                  cryptoWalletAddress: '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx',
+                                  cryptoWalletAddress:
+                                      '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx',
                                 );
                                 await partnerState.fetchOffRampOrder(
                                   orderId: orderId,

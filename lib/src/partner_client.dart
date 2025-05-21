@@ -1,38 +1,23 @@
 import 'dart:convert';
 
+import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.connect.client.dart' as orders;
+import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart';
+import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.connect.client.dart'
+    as storage;
+import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart';
 import 'package:bs58/bs58.dart';
 import 'package:cryptography/cryptography.dart' hide Hash, PublicKey, SecretBox, Signature;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
-import 'package:dio/dio.dart';
 import 'package:kyc_client_dart/kyc_client_dart.dart';
-import 'package:kyc_client_dart/src/api/intercetor.dart';
-import 'package:kyc_client_dart/src/api/orders/clients/partner_service_client.dart' as orders;
-import 'package:kyc_client_dart/src/api/orders/models/partner_accept_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_complete_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_fail_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_generate_transaction_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_get_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_reject_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_update_fees_request.dart';
-import 'package:kyc_client_dart/src/api/storage/clients/partner_service_client.dart' as storage;
-import 'package:kyc_client_dart/src/api/storage/models/partner_create_kyc_status_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_get_info_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_get_kyc_status_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_get_user_data_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_remove_validation_data_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_set_validation_data_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_update_kyc_status_request.dart';
 import 'package:kyc_client_dart/src/common.dart';
+import 'package:kyc_client_dart/src/grpc/transport.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';
 
 class KycPartnerClient {
-  KycPartnerClient({
-    required this.authKeyPair,
-    this.config = const AppConfig.demo(),
-  });
+  KycPartnerClient({required this.authKeyPair, this.config = const AppConfig.demo()});
 
   final AppConfig config;
 
@@ -59,69 +44,61 @@ class KycPartnerClient {
   }
 
   Future<void> _generateAuthToken() async {
-    _authPublicKey =
-        await authKeyPair.extractPublicKey().then((value) => Uint8List.fromList(value.bytes)).then(base58.encode);
+    _authPublicKey = await authKeyPair
+        .extractPublicKey()
+        .then((value) => Uint8List.fromList(value.bytes))
+        .then(base58.encode);
 
     await _initializeStorageClient();
     await _initializeOrderClient();
   }
 
   Future<void> _initializeStorageClient() async {
-    final dio = await _createAuthenticatedClient('storage.brij.fi');
-    _storageClient = storage.PartnerServiceClient(dio, baseUrl: config.storageBaseUrl);
+    _storageClient = storage.PartnerServiceClient(
+      createTransport(
+        baseUrl: (grpcUrl: config.storageGrpcBaseUrl, grpcWebUrl: config.storageBaseUrl),
+        token: await _createAuthToken('storage.brij.fi'),
+      ),
+    );
   }
 
   Future<void> _initializeOrderClient() async {
-    final dio = await _createAuthenticatedClient('orders.brij.fi');
-    _orderClient = orders.PartnerServiceClient(dio, baseUrl: config.orderBaseUrl);
+    _orderClient = orders.PartnerServiceClient(
+      createTransport(
+        baseUrl: (grpcUrl: config.orderGrpcBaseUrl, grpcWebUrl: config.orderBaseUrl),
+        token: await _createAuthToken('orders.brij.fi'),
+      ),
+    );
   }
 
-  Future<Dio> _createAuthenticatedClient(String audience) async {
-    final payload = jwt.JWT(
-      <String, dynamic>{
-        'iss': _authPublicKey,
-        'aud': audience,
-      },
-    );
+  Future<String> _createAuthToken(String audience) async {
+    final payload = jwt.JWT(<String, dynamic>{'iss': _authPublicKey, 'aud': audience});
 
-    final token = payload.sign(
+    return payload.sign(
       jwt.EdDSAPrivateKey(
         await authKeyPair.extractPrivateKeyBytes() + base58.decode(_authPublicKey),
       ),
       algorithm: jwt.JWTAlgorithm.EdDSA,
     );
-
-    return Dio()..interceptors.add(AuthInterceptor(token));
   }
 
   Future<String> getUserSecretKey(String userPK) async {
-    final info = await _storageClient.partnerServiceGetInfo(
-      body: PartnerGetInfoRequest(publicKey: userPK),
-    );
+    final info = await _storageClient.getInfo(GetInfoRequest(publicKey: userPK));
 
     final edSK = await authKeyPair.extractPrivateKeyBytes();
     final xSK = Uint8List(32);
 
-    TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(
-      xSK,
-      Uint8List.fromList(edSK),
-    );
+    TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(xSK, Uint8List.fromList(edSK));
 
     final userEdPK = Uint8List.fromList(base58.decode(userPK));
     final userXPK = Uint8List(32);
 
-    TweetNaClExt.crypto_sign_ed25519_pk_to_x25519_pk(
-      userXPK,
-      userEdPK,
-    );
+    TweetNaClExt.crypto_sign_ed25519_pk_to_x25519_pk(userXPK, userEdPK);
 
     final userPublicKey = PublicKey(userXPK);
     final privateKey = PrivateKey(xSK);
 
-    final sealedBox = Box(
-      theirPublicKey: userPublicKey,
-      myPrivateKey: privateKey,
-    );
+    final sealedBox = Box(theirPublicKey: userPublicKey, myPrivateKey: privateKey);
 
     final encodedSecretKey = base64Decode(info.encryptedSecretKey);
     final encryptedMessage = EncryptedMessage.fromList(encodedSecretKey);
@@ -135,17 +112,11 @@ class KycPartnerClient {
     required String secretKey,
     bool includeValues = true,
   }) async {
-    final response = await _storageClient.partnerServiceGetUserData(
-      body: PartnerGetUserDataRequest(
-        userPublicKey: userPK,
-        includeValues: includeValues,
-      ),
+    final response = await _storageClient.getUserData(
+      GetUserDataRequest(userPublicKey: userPK, includeValues: includeValues),
     );
 
-    return processUserDataForPartner(
-      response: response,
-      secretKey: secretKey,
-    );
+    return processUserDataForPartner(response: response, secretKey: secretKey);
   }
 
   Future<void> setValidationResult({
@@ -154,18 +125,16 @@ class KycPartnerClient {
     required String secretKey,
   }) async {
     if (value is HashValidationResult) {
-      await _storageClient.partnerServiceRemoveValidationData(
-        body: PartnerRemoveValidationDataRequest(id: value.dataId),
-      );
+      await _storageClient.removeValidationData(RemoveValidationDataRequest(id: value.dataId));
 
       final hash = value.hash;
       final message = '${value.dataId}|$userPK|$hash|${value.status.toProto()}';
       final signature = _signingKey.sign(utf8.encode(message));
 
-      await _storageClient.partnerServiceSetValidationData(
-        body: PartnerSetValidationDataRequest(
+      await _storageClient.setValidationData(
+        SetValidationDataRequest(
           dataId: value.dataId,
-          status: value.status.toApiValidationStatus(),
+          status: value.status.toProto(),
           hash: hash,
           signature: base58.encode(signature.signature.asTypedList),
         ),
@@ -174,35 +143,24 @@ class KycPartnerClient {
   }
 
   Future<Order> getOrder({required OrderId orderId}) async {
-    final response = await _orderClient.partnerServiceGetOrder(
-      body: PartnerGetOrderRequest(
-        orderId: orderId.orderId,
-        externalId: orderId.externalId,
-      ),
+    final response = await _orderClient.getOrder(
+      GetOrderRequest(orderId: orderId.orderId, externalId: orderId.externalId),
     );
 
     final secretKey = await getUserSecretKey(response.userPublicKey);
 
-    return processPartnerOrderData(
-      order: response,
-      secretKey: secretKey,
-    );
+    return processPartnerOrderData(order: response, secretKey: secretKey);
   }
 
   Future<List<Order>> getPartnerOrders() async {
-    final response = await _orderClient.partnerServiceGetOrders();
+    final response = await _orderClient.getOrders(GetOrdersRequest());
 
     return Future.wait(
-      response.orders.map(
-        (order) async {
-          final secretKey = await getUserSecretKey(order.userPublicKey);
+      response.orders.map((order) async {
+        final secretKey = await getUserSecretKey(order.userPublicKey);
 
-          return processPartnerOrderData(
-            order: order,
-            secretKey: secretKey,
-          );
-        },
-      ),
+        return processPartnerOrderData(order: order, secretKey: secretKey);
+      }),
     );
   }
 
@@ -215,17 +173,11 @@ class KycPartnerClient {
     final secretBox = SecretBox(Uint8List.fromList(base58.decode(userSecretKey)));
 
     final encryptedBankName = base64Encode(
-      encrypt(
-        data: utf8.encode(bankName),
-        secretBox: secretBox,
-      ),
+      encrypt(data: utf8.encode(bankName), secretBox: secretBox),
     );
 
     final encryptedBankAccount = base64Encode(
-      encrypt(
-        data: utf8.encode(bankAccount),
-        secretBox: secretBox,
-      ),
+      encrypt(data: utf8.encode(bankAccount), secretBox: secretBox),
     );
 
     final order = await getOrder(orderId: orderId);
@@ -241,8 +193,8 @@ class KycPartnerClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    await _orderClient.partnerServiceAcceptOrder(
-      body: PartnerAcceptOrderRequest(
+    await _orderClient.acceptOrder(
+      AcceptOrderRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
         bankName: encryptedBankName,
@@ -268,8 +220,8 @@ class KycPartnerClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    await _orderClient.partnerServiceAcceptOrder(
-      body: PartnerAcceptOrderRequest(
+    await _orderClient.acceptOrder(
+      AcceptOrderRequest(
         orderId: orderId.orderId,
         externalId: orderId.externalId,
         cryptoWalletAddress: cryptoWalletAddress,
@@ -283,52 +235,36 @@ class KycPartnerClient {
   Future<void> completeOnRampOrder({
     required OrderId orderId,
     required String transactionId,
-  }) async =>
-      _orderClient.partnerServiceCompleteOrder(
-        body: PartnerCompleteOrderRequest(
-          orderId: orderId.orderId,
-          externalId: orderId.externalId,
-          transactionId: transactionId,
-        ),
+  }) async => _orderClient.completeOrder(
+    CompleteOrderRequest(
+      orderId: orderId.orderId,
+      externalId: orderId.externalId,
+      transactionId: transactionId,
+    ),
+  );
+
+  Future<void> completeOffRampOrder({required OrderId orderId}) async => _orderClient.completeOrder(
+    CompleteOrderRequest(
+      orderId: orderId.orderId,
+      externalId: orderId.externalId,
+      transactionId: '',
+    ),
+  );
+
+  Future<void> failOrder({required OrderId orderId, required String reason}) async =>
+      _orderClient.failOrder(
+        FailOrderRequest(orderId: orderId.orderId, externalId: orderId.externalId, reason: reason),
       );
 
-  Future<void> completeOffRampOrder({
-    required OrderId orderId,
-  }) async =>
-      _orderClient.partnerServiceCompleteOrder(
-        body: PartnerCompleteOrderRequest(
-          orderId: orderId.orderId,
-          externalId: orderId.externalId,
-          transactionId: '',
-        ),
-      );
-
-  Future<void> failOrder({
-    required OrderId orderId,
-    required String reason,
-  }) async =>
-      _orderClient.partnerServiceFailOrder(
-        body: PartnerFailOrderRequest(
-          orderId: orderId.orderId,
-          externalId: orderId.externalId,
-          reason: reason,
-        ),
-      );
-
-  Future<void> rejectOrder({
-    required String orderId,
-    required String reason,
-  }) async =>
-      _orderClient.partnerServiceRejectOrder(
-        body: PartnerRejectOrderRequest(orderId: orderId, reason: reason),
-      );
+  Future<void> rejectOrder({required String orderId, required String reason}) async =>
+      _orderClient.rejectOrder(RejectOrderRequest(orderId: orderId, reason: reason));
 
   Future<KycStatusDetails> getKycStatusDetails({
     required String userPK,
     required String country,
   }) async {
-    final response = await _storageClient.partnerServiceGetKycStatus(
-      body: PartnerGetKycStatusRequest(
+    final response = await _storageClient.getKycStatus(
+      GetKycStatusRequest(
         userPublicKey: userPK,
         country: country,
         validatorPublicKey: config.verifierAuthPk,
@@ -343,29 +279,23 @@ class KycPartnerClient {
 
     final signature = _signingKey.sign(protoMessage);
 
-    final response = await _storageClient.partnerServiceCreateKycStatus(
-      body: PartnerCreateKycStatusRequest(
-        data: base64.encode(protoMessage),
-        signature: base64.encode(signature.signature.asTypedList),
-      ),
+    final response = await _storageClient.createKycStatus(
+      CreateKycStatusRequest(data: protoMessage, signature: signature.signature.asTypedList),
     );
 
     return response.kycId;
   }
 
-  Future<void> updateKycEntry({
-    required String kycId,
-    required KycItem kycItem,
-  }) async {
+  Future<void> updateKycEntry({required String kycId, required KycItem kycItem}) async {
     final protoMessage = kycItem.toProto().writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
 
-    await _storageClient.partnerServiceUpdateKycStatus(
-      body: PartnerUpdateKycStatusRequest(
+    await _storageClient.updateKycStatus(
+      UpdateKycStatusRequest(
         kycId: kycId,
-        data: base64.encode(protoMessage),
-        signature: base64.encode(signature.signature.asTypedList),
+        data: protoMessage,
+        signature: signature.signature.asTypedList,
       ),
     );
   }
@@ -374,22 +304,21 @@ class KycPartnerClient {
     required RampFeeUpdate onRampFee,
     required RampFeeUpdate offRampFee,
     required String walletAddress,
-  }) async =>
-      _orderClient.partnerServiceUpdateFees(
-        body: PartnerUpdateFeesRequest(
-          onRampFee: onRampFee.toProto(),
-          offRampFee: offRampFee.toProto(),
-          walletAddress: walletAddress,
-        ),
-      );
+  }) async => _orderClient.updateFees(
+    UpdateFeesRequest(
+      onRampFee: onRampFee.toProto(),
+      offRampFee: offRampFee.toProto(),
+      walletAddress: walletAddress,
+    ),
+  );
 
   Future<String> generateTransaction({
     required String orderId,
     required String externalId,
     required String fundingWalletAddress,
   }) async {
-    final response = await _orderClient.partnerServiceGenerateTransaction(
-      body: PartnerGenerateTransactionRequest(
+    final response = await _orderClient.generateTransaction(
+      GenerateTransactionRequest(
         orderId: orderId,
         externalId: externalId,
         fundingWalletAddress: fundingWalletAddress,

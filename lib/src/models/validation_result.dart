@@ -3,7 +3,7 @@ import 'package:kyc_client_dart/kyc_client_dart.dart';
 
 part 'validation_result.freezed.dart';
 
-@Freezed(map: FreezedMapOptions.none, when: FreezedWhenOptions.none)
+@freezed
 sealed class ValidationResult with _$ValidationResult {
   const factory ValidationResult.hash({
     required String dataId,
@@ -11,9 +11,6 @@ sealed class ValidationResult with _$ValidationResult {
     required String hash,
   }) = HashValidationResult;
 
-  const factory ValidationResult.custom({
-    String? id,
-    required String type,
-    required String value,
-  }) = CustomValidationResult;
+  const factory ValidationResult.custom({String? id, required String type, required String value}) =
+      CustomValidationResult;
 }

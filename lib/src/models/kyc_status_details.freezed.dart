@@ -14,18 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-KycStatusDetails _$KycStatusDetailsFromJson(Map<String, dynamic> json) {
-  return _KycStatusDetails.fromJson(json);
-}
-
 /// @nodoc
 mixin _$KycStatusDetails {
   KycStatus get status => throw _privateConstructorUsedError;
   KycItem? get data => throw _privateConstructorUsedError;
   String? get signature => throw _privateConstructorUsedError;
-
-  /// Serializes this KycStatusDetails to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of KycStatusDetails
   /// with the given fields replaced by the non-null parameter values.
@@ -144,13 +137,10 @@ class __$$KycStatusDetailsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$KycStatusDetailsImpl implements _KycStatusDetails {
   const _$KycStatusDetailsImpl(
       {required this.status, this.data, this.signature});
-
-  factory _$KycStatusDetailsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$KycStatusDetailsImplFromJson(json);
 
   @override
   final KycStatus status;
@@ -175,7 +165,6 @@ class _$KycStatusDetailsImpl implements _KycStatusDetails {
                 other.signature == signature));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, status, data, signature);
 
@@ -187,13 +176,6 @@ class _$KycStatusDetailsImpl implements _KycStatusDetails {
   _$$KycStatusDetailsImplCopyWith<_$KycStatusDetailsImpl> get copyWith =>
       __$$KycStatusDetailsImplCopyWithImpl<_$KycStatusDetailsImpl>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$KycStatusDetailsImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _KycStatusDetails implements KycStatusDetails {
@@ -201,9 +183,6 @@ abstract class _KycStatusDetails implements KycStatusDetails {
       {required final KycStatus status,
       final KycItem? data,
       final String? signature}) = _$KycStatusDetailsImpl;
-
-  factory _KycStatusDetails.fromJson(Map<String, dynamic> json) =
-      _$KycStatusDetailsImpl.fromJson;
 
   @override
   KycStatus get status;

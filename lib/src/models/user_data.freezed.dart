@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-UserData _$UserDataFromJson(Map<String, dynamic> json) {
-  return _UserData.fromJson(json);
-}
-
 /// @nodoc
 mixin _$UserData {
   Email? get email => throw _privateConstructorUsedError;
@@ -28,9 +24,6 @@ mixin _$UserData {
   List<Document>? get documents => throw _privateConstructorUsedError;
   List<BankInfo>? get bankInfos => throw _privateConstructorUsedError;
   Selfie? get selfie => throw _privateConstructorUsedError;
-
-  /// Serializes this UserData to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -299,7 +292,7 @@ class __$$UserDataImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$UserDataImpl implements _UserData {
   const _$UserDataImpl(
       {this.email,
@@ -312,9 +305,6 @@ class _$UserDataImpl implements _UserData {
       this.selfie})
       : _documents = documents,
         _bankInfos = bankInfos;
-
-  factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserDataImplFromJson(json);
 
   @override
   final Email? email;
@@ -373,7 +363,6 @@ class _$UserDataImpl implements _UserData {
             (identical(other.selfie, selfie) || other.selfie == selfie));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -393,13 +382,6 @@ class _$UserDataImpl implements _UserData {
   @pragma('vm:prefer-inline')
   _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith =>
       __$$UserDataImplCopyWithImpl<_$UserDataImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserDataImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _UserData implements UserData {
@@ -412,9 +394,6 @@ abstract class _UserData implements UserData {
       final List<Document>? documents,
       final List<BankInfo>? bankInfos,
       final Selfie? selfie}) = _$UserDataImpl;
-
-  factory _UserData.fromJson(Map<String, dynamic> json) =
-      _$UserDataImpl.fromJson;
 
   @override
   Email? get email;
@@ -441,19 +420,12 @@ abstract class _UserData implements UserData {
       throw _privateConstructorUsedError;
 }
 
-Email _$EmailFromJson(Map<String, dynamic> json) {
-  return _Email.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Email {
   String get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
   ValidationStatus get status => throw _privateConstructorUsedError;
-
-  /// Serializes this Email to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Email
   /// with the given fields replaced by the non-null parameter values.
@@ -560,16 +532,13 @@ class __$$EmailImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$EmailImpl implements _Email {
   const _$EmailImpl(
       {required this.value,
       this.id = '',
       this.hash,
       this.status = ValidationStatus.unspecified});
-
-  factory _$EmailImpl.fromJson(Map<String, dynamic> json) =>
-      _$$EmailImplFromJson(json);
 
   @override
   final String value;
@@ -598,7 +567,6 @@ class _$EmailImpl implements _Email {
             (identical(other.status, status) || other.status == status));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, value, id, hash, status);
 
@@ -609,13 +577,6 @@ class _$EmailImpl implements _Email {
   @pragma('vm:prefer-inline')
   _$$EmailImplCopyWith<_$EmailImpl> get copyWith =>
       __$$EmailImplCopyWithImpl<_$EmailImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$EmailImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Email implements Email {
@@ -624,8 +585,6 @@ abstract class _Email implements Email {
       final String id,
       final String? hash,
       final ValidationStatus status}) = _$EmailImpl;
-
-  factory _Email.fromJson(Map<String, dynamic> json) = _$EmailImpl.fromJson;
 
   @override
   String get value;
@@ -644,19 +603,12 @@ abstract class _Email implements Email {
       throw _privateConstructorUsedError;
 }
 
-Phone _$PhoneFromJson(Map<String, dynamic> json) {
-  return _Phone.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Phone {
   String get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
   ValidationStatus get status => throw _privateConstructorUsedError;
-
-  /// Serializes this Phone to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Phone
   /// with the given fields replaced by the non-null parameter values.
@@ -763,16 +715,13 @@ class __$$PhoneImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$PhoneImpl implements _Phone {
   const _$PhoneImpl(
       {required this.value,
       this.id = '',
       this.hash,
       this.status = ValidationStatus.unspecified});
-
-  factory _$PhoneImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PhoneImplFromJson(json);
 
   @override
   final String value;
@@ -801,7 +750,6 @@ class _$PhoneImpl implements _Phone {
             (identical(other.status, status) || other.status == status));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, value, id, hash, status);
 
@@ -812,13 +760,6 @@ class _$PhoneImpl implements _Phone {
   @pragma('vm:prefer-inline')
   _$$PhoneImplCopyWith<_$PhoneImpl> get copyWith =>
       __$$PhoneImplCopyWithImpl<_$PhoneImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PhoneImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Phone implements Phone {
@@ -827,8 +768,6 @@ abstract class _Phone implements Phone {
       final String id,
       final String? hash,
       final ValidationStatus status}) = _$PhoneImpl;
-
-  factory _Phone.fromJson(Map<String, dynamic> json) = _$PhoneImpl.fromJson;
 
   @override
   String get value;
@@ -847,18 +786,11 @@ abstract class _Phone implements Phone {
       throw _privateConstructorUsedError;
 }
 
-Selfie _$SelfieFromJson(Map<String, dynamic> json) {
-  return _Selfie.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Selfie {
   List<int> get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-
-  /// Serializes this Selfie to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
@@ -955,13 +887,10 @@ class __$$SelfieImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$SelfieImpl implements _Selfie {
   const _$SelfieImpl({required final List<int> value, this.id = '', this.hash})
       : _value = value;
-
-  factory _$SelfieImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SelfieImplFromJson(json);
 
   final List<int> _value;
   @override
@@ -992,7 +921,6 @@ class _$SelfieImpl implements _Selfie {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_value), id, hash);
@@ -1004,13 +932,6 @@ class _$SelfieImpl implements _Selfie {
   @pragma('vm:prefer-inline')
   _$$SelfieImplCopyWith<_$SelfieImpl> get copyWith =>
       __$$SelfieImplCopyWithImpl<_$SelfieImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SelfieImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Selfie implements Selfie {
@@ -1018,8 +939,6 @@ abstract class _Selfie implements Selfie {
       {required final List<int> value,
       final String id,
       final String? hash}) = _$SelfieImpl;
-
-  factory _Selfie.fromJson(Map<String, dynamic> json) = _$SelfieImpl.fromJson;
 
   @override
   List<int> get value;
@@ -1036,19 +955,12 @@ abstract class _Selfie implements Selfie {
       throw _privateConstructorUsedError;
 }
 
-Name _$NameFromJson(Map<String, dynamic> json) {
-  return _Name.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Name {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-
-  /// Serializes this Name to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Name
   /// with the given fields replaced by the non-null parameter values.
@@ -1154,16 +1066,13 @@ class __$$NameImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$NameImpl implements _Name {
   const _$NameImpl(
       {required this.firstName,
       required this.lastName,
       this.id = '',
       this.hash});
-
-  factory _$NameImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NameImplFromJson(json);
 
   @override
   final String firstName;
@@ -1193,7 +1102,6 @@ class _$NameImpl implements _Name {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, firstName, lastName, id, hash);
 
@@ -1204,13 +1112,6 @@ class _$NameImpl implements _Name {
   @pragma('vm:prefer-inline')
   _$$NameImplCopyWith<_$NameImpl> get copyWith =>
       __$$NameImplCopyWithImpl<_$NameImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NameImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Name implements Name {
@@ -1219,8 +1120,6 @@ abstract class _Name implements Name {
       required final String lastName,
       final String id,
       final String? hash}) = _$NameImpl;
-
-  factory _Name.fromJson(Map<String, dynamic> json) = _$NameImpl.fromJson;
 
   @override
   String get firstName;
@@ -1239,18 +1138,11 @@ abstract class _Name implements Name {
       throw _privateConstructorUsedError;
 }
 
-Citizenship _$CitizenshipFromJson(Map<String, dynamic> json) {
-  return _Citizenship.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Citizenship {
   String get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-
-  /// Serializes this Citizenship to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Citizenship
   /// with the given fields replaced by the non-null parameter values.
@@ -1350,12 +1242,9 @@ class __$$CitizenshipImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$CitizenshipImpl implements _Citizenship {
   const _$CitizenshipImpl({required this.value, this.id = '', this.hash});
-
-  factory _$CitizenshipImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CitizenshipImplFromJson(json);
 
   @override
   final String value;
@@ -1380,7 +1269,6 @@ class _$CitizenshipImpl implements _Citizenship {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, value, id, hash);
 
@@ -1391,13 +1279,6 @@ class _$CitizenshipImpl implements _Citizenship {
   @pragma('vm:prefer-inline')
   _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith =>
       __$$CitizenshipImplCopyWithImpl<_$CitizenshipImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CitizenshipImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Citizenship implements Citizenship {
@@ -1405,9 +1286,6 @@ abstract class _Citizenship implements Citizenship {
       {required final String value,
       final String id,
       final String? hash}) = _$CitizenshipImpl;
-
-  factory _Citizenship.fromJson(Map<String, dynamic> json) =
-      _$CitizenshipImpl.fromJson;
 
   @override
   String get value;
@@ -1424,18 +1302,11 @@ abstract class _Citizenship implements Citizenship {
       throw _privateConstructorUsedError;
 }
 
-BirthDate _$BirthDateFromJson(Map<String, dynamic> json) {
-  return _BirthDate.fromJson(json);
-}
-
 /// @nodoc
 mixin _$BirthDate {
   DateTime get value => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-
-  /// Serializes this BirthDate to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of BirthDate
   /// with the given fields replaced by the non-null parameter values.
@@ -1534,12 +1405,9 @@ class __$$BirthDateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$BirthDateImpl implements _BirthDate {
   const _$BirthDateImpl({required this.value, this.id = '', this.hash});
-
-  factory _$BirthDateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BirthDateImplFromJson(json);
 
   @override
   final DateTime value;
@@ -1564,7 +1432,6 @@ class _$BirthDateImpl implements _BirthDate {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, value, id, hash);
 
@@ -1575,13 +1442,6 @@ class _$BirthDateImpl implements _BirthDate {
   @pragma('vm:prefer-inline')
   _$$BirthDateImplCopyWith<_$BirthDateImpl> get copyWith =>
       __$$BirthDateImplCopyWithImpl<_$BirthDateImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BirthDateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _BirthDate implements BirthDate {
@@ -1589,9 +1449,6 @@ abstract class _BirthDate implements BirthDate {
       {required final DateTime value,
       final String id,
       final String? hash}) = _$BirthDateImpl;
-
-  factory _BirthDate.fromJson(Map<String, dynamic> json) =
-      _$BirthDateImpl.fromJson;
 
   @override
   DateTime get value;
@@ -1608,10 +1465,6 @@ abstract class _BirthDate implements BirthDate {
       throw _privateConstructorUsedError;
 }
 
-Document _$DocumentFromJson(Map<String, dynamic> json) {
-  return _Document.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Document {
   IdType get type => throw _privateConstructorUsedError;
@@ -1622,9 +1475,6 @@ mixin _$Document {
   List<int>? get backImage => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-
-  /// Serializes this Document to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -1789,7 +1639,7 @@ class __$$DocumentImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$DocumentImpl implements _Document {
   const _$DocumentImpl(
       {required this.type,
@@ -1802,9 +1652,6 @@ class _$DocumentImpl implements _Document {
       this.hash})
       : _frontImage = frontImage,
         _backImage = backImage;
-
-  factory _$DocumentImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DocumentImplFromJson(json);
 
   @override
   final IdType type;
@@ -1864,7 +1711,6 @@ class _$DocumentImpl implements _Document {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1884,13 +1730,6 @@ class _$DocumentImpl implements _Document {
   @pragma('vm:prefer-inline')
   _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith =>
       __$$DocumentImplCopyWithImpl<_$DocumentImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DocumentImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Document implements Document {
@@ -1903,9 +1742,6 @@ abstract class _Document implements Document {
       final List<int>? backImage,
       final String id,
       final String? hash}) = _$DocumentImpl;
-
-  factory _Document.fromJson(Map<String, dynamic> json) =
-      _$DocumentImpl.fromJson;
 
   @override
   IdType get type;
@@ -1932,10 +1768,6 @@ abstract class _Document implements Document {
       throw _privateConstructorUsedError;
 }
 
-BankInfo _$BankInfoFromJson(Map<String, dynamic> json) {
-  return _BankInfo.fromJson(json);
-}
-
 /// @nodoc
 mixin _$BankInfo {
   String get bankName => throw _privateConstructorUsedError;
@@ -1944,9 +1776,6 @@ mixin _$BankInfo {
   String get countryCode => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get hash => throw _privateConstructorUsedError;
-
-  /// Serializes this BankInfo to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2087,7 +1916,7 @@ class __$$BankInfoImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$BankInfoImpl implements _BankInfo {
   const _$BankInfoImpl(
       {required this.bankName,
@@ -2096,9 +1925,6 @@ class _$BankInfoImpl implements _BankInfo {
       required this.countryCode,
       this.id = '',
       this.hash});
-
-  factory _$BankInfoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BankInfoImplFromJson(json);
 
   @override
   final String bankName;
@@ -2136,7 +1962,6 @@ class _$BankInfoImpl implements _BankInfo {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, bankName, bankCode, accountNumber, countryCode, id, hash);
@@ -2148,13 +1973,6 @@ class _$BankInfoImpl implements _BankInfo {
   @pragma('vm:prefer-inline')
   _$$BankInfoImplCopyWith<_$BankInfoImpl> get copyWith =>
       __$$BankInfoImplCopyWithImpl<_$BankInfoImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BankInfoImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _BankInfo implements BankInfo {
@@ -2165,9 +1983,6 @@ abstract class _BankInfo implements BankInfo {
       required final String countryCode,
       final String id,
       final String? hash}) = _$BankInfoImpl;
-
-  factory _BankInfo.fromJson(Map<String, dynamic> json) =
-      _$BankInfoImpl.fromJson;
 
   @override
   String get bankName;

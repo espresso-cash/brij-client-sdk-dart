@@ -3,7 +3,6 @@ import 'package:kyc_client_dart/src/models/id_type.dart';
 import 'package:kyc_client_dart/src/models/validation_status.dart';
 
 part 'user_data.freezed.dart';
-part 'user_data.g.dart';
 
 @freezed
 class UserData with _$UserData {
@@ -17,9 +16,6 @@ class UserData with _$UserData {
     List<BankInfo>? bankInfos,
     Selfie? selfie,
   }) = _UserData;
-
-  factory UserData.fromJson(Map<String, dynamic> json) =>
-      _$UserDataFromJson(json);
 }
 
 @freezed
@@ -30,8 +26,6 @@ class Email with _$Email {
     String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Email;
-
-  factory Email.fromJson(Map<String, dynamic> json) => _$EmailFromJson(json);
 }
 
 @freezed
@@ -42,19 +36,11 @@ class Phone with _$Phone {
     String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Phone;
-
-  factory Phone.fromJson(Map<String, dynamic> json) => _$PhoneFromJson(json);
 }
 
 @freezed
 class Selfie with _$Selfie {
-  const factory Selfie({
-    required List<int> value,
-    @Default('') String id,
-    String? hash,
-  }) = _Selfie;
-
-  factory Selfie.fromJson(Map<String, dynamic> json) => _$SelfieFromJson(json);
+  const factory Selfie({required List<int> value, @Default('') String id, String? hash}) = _Selfie;
 }
 
 @freezed
@@ -65,32 +51,18 @@ class Name with _$Name {
     @Default('') String id,
     String? hash,
   }) = _Name;
-
-  factory Name.fromJson(Map<String, dynamic> json) => _$NameFromJson(json);
 }
 
 @freezed
 class Citizenship with _$Citizenship {
-  const factory Citizenship({
-    required String value,
-    @Default('') String id,
-    String? hash,
-  }) = _Citizenship;
-
-  factory Citizenship.fromJson(Map<String, dynamic> json) =>
-      _$CitizenshipFromJson(json);
+  const factory Citizenship({required String value, @Default('') String id, String? hash}) =
+      _Citizenship;
 }
 
 @freezed
 class BirthDate with _$BirthDate {
-  const factory BirthDate({
-    required DateTime value,
-    @Default('') String id,
-    String? hash,
-  }) = _BirthDate;
-
-  factory BirthDate.fromJson(Map<String, dynamic> json) =>
-      _$BirthDateFromJson(json);
+  const factory BirthDate({required DateTime value, @Default('') String id, String? hash}) =
+      _BirthDate;
 }
 
 @freezed
@@ -105,9 +77,6 @@ class Document with _$Document {
     @Default('') String id,
     String? hash,
   }) = _Document;
-
-  factory Document.fromJson(Map<String, dynamic> json) =>
-      _$DocumentFromJson(json);
 }
 
 @freezed
@@ -120,7 +89,4 @@ class BankInfo with _$BankInfo {
     @Default('') String id,
     String? hash,
   }) = _BankInfo;
-
-  factory BankInfo.fromJson(Map<String, dynamic> json) =>
-      _$BankInfoFromJson(json);
 }
