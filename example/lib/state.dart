@@ -194,13 +194,13 @@ class UserAppState extends ChangeNotifier {
   Future<void> fetchOrder(String orderId) async {
     final data = await _client.getOrder(orderId: OrderId.fromOrderId(orderId));
 
-    print(data.toJson());
+    print(data);
   }
 
   Future<void> fetchUserOrders() async {
     final data = await _client.getOrders();
 
-    _orders = data.map((e) => e.toJson().toString()).toList();
+    _orders = data.map((e) => e.toString()).toList();
 
     notifyListeners();
   }
@@ -219,7 +219,7 @@ class UserAppState extends ChangeNotifier {
       fiatCurrency: fiatCurrency,
     );
 
-    _quote = response.toJson().toString();
+    _quote = response.toString();
     notifyListeners();
   }
 
@@ -237,7 +237,7 @@ class UserAppState extends ChangeNotifier {
       fiatCurrency: fiatCurrency,
     );
 
-    _quote = response.toJson().toString();
+    _quote = response.toString();
     notifyListeners();
   }
 }
@@ -246,7 +246,7 @@ class PartnerAppState extends ChangeNotifier {
   String get authPublicKey => _authPublicKey;
   String get userSecretKey => _userSecretKey;
   String get partnerFeesAddress => _partnerFeesAddress;
-  Map<String, dynamic>? get userData => _userData;
+  UserData? get userData => _userData;
 
   String? get onRampOrderData => _onRampOrderData;
   String? get offRampOrderData => _offRampOrderData;
@@ -270,7 +270,7 @@ class PartnerAppState extends ChangeNotifier {
 
   final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
-  Map<String, dynamic>? _userData;
+  UserData? _userData;
 
   String? _onRampOrderData;
   String? _offRampOrderData;
@@ -290,7 +290,8 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
+    _authPublicKey =
+        await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
@@ -322,7 +323,7 @@ class PartnerAppState extends ChangeNotifier {
       secretKey: secretKey,
     );
 
-    _userData = data.toJson();
+    _userData = data;
 
     notifyListeners();
   }
@@ -335,7 +336,7 @@ class PartnerAppState extends ChangeNotifier {
       orderId: OrderId.from(orderId: orderId, externalId: externalId),
     );
 
-    _onRampOrderData = data.toJson().toString();
+    _onRampOrderData = data.toString();
 
     notifyListeners();
   }
@@ -348,7 +349,7 @@ class PartnerAppState extends ChangeNotifier {
       orderId: OrderId.from(orderId: orderId, externalId: externalId),
     );
 
-    _offRampOrderData = data.toJson().toString();
+    _offRampOrderData = data.toString();
 
     notifyListeners();
   }
@@ -356,7 +357,7 @@ class PartnerAppState extends ChangeNotifier {
   Future<void> fetchPartnerOrders() async {
     final data = await _client.getPartnerOrders();
 
-    _orders = data.map((e) => e.toJson().toString()).toList();
+    _orders = data.map((e) => e.toString()).toList();
 
     notifyListeners();
   }

@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-KycItem _$KycItemFromJson(Map<String, dynamic> json) {
-  return _KycItem.fromJson(json);
-}
-
 /// @nodoc
 mixin _$KycItem {
   List<String> get countries => throw _privateConstructorUsedError;
@@ -25,10 +21,8 @@ mixin _$KycItem {
   String get provider => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
   List<String> get hashes => throw _privateConstructorUsedError;
-  Map<String, dynamic> get additionalData => throw _privateConstructorUsedError;
-
-  /// Serializes this KycItem to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, List<int>> get additionalData =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of KycItem
   /// with the given fields replaced by the non-null parameter values.
@@ -47,7 +41,7 @@ abstract class $KycItemCopyWith<$Res> {
       String provider,
       String userPublicKey,
       List<String> hashes,
-      Map<String, dynamic> additionalData});
+      Map<String, List<int>> additionalData});
 }
 
 /// @nodoc
@@ -96,7 +90,7 @@ class _$KycItemCopyWithImpl<$Res, $Val extends KycItem>
       additionalData: null == additionalData
           ? _value.additionalData
           : additionalData // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as Map<String, List<int>>,
     ) as $Val);
   }
 }
@@ -114,7 +108,7 @@ abstract class _$$KycItemImplCopyWith<$Res> implements $KycItemCopyWith<$Res> {
       String provider,
       String userPublicKey,
       List<String> hashes,
-      Map<String, dynamic> additionalData});
+      Map<String, List<int>> additionalData});
 }
 
 /// @nodoc
@@ -161,13 +155,13 @@ class __$$KycItemImplCopyWithImpl<$Res>
       additionalData: null == additionalData
           ? _value._additionalData
           : additionalData // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as Map<String, List<int>>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$KycItemImpl extends _KycItem {
   const _$KycItemImpl(
       {required final List<String> countries,
@@ -175,14 +169,11 @@ class _$KycItemImpl extends _KycItem {
       required this.provider,
       required this.userPublicKey,
       final List<String> hashes = const [],
-      final Map<String, dynamic> additionalData = const {}})
+      final Map<String, List<int>> additionalData = const {}})
       : _countries = countries,
         _hashes = hashes,
         _additionalData = additionalData,
         super._();
-
-  factory _$KycItemImpl.fromJson(Map<String, dynamic> json) =>
-      _$$KycItemImplFromJson(json);
 
   final List<String> _countries;
   @override
@@ -207,10 +198,10 @@ class _$KycItemImpl extends _KycItem {
     return EqualUnmodifiableListView(_hashes);
   }
 
-  final Map<String, dynamic> _additionalData;
+  final Map<String, List<int>> _additionalData;
   @override
   @JsonKey()
-  Map<String, dynamic> get additionalData {
+  Map<String, List<int>> get additionalData {
     if (_additionalData is EqualUnmodifiableMapView) return _additionalData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_additionalData);
@@ -238,7 +229,6 @@ class _$KycItemImpl extends _KycItem {
                 .equals(other._additionalData, _additionalData));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -256,13 +246,6 @@ class _$KycItemImpl extends _KycItem {
   @pragma('vm:prefer-inline')
   _$$KycItemImplCopyWith<_$KycItemImpl> get copyWith =>
       __$$KycItemImplCopyWithImpl<_$KycItemImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$KycItemImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _KycItem extends KycItem {
@@ -272,10 +255,8 @@ abstract class _KycItem extends KycItem {
       required final String provider,
       required final String userPublicKey,
       final List<String> hashes,
-      final Map<String, dynamic> additionalData}) = _$KycItemImpl;
+      final Map<String, List<int>> additionalData}) = _$KycItemImpl;
   const _KycItem._() : super._();
-
-  factory _KycItem.fromJson(Map<String, dynamic> json) = _$KycItemImpl.fromJson;
 
   @override
   List<String> get countries;
@@ -288,7 +269,7 @@ abstract class _KycItem extends KycItem {
   @override
   List<String> get hashes;
   @override
-  Map<String, dynamic> get additionalData;
+  Map<String, List<int>> get additionalData;
 
   /// Create a copy of KycItem
   /// with the given fields replaced by the non-null parameter values.

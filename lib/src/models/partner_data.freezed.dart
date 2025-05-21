@@ -14,19 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-PartnerModel _$PartnerModelFromJson(Map<String, dynamic> json) {
-  return _PartnerModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$PartnerModel {
   String get name => throw _privateConstructorUsedError;
   String get publicKey => throw _privateConstructorUsedError;
   String get privacyUrl => throw _privateConstructorUsedError;
   String get termsUrl => throw _privateConstructorUsedError;
-
-  /// Serializes this PartnerModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of PartnerModel
   /// with the given fields replaced by the non-null parameter values.
@@ -138,16 +131,13 @@ class __$$PartnerModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$PartnerModelImpl implements _PartnerModel {
   _$PartnerModelImpl(
       {required this.name,
       required this.publicKey,
       required this.privacyUrl,
       required this.termsUrl});
-
-  factory _$PartnerModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PartnerModelImplFromJson(json);
 
   @override
   final String name;
@@ -177,7 +167,6 @@ class _$PartnerModelImpl implements _PartnerModel {
                 other.termsUrl == termsUrl));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, name, publicKey, privacyUrl, termsUrl);
@@ -189,13 +178,6 @@ class _$PartnerModelImpl implements _PartnerModel {
   @pragma('vm:prefer-inline')
   _$$PartnerModelImplCopyWith<_$PartnerModelImpl> get copyWith =>
       __$$PartnerModelImplCopyWithImpl<_$PartnerModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PartnerModelImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _PartnerModel implements PartnerModel {
@@ -204,9 +186,6 @@ abstract class _PartnerModel implements PartnerModel {
       required final String publicKey,
       required final String privacyUrl,
       required final String termsUrl}) = _$PartnerModelImpl;
-
-  factory _PartnerModel.fromJson(Map<String, dynamic> json) =
-      _$PartnerModelImpl.fromJson;
 
   @override
   String get name;

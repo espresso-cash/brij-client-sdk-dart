@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Order _$OrderFromJson(Map<String, dynamic> json) {
-  return _Order.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Order {
   String get orderId => throw _privateConstructorUsedError;
@@ -39,9 +35,6 @@ mixin _$Order {
   String get externalId => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
   String get walletPublicKey => throw _privateConstructorUsedError;
-
-  /// Serializes this Order to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -336,7 +329,7 @@ class __$$OrderImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$OrderImpl implements _Order {
   const _$OrderImpl(
       {required this.orderId,
@@ -358,9 +351,6 @@ class _$OrderImpl implements _Order {
       required this.externalId,
       required this.userWalletAddress,
       required this.walletPublicKey});
-
-  factory _$OrderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrderImplFromJson(json);
 
   @override
   final String orderId;
@@ -446,7 +436,6 @@ class _$OrderImpl implements _Order {
                 other.walletPublicKey == walletPublicKey));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -478,13 +467,6 @@ class _$OrderImpl implements _Order {
   @pragma('vm:prefer-inline')
   _$$OrderImplCopyWith<_$OrderImpl> get copyWith =>
       __$$OrderImplCopyWithImpl<_$OrderImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OrderImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Order implements Order {
@@ -508,8 +490,6 @@ abstract class _Order implements Order {
       required final String externalId,
       required final String userWalletAddress,
       required final String walletPublicKey}) = _$OrderImpl;
-
-  factory _Order.fromJson(Map<String, dynamic> json) = _$OrderImpl.fromJson;
 
   @override
   String get orderId;

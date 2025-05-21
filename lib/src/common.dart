@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'dart:isolate';
 
+import 'package:brij_protos_dart/gen/brij/orders/v1/common/ramp_type.pbenum.dart' as orders;
+import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart' as partner;
+import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' as wallet;
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as d;
+import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart' as partner;
+import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart';
+import 'package:brij_protos_dart/gen/google/protobuf/timestamp.pb.dart';
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
-import 'package:kyc_client_dart/src/api/orders/models/common_ramp_type.dart';
-import 'package:kyc_client_dart/src/api/orders/models/partner_get_order_response.dart';
-import 'package:kyc_client_dart/src/api/orders/models/wallet_get_order_response.dart';
-import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
-import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
-import 'package:kyc_client_dart/src/api/storage/models/common_data_type.dart';
-import 'package:kyc_client_dart/src/api/storage/models/partner_get_user_data_response.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_user_data_response.dart';
 import 'package:kyc_client_dart/src/currency/currency_list.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
 import 'package:pinenacl/digests.dart';
@@ -27,42 +26,33 @@ String generateHash(Object data) {
     GeneratedMessage() => serializeProto(data),
     Uint8List() => data,
     String() => Uint8List.fromList(utf8.encode(data)),
-    _ => throw ArgumentError('Unsupported type: ${data.runtimeType}')
+    _ => throw ArgumentError('Unsupported type: ${data.runtimeType}'),
   };
 
   return hex.encode(Hash.sha256(bytes));
 }
 
 Uint8List serializeProto(GeneratedMessage data) {
-  if (data.runtimeType == proto.BirthDate) {
-    final value = data as proto.BirthDate;
-    data = proto.BirthDate(value: Timestamp()..seconds = value.value.seconds);
+  if (data.runtimeType == d.BirthDate) {
+    final value = data as d.BirthDate;
+    data = d.BirthDate(value: Timestamp()..seconds = value.value.seconds);
   }
   return data.writeToBuffer();
 }
 
-Uint8List encrypt({
-  required Uint8List data,
-  required SecretBox secretBox,
-}) {
+Uint8List encrypt({required Uint8List data, required SecretBox secretBox}) {
   final cipherText = secretBox.encrypt(data);
 
-  return Uint8List.fromList([
-    ...cipherText.nonce,
-    ...cipherText.cipherText,
-  ]);
+  return Uint8List.fromList([...cipherText.nonce, ...cipherText.cipherText]);
 }
 
-Uint8List decrypt({
-  required String encryptedData,
-  required String secretKey,
-}) {
+Uint8List decrypt({required List<int> encryptedData, required String secretKey}) {
   if (encryptedData.isEmpty) {
     return Uint8List(0);
   }
 
   final box = SecretBox(Uint8List.fromList(base58.decode(secretKey)));
-  final data = base64Decode(encryptedData);
+  final data = Uint8List.fromList(encryptedData);
 
   if (data.length < TweetNaCl.nonceLength) {
     throw Exception('encrypted message too short');
@@ -79,26 +69,18 @@ Uint8List decrypt({
 }
 
 Future<UserData> processUserDataForWallet({
-  required WalletGetUserDataResponse response,
+  required GetUserDataResponse response,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processUserDataForWallet(
-      response: response,
-      secretKey: secretKey,
-    );
+    return _processUserDataForWallet(response: response, secretKey: secretKey);
   }
 
-  return Isolate.run(
-    () => _processUserDataForWallet(
-      response: response,
-      secretKey: secretKey,
-    ),
-  );
+  return Isolate.run(() => _processUserDataForWallet(response: response, secretKey: secretKey));
 }
 
 UserData _processUserDataForWallet({
-  required WalletGetUserDataResponse response,
+  required GetUserDataResponse response,
   required String secretKey,
 }) {
   final validationMap = {
@@ -106,7 +88,7 @@ UserData _processUserDataForWallet({
       data.dataId: HashValidationResult(
         dataId: data.dataId,
         hash: data.hash,
-        status: data.status.toApiValidationStatus(),
+        status: data.status.toModel(),
       ),
   };
 
@@ -131,39 +113,25 @@ UserData _processUserDataForWallet({
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
     switch (encryptedData.type) {
-      case CommonDataType.dataTypeEmail:
-        final wrappedData = proto.Email.fromBuffer(decryptedData);
-        email = Email(
-          value: wrappedData.value,
-          id: id,
-          status: status,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeName:
-        final wrappedData = proto.Name.fromBuffer(decryptedData);
+      case d.DataType.DATA_TYPE_EMAIL:
+        final wrappedData = d.Email.fromBuffer(decryptedData);
+        email = Email(value: wrappedData.value, id: id, status: status, hash: hash);
+      case d.DataType.DATA_TYPE_NAME:
+        final wrappedData = d.Name.fromBuffer(decryptedData);
         name = Name(
           firstName: wrappedData.firstName,
           lastName: wrappedData.lastName,
           id: id,
           hash: hash,
         );
-      case CommonDataType.dataTypeBirthDate:
-        final wrappedData = proto.BirthDate.fromBuffer(decryptedData);
-        birthDate = BirthDate(
-          value: wrappedData.value.toDateTime(),
-          id: id,
-          hash: hash,
-        );
-      case CommonDataType.dataTypePhone:
-        final wrappedData = proto.Phone.fromBuffer(decryptedData);
-        phone = Phone(
-          value: wrappedData.value,
-          id: id,
-          status: status,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeDocument:
-        final wrappedData = proto.Document.fromBuffer(decryptedData);
+      case d.DataType.DATA_TYPE_BIRTH_DATE:
+        final wrappedData = d.BirthDate.fromBuffer(decryptedData);
+        birthDate = BirthDate(value: wrappedData.value.toDateTime(), id: id, hash: hash);
+      case d.DataType.DATA_TYPE_PHONE:
+        final wrappedData = d.Phone.fromBuffer(decryptedData);
+        phone = Phone(value: wrappedData.value, id: id, status: status, hash: hash);
+      case d.DataType.DATA_TYPE_DOCUMENT:
+        final wrappedData = d.Document.fromBuffer(decryptedData);
         documents.add(
           Document(
             type: wrappedData.type.toIdType(),
@@ -176,8 +144,8 @@ UserData _processUserDataForWallet({
             hash: hash,
           ),
         );
-      case CommonDataType.dataTypeBankInfo:
-        final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
+      case d.DataType.DATA_TYPE_BANK_INFO:
+        final wrappedData = d.BankInfo.fromBuffer(decryptedData);
         bankInfos.add(
           BankInfo(
             bankName: wrappedData.bankName,
@@ -188,22 +156,14 @@ UserData _processUserDataForWallet({
             hash: hash,
           ),
         );
-      case CommonDataType.dataTypeSelfieImage:
-        final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
-        selfie = Selfie(
-          value: wrappedData.value,
-          id: id,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeCitizenship:
-        final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
-        citizenship = Citizenship(
-          value: wrappedData.value,
-          id: id,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeUnspecified:
-      case CommonDataType.$unknown:
+      case d.DataType.DATA_TYPE_SELFIE_IMAGE:
+        final wrappedData = d.SelfieImage.fromBuffer(decryptedData);
+        selfie = Selfie(value: wrappedData.value, id: id, hash: hash);
+      case d.DataType.DATA_TYPE_CITIZENSHIP:
+        final wrappedData = d.Citizenship.fromBuffer(decryptedData);
+        citizenship = Citizenship(value: wrappedData.value, id: id, hash: hash);
+      case d.DataType.DATA_TYPE_UNSPECIFIED:
+      case d.DataType():
     }
   }
 
@@ -220,26 +180,18 @@ UserData _processUserDataForWallet({
 }
 
 Future<UserData> processUserDataForPartner({
-  required PartnerGetUserDataResponse response,
+  required partner.GetUserDataResponse response,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processUserDataForPartner(
-      response: response,
-      secretKey: secretKey,
-    );
+    return _processUserDataForPartner(response: response, secretKey: secretKey);
   }
 
-  return Isolate.run(
-    () => _processUserDataForPartner(
-      response: response,
-      secretKey: secretKey,
-    ),
-  );
+  return Isolate.run(() => _processUserDataForPartner(response: response, secretKey: secretKey));
 }
 
 UserData _processUserDataForPartner({
-  required PartnerGetUserDataResponse response,
+  required partner.GetUserDataResponse response,
   required String secretKey,
 }) {
   final validationMap = {
@@ -247,7 +199,7 @@ UserData _processUserDataForPartner({
       data.dataId: HashValidationResult(
         dataId: data.dataId,
         hash: data.hash,
-        status: data.status.toApiValidationStatus(),
+        status: data.status.toModel(),
       ),
   };
 
@@ -272,39 +224,25 @@ UserData _processUserDataForPartner({
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
     switch (encryptedData.type) {
-      case CommonDataType.dataTypeEmail:
-        final wrappedData = proto.Email.fromBuffer(decryptedData);
-        email = Email(
-          value: wrappedData.value,
-          id: id,
-          status: status,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeName:
-        final wrappedData = proto.Name.fromBuffer(decryptedData);
+      case d.DataType.DATA_TYPE_EMAIL:
+        final wrappedData = d.Email.fromBuffer(decryptedData);
+        email = Email(value: wrappedData.value, id: id, status: status, hash: hash);
+      case d.DataType.DATA_TYPE_NAME:
+        final wrappedData = d.Name.fromBuffer(decryptedData);
         name = Name(
           firstName: wrappedData.firstName,
           lastName: wrappedData.lastName,
           id: id,
           hash: hash,
         );
-      case CommonDataType.dataTypeBirthDate:
-        final wrappedData = proto.BirthDate.fromBuffer(decryptedData);
-        birthDate = BirthDate(
-          value: wrappedData.value.toDateTime(),
-          id: id,
-          hash: hash,
-        );
-      case CommonDataType.dataTypePhone:
-        final wrappedData = proto.Phone.fromBuffer(decryptedData);
-        phone = Phone(
-          value: wrappedData.value,
-          id: id,
-          status: status,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeDocument:
-        final wrappedData = proto.Document.fromBuffer(decryptedData);
+      case d.DataType.DATA_TYPE_BIRTH_DATE:
+        final wrappedData = d.BirthDate.fromBuffer(decryptedData);
+        birthDate = BirthDate(value: wrappedData.value.toDateTime(), id: id, hash: hash);
+      case d.DataType.DATA_TYPE_PHONE:
+        final wrappedData = d.Phone.fromBuffer(decryptedData);
+        phone = Phone(value: wrappedData.value, id: id, status: status, hash: hash);
+      case d.DataType.DATA_TYPE_DOCUMENT:
+        final wrappedData = d.Document.fromBuffer(decryptedData);
         documents.add(
           Document(
             type: wrappedData.type.toIdType(),
@@ -317,8 +255,8 @@ UserData _processUserDataForPartner({
             hash: hash,
           ),
         );
-      case CommonDataType.dataTypeBankInfo:
-        final wrappedData = proto.BankInfo.fromBuffer(decryptedData);
+      case d.DataType.DATA_TYPE_BANK_INFO:
+        final wrappedData = d.BankInfo.fromBuffer(decryptedData);
         bankInfos.add(
           BankInfo(
             bankName: wrappedData.bankName,
@@ -329,22 +267,14 @@ UserData _processUserDataForPartner({
             hash: hash,
           ),
         );
-      case CommonDataType.dataTypeSelfieImage:
-        final wrappedData = proto.SelfieImage.fromBuffer(decryptedData);
-        selfie = Selfie(
-          value: wrappedData.value,
-          id: id,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeCitizenship:
-        final wrappedData = proto.Citizenship.fromBuffer(decryptedData);
-        citizenship = Citizenship(
-          value: wrappedData.value,
-          id: id,
-          hash: hash,
-        );
-      case CommonDataType.dataTypeUnspecified:
-      case CommonDataType.$unknown:
+      case d.DataType.DATA_TYPE_SELFIE_IMAGE:
+        final wrappedData = d.SelfieImage.fromBuffer(decryptedData);
+        selfie = Selfie(value: wrappedData.value, id: id, hash: hash);
+      case d.DataType.DATA_TYPE_CITIZENSHIP:
+        final wrappedData = d.Citizenship.fromBuffer(decryptedData);
+        citizenship = Citizenship(value: wrappedData.value, id: id, hash: hash);
+      case d.DataType.DATA_TYPE_UNSPECIFIED:
+      case d.DataType():
     }
   }
 
@@ -360,37 +290,41 @@ UserData _processUserDataForPartner({
   );
 }
 
-Order processWalletOrderData({
-  required WalletGetOrderResponse order,
-  required String secretKey,
-}) {
+Order processWalletOrderData({required wallet.GetOrderResponse order, required String secretKey}) {
   final decryptedBankName =
-      order.bankName.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankName, secretKey: secretKey)) : '';
+      order.bankName.isNotEmpty
+          ? utf8.decode(decrypt(encryptedData: base64Decode(order.bankName), secretKey: secretKey))
+          : '';
 
   final decryptedBankAccount =
-      order.bankAccount.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankAccount, secretKey: secretKey)) : '';
+      order.bankAccount.isNotEmpty
+          ? utf8.decode(
+            decrypt(encryptedData: base64Decode(order.bankAccount), secretKey: secretKey),
+          )
+          : '';
 
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage = order.type == CommonRampType.rampTypeONRamp
-        ? createUserOnRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            walletAddress: order.userWalletAddress,
-          )
-        : createUserOffRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            encryptedBankName: order.bankName,
-            encryptedBankAccount: order.bankAccount,
-            walletAddress: order.userWalletAddress,
-          );
+    final userMessage =
+        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
+            ? createUserOnRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              walletAddress: order.userWalletAddress,
+            )
+            : createUserOffRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              encryptedBankName: order.bankName,
+              encryptedBankAccount: order.bankAccount,
+              walletAddress: order.userWalletAddress,
+            );
 
     if (!verifyKey.verify(
       signature: Signature(base58.decode(order.userSignature)),
@@ -402,24 +336,25 @@ Order processWalletOrderData({
 
   if (order.partnerSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage = order.type == CommonRampType.rampTypeONRamp
-        ? createPartnerOnRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            encryptedBankName: order.bankName,
-            encryptedBankAccount: order.bankAccount,
-          )
-        : createPartnerOffRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            cryptoWalletAddress: order.cryptoWalletAddress,
-          );
+    final partnerMessage =
+        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
+            ? createPartnerOnRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              encryptedBankName: order.bankName,
+              encryptedBankAccount: order.bankAccount,
+            )
+            : createPartnerOffRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              cryptoWalletAddress: order.cryptoWalletAddress,
+            );
 
     if (!verifyKey.verify(
       signature: Signature(base58.decode(order.partnerSignature)),
@@ -430,44 +365,52 @@ Order processWalletOrderData({
   }
 
   return Order.fromWalletGetOrderResponse(
-    order.copyWith(
-      bankName: decryptedBankName,
-      bankAccount: decryptedBankAccount,
-    ),
+    order.rebuild((r) {
+      r
+        ..bankName = decryptedBankName
+        ..bankAccount = decryptedBankAccount;
+    }),
   );
 }
 
 Order processPartnerOrderData({
-  required PartnerGetOrderResponse order,
+  required partner.GetOrderResponse order,
   required String secretKey,
 }) {
   final decryptedBankName =
-      order.bankName.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankName, secretKey: secretKey)) : '';
+      order.bankName.isNotEmpty
+          ? utf8.decode(decrypt(encryptedData: base64Decode(order.bankName), secretKey: secretKey))
+          : '';
 
   final decryptedBankAccount =
-      order.bankAccount.isNotEmpty ? utf8.decode(decrypt(encryptedData: order.bankAccount, secretKey: secretKey)) : '';
+      order.bankAccount.isNotEmpty
+          ? utf8.decode(
+            decrypt(encryptedData: base64Decode(order.bankAccount), secretKey: secretKey),
+          )
+          : '';
 
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage = order.type == CommonRampType.rampTypeONRamp
-        ? createUserOnRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            walletAddress: order.userWalletAddress,
-          )
-        : createUserOffRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            encryptedBankName: order.bankName,
-            encryptedBankAccount: order.bankAccount,
-            walletAddress: order.userWalletAddress,
-          );
+    final userMessage =
+        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
+            ? createUserOnRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              walletAddress: order.userWalletAddress,
+            )
+            : createUserOffRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              encryptedBankName: order.bankName,
+              encryptedBankAccount: order.bankAccount,
+              walletAddress: order.userWalletAddress,
+            );
 
     if (!verifyKey.verify(
       signature: Signature(base58.decode(order.userSignature)),
@@ -479,24 +422,25 @@ Order processPartnerOrderData({
 
   if (order.partnerSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage = order.type == CommonRampType.rampTypeONRamp
-        ? createPartnerOnRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            encryptedBankName: order.bankName,
-            encryptedBankAccount: order.bankAccount,
-          )
-        : createPartnerOffRampMessage(
-            orderId: order.orderId,
-            cryptoAmount: order.cryptoAmount,
-            cryptoCurrency: order.cryptoCurrency,
-            fiatAmount: order.fiatAmount,
-            fiatCurrency: order.fiatCurrency,
-            cryptoWalletAddress: order.cryptoWalletAddress,
-          );
+    final partnerMessage =
+        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
+            ? createPartnerOnRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              encryptedBankName: order.bankName,
+              encryptedBankAccount: order.bankAccount,
+            )
+            : createPartnerOffRampMessage(
+              orderId: order.orderId,
+              cryptoAmount: order.cryptoAmount,
+              cryptoCurrency: order.cryptoCurrency,
+              fiatAmount: order.fiatAmount,
+              fiatCurrency: order.fiatCurrency,
+              cryptoWalletAddress: order.cryptoWalletAddress,
+            );
 
     if (!verifyKey.verify(
       signature: Signature(base58.decode(order.partnerSignature)),
@@ -507,10 +451,11 @@ Order processPartnerOrderData({
   }
 
   return Order.fromPartnerGetOrderResponse(
-    order.copyWith(
-      bankName: decryptedBankName,
-      bankAccount: decryptedBankAccount,
-    ),
+    order.rebuild((r) {
+      r
+        ..bankName = decryptedBankName
+        ..bankAccount = decryptedBankAccount;
+    }),
   );
 }
 

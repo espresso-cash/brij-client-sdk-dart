@@ -170,29 +170,6 @@ abstract class _KycRequirement implements KycRequirement {
       throw _privateConstructorUsedError;
 }
 
-Requirement _$RequirementFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'basicInfo':
-      return BasicInfoRequirement.fromJson(json);
-    case 'countryCode':
-      return CountryCodeRequirement.fromJson(json);
-    case 'documentType':
-      return DocumentTypeRequirement.fromJson(json);
-    case 'documentField':
-      return DocumentFieldRequirement.fromJson(json);
-    case 'and':
-      return AndRequirement.fromJson(json);
-    case 'or':
-      return OrRequirement.fromJson(json);
-    case 'not':
-      return NotRequirement.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'Requirement',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$Requirement {
   @optionalTypeArgs
@@ -263,9 +240,6 @@ mixin _$Requirement {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Serializes this Requirement to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -323,19 +297,12 @@ class __$$BasicInfoRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
-  const _$BasicInfoRequirementImpl({required this.type, final String? $type})
-      : $type = $type ?? 'basicInfo';
 
-  factory _$BasicInfoRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BasicInfoRequirementImplFromJson(json);
+class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
+  const _$BasicInfoRequirementImpl({required this.type});
 
   @override
   final BasicInfoType type;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -350,7 +317,6 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
             (identical(other.type, type) || other.type == type));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type);
 
@@ -455,21 +421,11 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BasicInfoRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class BasicInfoRequirement implements Requirement {
   const factory BasicInfoRequirement({required final BasicInfoType type}) =
       _$BasicInfoRequirementImpl;
-
-  factory BasicInfoRequirement.fromJson(Map<String, dynamic> json) =
-      _$BasicInfoRequirementImpl.fromJson;
 
   BasicInfoType get type;
 
@@ -516,19 +472,12 @@ class __$$CountryCodeRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
-  const _$CountryCodeRequirementImpl({required this.code, final String? $type})
-      : $type = $type ?? 'countryCode';
 
-  factory _$CountryCodeRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CountryCodeRequirementImplFromJson(json);
+class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
+  const _$CountryCodeRequirementImpl({required this.code});
 
   @override
   final String code;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -543,7 +492,6 @@ class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
             (identical(other.code, code) || other.code == code));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code);
 
@@ -647,21 +595,11 @@ class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CountryCodeRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class CountryCodeRequirement implements Requirement {
   const factory CountryCodeRequirement({required final String code}) =
       _$CountryCodeRequirementImpl;
-
-  factory CountryCodeRequirement.fromJson(Map<String, dynamic> json) =
-      _$CountryCodeRequirementImpl.fromJson;
 
   String get code;
 
@@ -708,19 +646,12 @@ class __$$DocumentTypeRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
-  const _$DocumentTypeRequirementImpl({required this.type, final String? $type})
-      : $type = $type ?? 'documentType';
 
-  factory _$DocumentTypeRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DocumentTypeRequirementImplFromJson(json);
+class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
+  const _$DocumentTypeRequirementImpl({required this.type});
 
   @override
   final IdType type;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -735,7 +666,6 @@ class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
             (identical(other.type, type) || other.type == type));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type);
 
@@ -839,21 +769,11 @@ class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DocumentTypeRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class DocumentTypeRequirement implements Requirement {
   const factory DocumentTypeRequirement({required final IdType type}) =
       _$DocumentTypeRequirementImpl;
-
-  factory DocumentTypeRequirement.fromJson(Map<String, dynamic> json) =
-      _$DocumentTypeRequirementImpl.fromJson;
 
   IdType get type;
 
@@ -900,20 +820,12 @@ class __$$DocumentFieldRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
-  const _$DocumentFieldRequirementImpl(
-      {required this.field, final String? $type})
-      : $type = $type ?? 'documentField';
 
-  factory _$DocumentFieldRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DocumentFieldRequirementImplFromJson(json);
+class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
+  const _$DocumentFieldRequirementImpl({required this.field});
 
   @override
   final DocumentField field;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -928,7 +840,6 @@ class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
             (identical(other.field, field) || other.field == field));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, field);
 
@@ -1032,21 +943,11 @@ class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DocumentFieldRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class DocumentFieldRequirement implements Requirement {
   const factory DocumentFieldRequirement({required final DocumentField field}) =
       _$DocumentFieldRequirementImpl;
-
-  factory DocumentFieldRequirement.fromJson(Map<String, dynamic> json) =
-      _$DocumentFieldRequirementImpl.fromJson;
 
   DocumentField get field;
 
@@ -1091,15 +992,10 @@ class __$$AndRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$AndRequirementImpl implements AndRequirement {
-  const _$AndRequirementImpl(
-      {required final List<Requirement> requirements, final String? $type})
-      : _requirements = requirements,
-        $type = $type ?? 'and';
 
-  factory _$AndRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AndRequirementImplFromJson(json);
+class _$AndRequirementImpl implements AndRequirement {
+  const _$AndRequirementImpl({required final List<Requirement> requirements})
+      : _requirements = requirements;
 
   final List<Requirement> _requirements;
   @override
@@ -1108,9 +1004,6 @@ class _$AndRequirementImpl implements AndRequirement {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_requirements);
   }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -1126,7 +1019,6 @@ class _$AndRequirementImpl implements AndRequirement {
                 .equals(other._requirements, _requirements));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_requirements));
@@ -1231,21 +1123,11 @@ class _$AndRequirementImpl implements AndRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AndRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class AndRequirement implements Requirement {
   const factory AndRequirement(
       {required final List<Requirement> requirements}) = _$AndRequirementImpl;
-
-  factory AndRequirement.fromJson(Map<String, dynamic> json) =
-      _$AndRequirementImpl.fromJson;
 
   List<Requirement> get requirements;
 
@@ -1290,15 +1172,10 @@ class __$$OrRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$OrRequirementImpl implements OrRequirement {
-  const _$OrRequirementImpl(
-      {required final List<Requirement> requirements, final String? $type})
-      : _requirements = requirements,
-        $type = $type ?? 'or';
 
-  factory _$OrRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrRequirementImplFromJson(json);
+class _$OrRequirementImpl implements OrRequirement {
+  const _$OrRequirementImpl({required final List<Requirement> requirements})
+      : _requirements = requirements;
 
   final List<Requirement> _requirements;
   @override
@@ -1307,9 +1184,6 @@ class _$OrRequirementImpl implements OrRequirement {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_requirements);
   }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -1325,7 +1199,6 @@ class _$OrRequirementImpl implements OrRequirement {
                 .equals(other._requirements, _requirements));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_requirements));
@@ -1429,21 +1302,11 @@ class _$OrRequirementImpl implements OrRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OrRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class OrRequirement implements Requirement {
   const factory OrRequirement({required final List<Requirement> requirements}) =
       _$OrRequirementImpl;
-
-  factory OrRequirement.fromJson(Map<String, dynamic> json) =
-      _$OrRequirementImpl.fromJson;
 
   List<Requirement> get requirements;
 
@@ -1500,19 +1363,12 @@ class __$$NotRequirementImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$NotRequirementImpl implements NotRequirement {
-  const _$NotRequirementImpl({required this.requirement, final String? $type})
-      : $type = $type ?? 'not';
 
-  factory _$NotRequirementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NotRequirementImplFromJson(json);
+class _$NotRequirementImpl implements NotRequirement {
+  const _$NotRequirementImpl({required this.requirement});
 
   @override
   final Requirement requirement;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -1528,7 +1384,6 @@ class _$NotRequirementImpl implements NotRequirement {
                 other.requirement == requirement));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, requirement);
 
@@ -1632,21 +1487,11 @@ class _$NotRequirementImpl implements NotRequirement {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NotRequirementImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class NotRequirement implements Requirement {
   const factory NotRequirement({required final Requirement requirement}) =
       _$NotRequirementImpl;
-
-  factory NotRequirement.fromJson(Map<String, dynamic> json) =
-      _$NotRequirementImpl.fromJson;
 
   Requirement get requirement;
 

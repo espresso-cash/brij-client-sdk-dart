@@ -1,24 +1,20 @@
-import 'package:kyc_client_dart/src/api/orders/models/common_ramp_type.dart';
+import 'package:brij_protos_dart/gen/brij/orders/v1/common/ramp_type.pbenum.dart' as proto;
 
-enum RampType {
-  onRamp,
-  offRamp,
-  unspecified,
-}
+enum RampType { onRamp, offRamp, unspecified }
 
-extension CommonRampTypeExtension on CommonRampType {
+extension CommonRampTypeExtension on proto.RampType {
   RampType fromProto() => switch (this) {
-        CommonRampType.rampTypeONRamp => RampType.onRamp,
-        CommonRampType.rampTypeOffRamp => RampType.offRamp,
-        CommonRampType.rampTypeUnspecified => RampType.unspecified,
-        CommonRampType.$unknown => RampType.unspecified,
-      };
+    proto.RampType.RAMP_TYPE_ON_RAMP => RampType.onRamp,
+    proto.RampType.RAMP_TYPE_OFF_RAMP => RampType.offRamp,
+    proto.RampType.RAMP_TYPE_UNSPECIFIED => RampType.unspecified,
+    proto.RampType() => RampType.unspecified,
+  };
 }
 
 extension RampTypeExtension on RampType {
-  CommonRampType toProto() => switch (this) {
-        RampType.onRamp => CommonRampType.rampTypeONRamp,
-        RampType.offRamp => CommonRampType.rampTypeOffRamp,
-        RampType.unspecified => CommonRampType.rampTypeUnspecified,
-      };
+  proto.RampType toProto() => switch (this) {
+    RampType.onRamp => proto.RampType.RAMP_TYPE_ON_RAMP,
+    RampType.offRamp => proto.RampType.RAMP_TYPE_OFF_RAMP,
+    RampType.unspecified => proto.RampType.RAMP_TYPE_UNSPECIFIED,
+  };
 }

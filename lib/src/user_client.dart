@@ -1,43 +1,26 @@
 import 'dart:convert';
 
+import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client.dart' as order;
+import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as proto;
+import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.connect.client.dart' as wallet;
+import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/get_kyc_requirements.pb.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/init_email_validation.pb.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/init_phone_validation.pb.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/service.connect.client.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/start_kyc.pb.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/validate_email.pb.dart';
+import 'package:brij_protos_dart/gen/brij/verifier/v1/validate_phone.pb.dart';
+import 'package:brij_protos_dart/gen/google/protobuf/timestamp.pb.dart';
 import 'package:bs58/bs58.dart';
+import 'package:connectrpc/connect.dart';
 import 'package:cryptography/cryptography.dart' hide PublicKey, SecretBox;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dfunc/dfunc.dart';
-import 'package:dio/dio.dart';
-import 'package:kyc_client_dart/src/api/intercetor.dart';
-import 'package:kyc_client_dart/src/api/orders/clients/wallet_service_client.dart'
-    as order;
-import 'package:kyc_client_dart/src/api/orders/models/wallet_create_off_ramp_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/wallet_create_on_ramp_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/wallet_generate_transaction_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/wallet_get_order_request.dart';
-import 'package:kyc_client_dart/src/api/orders/models/wallet_get_quote_request.dart';
-import 'package:kyc_client_dart/src/api/protos/data.pb.dart' as proto;
-import 'package:kyc_client_dart/src/api/protos/google/protobuf/timestamp.pb.dart';
-import 'package:kyc_client_dart/src/api/storage/clients/wallet_service_client.dart'
-    as storage;
-import 'package:kyc_client_dart/src/api/storage/models/common_data_type.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_check_access_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_kyc_status_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_partner_info_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_seed_message_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_user_data_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_get_wallet_proof_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_grant_access_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_init_storage_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_remove_user_data_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_revoke_access_request.dart';
-import 'package:kyc_client_dart/src/api/storage/models/wallet_set_user_data_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/models/v1_get_kyc_requirements_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/models/v1_init_email_validation_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/models/v1_init_phone_validation_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/models/v1_start_kyc_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/models/v1_validate_email_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/models/v1_validate_phone_request.dart';
-import 'package:kyc_client_dart/src/api/verifier/verifier_service/verifier_service_client.dart';
 import 'package:kyc_client_dart/src/common.dart';
 import 'package:kyc_client_dart/src/config/config.dart';
+import 'package:kyc_client_dart/src/grpc/transport.dart';
 import 'package:kyc_client_dart/src/models/export.dart';
 import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart' hide Signature;
@@ -48,10 +31,7 @@ import 'package:uuid/uuid.dart';
 typedef SignRequest = Future<Signature> Function(Iterable<int> data);
 
 class KycUserClient {
-  KycUserClient({
-    required this.sign,
-    this.config = const AppConfig.demo(),
-  });
+  KycUserClient({required this.sign, this.config = const AppConfig.demo()});
 
   final AppConfig config;
   final SignRequest sign;
@@ -67,8 +47,8 @@ class KycUserClient {
   late final SecretBox _secretBox;
   late final SigningKey _signingKey;
 
-  late final storage.WalletServiceClient _storageClient;
-  late final VerifierServiceClient _validatorClient;
+  late final wallet.WalletServiceClient _storageClient;
+  late final VerifierServiceClient _verifierClient;
   late final order.WalletServiceClient _orderClient;
 
   String get authPublicKey => _authPublicKey;
@@ -80,18 +60,15 @@ class KycUserClient {
       final initAuthKeyPair = await Ed25519().newKeyPair();
       final tempStorageClient = await _createTempStorageClient(initAuthKeyPair);
 
-      final proofResponse = await tempStorageClient.walletServiceGetWalletProof(
-        body: WalletGetWalletProofRequest(walletAddress: walletAddress),
+      final proofResponse = await tempStorageClient.getWalletProof(
+        GetWalletProofRequest(walletAddress: walletAddress),
       );
 
-      final proofSignature =
-          await sign(utf8.encode(proofResponse.proofMessage));
-      final encodedProofSignature =
-          base58.encode(Uint8List.fromList(proofSignature.bytes));
+      final proofSignature = await sign(utf8.encode(proofResponse.proofMessage));
+      final encodedProofSignature = base58.encode(Uint8List.fromList(proofSignature.bytes));
 
-      final seedMessageResponse =
-          await tempStorageClient.walletServiceGetSeedMessage(
-        body: WalletGetSeedMessageRequest(
+      final seedMessageResponse = await tempStorageClient.getSeedMessage(
+        GetSeedMessageRequest(
           walletAddress: walletAddress,
           walletProofSignature: encodedProofSignature,
         ),
@@ -106,11 +83,9 @@ class KycUserClient {
         );
       }
 
-      await _initializeEncryption(
-        encryptedSecretKey: seedMessageResponse.encryptedSecretKey,
-      );
+      await _initializeEncryption(encryptedSecretKey: seedMessageResponse.encryptedSecretKey);
       await _initializeStorageClient();
-    } on DioException catch (e) {
+    } on ConnectException catch (e) {
       if (!(_isUserNotInitialized(e) || _isRestoreAuthError(e))) {
         rethrow;
       }
@@ -122,11 +97,9 @@ class KycUserClient {
 
       try {
         await _initStorage(walletAddress: walletAddress);
-      } on DioException catch (e) {
+      } on ConnectException catch (e) {
         if (_isUserAlreadyInitializedError(e)) {
-          throw Exception(
-            'User already initialized. Please retry the init operation.',
-          );
+          throw Exception('User already initialized. Please retry the init operation.');
         }
         rethrow;
       }
@@ -136,20 +109,11 @@ class KycUserClient {
     await _initializeOrderClient();
   }
 
-  bool _isUserNotInitialized(DioException e) =>
-      e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] ==
-          'user not initialized';
+  bool _isUserNotInitialized(ConnectException e) => e.message == 'user not initialized';
 
-  bool _isRestoreAuthError(DioException e) =>
-      e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] ==
-          'wallet proof signature is invalid';
+  bool _isRestoreAuthError(ConnectException e) => e.message == 'wallet proof signature is invalid';
 
-  bool _isUserAlreadyInitializedError(DioException e) =>
-      e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] ==
-          'user already exists';
+  bool _isUserAlreadyInitializedError(ConnectException e) => e.message == 'user already exists';
 
   Future<Uint8List> _generateSeed({String? message}) async {
     final signature = await sign(utf8.encode(message ?? _seedMessage));
@@ -159,130 +123,116 @@ class KycUserClient {
   Future<void> _initializeKeys(Uint8List seed) async {
     _authKeyPair = await Ed25519().newKeyPairFromSeed(seed);
     _authPublicKey = base58.encode(
-      Uint8List.fromList(
-        await _authKeyPair.extractPublicKey().then((value) => value.bytes),
-      ),
+      Uint8List.fromList(await _authKeyPair.extractPublicKey().then((value) => value.bytes)),
     );
   }
 
-  Future<storage.WalletServiceClient> _createTempStorageClient(
-    SimpleKeyPair keyPair,
-  ) async {
-    final publicKeyBytes =
-        await keyPair.extractPublicKey().then((value) => value.bytes);
+  Future<wallet.WalletServiceClient> _createTempStorageClient(SimpleKeyPair keyPair) async {
+    final publicKeyBytes = await keyPair.extractPublicKey().then((value) => value.bytes);
     final publicKeyBase58 = base58.encode(Uint8List.fromList(publicKeyBytes));
 
-    final payload = jwt.JWT(
-      <String, dynamic>{
-        'iss': publicKeyBase58,
-        'aud': 'storage.brij.fi',
-      },
-    );
+    final payload = jwt.JWT(<String, dynamic>{'iss': publicKeyBase58, 'aud': 'storage.brij.fi'});
 
     final token = payload.sign(
-      jwt.EdDSAPrivateKey(
-        await keyPair.extractPrivateKeyBytes() + publicKeyBytes,
-      ),
+      jwt.EdDSAPrivateKey(await keyPair.extractPrivateKeyBytes() + publicKeyBytes),
       algorithm: jwt.JWTAlgorithm.EdDSA,
     );
 
-    final dio = Dio()..interceptors.add(AuthInterceptor(token));
-    return storage.WalletServiceClient(dio, baseUrl: config.storageBaseUrl);
+    return wallet.WalletServiceClient(
+      createTransport(
+        baseUrl: (grpcUrl: config.storageGrpcBaseUrl, grpcWebUrl: config.storageBaseUrl),
+        token: token,
+      ),
+    );
   }
 
   Future<void> _initializeStorageClient() async {
-    final dio = await _createAuthenticatedClient('storage.brij.fi');
-    _storageClient =
-        storage.WalletServiceClient(dio, baseUrl: config.storageBaseUrl);
+    _storageClient = wallet.WalletServiceClient(
+      createTransport(
+        baseUrl: (grpcUrl: config.storageGrpcBaseUrl, grpcWebUrl: config.storageBaseUrl),
+        token: await _createAuthToken('storage.brij.fi'),
+      ),
+    );
   }
 
   Future<void> _initializeValidatorClient() async {
-    final dio = await _createAuthenticatedClient('verifier.brij.fi');
-    _validatorClient =
-        VerifierServiceClient(dio, baseUrl: config.validatorBaseUrl);
+    _verifierClient = VerifierServiceClient(
+      createTransport(
+        baseUrl: (grpcUrl: config.verifierGrpcBaseUrl, grpcWebUrl: config.verifierBaseUrl),
+        token: await _createAuthToken('verifier.brij.fi'),
+      ),
+    );
   }
 
   Future<void> _initializeOrderClient() async {
-    final dio = await _createAuthenticatedClient('orders.brij.fi');
-    _orderClient = order.WalletServiceClient(dio, baseUrl: config.orderBaseUrl);
+    _orderClient = order.WalletServiceClient(
+      createTransport(
+        baseUrl: (grpcUrl: config.orderGrpcBaseUrl, grpcWebUrl: config.orderBaseUrl),
+        token: await _createAuthToken('orders.brij.fi'),
+      ),
+    );
   }
 
-  Future<Dio> _createAuthenticatedClient(String audience) async {
-    final payload = jwt.JWT(
-      <String, dynamic>{
-        'iss': _authPublicKey,
-        'aud': audience,
-      },
-    );
+  Future<String> _createAuthToken(String audience) async {
+    final payload = jwt.JWT(<String, dynamic>{'iss': _authPublicKey, 'aud': audience});
 
     final publicKey = await _authKeyPair.extractPublicKey();
-    final token = payload.sign(
-      jwt.EdDSAPrivateKey(
-        await _authKeyPair.extractPrivateKeyBytes() + publicKey.bytes,
-      ),
+    return payload.sign(
+      jwt.EdDSAPrivateKey(await _authKeyPair.extractPrivateKeyBytes() + publicKey.bytes),
       algorithm: jwt.JWTAlgorithm.EdDSA,
     );
-
-    return Dio()..interceptors.add(AuthInterceptor(token));
   }
 
   Future<void> _initializeEncryption({String? encryptedSecretKey}) async {
-    final edSK =
-        Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
+    final edSK = Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
     final xSK = Uint8List(32);
     TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(xSK, edSK);
     _encryptionSecretKey = PrivateKey(xSK);
 
     final sealedBox = SealedBox(_encryptionSecretKey);
 
-    _secretKey = encryptedSecretKey == null
-        ? await Chacha20.poly1305Aead().newSecretKey()
-        : SecretKey(sealedBox.decrypt(base64Decode(encryptedSecretKey)));
+    _secretKey =
+        encryptedSecretKey == null
+            ? await Chacha20.poly1305Aead().newSecretKey()
+            : SecretKey(sealedBox.decrypt(base64Decode(encryptedSecretKey)));
 
-    _rawSecretKey =
-        base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
+    _rawSecretKey = base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
     _encryptedSecretKey = base64Encode(
       sealedBox.encrypt(Uint8List.fromList(await _secretKey.extractBytes())),
     );
     _secretBox = SecretBox(Uint8List.fromList(await _secretKey.extractBytes()));
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
-        await _authKeyPair.extractPrivateKeyBytes() +
-            (await _authKeyPair.extractPublicKey()).bytes,
+        await _authKeyPair.extractPrivateKeyBytes() + (await _authKeyPair.extractPublicKey()).bytes,
       ),
     );
   }
 
   Future<void> _initStorage({required String walletAddress}) async {
-    final proofMessage = await _storageClient.walletServiceGetWalletProof(
-      body: WalletGetWalletProofRequest(walletAddress: walletAddress),
+    final proofMessage = await _storageClient.getWalletProof(
+      GetWalletProofRequest(walletAddress: walletAddress),
     );
     final proofSignature = await sign(utf8.encode(proofMessage.proofMessage));
-    await _storageClient.walletServiceInitStorage(
-      body: WalletInitStorageRequest(
+    await _storageClient.initStorage(
+      InitStorageRequest(
         walletAddress: walletAddress,
         message: _seedMessage,
         encryptedSecretKey: _encryptedSecretKey,
-        walletProofSignature:
-            base58.encode(Uint8List.fromList(proofSignature.bytes)),
+        walletProofSignature: base58.encode(Uint8List.fromList(proofSignature.bytes)),
       ),
     );
   }
 
-  Future<PartnerModel> getPartnerInfo({required String partnerPK}) =>
-      _storageClient
-          .walletServiceGetPartnerInfo(
-            body: WalletGetPartnerInfoRequest(id: partnerPK),
-          )
-          .then((e) => PartnerModel.fromJson(e.toJson()));
+  Future<PartnerModel> getPartnerInfo({required String partnerPK}) => _storageClient
+      .getPartnerInfo(GetPartnerInfoRequest(id: partnerPK))
+      .then(PartnerModel.fromProto);
 
   Future<List<PartnerModel>> getGrantedAccessPartners() async {
-    final response =
-        await _storageClient.walletServiceGetGrantedAccessPartners();
+    final response = await _storageClient.getGrantedAccessPartners(
+      GetGrantedAccessPartnersRequest(),
+    );
 
-    return response.partners
-        .map((e) => PartnerModel.fromJson(e.toJson()))
-        .toList();
+    return response.partners.map(PartnerModel.fromProto).toList();
   }
 
   Future<void> grantPartnerAccess(String partnerPK) async {
@@ -292,31 +242,23 @@ class KycUserClient {
     TweetNaClExt.crypto_sign_ed25519_pk_to_x25519_pk(partnerXPK, partnerEdPK);
 
     final partnerPublicKey = PublicKey(partnerXPK);
-    final sealedBox = Box(
-      theirPublicKey: partnerPublicKey,
-      myPrivateKey: _encryptionSecretKey,
-    );
+    final sealedBox = Box(theirPublicKey: partnerPublicKey, myPrivateKey: _encryptionSecretKey);
 
     final encodedSecretKey = base64Encode(
       sealedBox.encrypt(Uint8List.fromList(base58.decode(_rawSecretKey))),
     );
 
-    await _storageClient.walletServiceGrantAccess(
-      body: WalletGrantAccessRequest(
-        partnerPublicKey: partnerPK,
-        encryptedSecretKey: encodedSecretKey,
-      ),
+    await _storageClient.grantAccess(
+      GrantAccessRequest(partnerPublicKey: partnerPK, encryptedSecretKey: encodedSecretKey),
     );
   }
 
   Future<void> revokePartnerAccess(String partnerPK) async {
-    await _storageClient.walletServiceRevokeAccess(
-      body: WalletRevokeAccessRequest(partnerPublicKey: partnerPK),
-    );
+    await _storageClient.revokeAccess(RevokeAccessRequest(partnerPublicKey: partnerPK));
   }
 
   Future<void> removeAllUserData() async {
-    await _storageClient.walletServiceRemoveAllUserData();
+    await _storageClient.removeAllUserData(RemoveAllUserDataRequest());
   }
 
   Future<void> setData({
@@ -331,24 +273,13 @@ class KycUserClient {
   }) async {
     final dataList = [
       if (email != null)
-        (
-          data: proto.Email(value: email.value),
-          type: CommonDataType.dataTypeEmail,
-          id: email.id,
-        ),
+        (data: proto.Email(value: email.value), type: proto.DataType.DATA_TYPE_EMAIL, id: email.id),
       if (phone != null)
-        (
-          data: proto.Phone(value: phone.value),
-          type: CommonDataType.dataTypePhone,
-          id: phone.id,
-        ),
+        (data: proto.Phone(value: phone.value), type: proto.DataType.DATA_TYPE_PHONE, id: phone.id),
       if (name != null)
         (
-          data: proto.Name(
-            firstName: name.firstName,
-            lastName: name.lastName,
-          ),
-          type: CommonDataType.dataTypeName,
+          data: proto.Name(firstName: name.firstName, lastName: name.lastName),
+          type: proto.DataType.DATA_TYPE_NAME,
           id: name.id,
         ),
       if (document != null)
@@ -358,16 +289,14 @@ class KycUserClient {
             type: document.type.toDocumentType(),
             countryCode: document.countryCode,
             expirationDate: document.expirationDate?.let(
-              (date) => Timestamp.fromDateTime(
-                DateTime.utc(date.year, date.month, date.day),
-              ),
+              (date) => Timestamp.fromDateTime(DateTime.utc(date.year, date.month, date.day)),
             ),
             photo: proto.DocumentPhoto(
               frontImage: document.frontImage,
               backImage: document.backImage,
             ),
           ),
-          type: CommonDataType.dataTypeDocument,
+          type: proto.DataType.DATA_TYPE_DOCUMENT,
           id: document.id,
         ),
       if (bankInfo != null)
@@ -378,7 +307,7 @@ class KycUserClient {
             bankCode: bankInfo.bankCode,
             countryCode: bankInfo.countryCode,
           ),
-          type: CommonDataType.dataTypeBankInfo,
+          type: proto.DataType.DATA_TYPE_BANK_INFO,
           id: bankInfo.id,
         ),
       if (dob != null)
@@ -388,46 +317,39 @@ class KycUserClient {
               DateTime.utc(dob.value.year, dob.value.month, dob.value.day),
             ),
           ),
-          type: CommonDataType.dataTypeBirthDate,
-          id: dob.id
+          type: proto.DataType.DATA_TYPE_BIRTH_DATE,
+          id: dob.id,
         ),
       if (citizenship != null)
         (
-          data: proto.Citizenship(
-            value: citizenship.value,
-          ),
-          type: CommonDataType.dataTypeCitizenship,
+          data: proto.Citizenship(value: citizenship.value),
+          type: proto.DataType.DATA_TYPE_CITIZENSHIP,
           id: citizenship.id,
         ),
       if (selfie != null)
         (
           data: proto.SelfieImage(value: selfie.value),
-          type: CommonDataType.dataTypeSelfieImage,
+          type: proto.DataType.DATA_TYPE_SELFIE_IMAGE,
           id: selfie.id,
         ),
     ];
 
     for (final item in dataList) {
       final protoData = serializeProto(item.data);
-      final encryptedData = encrypt(
-        data: protoData,
-        secretBox: _secretBox,
-      );
+      final encryptedData = encrypt(data: protoData, secretBox: _secretBox);
 
       final hash = generateHash(encryptedData);
-      final message = '${item.type.json}|$hash';
+      final message = '${item.type.name}|$hash';
       final signature = _signingKey.sign(utf8.encode(message));
 
       if (item.id.isNotEmpty) {
-        await _storageClient.walletServiceRemoveUserData(
-          body: WalletRemoveUserDataRequest(id: item.id),
-        );
+        await _storageClient.removeUserData(RemoveUserDataRequest(id: item.id));
       }
 
-      await _storageClient.walletServiceSetUserData(
-        body: WalletSetUserDataRequest(
+      await _storageClient.setUserData(
+        SetUserDataRequest(
           type: item.type,
-          encryptedValue: base64Encode(encryptedData),
+          encryptedValue: encryptedData,
           hash: hash,
           signature: base58.encode(signature.signature.asTypedList),
         ),
@@ -435,48 +357,28 @@ class KycUserClient {
     }
   }
 
-  Future<UserData> getUserData({
-    required String secretKey,
-    bool includeValues = true,
-  }) async {
-    final response = await _storageClient.walletServiceGetUserData(
-      body: WalletGetUserDataRequest(includeValues: includeValues),
+  Future<UserData> getUserData({required String secretKey, bool includeValues = true}) async {
+    final response = await _storageClient.getUserData(
+      GetUserDataRequest(includeValues: includeValues),
     );
 
-    return processUserDataForWallet(
-      response: response,
-      secretKey: secretKey,
-    );
+    return processUserDataForWallet(response: response, secretKey: secretKey);
   }
 
   Future<void> initEmailValidation({required String dataId}) async {
-    await _validatorClient.verifierServiceInitEmailValidation(
-      body: V1InitEmailValidationRequest(dataId: dataId),
-    );
+    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataId: dataId));
   }
 
-  Future<void> validateEmail({
-    required String code,
-    required String dataId,
-  }) async {
-    await _validatorClient.verifierServiceValidateEmail(
-      body: V1ValidateEmailRequest(code: code, dataId: dataId),
-    );
+  Future<void> validateEmail({required String code, required String dataId}) async {
+    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataId: dataId));
   }
 
   Future<void> initPhoneValidation({required String dataId}) async {
-    await _validatorClient.verifierServiceInitPhoneValidation(
-      body: V1InitPhoneValidationRequest(dataId: dataId),
-    );
+    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataId: dataId));
   }
 
-  Future<void> validatePhone({
-    required String code,
-    required String dataId,
-  }) async {
-    await _validatorClient.verifierServiceValidatePhone(
-      body: V1ValidatePhoneRequest(code: code, dataId: dataId),
-    );
+  Future<void> validatePhone({required String code, required String dataId}) async {
+    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataId: dataId));
   }
 
   Future<String> createOnRampOrder({
@@ -500,8 +402,8 @@ class KycUserClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    final response = await _orderClient.walletServiceCreateOnRampOrder(
-      body: WalletCreateOnRampOrderRequest(
+    final response = await _orderClient.createOnRampOrder(
+      CreateOnRampOrderRequest(
         orderId: orderId,
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
@@ -531,17 +433,11 @@ class KycUserClient {
     final orderId = const Uuid().v4();
 
     final encryptedBankName = base64Encode(
-      encrypt(
-        data: utf8.encode(bankName),
-        secretBox: _secretBox,
-      ),
+      encrypt(data: utf8.encode(bankName), secretBox: _secretBox),
     );
 
     final encryptedBankAccount = base64Encode(
-      encrypt(
-        data: utf8.encode(bankAccount),
-        secretBox: _secretBox,
-      ),
+      encrypt(data: utf8.encode(bankAccount), secretBox: _secretBox),
     );
 
     final signatureMessage = createUserOffRampMessage(
@@ -556,8 +452,8 @@ class KycUserClient {
     );
     final signature = _signingKey.sign(utf8.encode(signatureMessage));
 
-    final response = await _orderClient.walletServiceCreateOffRampOrder(
-      body: WalletCreateOffRampOrderRequest(
+    final response = await _orderClient.createOffRampOrder(
+      CreateOffRampOrderRequest(
         orderId: orderId,
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
@@ -575,39 +471,24 @@ class KycUserClient {
     return response.orderId;
   }
 
-  Future<Order> getOrder({
-    required OrderId orderId,
-  }) async {
-    final response = await _orderClient.walletServiceGetOrder(
-      body: WalletGetOrderRequest(
-        orderId: orderId.orderId,
-        externalId: orderId.externalId,
-      ),
+  Future<Order> getOrder({required OrderId orderId}) async {
+    final response = await _orderClient.getOrder(
+      GetOrderRequest(orderId: orderId.orderId, externalId: orderId.externalId),
     );
 
-    return processWalletOrderData(
-      order: response,
-      secretKey: rawSecretKey,
-    );
+    return processWalletOrderData(order: response, secretKey: rawSecretKey);
   }
 
   Future<List<Order>> getOrders() async {
-    final response = await _orderClient.walletServiceGetOrders();
+    final response = await _orderClient.getOrders(GetOrdersRequest());
 
     return response.orders
-        .map(
-          (order) => processWalletOrderData(
-            order: order,
-            secretKey: rawSecretKey,
-          ),
-        )
+        .map((order) => processWalletOrderData(order: order, secretKey: rawSecretKey))
         .toList();
   }
 
   Future<bool> hasGrantedAccess(String partnerPK) async => _storageClient
-      .walletServiceCheckAccess(
-        body: WalletCheckAccessRequest(partnerPublicKey: partnerPK),
-      )
+      .checkAccess(CheckAccessRequest(partnerPublicKey: partnerPK))
       .then((e) => e.hasAccess);
 
   Future<KycStatusDetails> getKycStatusDetails({
@@ -615,15 +496,12 @@ class KycUserClient {
     required String country,
   }) async {
     try {
-      final response = await _storageClient.walletServiceGetKycStatus(
-        body: WalletGetKycStatusRequest(
-          country: country,
-          validatorPublicKey: config.verifierAuthPk,
-        ),
+      final response = await _storageClient.getKycStatus(
+        GetKycStatusRequest(country: country, validatorPublicKey: config.verifierAuthPk),
       );
 
-      return KycStatusDetails.fromJson(response.toJson());
-    } on DioException catch (e) {
+      return KycStatusDetails(status: KycStatus.fromProto(response.status));
+    } on ConnectException catch (e) {
       if (_isKycDataNotFound(e)) {
         return const KycStatusDetails(status: KycStatus.unspecified);
       }
@@ -632,28 +510,20 @@ class KycUserClient {
     }
   }
 
-  bool _isKycDataNotFound(DioException e) =>
-      e.response?.data is Map<String, dynamic> &&
-      (e.response?.data as Map<String, dynamic>)['message'] ==
-          'kyc data not found';
-
   Future<String> startKycRequest({
     required String country,
     required List<String> dataHashes,
   }) async {
-    final response = await _validatorClient.verifierServiceStartKyc(
-      body: V1StartKycRequest(
-        country: country,
-        dataHashes: dataHashes,
-      ),
+    final response = await _verifierClient.startKyc(
+      StartKycRequest(country: country, dataHashes: dataHashes),
     );
 
     return response.kycId;
   }
 
   Future<KycRequirement> getKycRequirements({required String country}) async {
-    final response = await _validatorClient.verifierServiceGetKycRequirements(
-      body: V1GetKycRequirementsRequest(country: country),
+    final response = await _verifierClient.getKycRequirements(
+      GetKycRequirementsRequest(country: country),
     );
 
     return KycRequirement.fromProto(response);
@@ -666,8 +536,8 @@ class KycUserClient {
     required RampType rampType,
     required String fiatCurrency,
   }) async {
-    final response = await _orderClient.walletServiceGetQuote(
-      body: WalletGetQuoteRequest(
+    final response = await _orderClient.getQuote(
+      GetQuoteRequest(
         partnerPublicKey: partnerPK,
         cryptoAmount: cryptoAmount,
         rampType: rampType.toProto(),
@@ -679,17 +549,13 @@ class KycUserClient {
     return Quote.fromWalletGetQuoteResponse(response);
   }
 
-  Future<String> generateTransaction({
-    required String orderId,
-    required String externalId,
-  }) async {
-    final response = await _orderClient.walletServiceGenerateTransaction(
-      body: WalletGenerateTransactionRequest(
-        orderId: orderId,
-        externalId: externalId,
-      ),
+  Future<String> generateTransaction({required String orderId, required String externalId}) async {
+    final response = await _orderClient.generateTransaction(
+      GenerateTransactionRequest(orderId: orderId, externalId: externalId),
     );
 
     return response.transaction;
   }
 }
+
+bool _isKycDataNotFound(ConnectException e) => e.message == 'kyc data not found';

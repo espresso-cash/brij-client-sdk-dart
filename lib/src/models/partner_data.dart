@@ -1,7 +1,7 @@
+import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'partner_data.freezed.dart';
-part 'partner_data.g.dart';
 
 @freezed
 class PartnerModel with _$PartnerModel {
@@ -12,6 +12,10 @@ class PartnerModel with _$PartnerModel {
     required String termsUrl,
   }) = _PartnerModel;
 
-  factory PartnerModel.fromJson(Map<String, dynamic> json) =>
-      _$PartnerModelFromJson(json);
+  factory PartnerModel.fromProto(GetPartnerInfoResponse response) => PartnerModel(
+    name: response.name,
+    publicKey: response.publicKey,
+    privacyUrl: response.privacyUrl,
+    termsUrl: response.termsUrl,
+  );
 }
