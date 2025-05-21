@@ -66,7 +66,7 @@ packages:
     dependency: "direct main"
     description:
       path: brij_protos_dart
-      ref: main
+      ref: "v0.12.0"
       resolved-ref: afebd1eae6886bf5f4daec8f0e70393ab261ee17
       url: "https://github.com/espresso-cash/protos.git"
     source: git
