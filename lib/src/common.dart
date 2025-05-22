@@ -365,11 +365,28 @@ Order processWalletOrderData({required wallet.GetOrderResponse order, required S
   }
 
   return Order.fromWalletGetOrderResponse(
-    order.rebuild((r) {
-      r
-        ..bankName = decryptedBankName
-        ..bankAccount = decryptedBankAccount;
-    }),
+    wallet.GetOrderResponse(
+      orderId: order.orderId,
+      created: order.created,
+      status: order.status,
+      partnerPublicKey: order.partnerPublicKey,
+      userPublicKey: order.userPublicKey,
+      comment: order.comment,
+      type: order.type,
+      cryptoAmount: order.cryptoAmount,
+      cryptoCurrency: order.cryptoCurrency,
+      fiatAmount: order.fiatAmount,
+      fiatCurrency: order.fiatCurrency,
+      bankName: decryptedBankName,
+      bankAccount: decryptedBankAccount,
+      cryptoWalletAddress: order.cryptoWalletAddress,
+      transaction: order.transaction,
+      transactionId: order.transactionId,
+      userSignature: order.userSignature,
+      partnerSignature: order.partnerSignature,
+      userWalletAddress: order.userWalletAddress,
+      walletPublicKey: order.walletPublicKey,
+    ),
   );
 }
 
@@ -451,11 +468,29 @@ Order processPartnerOrderData({
   }
 
   return Order.fromPartnerGetOrderResponse(
-    order.rebuild((r) {
-      r
-        ..bankName = decryptedBankName
-        ..bankAccount = decryptedBankAccount;
-    }),
+    partner.GetOrderResponse(
+      orderId: order.orderId,
+      created: order.created,
+      status: order.status,
+      partnerPublicKey: order.partnerPublicKey,
+      userPublicKey: order.userPublicKey,
+      comment: order.comment,
+      type: order.type,
+      cryptoAmount: order.cryptoAmount,
+      cryptoCurrency: order.cryptoCurrency,
+      fiatAmount: order.fiatAmount,
+      fiatCurrency: order.fiatCurrency,
+      bankName: decryptedBankName,
+      bankAccount: decryptedBankAccount,
+      cryptoWalletAddress: order.cryptoWalletAddress,
+      transaction: order.transaction,
+      transactionId: order.transactionId,
+      userSignature: order.userSignature,
+      partnerSignature: order.partnerSignature,
+      userWalletAddress: order.userWalletAddress,
+      walletPublicKey: order.walletPublicKey,
+      externalId: order.externalId,
+    ),
   );
 }
 
