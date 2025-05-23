@@ -158,12 +158,10 @@ class KycPartnerClient {
 
     final orders = <Order>[];
     for (final order in response.orders) {
-      try {
-        final secretKey = await getUserSecretKey(order.userPublicKey);
-        orders.add(processPartnerOrderData(order: order, secretKey: secretKey));
-      } on ConnectException catch (_) {
-        continue;
-      }
+      final secretKey = await getUserSecretKey(
+        order.userPublicKey,
+      ).catchError((_) => '', test: (e) => e is ConnectException);
+      orders.add(processPartnerOrderData(order: order, secretKey: secretKey));
     }
 
     return orders;

@@ -380,12 +380,12 @@ Order processPartnerOrderData({
   required String secretKey,
 }) {
   final decryptedBankName =
-      order.bankName.isNotEmpty
+      order.bankName.isNotEmpty && secretKey.isNotEmpty
           ? utf8.decode(decrypt(encryptedData: base64Decode(order.bankName), secretKey: secretKey))
           : '';
 
   final decryptedBankAccount =
-      order.bankAccount.isNotEmpty
+      order.bankAccount.isNotEmpty && secretKey.isNotEmpty
           ? utf8.decode(
             decrypt(encryptedData: base64Decode(order.bankAccount), secretKey: secretKey),
           )
