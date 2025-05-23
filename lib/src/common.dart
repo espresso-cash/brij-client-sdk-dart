@@ -364,29 +364,14 @@ Order processWalletOrderData({required wallet.GetOrderResponse order, required S
     }
   }
 
+  order.freeze();
+
   return Order.fromWalletGetOrderResponse(
-    wallet.GetOrderResponse(
-      orderId: order.orderId,
-      created: order.created,
-      status: order.status,
-      partnerPublicKey: order.partnerPublicKey,
-      userPublicKey: order.userPublicKey,
-      comment: order.comment,
-      type: order.type,
-      cryptoAmount: order.cryptoAmount,
-      cryptoCurrency: order.cryptoCurrency,
-      fiatAmount: order.fiatAmount,
-      fiatCurrency: order.fiatCurrency,
-      bankName: decryptedBankName,
-      bankAccount: decryptedBankAccount,
-      cryptoWalletAddress: order.cryptoWalletAddress,
-      transaction: order.transaction,
-      transactionId: order.transactionId,
-      userSignature: order.userSignature,
-      partnerSignature: order.partnerSignature,
-      userWalletAddress: order.userWalletAddress,
-      walletPublicKey: order.walletPublicKey,
-    ),
+    order.rebuild((r) {
+      r
+        ..bankName = decryptedBankName
+        ..bankAccount = decryptedBankAccount;
+    }),
   );
 }
 
@@ -467,30 +452,14 @@ Order processPartnerOrderData({
     }
   }
 
+  order.freeze();
+
   return Order.fromPartnerGetOrderResponse(
-    partner.GetOrderResponse(
-      orderId: order.orderId,
-      created: order.created,
-      status: order.status,
-      partnerPublicKey: order.partnerPublicKey,
-      userPublicKey: order.userPublicKey,
-      comment: order.comment,
-      type: order.type,
-      cryptoAmount: order.cryptoAmount,
-      cryptoCurrency: order.cryptoCurrency,
-      fiatAmount: order.fiatAmount,
-      fiatCurrency: order.fiatCurrency,
-      bankName: decryptedBankName,
-      bankAccount: decryptedBankAccount,
-      cryptoWalletAddress: order.cryptoWalletAddress,
-      transaction: order.transaction,
-      transactionId: order.transactionId,
-      userSignature: order.userSignature,
-      partnerSignature: order.partnerSignature,
-      userWalletAddress: order.userWalletAddress,
-      walletPublicKey: order.walletPublicKey,
-      externalId: order.externalId,
-    ),
+    order.rebuild((r) {
+      r
+        ..bankName = decryptedBankName
+        ..bankAccount = decryptedBankAccount;
+    }),
   );
 }
 
