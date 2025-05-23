@@ -6,6 +6,7 @@ import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.connect.cli
     as storage;
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart';
 import 'package:bs58/bs58.dart';
+import 'package:connectrpc/connect.dart';
 import 'package:cryptography/cryptography.dart' hide Hash, PublicKey, SecretBox, Signature;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:kyc_client_dart/kyc_client_dart.dart';
@@ -155,13 +156,17 @@ class KycPartnerClient {
   Future<List<Order>> getPartnerOrders() async {
     final response = await _orderClient.getOrders(GetOrdersRequest());
 
-    return Future.wait(
-      response.orders.map((order) async {
+    final orders = <Order>[];
+    for (final order in response.orders) {
+      try {
         final secretKey = await getUserSecretKey(order.userPublicKey);
+        orders.add(processPartnerOrderData(order: order, secretKey: secretKey));
+      } on ConnectException catch (_) {
+        continue;
+      }
+    }
 
-        return processPartnerOrderData(order: order, secretKey: secretKey);
-      }),
-    );
+    return orders;
   }
 
   Future<void> acceptOnRampOrder({
