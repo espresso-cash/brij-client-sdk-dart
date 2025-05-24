@@ -57,7 +57,7 @@ class KycPartnerClient {
   Future<void> _initializeStorageClient() async {
     _storageClient = storage.PartnerServiceClient(
       createTransport(
-        baseUrl: (grpcUrl: config.storageGrpcBaseUrl, grpcWebUrl: config.storageBaseUrl),
+        baseUrl: config.storageBaseUrl,
         token: await _createAuthToken('storage.brij.fi'),
       ),
     );
@@ -66,7 +66,7 @@ class KycPartnerClient {
   Future<void> _initializeOrderClient() async {
     _orderClient = orders.PartnerServiceClient(
       createTransport(
-        baseUrl: (grpcUrl: config.orderGrpcBaseUrl, grpcWebUrl: config.orderBaseUrl),
+        baseUrl: config.orderBaseUrl,
         token: await _createAuthToken('orders.brij.fi'),
       ),
     );

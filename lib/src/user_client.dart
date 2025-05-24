@@ -139,17 +139,14 @@ class KycUserClient {
     );
 
     return wallet.WalletServiceClient(
-      createTransport(
-        baseUrl: (grpcUrl: config.storageGrpcBaseUrl, grpcWebUrl: config.storageBaseUrl),
-        token: token,
-      ),
+      createTransport(baseUrl: config.storageBaseUrl, token: token),
     );
   }
 
   Future<void> _initializeStorageClient() async {
     _storageClient = wallet.WalletServiceClient(
       createTransport(
-        baseUrl: (grpcUrl: config.storageGrpcBaseUrl, grpcWebUrl: config.storageBaseUrl),
+        baseUrl: config.storageBaseUrl,
         token: await _createAuthToken('storage.brij.fi'),
       ),
     );
@@ -158,7 +155,7 @@ class KycUserClient {
   Future<void> _initializeValidatorClient() async {
     _verifierClient = VerifierServiceClient(
       createTransport(
-        baseUrl: (grpcUrl: config.verifierGrpcBaseUrl, grpcWebUrl: config.verifierBaseUrl),
+        baseUrl: config.verifierBaseUrl,
         token: await _createAuthToken('verifier.brij.fi'),
       ),
     );
@@ -167,7 +164,7 @@ class KycUserClient {
   Future<void> _initializeOrderClient() async {
     _orderClient = order.WalletServiceClient(
       createTransport(
-        baseUrl: (grpcUrl: config.orderGrpcBaseUrl, grpcWebUrl: config.orderBaseUrl),
+        baseUrl: config.orderBaseUrl,
         token: await _createAuthToken('orders.brij.fi'),
       ),
     );

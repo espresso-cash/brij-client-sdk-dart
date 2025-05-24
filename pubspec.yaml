@@ -1,5 +1,5 @@
 name: kyc_client_dart
-version: 1.0.5
+version: 1.0.6
 description: A sample command-line application.
 
 environment:
@@ -9,7 +9,7 @@ dependencies:
   brij_protos_dart:
     git:
       url: https://github.com/espresso-cash/protos.git
-      ref: v0.12.0
+      ref: v0.13.0
       path: brij_protos_dart
   bs58: ^1.0.2
   connectrpc: ^0.4.0
