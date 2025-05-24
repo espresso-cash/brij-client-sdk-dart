@@ -1,5 +1,10 @@
 import 'dart:convert';
 
+import 'package:brij_client/src/common.dart';
+import 'package:brij_client/src/config/config.dart';
+import 'package:brij_client/src/grpc/transport.dart';
+import 'package:brij_client/src/models/export.dart';
+import 'package:brij_client/src/models/kyc_status_details.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client.dart' as order;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as proto;
@@ -18,11 +23,6 @@ import 'package:connectrpc/connect.dart';
 import 'package:cryptography/cryptography.dart' hide PublicKey, SecretBox;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:dfunc/dfunc.dart';
-import 'package:kyc_client_dart/src/common.dart';
-import 'package:kyc_client_dart/src/config/config.dart';
-import 'package:kyc_client_dart/src/grpc/transport.dart';
-import 'package:kyc_client_dart/src/models/export.dart';
-import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart' hide Signature;
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';

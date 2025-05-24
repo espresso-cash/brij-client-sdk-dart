@@ -1,7 +1,7 @@
+import 'package:brij_client/brij_client.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kyc_client_dart/kyc_client_dart.dart';
 import 'package:solana/base58.dart';
 import 'package:solana/solana.dart';
 import 'package:uuid/uuid.dart';

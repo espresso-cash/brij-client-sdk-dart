@@ -1,6 +1,6 @@
+import 'package:brij_client_example/shared.dart';
+import 'package:brij_client_example/state.dart';
 import 'package:flutter/material.dart';
-import 'package:kyc_sharing_client/shared.dart';
-import 'package:kyc_sharing_client/state.dart';
 import 'package:provider/provider.dart';
 
 class PartnerView extends StatefulWidget {

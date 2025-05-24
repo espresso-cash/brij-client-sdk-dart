@@ -1,7 +1,7 @@
+import 'package:brij_client/src/models/ramp_type.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart' as partner;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' as wallet;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/models/ramp_type.dart';
 
 part 'order.freezed.dart';
 

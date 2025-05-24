@@ -1,6 +1,6 @@
+import 'package:brij_client/src/models/id_type.dart';
+import 'package:brij_client/src/models/validation_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/models/id_type.dart';
-import 'package:kyc_client_dart/src/models/validation_status.dart';
 
 part 'user_data.freezed.dart';
 

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:brij_client/src/models/kyc_item.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/kyc_item.pb.dart' as proto;
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart' as partner;
 import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart' as wallet;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/src/models/kyc_item.dart';
 
 part 'kyc_status_details.freezed.dart';
 

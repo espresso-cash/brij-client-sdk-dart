@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:brij_client/brij_client.dart';
+import 'package:brij_client/src/common.dart';
+import 'package:brij_client/src/grpc/transport.dart';
+import 'package:brij_client/src/models/kyc_status_details.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.connect.client.dart' as orders;
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.connect.client.dart'
@@ -9,10 +13,6 @@ import 'package:bs58/bs58.dart';
 import 'package:connectrpc/connect.dart';
 import 'package:cryptography/cryptography.dart' hide Hash, PublicKey, SecretBox, Signature;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
-import 'package:kyc_client_dart/kyc_client_dart.dart';
-import 'package:kyc_client_dart/src/common.dart';
-import 'package:kyc_client_dart/src/grpc/transport.dart';
-import 'package:kyc_client_dart/src/models/kyc_status_details.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';
 import 'package:pinenacl/x25519.dart';

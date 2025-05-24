@@ -1,7 +1,7 @@
+import 'package:brij_client/brij_client.dart';
 import 'package:brij_protos_dart/gen/brij/verifier/v1/data.pbenum.dart';
 import 'package:brij_protos_dart/gen/brij/verifier/v1/get_kyc_requirements.pb.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/kyc_client_dart.dart';
 
 part 'kyc_requirement.freezed.dart';
 

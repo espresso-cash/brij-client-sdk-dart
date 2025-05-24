@@ -1,7 +1,7 @@
+import 'package:brij_client_example/partner.dart';
+import 'package:brij_client_example/state.dart';
+import 'package:brij_client_example/user.dart';
 import 'package:flutter/material.dart';
-import 'package:kyc_sharing_client/partner.dart';
-import 'package:kyc_sharing_client/state.dart';
-import 'package:kyc_sharing_client/user.dart';
 import 'package:provider/provider.dart';
 
 void main() {

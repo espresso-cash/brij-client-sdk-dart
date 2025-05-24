@@ -1,5 +1,5 @@
+import 'package:brij_client/brij_client.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kyc_client_dart/kyc_client_dart.dart';
 
 part 'validation_result.freezed.dart';
 

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:isolate';
 
+import 'package:brij_client/src/currency/currency_list.dart';
+import 'package:brij_client/src/models/export.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/common/ramp_type.pbenum.dart' as orders;
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart' as partner;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' as wallet;
@@ -10,8 +12,6 @@ import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart';
 import 'package:brij_protos_dart/gen/google/protobuf/timestamp.pb.dart';
 import 'package:bs58/bs58.dart';
 import 'package:convert/convert.dart';
-import 'package:kyc_client_dart/src/currency/currency_list.dart';
-import 'package:kyc_client_dart/src/models/export.dart';
 import 'package:pinenacl/digests.dart';
 import 'package:pinenacl/ed25519.dart';
 import 'package:pinenacl/tweetnacl.dart';

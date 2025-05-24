@@ -1,7 +1,7 @@
+import 'package:brij_client_example/shared.dart';
+import 'package:brij_client_example/state.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
-import 'package:kyc_sharing_client/shared.dart';
-import 'package:kyc_sharing_client/state.dart';
 import 'package:provider/provider.dart';
 
 class UserView extends StatefulWidget {
@@ -202,7 +202,9 @@ class _UserViewState extends State<UserView> {
                   onPressed: _emailVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context.read<UserAppState>().validateEmail(_emailVerificationController.text);
+                          await context
+                              .read<UserAppState>()
+                              .validateEmail(_emailVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -230,7 +232,9 @@ class _UserViewState extends State<UserView> {
                   onPressed: _phoneVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context.read<UserAppState>().validatePhone(_phoneVerificationController.text);
+                          await context
+                              .read<UserAppState>()
+                              .validatePhone(_phoneVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -286,7 +290,9 @@ class _UserViewState extends State<UserView> {
         children: [
           ValueField(
             title: 'Partner Info',
-            value: state.partnerInfo != null ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})' : '',
+            value: state.partnerInfo != null
+                ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})'
+                : '',
           ),
           Consumer<PartnerAppState>(
             builder: (context, partnerState, _) => ElevatedButton(
