@@ -14,6 +14,9 @@ sealed class ValidationResult with _$ValidationResult {
     required DateTime validatedAt,
   }) = _ValidationResult;
 
+  factory ValidationResult.fromBuffer(List<int> buffer) =>
+      ValidationResult.fromProto(proto.ValidationDataEnvelope.fromBuffer(buffer));
+
   factory ValidationResult.fromProto(proto.ValidationDataEnvelope proto) => ValidationResult(
     status: ValidationStatus.fromProto(proto.status),
     hash: proto.dataHash,
