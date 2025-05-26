@@ -1,4 +1,4 @@
-import 'package:brij_protos_dart/gen/brij/storage/v1/common/kyc_item.pb.dart' as proto;
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/kyc.pb.dart' as proto;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'kyc_item.freezed.dart';
@@ -55,7 +55,7 @@ class KycItem with _$KycItem {
 
   const KycItem._();
 
-  factory KycItem.fromProto(proto.KycItem proto) => KycItem(
+  factory KycItem.fromProto(proto.KycEnvelope proto) => KycItem(
     countries: proto.countries,
     status: KycStatus.fromProto(proto.status),
     provider: proto.provider,
@@ -64,8 +64,8 @@ class KycItem with _$KycItem {
     additionalData: proto.additionalData,
   );
 
-  proto.KycItem toProto() {
-    final protoMessage = proto.KycItem(
+  proto.KycEnvelope toProto() {
+    final protoMessage = proto.KycEnvelope(
       countries: countries,
       status: status.toProto(),
       provider: provider,

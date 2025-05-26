@@ -16,14 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$KycStatusDetails {
-  KycStatus get status => throw _privateConstructorUsedError;
-  KycItem? get data => throw _privateConstructorUsedError;
-  String? get signature => throw _privateConstructorUsedError;
-
-  /// Create a copy of KycStatusDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $KycStatusDetailsCopyWith<KycStatusDetails> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(KycStatus status) wallet,
+    required TResult Function(KycItem data, String signature) partner,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(KycStatus status)? wallet,
+    TResult? Function(KycItem data, String signature)? partner,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(KycStatus status)? wallet,
+    TResult Function(KycItem data, String signature)? partner,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WalletKycStatusDetails value) wallet,
+    required TResult Function(_PartnerKycStatusDetails value) partner,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_WalletKycStatusDetails value)? wallet,
+    TResult? Function(_PartnerKycStatusDetails value)? partner,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WalletKycStatusDetails value)? wallet,
+    TResult Function(_PartnerKycStatusDetails value)? partner,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -32,10 +61,6 @@ abstract class $KycStatusDetailsCopyWith<$Res> {
   factory $KycStatusDetailsCopyWith(
           KycStatusDetails value, $Res Function(KycStatusDetails) then) =
       _$KycStatusDetailsCopyWithImpl<$Res, KycStatusDetails>;
-  @useResult
-  $Res call({KycStatus status, KycItem? data, String? signature});
-
-  $KycItemCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -50,64 +75,25 @@ class _$KycStatusDetailsCopyWithImpl<$Res, $Val extends KycStatusDetails>
 
   /// Create a copy of KycStatusDetails
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? data = freezed,
-    Object? signature = freezed,
-  }) {
-    return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as KycStatus,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as KycItem?,
-      signature: freezed == signature
-          ? _value.signature
-          : signature // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-
-  /// Create a copy of KycStatusDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $KycItemCopyWith<$Res>? get data {
-    if (_value.data == null) {
-      return null;
-    }
-
-    return $KycItemCopyWith<$Res>(_value.data!, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$KycStatusDetailsImplCopyWith<$Res>
-    implements $KycStatusDetailsCopyWith<$Res> {
-  factory _$$KycStatusDetailsImplCopyWith(_$KycStatusDetailsImpl value,
-          $Res Function(_$KycStatusDetailsImpl) then) =
-      __$$KycStatusDetailsImplCopyWithImpl<$Res>;
-  @override
+abstract class _$$WalletKycStatusDetailsImplCopyWith<$Res> {
+  factory _$$WalletKycStatusDetailsImplCopyWith(
+          _$WalletKycStatusDetailsImpl value,
+          $Res Function(_$WalletKycStatusDetailsImpl) then) =
+      __$$WalletKycStatusDetailsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({KycStatus status, KycItem? data, String? signature});
-
-  @override
-  $KycItemCopyWith<$Res>? get data;
+  $Res call({KycStatus status});
 }
 
 /// @nodoc
-class __$$KycStatusDetailsImplCopyWithImpl<$Res>
-    extends _$KycStatusDetailsCopyWithImpl<$Res, _$KycStatusDetailsImpl>
-    implements _$$KycStatusDetailsImplCopyWith<$Res> {
-  __$$KycStatusDetailsImplCopyWithImpl(_$KycStatusDetailsImpl _value,
-      $Res Function(_$KycStatusDetailsImpl) _then)
+class __$$WalletKycStatusDetailsImplCopyWithImpl<$Res>
+    extends _$KycStatusDetailsCopyWithImpl<$Res, _$WalletKycStatusDetailsImpl>
+    implements _$$WalletKycStatusDetailsImplCopyWith<$Res> {
+  __$$WalletKycStatusDetailsImplCopyWithImpl(
+      _$WalletKycStatusDetailsImpl _value,
+      $Res Function(_$WalletKycStatusDetailsImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of KycStatusDetails
@@ -116,85 +102,289 @@ class __$$KycStatusDetailsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? data = freezed,
-    Object? signature = freezed,
   }) {
-    return _then(_$KycStatusDetailsImpl(
+    return _then(_$WalletKycStatusDetailsImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as KycStatus,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as KycItem?,
-      signature: freezed == signature
-          ? _value.signature
-          : signature // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$KycStatusDetailsImpl implements _KycStatusDetails {
-  const _$KycStatusDetailsImpl(
-      {required this.status, this.data, this.signature});
+class _$WalletKycStatusDetailsImpl implements _WalletKycStatusDetails {
+  const _$WalletKycStatusDetailsImpl({required this.status});
 
   @override
   final KycStatus status;
-  @override
-  final KycItem? data;
-  @override
-  final String? signature;
 
   @override
   String toString() {
-    return 'KycStatusDetails(status: $status, data: $data, signature: $signature)';
+    return 'KycStatusDetails.wallet(status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$KycStatusDetailsImpl &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.data, data) || other.data == data) &&
-            (identical(other.signature, signature) ||
-                other.signature == signature));
+            other is _$WalletKycStatusDetailsImpl &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, data, signature);
+  int get hashCode => Object.hash(runtimeType, status);
 
   /// Create a copy of KycStatusDetails
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$KycStatusDetailsImplCopyWith<_$KycStatusDetailsImpl> get copyWith =>
-      __$$KycStatusDetailsImplCopyWithImpl<_$KycStatusDetailsImpl>(
-          this, _$identity);
+  _$$WalletKycStatusDetailsImplCopyWith<_$WalletKycStatusDetailsImpl>
+      get copyWith => __$$WalletKycStatusDetailsImplCopyWithImpl<
+          _$WalletKycStatusDetailsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(KycStatus status) wallet,
+    required TResult Function(KycItem data, String signature) partner,
+  }) {
+    return wallet(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(KycStatus status)? wallet,
+    TResult? Function(KycItem data, String signature)? partner,
+  }) {
+    return wallet?.call(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(KycStatus status)? wallet,
+    TResult Function(KycItem data, String signature)? partner,
+    required TResult orElse(),
+  }) {
+    if (wallet != null) {
+      return wallet(status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WalletKycStatusDetails value) wallet,
+    required TResult Function(_PartnerKycStatusDetails value) partner,
+  }) {
+    return wallet(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_WalletKycStatusDetails value)? wallet,
+    TResult? Function(_PartnerKycStatusDetails value)? partner,
+  }) {
+    return wallet?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WalletKycStatusDetails value)? wallet,
+    TResult Function(_PartnerKycStatusDetails value)? partner,
+    required TResult orElse(),
+  }) {
+    if (wallet != null) {
+      return wallet(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _KycStatusDetails implements KycStatusDetails {
-  const factory _KycStatusDetails(
-      {required final KycStatus status,
-      final KycItem? data,
-      final String? signature}) = _$KycStatusDetailsImpl;
+abstract class _WalletKycStatusDetails implements KycStatusDetails {
+  const factory _WalletKycStatusDetails({required final KycStatus status}) =
+      _$WalletKycStatusDetailsImpl;
 
-  @override
   KycStatus get status;
+
+  /// Create a copy of KycStatusDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WalletKycStatusDetailsImplCopyWith<_$WalletKycStatusDetailsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PartnerKycStatusDetailsImplCopyWith<$Res> {
+  factory _$$PartnerKycStatusDetailsImplCopyWith(
+          _$PartnerKycStatusDetailsImpl value,
+          $Res Function(_$PartnerKycStatusDetailsImpl) then) =
+      __$$PartnerKycStatusDetailsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({KycItem data, String signature});
+
+  $KycItemCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$PartnerKycStatusDetailsImplCopyWithImpl<$Res>
+    extends _$KycStatusDetailsCopyWithImpl<$Res, _$PartnerKycStatusDetailsImpl>
+    implements _$$PartnerKycStatusDetailsImplCopyWith<$Res> {
+  __$$PartnerKycStatusDetailsImplCopyWithImpl(
+      _$PartnerKycStatusDetailsImpl _value,
+      $Res Function(_$PartnerKycStatusDetailsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of KycStatusDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
-  KycItem? get data;
-  @override
-  String? get signature;
+  $Res call({
+    Object? data = null,
+    Object? signature = null,
+  }) {
+    return _then(_$PartnerKycStatusDetailsImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as KycItem,
+      signature: null == signature
+          ? _value.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 
   /// Create a copy of KycStatusDetails
   /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
+  $KycItemCopyWith<$Res> get data {
+    return $KycItemCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$PartnerKycStatusDetailsImpl implements _PartnerKycStatusDetails {
+  const _$PartnerKycStatusDetailsImpl(
+      {required this.data, required this.signature});
+
+  @override
+  final KycItem data;
+  @override
+  final String signature;
+
+  @override
+  String toString() {
+    return 'KycStatusDetails.partner(data: $data, signature: $signature)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PartnerKycStatusDetailsImpl &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.signature, signature) ||
+                other.signature == signature));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data, signature);
+
+  /// Create a copy of KycStatusDetails
+  /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$KycStatusDetailsImplCopyWith<_$KycStatusDetailsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PartnerKycStatusDetailsImplCopyWith<_$PartnerKycStatusDetailsImpl>
+      get copyWith => __$$PartnerKycStatusDetailsImplCopyWithImpl<
+          _$PartnerKycStatusDetailsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(KycStatus status) wallet,
+    required TResult Function(KycItem data, String signature) partner,
+  }) {
+    return partner(data, signature);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(KycStatus status)? wallet,
+    TResult? Function(KycItem data, String signature)? partner,
+  }) {
+    return partner?.call(data, signature);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(KycStatus status)? wallet,
+    TResult Function(KycItem data, String signature)? partner,
+    required TResult orElse(),
+  }) {
+    if (partner != null) {
+      return partner(data, signature);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WalletKycStatusDetails value) wallet,
+    required TResult Function(_PartnerKycStatusDetails value) partner,
+  }) {
+    return partner(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_WalletKycStatusDetails value)? wallet,
+    TResult? Function(_PartnerKycStatusDetails value)? partner,
+  }) {
+    return partner?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WalletKycStatusDetails value)? wallet,
+    TResult Function(_PartnerKycStatusDetails value)? partner,
+    required TResult orElse(),
+  }) {
+    if (partner != null) {
+      return partner(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PartnerKycStatusDetails implements KycStatusDetails {
+  const factory _PartnerKycStatusDetails(
+      {required final KycItem data,
+      required final String signature}) = _$PartnerKycStatusDetailsImpl;
+
+  KycItem get data;
+  String get signature;
+
+  /// Create a copy of KycStatusDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PartnerKycStatusDetailsImplCopyWith<_$PartnerKycStatusDetailsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

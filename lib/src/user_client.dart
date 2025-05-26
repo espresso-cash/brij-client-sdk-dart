@@ -340,17 +340,13 @@ class KycUserClient {
       final signature = _signingKey.sign(utf8.encode(message));
 
       if (item.id.isNotEmpty) {
-        await _storageClient.removeUserData(RemoveUserDataRequest(id: item.id));
+        await _storageClient.removeUserData(
+          RemoveUserDataRequest(hash: item.id),
+        ); //TODO update to hash
       }
 
-      await _storageClient.setUserData(
-        SetUserDataRequest(
-          type: item.type,
-          encryptedValue: encryptedData,
-          hash: hash,
-          signature: base58.encode(signature.signature.asTypedList),
-        ),
-      );
+      // TODO
+      await _storageClient.setUserData(SetUserDataRequest(hash: hash, signature: []));
     }
   }
 
@@ -497,10 +493,10 @@ class KycUserClient {
         GetKycStatusRequest(country: country, validatorPublicKey: config.verifierAuthPk),
       );
 
-      return KycStatusDetails(status: KycStatus.fromProto(response.status));
+      return KycStatusDetails.wallet(status: KycStatus.fromProto(response.status));
     } on ConnectException catch (e) {
       if (_isKycDataNotFound(e)) {
-        return const KycStatusDetails(status: KycStatus.unspecified);
+        return const KycStatusDetails.wallet(status: KycStatus.unspecified);
       }
 
       rethrow;

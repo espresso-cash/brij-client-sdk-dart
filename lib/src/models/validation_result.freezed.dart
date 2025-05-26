@@ -15,13 +15,30 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ValidationResult {}
+mixin _$ValidationResult {
+  ValidationStatus get status => throw _privateConstructorUsedError;
+  String get hash => throw _privateConstructorUsedError;
+  String get validatorPublicKey => throw _privateConstructorUsedError;
+  DateTime get validatedAt => throw _privateConstructorUsedError;
+
+  /// Create a copy of ValidationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ValidationResultCopyWith<ValidationResult> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $ValidationResultCopyWith<$Res> {
   factory $ValidationResultCopyWith(
           ValidationResult value, $Res Function(ValidationResult) then) =
       _$ValidationResultCopyWithImpl<$Res, ValidationResult>;
+  @useResult
+  $Res call(
+      {ValidationStatus status,
+      String hash,
+      String validatorPublicKey,
+      DateTime validatedAt});
 }
 
 /// @nodoc
@@ -36,39 +53,15 @@ class _$ValidationResultCopyWithImpl<$Res, $Val extends ValidationResult>
 
   /// Create a copy of ValidationResult
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$HashValidationResultImplCopyWith<$Res> {
-  factory _$$HashValidationResultImplCopyWith(_$HashValidationResultImpl value,
-          $Res Function(_$HashValidationResultImpl) then) =
-      __$$HashValidationResultImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String dataId, ValidationStatus status, String hash});
-}
-
-/// @nodoc
-class __$$HashValidationResultImplCopyWithImpl<$Res>
-    extends _$ValidationResultCopyWithImpl<$Res, _$HashValidationResultImpl>
-    implements _$$HashValidationResultImplCopyWith<$Res> {
-  __$$HashValidationResultImplCopyWithImpl(_$HashValidationResultImpl _value,
-      $Res Function(_$HashValidationResultImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ValidationResult
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dataId = null,
     Object? status = null,
     Object? hash = null,
+    Object? validatorPublicKey = null,
+    Object? validatedAt = null,
   }) {
-    return _then(_$HashValidationResultImpl(
-      dataId: null == dataId
-          ? _value.dataId
-          : dataId // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_value.copyWith(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -77,86 +70,39 @@ class __$$HashValidationResultImplCopyWithImpl<$Res>
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+      validatorPublicKey: null == validatorPublicKey
+          ? _value.validatorPublicKey
+          : validatorPublicKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      validatedAt: null == validatedAt
+          ? _value.validatedAt
+          : validatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
-
-class _$HashValidationResultImpl implements HashValidationResult {
-  const _$HashValidationResultImpl(
-      {required this.dataId, required this.status, required this.hash});
-
+abstract class _$$ValidationResultImplCopyWith<$Res>
+    implements $ValidationResultCopyWith<$Res> {
+  factory _$$ValidationResultImplCopyWith(_$ValidationResultImpl value,
+          $Res Function(_$ValidationResultImpl) then) =
+      __$$ValidationResultImplCopyWithImpl<$Res>;
   @override
-  final String dataId;
-  @override
-  final ValidationStatus status;
-  @override
-  final String hash;
-
-  @override
-  String toString() {
-    return 'ValidationResult.hash(dataId: $dataId, status: $status, hash: $hash)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$HashValidationResultImpl &&
-            (identical(other.dataId, dataId) || other.dataId == dataId) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.hash, hash) || other.hash == hash));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, dataId, status, hash);
-
-  /// Create a copy of ValidationResult
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$HashValidationResultImplCopyWith<_$HashValidationResultImpl>
-      get copyWith =>
-          __$$HashValidationResultImplCopyWithImpl<_$HashValidationResultImpl>(
-              this, _$identity);
-}
-
-abstract class HashValidationResult implements ValidationResult {
-  const factory HashValidationResult(
-      {required final String dataId,
-      required final ValidationStatus status,
-      required final String hash}) = _$HashValidationResultImpl;
-
-  String get dataId;
-  ValidationStatus get status;
-  String get hash;
-
-  /// Create a copy of ValidationResult
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HashValidationResultImplCopyWith<_$HashValidationResultImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CustomValidationResultImplCopyWith<$Res> {
-  factory _$$CustomValidationResultImplCopyWith(
-          _$CustomValidationResultImpl value,
-          $Res Function(_$CustomValidationResultImpl) then) =
-      __$$CustomValidationResultImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? id, String type, String value});
+  $Res call(
+      {ValidationStatus status,
+      String hash,
+      String validatorPublicKey,
+      DateTime validatedAt});
 }
 
 /// @nodoc
-class __$$CustomValidationResultImplCopyWithImpl<$Res>
-    extends _$ValidationResultCopyWithImpl<$Res, _$CustomValidationResultImpl>
-    implements _$$CustomValidationResultImplCopyWith<$Res> {
-  __$$CustomValidationResultImplCopyWithImpl(
-      _$CustomValidationResultImpl _value,
-      $Res Function(_$CustomValidationResultImpl) _then)
+class __$$ValidationResultImplCopyWithImpl<$Res>
+    extends _$ValidationResultCopyWithImpl<$Res, _$ValidationResultImpl>
+    implements _$$ValidationResultImplCopyWith<$Res> {
+  __$$ValidationResultImplCopyWithImpl(_$ValidationResultImpl _value,
+      $Res Function(_$ValidationResultImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ValidationResult
@@ -164,81 +110,102 @@ class __$$CustomValidationResultImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = null,
-    Object? value = null,
+    Object? status = null,
+    Object? hash = null,
+    Object? validatorPublicKey = null,
+    Object? validatedAt = null,
   }) {
-    return _then(_$CustomValidationResultImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+    return _then(_$ValidationResultImpl(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ValidationStatus,
+      hash: null == hash
+          ? _value.hash
+          : hash // ignore: cast_nullable_to_non_nullable
               as String,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      validatorPublicKey: null == validatorPublicKey
+          ? _value.validatorPublicKey
+          : validatorPublicKey // ignore: cast_nullable_to_non_nullable
               as String,
+      validatedAt: null == validatedAt
+          ? _value.validatedAt
+          : validatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
 
 /// @nodoc
 
-class _$CustomValidationResultImpl implements CustomValidationResult {
-  const _$CustomValidationResultImpl(
-      {this.id, required this.type, required this.value});
+class _$ValidationResultImpl implements _ValidationResult {
+  const _$ValidationResultImpl(
+      {required this.status,
+      required this.hash,
+      required this.validatorPublicKey,
+      required this.validatedAt});
 
   @override
-  final String? id;
+  final ValidationStatus status;
   @override
-  final String type;
+  final String hash;
   @override
-  final String value;
+  final String validatorPublicKey;
+  @override
+  final DateTime validatedAt;
 
   @override
   String toString() {
-    return 'ValidationResult.custom(id: $id, type: $type, value: $value)';
+    return 'ValidationResult(status: $status, hash: $hash, validatorPublicKey: $validatorPublicKey, validatedAt: $validatedAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CustomValidationResultImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.value, value) || other.value == value));
+            other is _$ValidationResultImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.hash, hash) || other.hash == hash) &&
+            (identical(other.validatorPublicKey, validatorPublicKey) ||
+                other.validatorPublicKey == validatorPublicKey) &&
+            (identical(other.validatedAt, validatedAt) ||
+                other.validatedAt == validatedAt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, type, value);
+  int get hashCode =>
+      Object.hash(runtimeType, status, hash, validatorPublicKey, validatedAt);
 
   /// Create a copy of ValidationResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CustomValidationResultImplCopyWith<_$CustomValidationResultImpl>
-      get copyWith => __$$CustomValidationResultImplCopyWithImpl<
-          _$CustomValidationResultImpl>(this, _$identity);
+  _$$ValidationResultImplCopyWith<_$ValidationResultImpl> get copyWith =>
+      __$$ValidationResultImplCopyWithImpl<_$ValidationResultImpl>(
+          this, _$identity);
 }
 
-abstract class CustomValidationResult implements ValidationResult {
-  const factory CustomValidationResult(
-      {final String? id,
-      required final String type,
-      required final String value}) = _$CustomValidationResultImpl;
+abstract class _ValidationResult implements ValidationResult {
+  const factory _ValidationResult(
+      {required final ValidationStatus status,
+      required final String hash,
+      required final String validatorPublicKey,
+      required final DateTime validatedAt}) = _$ValidationResultImpl;
 
-  String? get id;
-  String get type;
-  String get value;
+  @override
+  ValidationStatus get status;
+  @override
+  String get hash;
+  @override
+  String get validatorPublicKey;
+  @override
+  DateTime get validatedAt;
 
   /// Create a copy of ValidationResult
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CustomValidationResultImplCopyWith<_$CustomValidationResultImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ValidationResultImplCopyWith<_$ValidationResultImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

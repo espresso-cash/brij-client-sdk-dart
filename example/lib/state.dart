@@ -108,7 +108,9 @@ class UserAppState extends ChangeNotifier {
     await _client.setData(
       email: Email(value: email, id: _emailId),
       phone: Phone(value: phone, id: _phoneId),
-      selfie: file != null ? Selfie(value: await file.readAsBytes(), id: _selfieId) : null,
+      selfie: file != null
+          ? Selfie(value: await file.readAsBytes(), id: _selfieId)
+          : null,
     );
 
     await fetchData();
@@ -268,7 +270,8 @@ class PartnerAppState extends ChangeNotifier {
   late String _authPublicKey = '';
   late String _userSecretKey = '';
 
-  final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
+  final String _partnerFeesAddress =
+      '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
   UserData? _userData;
 
@@ -290,26 +293,12 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey =
-        await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
+    _authPublicKey = await keyPair
+        .extractPublicKey()
+        .then((value) => value.bytes)
+        .then(base58encode);
 
     notifyListeners();
-  }
-
-  Future<void> createCustomValidationResult({
-    required String type,
-    required String result,
-    required String userPK,
-    required String secretKey,
-  }) async {
-    await _client.setValidationResult(
-      value: CustomValidationResult(
-        type: type,
-        value: result,
-      ),
-      userPK: userPK,
-      secretKey: secretKey,
-    );
   }
 
   Future<void> getUserSecretKey(String userPK) async {
