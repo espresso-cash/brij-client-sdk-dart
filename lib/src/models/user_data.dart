@@ -22,7 +22,6 @@ class UserData with _$UserData {
 class Email with _$Email {
   const factory Email({
     required String value,
-    @Default('') String id,
     String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Email;
@@ -32,7 +31,6 @@ class Email with _$Email {
 class Phone with _$Phone {
   const factory Phone({
     required String value,
-    @Default('') String id,
     String? hash,
     @Default(ValidationStatus.unspecified) ValidationStatus status,
   }) = _Phone;
@@ -40,29 +38,22 @@ class Phone with _$Phone {
 
 @freezed
 class Selfie with _$Selfie {
-  const factory Selfie({required List<int> value, @Default('') String id, String? hash}) = _Selfie;
+  const factory Selfie({required List<int> value, String? hash}) = _Selfie;
 }
 
 @freezed
 class Name with _$Name {
-  const factory Name({
-    required String firstName,
-    required String lastName,
-    @Default('') String id,
-    String? hash,
-  }) = _Name;
+  const factory Name({required String firstName, required String lastName, String? hash}) = _Name;
 }
 
 @freezed
 class Citizenship with _$Citizenship {
-  const factory Citizenship({required String value, @Default('') String id, String? hash}) =
-      _Citizenship;
+  const factory Citizenship({required String value, String? hash}) = _Citizenship;
 }
 
 @freezed
 class BirthDate with _$BirthDate {
-  const factory BirthDate({required DateTime value, @Default('') String id, String? hash}) =
-      _BirthDate;
+  const factory BirthDate({required DateTime value, String? hash}) = _BirthDate;
 }
 
 @freezed
@@ -74,7 +65,6 @@ class Document with _$Document {
     DateTime? expirationDate,
     List<int>? frontImage,
     List<int>? backImage,
-    @Default('') String id,
     String? hash,
   }) = _Document;
 }
@@ -86,7 +76,6 @@ class BankInfo with _$BankInfo {
     required String bankCode,
     required String accountNumber,
     required String countryCode,
-    @Default('') String id,
     String? hash,
   }) = _BankInfo;
 }
