@@ -138,12 +138,13 @@ class __$$ValidationResultImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ValidationResultImpl implements _ValidationResult {
+class _$ValidationResultImpl extends _ValidationResult {
   const _$ValidationResultImpl(
       {required this.status,
       required this.hash,
       required this.validatorPublicKey,
-      required this.validatedAt});
+      required this.validatedAt})
+      : super._();
 
   @override
   final ValidationStatus status;
@@ -186,12 +187,13 @@ class _$ValidationResultImpl implements _ValidationResult {
           this, _$identity);
 }
 
-abstract class _ValidationResult implements ValidationResult {
+abstract class _ValidationResult extends ValidationResult {
   const factory _ValidationResult(
       {required final ValidationStatus status,
       required final String hash,
       required final String validatorPublicKey,
       required final DateTime validatedAt}) = _$ValidationResultImpl;
+  const _ValidationResult._() : super._();
 
   @override
   ValidationStatus get status;
