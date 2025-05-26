@@ -96,9 +96,9 @@ class UserAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _emailId = '';
-  String _phoneId = '';
-  String _selfieId = '';
+  String _emailHash = '';
+  String _phoneHash = '';
+  String _selfieHash = '';
 
   Future<void> updateData({
     required String email,
@@ -106,10 +106,10 @@ class UserAppState extends ChangeNotifier {
     XFile? file,
   }) async {
     await _client.setData(
-      email: Email(value: email, id: _emailId),
-      phone: Phone(value: phone, id: _phoneId),
+      email: Email(value: email, hash: _emailHash),
+      phone: Phone(value: phone, hash: _phoneHash),
       selfie: file != null
-          ? Selfie(value: await file.readAsBytes(), id: _selfieId)
+          ? Selfie(value: await file.readAsBytes(), hash: _selfieHash)
           : null,
     );
 
@@ -122,9 +122,9 @@ class UserAppState extends ChangeNotifier {
         secretKey: _rawSecretKey,
       );
 
-      _emailId = data.email?.id ?? '';
-      _phoneId = data.phone?.id ?? '';
-      _selfieId = data.selfie?.id ?? '';
+      _emailHash = data.email?.hash ?? '';
+      _phoneHash = data.phone?.hash ?? '';
+      _selfieHash = data.selfie?.hash ?? '';
 
       _email = data.email?.value ?? '-';
       _phone = data.phone?.value ?? '-';
@@ -136,19 +136,19 @@ class UserAppState extends ChangeNotifier {
   }
 
   Future<void> initEmailValidation() async {
-    await _client.initEmailValidation(dataId: _emailId);
+    await _client.initEmailValidation(dataId: _emailHash);
   }
 
   Future<void> initPhoneValidation() async {
-    await _client.initPhoneValidation(dataId: _phoneId);
+    await _client.initPhoneValidation(dataId: _phoneHash);
   }
 
   Future<void> validateEmail(String code) async {
-    await _client.validateEmail(code: code, dataId: _emailId);
+    await _client.validateEmail(code: code, dataId: _emailHash);
   }
 
   Future<void> validatePhone(String code) async {
-    await _client.validatePhone(code: code, dataId: _phoneId);
+    await _client.validatePhone(code: code, dataId: _phoneHash);
   }
 
   Future<void> createOnRampOrder({
