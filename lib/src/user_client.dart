@@ -375,19 +375,19 @@ class KycUserClient {
   }
 
   Future<void> initEmailValidation({required String dataId}) async {
-    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataId: dataId));
+    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataHash: dataId));
   }
 
   Future<void> validateEmail({required String code, required String dataId}) async {
-    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataId: dataId));
+    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataHash: dataId));
   }
 
   Future<void> initPhoneValidation({required String dataId}) async {
-    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataId: dataId));
+    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataHash: dataId));
   }
 
   Future<void> validatePhone({required String code, required String dataId}) async {
-    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataId: dataId));
+    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataHash: dataId));
   }
 
   Future<String> createOnRampOrder({
