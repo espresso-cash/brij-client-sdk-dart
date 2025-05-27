@@ -357,7 +357,11 @@ class KycUserClient {
       final signature = _signingKey.sign(protoMessage);
 
       await _storageClient.setUserData(
-        SetUserDataRequest(payload: protoMessage, signature: signature, hash: hash),
+        SetUserDataRequest(
+          payload: protoMessage,
+          signature: signature.signature.asTypedList,
+          hash: hash,
+        ),
       );
     }
   }
