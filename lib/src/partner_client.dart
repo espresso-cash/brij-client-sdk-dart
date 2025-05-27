@@ -125,22 +125,15 @@ class KycPartnerClient {
     required String userPK,
     required String secretKey,
   }) async {
-    if (value is HashValidationResult) {
-      await _storageClient.removeValidationData(RemoveValidationDataRequest(id: value.dataId));
+    await _storageClient.removeValidationData(RemoveValidationDataRequest(dataHash: value.hash));
 
-      final hash = value.hash;
-      final message = '${value.dataId}|$userPK|$hash|${value.status.toProto()}';
-      final signature = _signingKey.sign(utf8.encode(message));
+    final protoMessage = value.toProto().writeToBuffer();
 
-      await _storageClient.setValidationData(
-        SetValidationDataRequest(
-          dataId: value.dataId,
-          status: value.status.toProto(),
-          hash: hash,
-          signature: base58.encode(signature.signature.asTypedList),
-        ),
-      );
-    }
+    final signature = _signingKey.sign(protoMessage);
+
+    await _storageClient.setValidationData(
+      SetValidationDataRequest(payload: protoMessage, signature: signature.signature.asTypedList),
+    );
   }
 
   Future<Order> getOrder({required OrderId orderId}) async {
@@ -283,7 +276,7 @@ class KycPartnerClient {
     final signature = _signingKey.sign(protoMessage);
 
     final response = await _storageClient.createKycStatus(
-      CreateKycStatusRequest(data: protoMessage, signature: signature.signature.asTypedList),
+      CreateKycStatusRequest(payload: protoMessage, signature: signature.signature.asTypedList),
     );
 
     return response.kycId;
@@ -297,7 +290,7 @@ class KycPartnerClient {
     await _storageClient.updateKycStatus(
       UpdateKycStatusRequest(
         kycId: kycId,
-        data: protoMessage,
+        payload: protoMessage,
         signature: signature.signature.asTypedList,
       ),
     );

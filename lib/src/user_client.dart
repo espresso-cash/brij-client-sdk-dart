@@ -8,6 +8,7 @@ import 'package:brij_client/src/models/kyc_status_details.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client.dart' as order;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as proto;
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/user_data.pb.dart' as user;
 import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.connect.client.dart' as wallet;
 import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart';
 import 'package:brij_protos_dart/gen/brij/verifier/v1/get_kyc_requirements.pb.dart';
@@ -270,14 +271,22 @@ class KycUserClient {
   }) async {
     final dataList = [
       if (email != null)
-        (data: proto.Email(value: email.value), type: proto.DataType.DATA_TYPE_EMAIL, id: email.id),
+        (
+          data: proto.Email(value: email.value),
+          type: proto.DataType.DATA_TYPE_EMAIL,
+          hash: email.hash,
+        ),
       if (phone != null)
-        (data: proto.Phone(value: phone.value), type: proto.DataType.DATA_TYPE_PHONE, id: phone.id),
+        (
+          data: proto.Phone(value: phone.value),
+          type: proto.DataType.DATA_TYPE_PHONE,
+          hash: phone.hash,
+        ),
       if (name != null)
         (
           data: proto.Name(firstName: name.firstName, lastName: name.lastName),
           type: proto.DataType.DATA_TYPE_NAME,
-          id: name.id,
+          hash: name.hash,
         ),
       if (document != null)
         (
@@ -294,7 +303,7 @@ class KycUserClient {
             ),
           ),
           type: proto.DataType.DATA_TYPE_DOCUMENT,
-          id: document.id,
+          hash: document.hash,
         ),
       if (bankInfo != null)
         (
@@ -305,7 +314,7 @@ class KycUserClient {
             countryCode: bankInfo.countryCode,
           ),
           type: proto.DataType.DATA_TYPE_BANK_INFO,
-          id: bankInfo.id,
+          hash: bankInfo.hash,
         ),
       if (dob != null)
         (
@@ -315,40 +324,43 @@ class KycUserClient {
             ),
           ),
           type: proto.DataType.DATA_TYPE_BIRTH_DATE,
-          id: dob.id,
+          hash: dob.hash,
         ),
       if (citizenship != null)
         (
           data: proto.Citizenship(value: citizenship.value),
           type: proto.DataType.DATA_TYPE_CITIZENSHIP,
-          id: citizenship.id,
+          hash: citizenship.hash,
         ),
       if (selfie != null)
         (
           data: proto.SelfieImage(value: selfie.value),
           type: proto.DataType.DATA_TYPE_SELFIE_IMAGE,
-          id: selfie.id,
+          hash: selfie.hash,
         ),
     ];
 
     for (final item in dataList) {
+      final itemHash = item.hash;
+
+      if (itemHash != null && itemHash.isNotEmpty) {
+        await _storageClient.removeUserData(RemoveUserDataRequest(hash: itemHash));
+      }
+
       final protoData = serializeProto(item.data);
       final encryptedData = encrypt(data: protoData, secretBox: _secretBox);
-
       final hash = generateHash(encryptedData);
-      final message = '${item.type.name}|$hash';
-      final signature = _signingKey.sign(utf8.encode(message));
 
-      if (item.id.isNotEmpty) {
-        await _storageClient.removeUserData(RemoveUserDataRequest(id: item.id));
-      }
+      final protoMessage =
+          user.UserDataEnvelope(encryptedValue: encryptedData, type: item.type).writeToBuffer();
+
+      final signature = _signingKey.sign(protoMessage);
 
       await _storageClient.setUserData(
         SetUserDataRequest(
-          type: item.type,
-          encryptedValue: encryptedData,
+          payload: protoMessage,
+          signature: signature.signature.asTypedList,
           hash: hash,
-          signature: base58.encode(signature.signature.asTypedList),
         ),
       );
     }
@@ -363,19 +375,19 @@ class KycUserClient {
   }
 
   Future<void> initEmailValidation({required String dataId}) async {
-    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataId: dataId));
+    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataHash: dataId));
   }
 
   Future<void> validateEmail({required String code, required String dataId}) async {
-    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataId: dataId));
+    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataHash: dataId));
   }
 
   Future<void> initPhoneValidation({required String dataId}) async {
-    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataId: dataId));
+    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataHash: dataId));
   }
 
   Future<void> validatePhone({required String code, required String dataId}) async {
-    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataId: dataId));
+    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataHash: dataId));
   }
 
   Future<String> createOnRampOrder({
@@ -497,10 +509,10 @@ class KycUserClient {
         GetKycStatusRequest(country: country, validatorPublicKey: config.verifierAuthPk),
       );
 
-      return KycStatusDetails(status: KycStatus.fromProto(response.status));
+      return KycStatusDetails.wallet(status: KycStatus.fromProto(response.status));
     } on ConnectException catch (e) {
       if (_isKycDataNotFound(e)) {
-        return const KycStatusDetails(status: KycStatus.unspecified);
+        return const KycStatusDetails.wallet(status: KycStatus.unspecified);
       }
 
       rethrow;

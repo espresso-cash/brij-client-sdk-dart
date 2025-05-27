@@ -7,6 +7,7 @@ import 'package:brij_protos_dart/gen/brij/orders/v1/common/ramp_type.pbenum.dart
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart' as partner;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' as wallet;
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as d;
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/user_data.pb.dart' as u;
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart' as partner;
 import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.pb.dart';
 import 'package:brij_protos_dart/gen/google/protobuf/timestamp.pb.dart';
@@ -83,14 +84,12 @@ UserData _processUserDataForWallet({
   required GetUserDataResponse response,
   required String secretKey,
 }) {
-  final validationMap = {
-    for (final data in response.validationData)
-      data.dataId: HashValidationResult(
-        dataId: data.dataId,
-        hash: data.hash,
-        status: data.status.toModel(),
-      ),
-  };
+  final validationMap = <String, ValidationResult>{};
+  for (final data in response.validationData) {
+    final validationResult = ValidationResult.fromBuffer(data.payload);
+
+    validationMap[validationResult.hash] = validationResult;
+  }
 
   Email? email;
   Phone? phone;
@@ -102,34 +101,27 @@ UserData _processUserDataForWallet({
   Selfie? selfie;
 
   for (final encryptedData in response.userData) {
-    final decryptedData = decrypt(
-      encryptedData: encryptedData.encryptedValue,
-      secretKey: secretKey,
-    );
+    final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
 
-    final id = encryptedData.id;
+    final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);
+
     final hash = encryptedData.hash;
-    final verificationData = validationMap[id];
+    final verificationData = validationMap[hash];
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
-    switch (encryptedData.type) {
+    switch (user.type) {
       case d.DataType.DATA_TYPE_EMAIL:
         final wrappedData = d.Email.fromBuffer(decryptedData);
-        email = Email(value: wrappedData.value, id: id, status: status, hash: hash);
+        email = Email(value: wrappedData.value, status: status, hash: hash);
       case d.DataType.DATA_TYPE_NAME:
         final wrappedData = d.Name.fromBuffer(decryptedData);
-        name = Name(
-          firstName: wrappedData.firstName,
-          lastName: wrappedData.lastName,
-          id: id,
-          hash: hash,
-        );
+        name = Name(firstName: wrappedData.firstName, lastName: wrappedData.lastName, hash: hash);
       case d.DataType.DATA_TYPE_BIRTH_DATE:
         final wrappedData = d.BirthDate.fromBuffer(decryptedData);
-        birthDate = BirthDate(value: wrappedData.value.toDateTime(), id: id, hash: hash);
+        birthDate = BirthDate(value: wrappedData.value.toDateTime(), hash: hash);
       case d.DataType.DATA_TYPE_PHONE:
         final wrappedData = d.Phone.fromBuffer(decryptedData);
-        phone = Phone(value: wrappedData.value, id: id, status: status, hash: hash);
+        phone = Phone(value: wrappedData.value, status: status, hash: hash);
       case d.DataType.DATA_TYPE_DOCUMENT:
         final wrappedData = d.Document.fromBuffer(decryptedData);
         documents.add(
@@ -137,7 +129,6 @@ UserData _processUserDataForWallet({
             type: wrappedData.type.toIdType(),
             number: wrappedData.number,
             countryCode: wrappedData.countryCode,
-            id: id,
             expirationDate: wrappedData.expirationDate.toDateTime(),
             frontImage: wrappedData.photo.frontImage,
             backImage: wrappedData.photo.backImage,
@@ -152,16 +143,15 @@ UserData _processUserDataForWallet({
             accountNumber: wrappedData.accountNumber,
             bankCode: wrappedData.bankCode,
             countryCode: wrappedData.countryCode,
-            id: id,
             hash: hash,
           ),
         );
       case d.DataType.DATA_TYPE_SELFIE_IMAGE:
         final wrappedData = d.SelfieImage.fromBuffer(decryptedData);
-        selfie = Selfie(value: wrappedData.value, id: id, hash: hash);
+        selfie = Selfie(value: wrappedData.value, hash: hash);
       case d.DataType.DATA_TYPE_CITIZENSHIP:
         final wrappedData = d.Citizenship.fromBuffer(decryptedData);
-        citizenship = Citizenship(value: wrappedData.value, id: id, hash: hash);
+        citizenship = Citizenship(value: wrappedData.value, hash: hash);
       case d.DataType.DATA_TYPE_UNSPECIFIED:
       case d.DataType():
     }
@@ -194,14 +184,12 @@ UserData _processUserDataForPartner({
   required partner.GetUserDataResponse response,
   required String secretKey,
 }) {
-  final validationMap = {
-    for (final data in response.validationData)
-      data.dataId: HashValidationResult(
-        dataId: data.dataId,
-        hash: data.hash,
-        status: data.status.toModel(),
-      ),
-  };
+  final validationMap = <String, ValidationResult>{};
+  for (final data in response.validationData) {
+    final validationResult = ValidationResult.fromBuffer(data.payload);
+
+    validationMap[validationResult.hash] = validationResult;
+  }
 
   Email? email;
   Phone? phone;
@@ -213,34 +201,27 @@ UserData _processUserDataForPartner({
   Selfie? selfie;
 
   for (final encryptedData in response.userData) {
-    final decryptedData = decrypt(
-      encryptedData: encryptedData.encryptedValue,
-      secretKey: secretKey,
-    );
+    final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
 
-    final id = encryptedData.id;
+    final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);
+
     final hash = encryptedData.hash;
-    final verificationData = validationMap[id];
+    final verificationData = validationMap[hash];
     final status = verificationData?.status ?? ValidationStatus.unspecified;
 
-    switch (encryptedData.type) {
+    switch (user.type) {
       case d.DataType.DATA_TYPE_EMAIL:
         final wrappedData = d.Email.fromBuffer(decryptedData);
-        email = Email(value: wrappedData.value, id: id, status: status, hash: hash);
+        email = Email(value: wrappedData.value, status: status, hash: hash);
       case d.DataType.DATA_TYPE_NAME:
         final wrappedData = d.Name.fromBuffer(decryptedData);
-        name = Name(
-          firstName: wrappedData.firstName,
-          lastName: wrappedData.lastName,
-          id: id,
-          hash: hash,
-        );
+        name = Name(firstName: wrappedData.firstName, lastName: wrappedData.lastName, hash: hash);
       case d.DataType.DATA_TYPE_BIRTH_DATE:
         final wrappedData = d.BirthDate.fromBuffer(decryptedData);
-        birthDate = BirthDate(value: wrappedData.value.toDateTime(), id: id, hash: hash);
+        birthDate = BirthDate(value: wrappedData.value.toDateTime(), hash: hash);
       case d.DataType.DATA_TYPE_PHONE:
         final wrappedData = d.Phone.fromBuffer(decryptedData);
-        phone = Phone(value: wrappedData.value, id: id, status: status, hash: hash);
+        phone = Phone(value: wrappedData.value, status: status, hash: hash);
       case d.DataType.DATA_TYPE_DOCUMENT:
         final wrappedData = d.Document.fromBuffer(decryptedData);
         documents.add(
@@ -248,7 +229,6 @@ UserData _processUserDataForPartner({
             type: wrappedData.type.toIdType(),
             number: wrappedData.number,
             countryCode: wrappedData.countryCode,
-            id: id,
             expirationDate: wrappedData.expirationDate.toDateTime(),
             frontImage: wrappedData.photo.frontImage,
             backImage: wrappedData.photo.backImage,
@@ -263,16 +243,15 @@ UserData _processUserDataForPartner({
             accountNumber: wrappedData.accountNumber,
             bankCode: wrappedData.bankCode,
             countryCode: wrappedData.countryCode,
-            id: id,
             hash: hash,
           ),
         );
       case d.DataType.DATA_TYPE_SELFIE_IMAGE:
         final wrappedData = d.SelfieImage.fromBuffer(decryptedData);
-        selfie = Selfie(value: wrappedData.value, id: id, hash: hash);
+        selfie = Selfie(value: wrappedData.value, hash: hash);
       case d.DataType.DATA_TYPE_CITIZENSHIP:
         final wrappedData = d.Citizenship.fromBuffer(decryptedData);
-        citizenship = Citizenship(value: wrappedData.value, id: id, hash: hash);
+        citizenship = Citizenship(value: wrappedData.value, hash: hash);
       case d.DataType.DATA_TYPE_UNSPECIFIED:
       case d.DataType():
     }
