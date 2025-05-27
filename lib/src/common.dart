@@ -188,6 +188,8 @@ UserData _processUserDataForPartner({
   for (final data in response.validationData) {
     final validationResult = ValidationResult.fromBuffer(data.payload);
 
+    // TODO(KB): validate signature
+
     validationMap[validationResult.hash] = validationResult;
   }
 
@@ -202,6 +204,8 @@ UserData _processUserDataForPartner({
 
   for (final encryptedData in response.userData) {
     final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
+
+    // TODO(KB): validate signature
 
     final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);
 

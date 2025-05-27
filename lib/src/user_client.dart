@@ -4,7 +4,6 @@ import 'package:brij_client/src/common.dart';
 import 'package:brij_client/src/config/config.dart';
 import 'package:brij_client/src/grpc/transport.dart';
 import 'package:brij_client/src/models/export.dart';
-import 'package:brij_client/src/models/kyc_status_details.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client.dart' as order;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as proto;
@@ -374,20 +373,20 @@ class KycUserClient {
     return processUserDataForWallet(response: response, secretKey: secretKey);
   }
 
-  Future<void> initEmailValidation({required String dataId}) async {
-    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataHash: dataId));
+  Future<void> initEmailValidation({required String dataHash}) async {
+    await _verifierClient.initEmailValidation(InitEmailValidationRequest(dataHash: dataHash));
   }
 
-  Future<void> validateEmail({required String code, required String dataId}) async {
-    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataHash: dataId));
+  Future<void> validateEmail({required String code, required String dataHash}) async {
+    await _verifierClient.validateEmail(ValidateEmailRequest(code: code, dataHash: dataHash));
   }
 
-  Future<void> initPhoneValidation({required String dataId}) async {
-    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataHash: dataId));
+  Future<void> initPhoneValidation({required String dataHash}) async {
+    await _verifierClient.initPhoneValidation(InitPhoneValidationRequest(dataHash: dataHash));
   }
 
-  Future<void> validatePhone({required String code, required String dataId}) async {
-    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataHash: dataId));
+  Future<void> validatePhone({required String code, required String dataHash}) async {
+    await _verifierClient.validatePhone(ValidatePhoneRequest(code: code, dataHash: dataHash));
   }
 
   Future<String> createOnRampOrder({
@@ -500,19 +499,16 @@ class KycUserClient {
       .checkAccess(CheckAccessRequest(partnerPublicKey: partnerPK))
       .then((e) => e.hasAccess);
 
-  Future<KycStatusDetails> getKycStatusDetails({
-    required String userPK,
-    required String country,
-  }) async {
+  Future<KycStatus> getKycStatus({required String userPK, required String country}) async {
     try {
       final response = await _storageClient.getKycStatus(
         GetKycStatusRequest(country: country, validatorPublicKey: config.verifierAuthPk),
       );
 
-      return KycStatusDetails.wallet(status: KycStatus.fromProto(response.status));
+      return KycStatus.fromProto(response.status);
     } on ConnectException catch (e) {
       if (_isKycDataNotFound(e)) {
-        return const KycStatusDetails.wallet(status: KycStatus.unspecified);
+        return KycStatus.unspecified;
       }
 
       rethrow;

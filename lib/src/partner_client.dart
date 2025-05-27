@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:brij_client/brij_client.dart';
 import 'package:brij_client/src/common.dart';
 import 'package:brij_client/src/grpc/transport.dart';
-import 'package:brij_client/src/models/kyc_status_details.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.connect.client.dart' as orders;
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart';
+import 'package:brij_protos_dart/gen/brij/storage/v1/common/kyc.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.connect.client.dart'
     as storage;
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart';
@@ -255,10 +255,7 @@ class KycPartnerClient {
   Future<void> rejectOrder({required String orderId, required String reason}) async =>
       _orderClient.rejectOrder(RejectOrderRequest(orderId: orderId, reason: reason));
 
-  Future<KycStatusDetails> getKycStatusDetails({
-    required String userPK,
-    required String country,
-  }) async {
+  Future<KycItem> getKycItem({required String userPK, required String country}) async {
     final response = await _storageClient.getKycStatus(
       GetKycStatusRequest(
         userPublicKey: userPK,
@@ -267,7 +264,9 @@ class KycPartnerClient {
       ),
     );
 
-    return KycStatusDetails.fromPartnerProto(response);
+    // TODO(KB): verify signature
+
+    return KycItem.fromProto(KycEnvelope.fromBuffer(response.payload));
   }
 
   Future<String> createKycEntry({required KycItem kycItem}) async {
