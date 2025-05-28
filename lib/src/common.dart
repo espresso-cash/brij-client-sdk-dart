@@ -71,17 +71,27 @@ Uint8List decrypt({required List<int> encryptedData, required String secretKey})
 
 Future<UserData> processUserDataForWallet({
   required GetUserDataResponse response,
+  required String userPublicKey,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processUserDataForWallet(response: response, secretKey: secretKey);
+    return _processUserDataForWallet(
+      response: response,
+      userPublicKey: userPublicKey,
+      secretKey: secretKey,
+    );
   }
 
-  return Isolate.run(() => _processUserDataForWallet(response: response, secretKey: secretKey));
+  return Isolate.run(() => _processUserDataForWallet(
+        response: response,
+        userPublicKey: userPublicKey,
+        secretKey: secretKey,
+      ));
 }
 
 UserData _processUserDataForWallet({
   required GetUserDataResponse response,
+  required String userPublicKey,
   required String secretKey,
 }) {
   final validationMap = <String, ValidationResult>{};
@@ -102,6 +112,15 @@ UserData _processUserDataForWallet({
 
   for (final encryptedData in response.userData) {
     final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
+
+        final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(userPublicKey)));
+
+    if (!verifyKey.verify(
+      signature: Signature(Uint8List.fromList(encryptedData.signature)),
+      message: Uint8List.fromList(encryptedData.payload),
+    )) {
+      throw Exception('Invalid user data signature');
+    }
 
     final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);
 
@@ -171,24 +190,45 @@ UserData _processUserDataForWallet({
 
 Future<UserData> processUserDataForPartner({
   required partner.GetUserDataResponse response,
+  required String userPublicKey,
   required String secretKey,
 }) async {
   if (_isWeb) {
-    return _processUserDataForPartner(response: response, secretKey: secretKey);
+    return _processUserDataForPartner(
+      response: response,
+      userPublicKey: userPublicKey,
+      secretKey: secretKey,
+    );
   }
 
-  return Isolate.run(() => _processUserDataForPartner(response: response, secretKey: secretKey));
+  return Isolate.run(
+    () => _processUserDataForPartner(
+      response: response,
+      userPublicKey: userPublicKey,
+      secretKey: secretKey,
+    ),
+  );
 }
 
 UserData _processUserDataForPartner({
   required partner.GetUserDataResponse response,
+  required String userPublicKey,
   required String secretKey,
 }) {
   final validationMap = <String, ValidationResult>{};
   for (final data in response.validationData) {
     final validationResult = ValidationResult.fromBuffer(data.payload);
 
-    // TODO(KB): validate signature
+    final verifyKey = VerifyKey(
+      Uint8List.fromList(base58.decode(validationResult.validatorPublicKey)),
+    );
+
+    if (!verifyKey.verify(
+      signature: Signature(Uint8List.fromList(data.signature)),
+      message: Uint8List.fromList(data.payload),
+    )) {
+      throw Exception('Invalid validation data signature');
+    }
 
     validationMap[validationResult.hash] = validationResult;
   }
@@ -205,7 +245,14 @@ UserData _processUserDataForPartner({
   for (final encryptedData in response.userData) {
     final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
 
-    // TODO(KB): validate signature
+    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(userPublicKey)));
+
+    if (!verifyKey.verify(
+      signature: Signature(Uint8List.fromList(encryptedData.signature)),
+      message: Uint8List.fromList(encryptedData.payload),
+    )) {
+      throw Exception('Invalid user data signature');
+    }
 
     final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);
 

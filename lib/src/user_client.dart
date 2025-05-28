@@ -370,7 +370,11 @@ class KycUserClient {
       GetUserDataRequest(includeValues: includeValues),
     );
 
-    return processUserDataForWallet(response: response, secretKey: secretKey);
+    return processUserDataForWallet(
+      response: response,
+      userPublicKey: _authPublicKey,
+      secretKey: secretKey,
+    );
   }
 
   Future<void> initEmailValidation({required String dataHash}) async {

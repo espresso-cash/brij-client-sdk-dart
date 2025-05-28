@@ -117,7 +117,11 @@ class KycPartnerClient {
       GetUserDataRequest(userPublicKey: userPK, includeValues: includeValues),
     );
 
-    return processUserDataForPartner(response: response, secretKey: secretKey);
+    return processUserDataForPartner(
+      response: response,
+      userPublicKey: userPK,
+      secretKey: secretKey,
+    );
   }
 
   Future<void> setValidationResult({
