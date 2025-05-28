@@ -73,26 +73,32 @@ Future<UserData> processUserDataForWallet({
   required GetUserDataResponse response,
   required String userPublicKey,
   required String secretKey,
+  required bool shouldValidateDataSignature,
 }) async {
   if (_isWeb) {
     return _processUserDataForWallet(
       response: response,
       userPublicKey: userPublicKey,
       secretKey: secretKey,
+      shouldValidateDataSignature: shouldValidateDataSignature,
     );
   }
 
-  return Isolate.run(() => _processUserDataForWallet(
-        response: response,
-        userPublicKey: userPublicKey,
-        secretKey: secretKey,
-      ));
+  return Isolate.run(
+    () => _processUserDataForWallet(
+      response: response,
+      userPublicKey: userPublicKey,
+      secretKey: secretKey,
+      shouldValidateDataSignature: shouldValidateDataSignature,
+    ),
+  );
 }
 
 UserData _processUserDataForWallet({
   required GetUserDataResponse response,
   required String userPublicKey,
   required String secretKey,
+  required bool shouldValidateDataSignature,
 }) {
   final validationMap = <String, ValidationResult>{};
   for (final data in response.validationData) {
@@ -113,13 +119,15 @@ UserData _processUserDataForWallet({
   for (final encryptedData in response.userData) {
     final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
 
-        final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(userPublicKey)));
+    if (shouldValidateDataSignature) {
+      final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(userPublicKey)));
 
-    if (!verifyKey.verify(
-      signature: Signature(Uint8List.fromList(encryptedData.signature)),
-      message: Uint8List.fromList(encryptedData.payload),
-    )) {
-      throw Exception('Invalid user data signature');
+      if (!verifyKey.verify(
+        signature: Signature(Uint8List.fromList(encryptedData.signature)),
+        message: Uint8List.fromList(encryptedData.payload),
+      )) {
+        throw Exception('Invalid user data signature');
+      }
     }
 
     final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);
@@ -192,12 +200,14 @@ Future<UserData> processUserDataForPartner({
   required partner.GetUserDataResponse response,
   required String userPublicKey,
   required String secretKey,
+  required bool shouldValidateDataSignature,
 }) async {
   if (_isWeb) {
     return _processUserDataForPartner(
       response: response,
       userPublicKey: userPublicKey,
       secretKey: secretKey,
+      shouldValidateDataSignature: shouldValidateDataSignature,
     );
   }
 
@@ -206,6 +216,7 @@ Future<UserData> processUserDataForPartner({
       response: response,
       userPublicKey: userPublicKey,
       secretKey: secretKey,
+      shouldValidateDataSignature: shouldValidateDataSignature,
     ),
   );
 }
@@ -214,6 +225,7 @@ UserData _processUserDataForPartner({
   required partner.GetUserDataResponse response,
   required String userPublicKey,
   required String secretKey,
+  required bool shouldValidateDataSignature,
 }) {
   final validationMap = <String, ValidationResult>{};
   for (final data in response.validationData) {
@@ -245,13 +257,15 @@ UserData _processUserDataForPartner({
   for (final encryptedData in response.userData) {
     final user = u.UserDataEnvelope.fromBuffer(encryptedData.payload);
 
-    final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(userPublicKey)));
+    if (shouldValidateDataSignature) {
+      final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(userPublicKey)));
 
-    if (!verifyKey.verify(
-      signature: Signature(Uint8List.fromList(encryptedData.signature)),
-      message: Uint8List.fromList(encryptedData.payload),
-    )) {
-      throw Exception('Invalid user data signature');
+      if (!verifyKey.verify(
+        signature: Signature(Uint8List.fromList(encryptedData.signature)),
+        message: Uint8List.fromList(encryptedData.payload),
+      )) {
+        throw Exception('Invalid user data signature');
+      }
     }
 
     final decryptedData = decrypt(encryptedData: user.encryptedValue, secretKey: secretKey);

@@ -121,6 +121,7 @@ class KycPartnerClient {
       response: response,
       userPublicKey: userPK,
       secretKey: secretKey,
+      shouldValidateDataSignature: includeValues,
     );
   }
 

@@ -374,6 +374,7 @@ class KycUserClient {
       response: response,
       userPublicKey: _authPublicKey,
       secretKey: secretKey,
+      shouldValidateDataSignature: includeValues,
     );
   }
 
