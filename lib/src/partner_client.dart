@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:brij_client/brij_client.dart';
 import 'package:brij_client/src/common.dart';
 import 'package:brij_client/src/grpc/transport.dart';
+import 'package:brij_protos_dart/gen/brij/orders/v1/common/envelopes.pb.dart' as common;
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.connect.client.dart' as orders;
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/kyc.pb.dart';
@@ -169,39 +170,21 @@ class KycPartnerClient {
     required OrderId orderId,
     required String bankName,
     required String bankAccount,
-    required String userSecretKey,
   }) async {
-    final secretBox = SecretBox(Uint8List.fromList(base58.decode(userSecretKey)));
+    final protoMessage =
+        common.OnRampOrderPartnerEnvelope(
+          orderId: orderId.orderId,
+          bankName: bankName,
+          bankAccount: bankAccount,
+        ).writeToBuffer();
 
-    final encryptedBankName = base64Encode(
-      encrypt(data: utf8.encode(bankName), secretBox: secretBox),
-    );
-
-    final encryptedBankAccount = base64Encode(
-      encrypt(data: utf8.encode(bankAccount), secretBox: secretBox),
-    );
-
-    final order = await getOrder(orderId: orderId);
-
-    final signatureMessage = createPartnerOnRampMessage(
-      orderId: order.orderId,
-      cryptoAmount: order.cryptoAmount,
-      cryptoCurrency: order.cryptoCurrency,
-      fiatAmount: order.fiatAmount,
-      fiatCurrency: order.fiatCurrency,
-      encryptedBankName: encryptedBankName,
-      encryptedBankAccount: encryptedBankAccount,
-    );
-    final signature = _signingKey.sign(utf8.encode(signatureMessage));
+    final signature = _signingKey.sign(protoMessage);
 
     await _orderClient.acceptOrder(
       AcceptOrderRequest(
-        orderId: orderId.orderId,
+        payload: protoMessage,
+        signature: signature.signature.asTypedList,
         externalId: orderId.externalId,
-        bankName: encryptedBankName,
-        bankAccount: encryptedBankAccount,
-        cryptoWalletAddress: '',
-        partnerSignature: base58.encode(signature.signature.asTypedList),
       ),
     );
   }
@@ -210,25 +193,19 @@ class KycPartnerClient {
     required OrderId orderId,
     required String cryptoWalletAddress,
   }) async {
-    final order = await getOrder(orderId: orderId);
-    final signatureMessage = createPartnerOffRampMessage(
-      orderId: order.orderId,
-      cryptoAmount: order.cryptoAmount,
-      cryptoCurrency: order.cryptoCurrency,
-      fiatAmount: order.fiatAmount,
-      fiatCurrency: order.fiatCurrency,
-      cryptoWalletAddress: cryptoWalletAddress,
-    );
-    final signature = _signingKey.sign(utf8.encode(signatureMessage));
+    final protoMessage =
+        common.OffRampOrderPartnerEnvelope(
+          orderId: orderId.orderId,
+          cryptoWalletAddress: cryptoWalletAddress,
+        ).writeToBuffer();
+
+    final signature = _signingKey.sign(protoMessage);
 
     await _orderClient.acceptOrder(
       AcceptOrderRequest(
-        orderId: orderId.orderId,
+        payload: protoMessage,
+        signature: signature.signature.asTypedList,
         externalId: orderId.externalId,
-        cryptoWalletAddress: cryptoWalletAddress,
-        bankName: '',
-        bankAccount: '',
-        partnerSignature: base58.encode(signature.signature.asTypedList),
       ),
     );
   }
