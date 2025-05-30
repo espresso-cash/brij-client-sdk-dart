@@ -12,7 +12,8 @@ part of 'fee_update.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$FeeUpdate {
@@ -32,10 +33,11 @@ abstract class $FeeUpdateCopyWith<$Res> {
   factory $FeeUpdateCopyWith(FeeUpdate value, $Res Function(FeeUpdate) then) =
       _$FeeUpdateCopyWithImpl<$Res, FeeUpdate>;
   @useResult
-  $Res call(
-      {RampFeeUpdate onRampFee,
-      RampFeeUpdate offRampFee,
-      String walletAddress});
+  $Res call({
+    RampFeeUpdate onRampFee,
+    RampFeeUpdate offRampFee,
+    String walletAddress,
+  });
 
   $RampFeeUpdateCopyWith<$Res> get onRampFee;
   $RampFeeUpdateCopyWith<$Res> get offRampFee;
@@ -60,20 +62,26 @@ class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
     Object? offRampFee = null,
     Object? walletAddress = null,
   }) {
-    return _then(_value.copyWith(
-      onRampFee: null == onRampFee
-          ? _value.onRampFee
-          : onRampFee // ignore: cast_nullable_to_non_nullable
-              as RampFeeUpdate,
-      offRampFee: null == offRampFee
-          ? _value.offRampFee
-          : offRampFee // ignore: cast_nullable_to_non_nullable
-              as RampFeeUpdate,
-      walletAddress: null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            onRampFee:
+                null == onRampFee
+                    ? _value.onRampFee
+                    : onRampFee // ignore: cast_nullable_to_non_nullable
+                        as RampFeeUpdate,
+            offRampFee:
+                null == offRampFee
+                    ? _value.offRampFee
+                    : offRampFee // ignore: cast_nullable_to_non_nullable
+                        as RampFeeUpdate,
+            walletAddress:
+                null == walletAddress
+                    ? _value.walletAddress
+                    : walletAddress // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of FeeUpdate
@@ -101,14 +109,16 @@ class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
 abstract class _$$FeeUpdateImplCopyWith<$Res>
     implements $FeeUpdateCopyWith<$Res> {
   factory _$$FeeUpdateImplCopyWith(
-          _$FeeUpdateImpl value, $Res Function(_$FeeUpdateImpl) then) =
-      __$$FeeUpdateImplCopyWithImpl<$Res>;
+    _$FeeUpdateImpl value,
+    $Res Function(_$FeeUpdateImpl) then,
+  ) = __$$FeeUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {RampFeeUpdate onRampFee,
-      RampFeeUpdate offRampFee,
-      String walletAddress});
+  $Res call({
+    RampFeeUpdate onRampFee,
+    RampFeeUpdate offRampFee,
+    String walletAddress,
+  });
 
   @override
   $RampFeeUpdateCopyWith<$Res> get onRampFee;
@@ -121,8 +131,9 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
     extends _$FeeUpdateCopyWithImpl<$Res, _$FeeUpdateImpl>
     implements _$$FeeUpdateImplCopyWith<$Res> {
   __$$FeeUpdateImplCopyWithImpl(
-      _$FeeUpdateImpl _value, $Res Function(_$FeeUpdateImpl) _then)
-      : super(_value, _then);
+    _$FeeUpdateImpl _value,
+    $Res Function(_$FeeUpdateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -133,31 +144,36 @@ class __$$FeeUpdateImplCopyWithImpl<$Res>
     Object? offRampFee = null,
     Object? walletAddress = null,
   }) {
-    return _then(_$FeeUpdateImpl(
-      onRampFee: null == onRampFee
-          ? _value.onRampFee
-          : onRampFee // ignore: cast_nullable_to_non_nullable
-              as RampFeeUpdate,
-      offRampFee: null == offRampFee
-          ? _value.offRampFee
-          : offRampFee // ignore: cast_nullable_to_non_nullable
-              as RampFeeUpdate,
-      walletAddress: null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$FeeUpdateImpl(
+        onRampFee:
+            null == onRampFee
+                ? _value.onRampFee
+                : onRampFee // ignore: cast_nullable_to_non_nullable
+                    as RampFeeUpdate,
+        offRampFee:
+            null == offRampFee
+                ? _value.offRampFee
+                : offRampFee // ignore: cast_nullable_to_non_nullable
+                    as RampFeeUpdate,
+        walletAddress:
+            null == walletAddress
+                ? _value.walletAddress
+                : walletAddress // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$FeeUpdateImpl extends _FeeUpdate {
-  const _$FeeUpdateImpl(
-      {required this.onRampFee,
-      required this.offRampFee,
-      required this.walletAddress})
-      : super._();
+  const _$FeeUpdateImpl({
+    required this.onRampFee,
+    required this.offRampFee,
+    required this.walletAddress,
+  }) : super._();
 
   @override
   final RampFeeUpdate onRampFee;
@@ -198,10 +214,11 @@ class _$FeeUpdateImpl extends _FeeUpdate {
 }
 
 abstract class _FeeUpdate extends FeeUpdate {
-  const factory _FeeUpdate(
-      {required final RampFeeUpdate onRampFee,
-      required final RampFeeUpdate offRampFee,
-      required final String walletAddress}) = _$FeeUpdateImpl;
+  const factory _FeeUpdate({
+    required final RampFeeUpdate onRampFee,
+    required final RampFeeUpdate offRampFee,
+    required final String walletAddress,
+  }) = _$FeeUpdateImpl;
   const _FeeUpdate._() : super._();
 
   @override
@@ -235,11 +252,15 @@ mixin _$RampFeeUpdate {
 /// @nodoc
 abstract class $RampFeeUpdateCopyWith<$Res> {
   factory $RampFeeUpdateCopyWith(
-          RampFeeUpdate value, $Res Function(RampFeeUpdate) then) =
-      _$RampFeeUpdateCopyWithImpl<$Res, RampFeeUpdate>;
+    RampFeeUpdate value,
+    $Res Function(RampFeeUpdate) then,
+  ) = _$RampFeeUpdateCopyWithImpl<$Res, RampFeeUpdate>;
   @useResult
-  $Res call(
-      {double fixedFee, double percentageFee, ConversionRate conversionRates});
+  $Res call({
+    double fixedFee,
+    double percentageFee,
+    ConversionRate conversionRates,
+  });
 
   $ConversionRateCopyWith<$Res> get conversionRates;
 }
@@ -263,20 +284,26 @@ class _$RampFeeUpdateCopyWithImpl<$Res, $Val extends RampFeeUpdate>
     Object? percentageFee = null,
     Object? conversionRates = null,
   }) {
-    return _then(_value.copyWith(
-      fixedFee: null == fixedFee
-          ? _value.fixedFee
-          : fixedFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentageFee: null == percentageFee
-          ? _value.percentageFee
-          : percentageFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      conversionRates: null == conversionRates
-          ? _value.conversionRates
-          : conversionRates // ignore: cast_nullable_to_non_nullable
-              as ConversionRate,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            fixedFee:
+                null == fixedFee
+                    ? _value.fixedFee
+                    : fixedFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+            percentageFee:
+                null == percentageFee
+                    ? _value.percentageFee
+                    : percentageFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+            conversionRates:
+                null == conversionRates
+                    ? _value.conversionRates
+                    : conversionRates // ignore: cast_nullable_to_non_nullable
+                        as ConversionRate,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of RampFeeUpdate
@@ -294,12 +321,16 @@ class _$RampFeeUpdateCopyWithImpl<$Res, $Val extends RampFeeUpdate>
 abstract class _$$RampFeeUpdateImplCopyWith<$Res>
     implements $RampFeeUpdateCopyWith<$Res> {
   factory _$$RampFeeUpdateImplCopyWith(
-          _$RampFeeUpdateImpl value, $Res Function(_$RampFeeUpdateImpl) then) =
-      __$$RampFeeUpdateImplCopyWithImpl<$Res>;
+    _$RampFeeUpdateImpl value,
+    $Res Function(_$RampFeeUpdateImpl) then,
+  ) = __$$RampFeeUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {double fixedFee, double percentageFee, ConversionRate conversionRates});
+  $Res call({
+    double fixedFee,
+    double percentageFee,
+    ConversionRate conversionRates,
+  });
 
   @override
   $ConversionRateCopyWith<$Res> get conversionRates;
@@ -310,8 +341,9 @@ class __$$RampFeeUpdateImplCopyWithImpl<$Res>
     extends _$RampFeeUpdateCopyWithImpl<$Res, _$RampFeeUpdateImpl>
     implements _$$RampFeeUpdateImplCopyWith<$Res> {
   __$$RampFeeUpdateImplCopyWithImpl(
-      _$RampFeeUpdateImpl _value, $Res Function(_$RampFeeUpdateImpl) _then)
-      : super(_value, _then);
+    _$RampFeeUpdateImpl _value,
+    $Res Function(_$RampFeeUpdateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of RampFeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -322,31 +354,36 @@ class __$$RampFeeUpdateImplCopyWithImpl<$Res>
     Object? percentageFee = null,
     Object? conversionRates = null,
   }) {
-    return _then(_$RampFeeUpdateImpl(
-      fixedFee: null == fixedFee
-          ? _value.fixedFee
-          : fixedFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentageFee: null == percentageFee
-          ? _value.percentageFee
-          : percentageFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      conversionRates: null == conversionRates
-          ? _value.conversionRates
-          : conversionRates // ignore: cast_nullable_to_non_nullable
-              as ConversionRate,
-    ));
+    return _then(
+      _$RampFeeUpdateImpl(
+        fixedFee:
+            null == fixedFee
+                ? _value.fixedFee
+                : fixedFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+        percentageFee:
+            null == percentageFee
+                ? _value.percentageFee
+                : percentageFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+        conversionRates:
+            null == conversionRates
+                ? _value.conversionRates
+                : conversionRates // ignore: cast_nullable_to_non_nullable
+                    as ConversionRate,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$RampFeeUpdateImpl extends _RampFeeUpdate {
-  const _$RampFeeUpdateImpl(
-      {required this.fixedFee,
-      required this.percentageFee,
-      required this.conversionRates})
-      : super._();
+  const _$RampFeeUpdateImpl({
+    required this.fixedFee,
+    required this.percentageFee,
+    required this.conversionRates,
+  }) : super._();
 
   @override
   final double fixedFee;
@@ -387,10 +424,11 @@ class _$RampFeeUpdateImpl extends _RampFeeUpdate {
 }
 
 abstract class _RampFeeUpdate extends RampFeeUpdate {
-  const factory _RampFeeUpdate(
-      {required final double fixedFee,
-      required final double percentageFee,
-      required final ConversionRate conversionRates}) = _$RampFeeUpdateImpl;
+  const factory _RampFeeUpdate({
+    required final double fixedFee,
+    required final double percentageFee,
+    required final ConversionRate conversionRates,
+  }) = _$RampFeeUpdateImpl;
   const _RampFeeUpdate._() : super._();
 
   @override
@@ -424,8 +462,9 @@ mixin _$ConversionRate {
 /// @nodoc
 abstract class $ConversionRateCopyWith<$Res> {
   factory $ConversionRateCopyWith(
-          ConversionRate value, $Res Function(ConversionRate) then) =
-      _$ConversionRateCopyWithImpl<$Res, ConversionRate>;
+    ConversionRate value,
+    $Res Function(ConversionRate) then,
+  ) = _$ConversionRateCopyWithImpl<$Res, ConversionRate>;
   @useResult
   $Res call({String cryptoCurrency, String fiatCurrency, double rate});
 }
@@ -449,29 +488,36 @@ class _$ConversionRateCopyWithImpl<$Res, $Val extends ConversionRate>
     Object? fiatCurrency = null,
     Object? rate = null,
   }) {
-    return _then(_value.copyWith(
-      cryptoCurrency: null == cryptoCurrency
-          ? _value.cryptoCurrency
-          : cryptoCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      fiatCurrency: null == fiatCurrency
-          ? _value.fiatCurrency
-          : fiatCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      rate: null == rate
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            cryptoCurrency:
+                null == cryptoCurrency
+                    ? _value.cryptoCurrency
+                    : cryptoCurrency // ignore: cast_nullable_to_non_nullable
+                        as String,
+            fiatCurrency:
+                null == fiatCurrency
+                    ? _value.fiatCurrency
+                    : fiatCurrency // ignore: cast_nullable_to_non_nullable
+                        as String,
+            rate:
+                null == rate
+                    ? _value.rate
+                    : rate // ignore: cast_nullable_to_non_nullable
+                        as double,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ConversionRateImplCopyWith<$Res>
     implements $ConversionRateCopyWith<$Res> {
-  factory _$$ConversionRateImplCopyWith(_$ConversionRateImpl value,
-          $Res Function(_$ConversionRateImpl) then) =
-      __$$ConversionRateImplCopyWithImpl<$Res>;
+  factory _$$ConversionRateImplCopyWith(
+    _$ConversionRateImpl value,
+    $Res Function(_$ConversionRateImpl) then,
+  ) = __$$ConversionRateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String cryptoCurrency, String fiatCurrency, double rate});
@@ -482,8 +528,9 @@ class __$$ConversionRateImplCopyWithImpl<$Res>
     extends _$ConversionRateCopyWithImpl<$Res, _$ConversionRateImpl>
     implements _$$ConversionRateImplCopyWith<$Res> {
   __$$ConversionRateImplCopyWithImpl(
-      _$ConversionRateImpl _value, $Res Function(_$ConversionRateImpl) _then)
-      : super(_value, _then);
+    _$ConversionRateImpl _value,
+    $Res Function(_$ConversionRateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ConversionRate
   /// with the given fields replaced by the non-null parameter values.
@@ -494,31 +541,36 @@ class __$$ConversionRateImplCopyWithImpl<$Res>
     Object? fiatCurrency = null,
     Object? rate = null,
   }) {
-    return _then(_$ConversionRateImpl(
-      cryptoCurrency: null == cryptoCurrency
-          ? _value.cryptoCurrency
-          : cryptoCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      fiatCurrency: null == fiatCurrency
-          ? _value.fiatCurrency
-          : fiatCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      rate: null == rate
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+    return _then(
+      _$ConversionRateImpl(
+        cryptoCurrency:
+            null == cryptoCurrency
+                ? _value.cryptoCurrency
+                : cryptoCurrency // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fiatCurrency:
+            null == fiatCurrency
+                ? _value.fiatCurrency
+                : fiatCurrency // ignore: cast_nullable_to_non_nullable
+                    as String,
+        rate:
+            null == rate
+                ? _value.rate
+                : rate // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ConversionRateImpl extends _ConversionRate {
-  const _$ConversionRateImpl(
-      {required this.cryptoCurrency,
-      required this.fiatCurrency,
-      required this.rate})
-      : super._();
+  const _$ConversionRateImpl({
+    required this.cryptoCurrency,
+    required this.fiatCurrency,
+    required this.rate,
+  }) : super._();
 
   @override
   final String cryptoCurrency;
@@ -555,14 +607,17 @@ class _$ConversionRateImpl extends _ConversionRate {
   @pragma('vm:prefer-inline')
   _$$ConversionRateImplCopyWith<_$ConversionRateImpl> get copyWith =>
       __$$ConversionRateImplCopyWithImpl<_$ConversionRateImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 }
 
 abstract class _ConversionRate extends ConversionRate {
-  const factory _ConversionRate(
-      {required final String cryptoCurrency,
-      required final String fiatCurrency,
-      required final double rate}) = _$ConversionRateImpl;
+  const factory _ConversionRate({
+    required final String cryptoCurrency,
+    required final String fiatCurrency,
+    required final double rate,
+  }) = _$ConversionRateImpl;
   const _ConversionRate._() : super._();
 
   @override

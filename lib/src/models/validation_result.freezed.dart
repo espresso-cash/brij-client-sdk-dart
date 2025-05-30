@@ -12,7 +12,8 @@ part of 'validation_result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$ValidationResult {
@@ -31,14 +32,16 @@ mixin _$ValidationResult {
 /// @nodoc
 abstract class $ValidationResultCopyWith<$Res> {
   factory $ValidationResultCopyWith(
-          ValidationResult value, $Res Function(ValidationResult) then) =
-      _$ValidationResultCopyWithImpl<$Res, ValidationResult>;
+    ValidationResult value,
+    $Res Function(ValidationResult) then,
+  ) = _$ValidationResultCopyWithImpl<$Res, ValidationResult>;
   @useResult
-  $Res call(
-      {ValidationStatus status,
-      String hash,
-      String validatorPublicKey,
-      DateTime validatedAt});
+  $Res call({
+    ValidationStatus status,
+    String hash,
+    String validatorPublicKey,
+    DateTime validatedAt,
+  });
 }
 
 /// @nodoc
@@ -61,49 +64,59 @@ class _$ValidationResultCopyWithImpl<$Res, $Val extends ValidationResult>
     Object? validatorPublicKey = null,
     Object? validatedAt = null,
   }) {
-    return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
-      hash: null == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String,
-      validatorPublicKey: null == validatorPublicKey
-          ? _value.validatorPublicKey
-          : validatorPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      validatedAt: null == validatedAt
-          ? _value.validatedAt
-          : validatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as ValidationStatus,
+            hash:
+                null == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String,
+            validatorPublicKey:
+                null == validatorPublicKey
+                    ? _value.validatorPublicKey
+                    : validatorPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            validatedAt:
+                null == validatedAt
+                    ? _value.validatedAt
+                    : validatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ValidationResultImplCopyWith<$Res>
     implements $ValidationResultCopyWith<$Res> {
-  factory _$$ValidationResultImplCopyWith(_$ValidationResultImpl value,
-          $Res Function(_$ValidationResultImpl) then) =
-      __$$ValidationResultImplCopyWithImpl<$Res>;
+  factory _$$ValidationResultImplCopyWith(
+    _$ValidationResultImpl value,
+    $Res Function(_$ValidationResultImpl) then,
+  ) = __$$ValidationResultImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {ValidationStatus status,
-      String hash,
-      String validatorPublicKey,
-      DateTime validatedAt});
+  $Res call({
+    ValidationStatus status,
+    String hash,
+    String validatorPublicKey,
+    DateTime validatedAt,
+  });
 }
 
 /// @nodoc
 class __$$ValidationResultImplCopyWithImpl<$Res>
     extends _$ValidationResultCopyWithImpl<$Res, _$ValidationResultImpl>
     implements _$$ValidationResultImplCopyWith<$Res> {
-  __$$ValidationResultImplCopyWithImpl(_$ValidationResultImpl _value,
-      $Res Function(_$ValidationResultImpl) _then)
-      : super(_value, _then);
+  __$$ValidationResultImplCopyWithImpl(
+    _$ValidationResultImpl _value,
+    $Res Function(_$ValidationResultImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ValidationResult
   /// with the given fields replaced by the non-null parameter values.
@@ -115,36 +128,42 @@ class __$$ValidationResultImplCopyWithImpl<$Res>
     Object? validatorPublicKey = null,
     Object? validatedAt = null,
   }) {
-    return _then(_$ValidationResultImpl(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
-      hash: null == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String,
-      validatorPublicKey: null == validatorPublicKey
-          ? _value.validatorPublicKey
-          : validatorPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      validatedAt: null == validatedAt
-          ? _value.validatedAt
-          : validatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
+    return _then(
+      _$ValidationResultImpl(
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as ValidationStatus,
+        hash:
+            null == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String,
+        validatorPublicKey:
+            null == validatorPublicKey
+                ? _value.validatorPublicKey
+                : validatorPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        validatedAt:
+            null == validatedAt
+                ? _value.validatedAt
+                : validatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ValidationResultImpl extends _ValidationResult {
-  const _$ValidationResultImpl(
-      {required this.status,
-      required this.hash,
-      required this.validatorPublicKey,
-      required this.validatedAt})
-      : super._();
+  const _$ValidationResultImpl({
+    required this.status,
+    required this.hash,
+    required this.validatorPublicKey,
+    required this.validatedAt,
+  }) : super._();
 
   @override
   final ValidationStatus status;
@@ -184,15 +203,18 @@ class _$ValidationResultImpl extends _ValidationResult {
   @pragma('vm:prefer-inline')
   _$$ValidationResultImplCopyWith<_$ValidationResultImpl> get copyWith =>
       __$$ValidationResultImplCopyWithImpl<_$ValidationResultImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 }
 
 abstract class _ValidationResult extends ValidationResult {
-  const factory _ValidationResult(
-      {required final ValidationStatus status,
-      required final String hash,
-      required final String validatorPublicKey,
-      required final DateTime validatedAt}) = _$ValidationResultImpl;
+  const factory _ValidationResult({
+    required final ValidationStatus status,
+    required final String hash,
+    required final String validatorPublicKey,
+    required final DateTime validatedAt,
+  }) = _$ValidationResultImpl;
   const _ValidationResult._() : super._();
 
   @override
