@@ -12,7 +12,8 @@ part of 'partner_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$PartnerModel {
@@ -31,11 +32,16 @@ mixin _$PartnerModel {
 /// @nodoc
 abstract class $PartnerModelCopyWith<$Res> {
   factory $PartnerModelCopyWith(
-          PartnerModel value, $Res Function(PartnerModel) then) =
-      _$PartnerModelCopyWithImpl<$Res, PartnerModel>;
+    PartnerModel value,
+    $Res Function(PartnerModel) then,
+  ) = _$PartnerModelCopyWithImpl<$Res, PartnerModel>;
   @useResult
-  $Res call(
-      {String name, String publicKey, String privacyUrl, String termsUrl});
+  $Res call({
+    String name,
+    String publicKey,
+    String privacyUrl,
+    String termsUrl,
+  });
 }
 
 /// @nodoc
@@ -58,24 +64,31 @@ class _$PartnerModelCopyWithImpl<$Res, $Val extends PartnerModel>
     Object? privacyUrl = null,
     Object? termsUrl = null,
   }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      publicKey: null == publicKey
-          ? _value.publicKey
-          : publicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      privacyUrl: null == privacyUrl
-          ? _value.privacyUrl
-          : privacyUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      termsUrl: null == termsUrl
-          ? _value.termsUrl
-          : termsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            publicKey:
+                null == publicKey
+                    ? _value.publicKey
+                    : publicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            privacyUrl:
+                null == privacyUrl
+                    ? _value.privacyUrl
+                    : privacyUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            termsUrl:
+                null == termsUrl
+                    ? _value.termsUrl
+                    : termsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -83,12 +96,17 @@ class _$PartnerModelCopyWithImpl<$Res, $Val extends PartnerModel>
 abstract class _$$PartnerModelImplCopyWith<$Res>
     implements $PartnerModelCopyWith<$Res> {
   factory _$$PartnerModelImplCopyWith(
-          _$PartnerModelImpl value, $Res Function(_$PartnerModelImpl) then) =
-      __$$PartnerModelImplCopyWithImpl<$Res>;
+    _$PartnerModelImpl value,
+    $Res Function(_$PartnerModelImpl) then,
+  ) = __$$PartnerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String name, String publicKey, String privacyUrl, String termsUrl});
+  $Res call({
+    String name,
+    String publicKey,
+    String privacyUrl,
+    String termsUrl,
+  });
 }
 
 /// @nodoc
@@ -96,8 +114,9 @@ class __$$PartnerModelImplCopyWithImpl<$Res>
     extends _$PartnerModelCopyWithImpl<$Res, _$PartnerModelImpl>
     implements _$$PartnerModelImplCopyWith<$Res> {
   __$$PartnerModelImplCopyWithImpl(
-      _$PartnerModelImpl _value, $Res Function(_$PartnerModelImpl) _then)
-      : super(_value, _then);
+    _$PartnerModelImpl _value,
+    $Res Function(_$PartnerModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of PartnerModel
   /// with the given fields replaced by the non-null parameter values.
@@ -109,35 +128,42 @@ class __$$PartnerModelImplCopyWithImpl<$Res>
     Object? privacyUrl = null,
     Object? termsUrl = null,
   }) {
-    return _then(_$PartnerModelImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      publicKey: null == publicKey
-          ? _value.publicKey
-          : publicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      privacyUrl: null == privacyUrl
-          ? _value.privacyUrl
-          : privacyUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      termsUrl: null == termsUrl
-          ? _value.termsUrl
-          : termsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$PartnerModelImpl(
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        publicKey:
+            null == publicKey
+                ? _value.publicKey
+                : publicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        privacyUrl:
+            null == privacyUrl
+                ? _value.privacyUrl
+                : privacyUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        termsUrl:
+            null == termsUrl
+                ? _value.termsUrl
+                : termsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$PartnerModelImpl implements _PartnerModel {
-  _$PartnerModelImpl(
-      {required this.name,
-      required this.publicKey,
-      required this.privacyUrl,
-      required this.termsUrl});
+  _$PartnerModelImpl({
+    required this.name,
+    required this.publicKey,
+    required this.privacyUrl,
+    required this.termsUrl,
+  });
 
   @override
   final String name;
@@ -181,11 +207,12 @@ class _$PartnerModelImpl implements _PartnerModel {
 }
 
 abstract class _PartnerModel implements PartnerModel {
-  factory _PartnerModel(
-      {required final String name,
-      required final String publicKey,
-      required final String privacyUrl,
-      required final String termsUrl}) = _$PartnerModelImpl;
+  factory _PartnerModel({
+    required final String name,
+    required final String publicKey,
+    required final String privacyUrl,
+    required final String termsUrl,
+  }) = _$PartnerModelImpl;
 
   @override
   String get name;

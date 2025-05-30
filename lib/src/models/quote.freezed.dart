@@ -12,7 +12,8 @@ part of 'quote.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$Quote {
@@ -37,16 +38,17 @@ abstract class $QuoteCopyWith<$Res> {
   factory $QuoteCopyWith(Quote value, $Res Function(Quote) then) =
       _$QuoteCopyWithImpl<$Res, Quote>;
   @useResult
-  $Res call(
-      {double cryptoAmount,
-      double fiatAmount,
-      String fiatCurrency,
-      RampType type,
-      double conversionRate,
-      RampFee partnerFee,
-      RampFee walletFee,
-      RampFee platformFee,
-      double totalFee});
+  $Res call({
+    double cryptoAmount,
+    double fiatAmount,
+    String fiatCurrency,
+    RampType type,
+    double conversionRate,
+    RampFee partnerFee,
+    RampFee walletFee,
+    RampFee platformFee,
+    double totalFee,
+  });
 
   $RampFeeCopyWith<$Res> get partnerFee;
   $RampFeeCopyWith<$Res> get walletFee;
@@ -78,44 +80,56 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
     Object? platformFee = null,
     Object? totalFee = null,
   }) {
-    return _then(_value.copyWith(
-      cryptoAmount: null == cryptoAmount
-          ? _value.cryptoAmount
-          : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      fiatAmount: null == fiatAmount
-          ? _value.fiatAmount
-          : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      fiatCurrency: null == fiatCurrency
-          ? _value.fiatCurrency
-          : fiatCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as RampType,
-      conversionRate: null == conversionRate
-          ? _value.conversionRate
-          : conversionRate // ignore: cast_nullable_to_non_nullable
-              as double,
-      partnerFee: null == partnerFee
-          ? _value.partnerFee
-          : partnerFee // ignore: cast_nullable_to_non_nullable
-              as RampFee,
-      walletFee: null == walletFee
-          ? _value.walletFee
-          : walletFee // ignore: cast_nullable_to_non_nullable
-              as RampFee,
-      platformFee: null == platformFee
-          ? _value.platformFee
-          : platformFee // ignore: cast_nullable_to_non_nullable
-              as RampFee,
-      totalFee: null == totalFee
-          ? _value.totalFee
-          : totalFee // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            cryptoAmount:
+                null == cryptoAmount
+                    ? _value.cryptoAmount
+                    : cryptoAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            fiatAmount:
+                null == fiatAmount
+                    ? _value.fiatAmount
+                    : fiatAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            fiatCurrency:
+                null == fiatCurrency
+                    ? _value.fiatCurrency
+                    : fiatCurrency // ignore: cast_nullable_to_non_nullable
+                        as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as RampType,
+            conversionRate:
+                null == conversionRate
+                    ? _value.conversionRate
+                    : conversionRate // ignore: cast_nullable_to_non_nullable
+                        as double,
+            partnerFee:
+                null == partnerFee
+                    ? _value.partnerFee
+                    : partnerFee // ignore: cast_nullable_to_non_nullable
+                        as RampFee,
+            walletFee:
+                null == walletFee
+                    ? _value.walletFee
+                    : walletFee // ignore: cast_nullable_to_non_nullable
+                        as RampFee,
+            platformFee:
+                null == platformFee
+                    ? _value.platformFee
+                    : platformFee // ignore: cast_nullable_to_non_nullable
+                        as RampFee,
+            totalFee:
+                null == totalFee
+                    ? _value.totalFee
+                    : totalFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Quote
@@ -152,20 +166,22 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
 /// @nodoc
 abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
   factory _$$QuoteImplCopyWith(
-          _$QuoteImpl value, $Res Function(_$QuoteImpl) then) =
-      __$$QuoteImplCopyWithImpl<$Res>;
+    _$QuoteImpl value,
+    $Res Function(_$QuoteImpl) then,
+  ) = __$$QuoteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {double cryptoAmount,
-      double fiatAmount,
-      String fiatCurrency,
-      RampType type,
-      double conversionRate,
-      RampFee partnerFee,
-      RampFee walletFee,
-      RampFee platformFee,
-      double totalFee});
+  $Res call({
+    double cryptoAmount,
+    double fiatAmount,
+    String fiatCurrency,
+    RampType type,
+    double conversionRate,
+    RampFee partnerFee,
+    RampFee walletFee,
+    RampFee platformFee,
+    double totalFee,
+  });
 
   @override
   $RampFeeCopyWith<$Res> get partnerFee;
@@ -180,8 +196,9 @@ class __$$QuoteImplCopyWithImpl<$Res>
     extends _$QuoteCopyWithImpl<$Res, _$QuoteImpl>
     implements _$$QuoteImplCopyWith<$Res> {
   __$$QuoteImplCopyWithImpl(
-      _$QuoteImpl _value, $Res Function(_$QuoteImpl) _then)
-      : super(_value, _then);
+    _$QuoteImpl _value,
+    $Res Function(_$QuoteImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -198,60 +215,72 @@ class __$$QuoteImplCopyWithImpl<$Res>
     Object? platformFee = null,
     Object? totalFee = null,
   }) {
-    return _then(_$QuoteImpl(
-      cryptoAmount: null == cryptoAmount
-          ? _value.cryptoAmount
-          : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      fiatAmount: null == fiatAmount
-          ? _value.fiatAmount
-          : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      fiatCurrency: null == fiatCurrency
-          ? _value.fiatCurrency
-          : fiatCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as RampType,
-      conversionRate: null == conversionRate
-          ? _value.conversionRate
-          : conversionRate // ignore: cast_nullable_to_non_nullable
-              as double,
-      partnerFee: null == partnerFee
-          ? _value.partnerFee
-          : partnerFee // ignore: cast_nullable_to_non_nullable
-              as RampFee,
-      walletFee: null == walletFee
-          ? _value.walletFee
-          : walletFee // ignore: cast_nullable_to_non_nullable
-              as RampFee,
-      platformFee: null == platformFee
-          ? _value.platformFee
-          : platformFee // ignore: cast_nullable_to_non_nullable
-              as RampFee,
-      totalFee: null == totalFee
-          ? _value.totalFee
-          : totalFee // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+    return _then(
+      _$QuoteImpl(
+        cryptoAmount:
+            null == cryptoAmount
+                ? _value.cryptoAmount
+                : cryptoAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        fiatAmount:
+            null == fiatAmount
+                ? _value.fiatAmount
+                : fiatAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        fiatCurrency:
+            null == fiatCurrency
+                ? _value.fiatCurrency
+                : fiatCurrency // ignore: cast_nullable_to_non_nullable
+                    as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as RampType,
+        conversionRate:
+            null == conversionRate
+                ? _value.conversionRate
+                : conversionRate // ignore: cast_nullable_to_non_nullable
+                    as double,
+        partnerFee:
+            null == partnerFee
+                ? _value.partnerFee
+                : partnerFee // ignore: cast_nullable_to_non_nullable
+                    as RampFee,
+        walletFee:
+            null == walletFee
+                ? _value.walletFee
+                : walletFee // ignore: cast_nullable_to_non_nullable
+                    as RampFee,
+        platformFee:
+            null == platformFee
+                ? _value.platformFee
+                : platformFee // ignore: cast_nullable_to_non_nullable
+                    as RampFee,
+        totalFee:
+            null == totalFee
+                ? _value.totalFee
+                : totalFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$QuoteImpl implements _Quote {
-  const _$QuoteImpl(
-      {required this.cryptoAmount,
-      required this.fiatAmount,
-      required this.fiatCurrency,
-      required this.type,
-      required this.conversionRate,
-      required this.partnerFee,
-      required this.walletFee,
-      required this.platformFee,
-      required this.totalFee});
+  const _$QuoteImpl({
+    required this.cryptoAmount,
+    required this.fiatAmount,
+    required this.fiatCurrency,
+    required this.type,
+    required this.conversionRate,
+    required this.partnerFee,
+    required this.walletFee,
+    required this.platformFee,
+    required this.totalFee,
+  });
 
   @override
   final double cryptoAmount;
@@ -303,16 +332,17 @@ class _$QuoteImpl implements _Quote {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      cryptoAmount,
-      fiatAmount,
-      fiatCurrency,
-      type,
-      conversionRate,
-      partnerFee,
-      walletFee,
-      platformFee,
-      totalFee);
+    runtimeType,
+    cryptoAmount,
+    fiatAmount,
+    fiatCurrency,
+    type,
+    conversionRate,
+    partnerFee,
+    walletFee,
+    platformFee,
+    totalFee,
+  );
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -324,16 +354,17 @@ class _$QuoteImpl implements _Quote {
 }
 
 abstract class _Quote implements Quote {
-  const factory _Quote(
-      {required final double cryptoAmount,
-      required final double fiatAmount,
-      required final String fiatCurrency,
-      required final RampType type,
-      required final double conversionRate,
-      required final RampFee partnerFee,
-      required final RampFee walletFee,
-      required final RampFee platformFee,
-      required final double totalFee}) = _$QuoteImpl;
+  const factory _Quote({
+    required final double cryptoAmount,
+    required final double fiatAmount,
+    required final String fiatCurrency,
+    required final RampType type,
+    required final double conversionRate,
+    required final RampFee partnerFee,
+    required final RampFee walletFee,
+    required final RampFee platformFee,
+    required final double totalFee,
+  }) = _$QuoteImpl;
 
   @override
   double get cryptoAmount;
@@ -395,28 +426,31 @@ class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? fixedFee = null,
-    Object? percentageFee = null,
-  }) {
-    return _then(_value.copyWith(
-      fixedFee: null == fixedFee
-          ? _value.fixedFee
-          : fixedFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentageFee: null == percentageFee
-          ? _value.percentageFee
-          : percentageFee // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  $Res call({Object? fixedFee = null, Object? percentageFee = null}) {
+    return _then(
+      _value.copyWith(
+            fixedFee:
+                null == fixedFee
+                    ? _value.fixedFee
+                    : fixedFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+            percentageFee:
+                null == percentageFee
+                    ? _value.percentageFee
+                    : percentageFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$RampFeeImplCopyWith<$Res> implements $RampFeeCopyWith<$Res> {
   factory _$$RampFeeImplCopyWith(
-          _$RampFeeImpl value, $Res Function(_$RampFeeImpl) then) =
-      __$$RampFeeImplCopyWithImpl<$Res>;
+    _$RampFeeImpl value,
+    $Res Function(_$RampFeeImpl) then,
+  ) = __$$RampFeeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double fixedFee, double percentageFee});
@@ -427,27 +461,29 @@ class __$$RampFeeImplCopyWithImpl<$Res>
     extends _$RampFeeCopyWithImpl<$Res, _$RampFeeImpl>
     implements _$$RampFeeImplCopyWith<$Res> {
   __$$RampFeeImplCopyWithImpl(
-      _$RampFeeImpl _value, $Res Function(_$RampFeeImpl) _then)
-      : super(_value, _then);
+    _$RampFeeImpl _value,
+    $Res Function(_$RampFeeImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of RampFee
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? fixedFee = null,
-    Object? percentageFee = null,
-  }) {
-    return _then(_$RampFeeImpl(
-      fixedFee: null == fixedFee
-          ? _value.fixedFee
-          : fixedFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentageFee: null == percentageFee
-          ? _value.percentageFee
-          : percentageFee // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+  $Res call({Object? fixedFee = null, Object? percentageFee = null}) {
+    return _then(
+      _$RampFeeImpl(
+        fixedFee:
+            null == fixedFee
+                ? _value.fixedFee
+                : fixedFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+        percentageFee:
+            null == percentageFee
+                ? _value.percentageFee
+                : percentageFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
   }
 }
 
@@ -490,9 +526,10 @@ class _$RampFeeImpl implements _RampFee {
 }
 
 abstract class _RampFee implements RampFee {
-  const factory _RampFee(
-      {required final double fixedFee,
-      required final double percentageFee}) = _$RampFeeImpl;
+  const factory _RampFee({
+    required final double fixedFee,
+    required final double percentageFee,
+  }) = _$RampFeeImpl;
 
   @override
   double get fixedFee;

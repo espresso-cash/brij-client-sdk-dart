@@ -12,7 +12,8 @@ part of 'kyc_requirement.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$KycRequirement {
@@ -29,8 +30,9 @@ mixin _$KycRequirement {
 /// @nodoc
 abstract class $KycRequirementCopyWith<$Res> {
   factory $KycRequirementCopyWith(
-          KycRequirement value, $Res Function(KycRequirement) then) =
-      _$KycRequirementCopyWithImpl<$Res, KycRequirement>;
+    KycRequirement value,
+    $Res Function(KycRequirement) then,
+  ) = _$KycRequirementCopyWithImpl<$Res, KycRequirement>;
   @useResult
   $Res call({String country, List<Requirement> requirements});
 }
@@ -49,29 +51,32 @@ class _$KycRequirementCopyWithImpl<$Res, $Val extends KycRequirement>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? country = null,
-    Object? requirements = null,
-  }) {
-    return _then(_value.copyWith(
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
-      requirements: null == requirements
-          ? _value.requirements
-          : requirements // ignore: cast_nullable_to_non_nullable
-              as List<Requirement>,
-    ) as $Val);
+  $Res call({Object? country = null, Object? requirements = null}) {
+    return _then(
+      _value.copyWith(
+            country:
+                null == country
+                    ? _value.country
+                    : country // ignore: cast_nullable_to_non_nullable
+                        as String,
+            requirements:
+                null == requirements
+                    ? _value.requirements
+                    : requirements // ignore: cast_nullable_to_non_nullable
+                        as List<Requirement>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$KycRequirementImplCopyWith<$Res>
     implements $KycRequirementCopyWith<$Res> {
-  factory _$$KycRequirementImplCopyWith(_$KycRequirementImpl value,
-          $Res Function(_$KycRequirementImpl) then) =
-      __$$KycRequirementImplCopyWithImpl<$Res>;
+  factory _$$KycRequirementImplCopyWith(
+    _$KycRequirementImpl value,
+    $Res Function(_$KycRequirementImpl) then,
+  ) = __$$KycRequirementImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String country, List<Requirement> requirements});
@@ -82,36 +87,39 @@ class __$$KycRequirementImplCopyWithImpl<$Res>
     extends _$KycRequirementCopyWithImpl<$Res, _$KycRequirementImpl>
     implements _$$KycRequirementImplCopyWith<$Res> {
   __$$KycRequirementImplCopyWithImpl(
-      _$KycRequirementImpl _value, $Res Function(_$KycRequirementImpl) _then)
-      : super(_value, _then);
+    _$KycRequirementImpl _value,
+    $Res Function(_$KycRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of KycRequirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? country = null,
-    Object? requirements = null,
-  }) {
-    return _then(_$KycRequirementImpl(
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
-      requirements: null == requirements
-          ? _value._requirements
-          : requirements // ignore: cast_nullable_to_non_nullable
-              as List<Requirement>,
-    ));
+  $Res call({Object? country = null, Object? requirements = null}) {
+    return _then(
+      _$KycRequirementImpl(
+        country:
+            null == country
+                ? _value.country
+                : country // ignore: cast_nullable_to_non_nullable
+                    as String,
+        requirements:
+            null == requirements
+                ? _value._requirements
+                : requirements // ignore: cast_nullable_to_non_nullable
+                    as List<Requirement>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$KycRequirementImpl implements _KycRequirement {
-  const _$KycRequirementImpl(
-      {required this.country, required final List<Requirement> requirements})
-      : _requirements = requirements;
+  const _$KycRequirementImpl({
+    required this.country,
+    required final List<Requirement> requirements,
+  }) : _requirements = requirements;
 
   @override
   final String country;
@@ -134,13 +142,18 @@ class _$KycRequirementImpl implements _KycRequirement {
         (other.runtimeType == runtimeType &&
             other is _$KycRequirementImpl &&
             (identical(other.country, country) || other.country == country) &&
-            const DeepCollectionEquality()
-                .equals(other._requirements, _requirements));
+            const DeepCollectionEquality().equals(
+              other._requirements,
+              _requirements,
+            ));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, country, const DeepCollectionEquality().hash(_requirements));
+    runtimeType,
+    country,
+    const DeepCollectionEquality().hash(_requirements),
+  );
 
   /// Create a copy of KycRequirement
   /// with the given fields replaced by the non-null parameter values.
@@ -149,13 +162,16 @@ class _$KycRequirementImpl implements _KycRequirement {
   @pragma('vm:prefer-inline')
   _$$KycRequirementImplCopyWith<_$KycRequirementImpl> get copyWith =>
       __$$KycRequirementImplCopyWithImpl<_$KycRequirementImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 }
 
 abstract class _KycRequirement implements KycRequirement {
-  const factory _KycRequirement(
-      {required final String country,
-      required final List<Requirement> requirements}) = _$KycRequirementImpl;
+  const factory _KycRequirement({
+    required final String country,
+    required final List<Requirement> requirements,
+  }) = _$KycRequirementImpl;
 
   @override
   String get country;
@@ -181,8 +197,7 @@ mixin _$Requirement {
     required TResult Function(List<Requirement> requirements) and,
     required TResult Function(List<Requirement> requirements) or,
     required TResult Function(Requirement requirement) not,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoType type)? basicInfo,
@@ -192,8 +207,7 @@ mixin _$Requirement {
     TResult? Function(List<Requirement> requirements)? and,
     TResult? Function(List<Requirement> requirements)? or,
     TResult? Function(Requirement requirement)? not,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BasicInfoType type)? basicInfo,
@@ -204,8 +218,7 @@ mixin _$Requirement {
     TResult Function(List<Requirement> requirements)? or,
     TResult Function(Requirement requirement)? not,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BasicInfoRequirement value) basicInfo,
@@ -215,8 +228,7 @@ mixin _$Requirement {
     required TResult Function(AndRequirement value) and,
     required TResult Function(OrRequirement value) or,
     required TResult Function(NotRequirement value) not,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BasicInfoRequirement value)? basicInfo,
@@ -226,8 +238,7 @@ mixin _$Requirement {
     TResult? Function(AndRequirement value)? and,
     TResult? Function(OrRequirement value)? or,
     TResult? Function(NotRequirement value)? not,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BasicInfoRequirement value)? basicInfo,
@@ -238,15 +249,15 @@ mixin _$Requirement {
     TResult Function(OrRequirement value)? or,
     TResult Function(NotRequirement value)? not,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RequirementCopyWith<$Res> {
   factory $RequirementCopyWith(
-          Requirement value, $Res Function(Requirement) then) =
-      _$RequirementCopyWithImpl<$Res, Requirement>;
+    Requirement value,
+    $Res Function(Requirement) then,
+  ) = _$RequirementCopyWithImpl<$Res, Requirement>;
 }
 
 /// @nodoc
@@ -265,9 +276,10 @@ class _$RequirementCopyWithImpl<$Res, $Val extends Requirement>
 
 /// @nodoc
 abstract class _$$BasicInfoRequirementImplCopyWith<$Res> {
-  factory _$$BasicInfoRequirementImplCopyWith(_$BasicInfoRequirementImpl value,
-          $Res Function(_$BasicInfoRequirementImpl) then) =
-      __$$BasicInfoRequirementImplCopyWithImpl<$Res>;
+  factory _$$BasicInfoRequirementImplCopyWith(
+    _$BasicInfoRequirementImpl value,
+    $Res Function(_$BasicInfoRequirementImpl) then,
+  ) = __$$BasicInfoRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BasicInfoType type});
 }
@@ -276,23 +288,25 @@ abstract class _$$BasicInfoRequirementImplCopyWith<$Res> {
 class __$$BasicInfoRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$BasicInfoRequirementImpl>
     implements _$$BasicInfoRequirementImplCopyWith<$Res> {
-  __$$BasicInfoRequirementImplCopyWithImpl(_$BasicInfoRequirementImpl _value,
-      $Res Function(_$BasicInfoRequirementImpl) _then)
-      : super(_value, _then);
+  __$$BasicInfoRequirementImplCopyWithImpl(
+    _$BasicInfoRequirementImpl _value,
+    $Res Function(_$BasicInfoRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_$BasicInfoRequirementImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as BasicInfoType,
-    ));
+  $Res call({Object? type = null}) {
+    return _then(
+      _$BasicInfoRequirementImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as BasicInfoType,
+      ),
+    );
   }
 }
 
@@ -326,9 +340,11 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl>
-      get copyWith =>
-          __$$BasicInfoRequirementImplCopyWithImpl<_$BasicInfoRequirementImpl>(
-              this, _$identity);
+  get copyWith =>
+      __$$BasicInfoRequirementImplCopyWithImpl<_$BasicInfoRequirementImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -433,15 +449,15 @@ abstract class BasicInfoRequirement implements Requirement {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$CountryCodeRequirementImplCopyWith<$Res> {
   factory _$$CountryCodeRequirementImplCopyWith(
-          _$CountryCodeRequirementImpl value,
-          $Res Function(_$CountryCodeRequirementImpl) then) =
-      __$$CountryCodeRequirementImplCopyWithImpl<$Res>;
+    _$CountryCodeRequirementImpl value,
+    $Res Function(_$CountryCodeRequirementImpl) then,
+  ) = __$$CountryCodeRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String code});
 }
@@ -451,23 +467,24 @@ class __$$CountryCodeRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$CountryCodeRequirementImpl>
     implements _$$CountryCodeRequirementImplCopyWith<$Res> {
   __$$CountryCodeRequirementImplCopyWithImpl(
-      _$CountryCodeRequirementImpl _value,
-      $Res Function(_$CountryCodeRequirementImpl) _then)
-      : super(_value, _then);
+    _$CountryCodeRequirementImpl _value,
+    $Res Function(_$CountryCodeRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? code = null,
-  }) {
-    return _then(_$CountryCodeRequirementImpl(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? code = null}) {
+    return _then(
+      _$CountryCodeRequirementImpl(
+        code:
+            null == code
+                ? _value.code
+                : code // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -501,8 +518,11 @@ class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl>
-      get copyWith => __$$CountryCodeRequirementImplCopyWithImpl<
-          _$CountryCodeRequirementImpl>(this, _$identity);
+  get copyWith =>
+      __$$CountryCodeRequirementImplCopyWithImpl<_$CountryCodeRequirementImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -607,15 +627,15 @@ abstract class CountryCodeRequirement implements Requirement {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$DocumentTypeRequirementImplCopyWith<$Res> {
   factory _$$DocumentTypeRequirementImplCopyWith(
-          _$DocumentTypeRequirementImpl value,
-          $Res Function(_$DocumentTypeRequirementImpl) then) =
-      __$$DocumentTypeRequirementImplCopyWithImpl<$Res>;
+    _$DocumentTypeRequirementImpl value,
+    $Res Function(_$DocumentTypeRequirementImpl) then,
+  ) = __$$DocumentTypeRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({IdType type});
 }
@@ -625,23 +645,24 @@ class __$$DocumentTypeRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$DocumentTypeRequirementImpl>
     implements _$$DocumentTypeRequirementImplCopyWith<$Res> {
   __$$DocumentTypeRequirementImplCopyWithImpl(
-      _$DocumentTypeRequirementImpl _value,
-      $Res Function(_$DocumentTypeRequirementImpl) _then)
-      : super(_value, _then);
+    _$DocumentTypeRequirementImpl _value,
+    $Res Function(_$DocumentTypeRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_$DocumentTypeRequirementImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as IdType,
-    ));
+  $Res call({Object? type = null}) {
+    return _then(
+      _$DocumentTypeRequirementImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as IdType,
+      ),
+    );
   }
 }
 
@@ -675,8 +696,9 @@ class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl>
-      get copyWith => __$$DocumentTypeRequirementImplCopyWithImpl<
-          _$DocumentTypeRequirementImpl>(this, _$identity);
+  get copyWith => __$$DocumentTypeRequirementImplCopyWithImpl<
+    _$DocumentTypeRequirementImpl
+  >(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -781,15 +803,15 @@ abstract class DocumentTypeRequirement implements Requirement {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$DocumentFieldRequirementImplCopyWith<$Res> {
   factory _$$DocumentFieldRequirementImplCopyWith(
-          _$DocumentFieldRequirementImpl value,
-          $Res Function(_$DocumentFieldRequirementImpl) then) =
-      __$$DocumentFieldRequirementImplCopyWithImpl<$Res>;
+    _$DocumentFieldRequirementImpl value,
+    $Res Function(_$DocumentFieldRequirementImpl) then,
+  ) = __$$DocumentFieldRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DocumentField field});
 }
@@ -799,23 +821,24 @@ class __$$DocumentFieldRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$DocumentFieldRequirementImpl>
     implements _$$DocumentFieldRequirementImplCopyWith<$Res> {
   __$$DocumentFieldRequirementImplCopyWithImpl(
-      _$DocumentFieldRequirementImpl _value,
-      $Res Function(_$DocumentFieldRequirementImpl) _then)
-      : super(_value, _then);
+    _$DocumentFieldRequirementImpl _value,
+    $Res Function(_$DocumentFieldRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? field = null,
-  }) {
-    return _then(_$DocumentFieldRequirementImpl(
-      field: null == field
-          ? _value.field
-          : field // ignore: cast_nullable_to_non_nullable
-              as DocumentField,
-    ));
+  $Res call({Object? field = null}) {
+    return _then(
+      _$DocumentFieldRequirementImpl(
+        field:
+            null == field
+                ? _value.field
+                : field // ignore: cast_nullable_to_non_nullable
+                    as DocumentField,
+      ),
+    );
   }
 }
 
@@ -849,8 +872,9 @@ class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl>
-      get copyWith => __$$DocumentFieldRequirementImplCopyWithImpl<
-          _$DocumentFieldRequirementImpl>(this, _$identity);
+  get copyWith => __$$DocumentFieldRequirementImplCopyWithImpl<
+    _$DocumentFieldRequirementImpl
+  >(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -955,14 +979,15 @@ abstract class DocumentFieldRequirement implements Requirement {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$AndRequirementImplCopyWith<$Res> {
-  factory _$$AndRequirementImplCopyWith(_$AndRequirementImpl value,
-          $Res Function(_$AndRequirementImpl) then) =
-      __$$AndRequirementImplCopyWithImpl<$Res>;
+  factory _$$AndRequirementImplCopyWith(
+    _$AndRequirementImpl value,
+    $Res Function(_$AndRequirementImpl) then,
+  ) = __$$AndRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Requirement> requirements});
 }
@@ -972,22 +997,24 @@ class __$$AndRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$AndRequirementImpl>
     implements _$$AndRequirementImplCopyWith<$Res> {
   __$$AndRequirementImplCopyWithImpl(
-      _$AndRequirementImpl _value, $Res Function(_$AndRequirementImpl) _then)
-      : super(_value, _then);
+    _$AndRequirementImpl _value,
+    $Res Function(_$AndRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? requirements = null,
-  }) {
-    return _then(_$AndRequirementImpl(
-      requirements: null == requirements
-          ? _value._requirements
-          : requirements // ignore: cast_nullable_to_non_nullable
-              as List<Requirement>,
-    ));
+  $Res call({Object? requirements = null}) {
+    return _then(
+      _$AndRequirementImpl(
+        requirements:
+            null == requirements
+                ? _value._requirements
+                : requirements // ignore: cast_nullable_to_non_nullable
+                    as List<Requirement>,
+      ),
+    );
   }
 }
 
@@ -995,7 +1022,7 @@ class __$$AndRequirementImplCopyWithImpl<$Res>
 
 class _$AndRequirementImpl implements AndRequirement {
   const _$AndRequirementImpl({required final List<Requirement> requirements})
-      : _requirements = requirements;
+    : _requirements = requirements;
 
   final List<Requirement> _requirements;
   @override
@@ -1015,13 +1042,17 @@ class _$AndRequirementImpl implements AndRequirement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AndRequirementImpl &&
-            const DeepCollectionEquality()
-                .equals(other._requirements, _requirements));
+            const DeepCollectionEquality().equals(
+              other._requirements,
+              _requirements,
+            ));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_requirements));
+    runtimeType,
+    const DeepCollectionEquality().hash(_requirements),
+  );
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
@@ -1030,7 +1061,9 @@ class _$AndRequirementImpl implements AndRequirement {
   @pragma('vm:prefer-inline')
   _$$AndRequirementImplCopyWith<_$AndRequirementImpl> get copyWith =>
       __$$AndRequirementImplCopyWithImpl<_$AndRequirementImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -1126,8 +1159,9 @@ class _$AndRequirementImpl implements AndRequirement {
 }
 
 abstract class AndRequirement implements Requirement {
-  const factory AndRequirement(
-      {required final List<Requirement> requirements}) = _$AndRequirementImpl;
+  const factory AndRequirement({
+    required final List<Requirement> requirements,
+  }) = _$AndRequirementImpl;
 
   List<Requirement> get requirements;
 
@@ -1141,8 +1175,9 @@ abstract class AndRequirement implements Requirement {
 /// @nodoc
 abstract class _$$OrRequirementImplCopyWith<$Res> {
   factory _$$OrRequirementImplCopyWith(
-          _$OrRequirementImpl value, $Res Function(_$OrRequirementImpl) then) =
-      __$$OrRequirementImplCopyWithImpl<$Res>;
+    _$OrRequirementImpl value,
+    $Res Function(_$OrRequirementImpl) then,
+  ) = __$$OrRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Requirement> requirements});
 }
@@ -1152,22 +1187,24 @@ class __$$OrRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$OrRequirementImpl>
     implements _$$OrRequirementImplCopyWith<$Res> {
   __$$OrRequirementImplCopyWithImpl(
-      _$OrRequirementImpl _value, $Res Function(_$OrRequirementImpl) _then)
-      : super(_value, _then);
+    _$OrRequirementImpl _value,
+    $Res Function(_$OrRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? requirements = null,
-  }) {
-    return _then(_$OrRequirementImpl(
-      requirements: null == requirements
-          ? _value._requirements
-          : requirements // ignore: cast_nullable_to_non_nullable
-              as List<Requirement>,
-    ));
+  $Res call({Object? requirements = null}) {
+    return _then(
+      _$OrRequirementImpl(
+        requirements:
+            null == requirements
+                ? _value._requirements
+                : requirements // ignore: cast_nullable_to_non_nullable
+                    as List<Requirement>,
+      ),
+    );
   }
 }
 
@@ -1175,7 +1212,7 @@ class __$$OrRequirementImplCopyWithImpl<$Res>
 
 class _$OrRequirementImpl implements OrRequirement {
   const _$OrRequirementImpl({required final List<Requirement> requirements})
-      : _requirements = requirements;
+    : _requirements = requirements;
 
   final List<Requirement> _requirements;
   @override
@@ -1195,13 +1232,17 @@ class _$OrRequirementImpl implements OrRequirement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OrRequirementImpl &&
-            const DeepCollectionEquality()
-                .equals(other._requirements, _requirements));
+            const DeepCollectionEquality().equals(
+              other._requirements,
+              _requirements,
+            ));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_requirements));
+    runtimeType,
+    const DeepCollectionEquality().hash(_requirements),
+  );
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
@@ -1319,9 +1360,10 @@ abstract class OrRequirement implements Requirement {
 
 /// @nodoc
 abstract class _$$NotRequirementImplCopyWith<$Res> {
-  factory _$$NotRequirementImplCopyWith(_$NotRequirementImpl value,
-          $Res Function(_$NotRequirementImpl) then) =
-      __$$NotRequirementImplCopyWithImpl<$Res>;
+  factory _$$NotRequirementImplCopyWith(
+    _$NotRequirementImpl value,
+    $Res Function(_$NotRequirementImpl) then,
+  ) = __$$NotRequirementImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Requirement requirement});
 
@@ -1333,22 +1375,24 @@ class __$$NotRequirementImplCopyWithImpl<$Res>
     extends _$RequirementCopyWithImpl<$Res, _$NotRequirementImpl>
     implements _$$NotRequirementImplCopyWith<$Res> {
   __$$NotRequirementImplCopyWithImpl(
-      _$NotRequirementImpl _value, $Res Function(_$NotRequirementImpl) _then)
-      : super(_value, _then);
+    _$NotRequirementImpl _value,
+    $Res Function(_$NotRequirementImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? requirement = null,
-  }) {
-    return _then(_$NotRequirementImpl(
-      requirement: null == requirement
-          ? _value.requirement
-          : requirement // ignore: cast_nullable_to_non_nullable
-              as Requirement,
-    ));
+  $Res call({Object? requirement = null}) {
+    return _then(
+      _$NotRequirementImpl(
+        requirement:
+            null == requirement
+                ? _value.requirement
+                : requirement // ignore: cast_nullable_to_non_nullable
+                    as Requirement,
+      ),
+    );
   }
 
   /// Create a copy of Requirement
@@ -1394,7 +1438,9 @@ class _$NotRequirementImpl implements NotRequirement {
   @pragma('vm:prefer-inline')
   _$$NotRequirementImplCopyWith<_$NotRequirementImpl> get copyWith =>
       __$$NotRequirementImplCopyWithImpl<_$NotRequirementImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs

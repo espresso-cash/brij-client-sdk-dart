@@ -12,7 +12,8 @@ part of 'user_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$UserData {
@@ -37,15 +38,16 @@ abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res, UserData>;
   @useResult
-  $Res call(
-      {Email? email,
-      Phone? phone,
-      Name? name,
-      Citizenship? citizenship,
-      BirthDate? birthDate,
-      List<Document>? documents,
-      List<BankInfo>? bankInfos,
-      Selfie? selfie});
+  $Res call({
+    Email? email,
+    Phone? phone,
+    Name? name,
+    Citizenship? citizenship,
+    BirthDate? birthDate,
+    List<Document>? documents,
+    List<BankInfo>? bankInfos,
+    Selfie? selfie,
+  });
 
   $EmailCopyWith<$Res>? get email;
   $PhoneCopyWith<$Res>? get phone;
@@ -79,40 +81,51 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? bankInfos = freezed,
     Object? selfie = freezed,
   }) {
-    return _then(_value.copyWith(
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as Email?,
-      phone: freezed == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as Phone?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Name?,
-      citizenship: freezed == citizenship
-          ? _value.citizenship
-          : citizenship // ignore: cast_nullable_to_non_nullable
-              as Citizenship?,
-      birthDate: freezed == birthDate
-          ? _value.birthDate
-          : birthDate // ignore: cast_nullable_to_non_nullable
-              as BirthDate?,
-      documents: freezed == documents
-          ? _value.documents
-          : documents // ignore: cast_nullable_to_non_nullable
-              as List<Document>?,
-      bankInfos: freezed == bankInfos
-          ? _value.bankInfos
-          : bankInfos // ignore: cast_nullable_to_non_nullable
-              as List<BankInfo>?,
-      selfie: freezed == selfie
-          ? _value.selfie
-          : selfie // ignore: cast_nullable_to_non_nullable
-              as Selfie?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            email:
+                freezed == email
+                    ? _value.email
+                    : email // ignore: cast_nullable_to_non_nullable
+                        as Email?,
+            phone:
+                freezed == phone
+                    ? _value.phone
+                    : phone // ignore: cast_nullable_to_non_nullable
+                        as Phone?,
+            name:
+                freezed == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as Name?,
+            citizenship:
+                freezed == citizenship
+                    ? _value.citizenship
+                    : citizenship // ignore: cast_nullable_to_non_nullable
+                        as Citizenship?,
+            birthDate:
+                freezed == birthDate
+                    ? _value.birthDate
+                    : birthDate // ignore: cast_nullable_to_non_nullable
+                        as BirthDate?,
+            documents:
+                freezed == documents
+                    ? _value.documents
+                    : documents // ignore: cast_nullable_to_non_nullable
+                        as List<Document>?,
+            bankInfos:
+                freezed == bankInfos
+                    ? _value.bankInfos
+                    : bankInfos // ignore: cast_nullable_to_non_nullable
+                        as List<BankInfo>?,
+            selfie:
+                freezed == selfie
+                    ? _value.selfie
+                    : selfie // ignore: cast_nullable_to_non_nullable
+                        as Selfie?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of UserData
@@ -204,19 +217,21 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
 abstract class _$$UserDataImplCopyWith<$Res>
     implements $UserDataCopyWith<$Res> {
   factory _$$UserDataImplCopyWith(
-          _$UserDataImpl value, $Res Function(_$UserDataImpl) then) =
-      __$$UserDataImplCopyWithImpl<$Res>;
+    _$UserDataImpl value,
+    $Res Function(_$UserDataImpl) then,
+  ) = __$$UserDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Email? email,
-      Phone? phone,
-      Name? name,
-      Citizenship? citizenship,
-      BirthDate? birthDate,
-      List<Document>? documents,
-      List<BankInfo>? bankInfos,
-      Selfie? selfie});
+  $Res call({
+    Email? email,
+    Phone? phone,
+    Name? name,
+    Citizenship? citizenship,
+    BirthDate? birthDate,
+    List<Document>? documents,
+    List<BankInfo>? bankInfos,
+    Selfie? selfie,
+  });
 
   @override
   $EmailCopyWith<$Res>? get email;
@@ -237,8 +252,9 @@ class __$$UserDataImplCopyWithImpl<$Res>
     extends _$UserDataCopyWithImpl<$Res, _$UserDataImpl>
     implements _$$UserDataImplCopyWith<$Res> {
   __$$UserDataImplCopyWithImpl(
-      _$UserDataImpl _value, $Res Function(_$UserDataImpl) _then)
-      : super(_value, _then);
+    _$UserDataImpl _value,
+    $Res Function(_$UserDataImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -254,57 +270,67 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? bankInfos = freezed,
     Object? selfie = freezed,
   }) {
-    return _then(_$UserDataImpl(
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as Email?,
-      phone: freezed == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as Phone?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Name?,
-      citizenship: freezed == citizenship
-          ? _value.citizenship
-          : citizenship // ignore: cast_nullable_to_non_nullable
-              as Citizenship?,
-      birthDate: freezed == birthDate
-          ? _value.birthDate
-          : birthDate // ignore: cast_nullable_to_non_nullable
-              as BirthDate?,
-      documents: freezed == documents
-          ? _value._documents
-          : documents // ignore: cast_nullable_to_non_nullable
-              as List<Document>?,
-      bankInfos: freezed == bankInfos
-          ? _value._bankInfos
-          : bankInfos // ignore: cast_nullable_to_non_nullable
-              as List<BankInfo>?,
-      selfie: freezed == selfie
-          ? _value.selfie
-          : selfie // ignore: cast_nullable_to_non_nullable
-              as Selfie?,
-    ));
+    return _then(
+      _$UserDataImpl(
+        email:
+            freezed == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                    as Email?,
+        phone:
+            freezed == phone
+                ? _value.phone
+                : phone // ignore: cast_nullable_to_non_nullable
+                    as Phone?,
+        name:
+            freezed == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as Name?,
+        citizenship:
+            freezed == citizenship
+                ? _value.citizenship
+                : citizenship // ignore: cast_nullable_to_non_nullable
+                    as Citizenship?,
+        birthDate:
+            freezed == birthDate
+                ? _value.birthDate
+                : birthDate // ignore: cast_nullable_to_non_nullable
+                    as BirthDate?,
+        documents:
+            freezed == documents
+                ? _value._documents
+                : documents // ignore: cast_nullable_to_non_nullable
+                    as List<Document>?,
+        bankInfos:
+            freezed == bankInfos
+                ? _value._bankInfos
+                : bankInfos // ignore: cast_nullable_to_non_nullable
+                    as List<BankInfo>?,
+        selfie:
+            freezed == selfie
+                ? _value.selfie
+                : selfie // ignore: cast_nullable_to_non_nullable
+                    as Selfie?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$UserDataImpl implements _UserData {
-  const _$UserDataImpl(
-      {this.email,
-      this.phone,
-      this.name,
-      this.citizenship,
-      this.birthDate,
-      final List<Document>? documents,
-      final List<BankInfo>? bankInfos,
-      this.selfie})
-      : _documents = documents,
-        _bankInfos = bankInfos;
+  const _$UserDataImpl({
+    this.email,
+    this.phone,
+    this.name,
+    this.citizenship,
+    this.birthDate,
+    final List<Document>? documents,
+    final List<BankInfo>? bankInfos,
+    this.selfie,
+  }) : _documents = documents,
+       _bankInfos = bankInfos;
 
   @override
   final Email? email;
@@ -356,24 +382,29 @@ class _$UserDataImpl implements _UserData {
                 other.citizenship == citizenship) &&
             (identical(other.birthDate, birthDate) ||
                 other.birthDate == birthDate) &&
-            const DeepCollectionEquality()
-                .equals(other._documents, _documents) &&
-            const DeepCollectionEquality()
-                .equals(other._bankInfos, _bankInfos) &&
+            const DeepCollectionEquality().equals(
+              other._documents,
+              _documents,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._bankInfos,
+              _bankInfos,
+            ) &&
             (identical(other.selfie, selfie) || other.selfie == selfie));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      email,
-      phone,
-      name,
-      citizenship,
-      birthDate,
-      const DeepCollectionEquality().hash(_documents),
-      const DeepCollectionEquality().hash(_bankInfos),
-      selfie);
+    runtimeType,
+    email,
+    phone,
+    name,
+    citizenship,
+    birthDate,
+    const DeepCollectionEquality().hash(_documents),
+    const DeepCollectionEquality().hash(_bankInfos),
+    selfie,
+  );
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -385,15 +416,16 @@ class _$UserDataImpl implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  const factory _UserData(
-      {final Email? email,
-      final Phone? phone,
-      final Name? name,
-      final Citizenship? citizenship,
-      final BirthDate? birthDate,
-      final List<Document>? documents,
-      final List<BankInfo>? bankInfos,
-      final Selfie? selfie}) = _$UserDataImpl;
+  const factory _UserData({
+    final Email? email,
+    final Phone? phone,
+    final Name? name,
+    final Citizenship? citizenship,
+    final BirthDate? birthDate,
+    final List<Document>? documents,
+    final List<BankInfo>? bankInfos,
+    final Selfie? selfie,
+  }) = _$UserDataImpl;
 
   @override
   Email? get email;
@@ -459,28 +491,35 @@ class _$EmailCopyWithImpl<$Res, $Val extends Email>
     Object? hash = freezed,
     Object? status = null,
   }) {
-    return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            value:
+                null == value
+                    ? _value.value
+                    : value // ignore: cast_nullable_to_non_nullable
+                        as String,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as ValidationStatus,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$EmailImplCopyWith<$Res> implements $EmailCopyWith<$Res> {
   factory _$$EmailImplCopyWith(
-          _$EmailImpl value, $Res Function(_$EmailImpl) then) =
-      __$$EmailImplCopyWithImpl<$Res>;
+    _$EmailImpl value,
+    $Res Function(_$EmailImpl) then,
+  ) = __$$EmailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String value, String? hash, ValidationStatus status});
@@ -491,8 +530,9 @@ class __$$EmailImplCopyWithImpl<$Res>
     extends _$EmailCopyWithImpl<$Res, _$EmailImpl>
     implements _$$EmailImplCopyWith<$Res> {
   __$$EmailImplCopyWithImpl(
-      _$EmailImpl _value, $Res Function(_$EmailImpl) _then)
-      : super(_value, _then);
+    _$EmailImpl _value,
+    $Res Function(_$EmailImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Email
   /// with the given fields replaced by the non-null parameter values.
@@ -503,30 +543,36 @@ class __$$EmailImplCopyWithImpl<$Res>
     Object? hash = freezed,
     Object? status = null,
   }) {
-    return _then(_$EmailImpl(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
-    ));
+    return _then(
+      _$EmailImpl(
+        value:
+            null == value
+                ? _value.value
+                : value // ignore: cast_nullable_to_non_nullable
+                    as String,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as ValidationStatus,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$EmailImpl implements _Email {
-  const _$EmailImpl(
-      {required this.value,
-      this.hash,
-      this.status = ValidationStatus.unspecified});
+  const _$EmailImpl({
+    required this.value,
+    this.hash,
+    this.status = ValidationStatus.unspecified,
+  });
 
   @override
   final String value;
@@ -564,10 +610,11 @@ class _$EmailImpl implements _Email {
 }
 
 abstract class _Email implements Email {
-  const factory _Email(
-      {required final String value,
-      final String? hash,
-      final ValidationStatus status}) = _$EmailImpl;
+  const factory _Email({
+    required final String value,
+    final String? hash,
+    final ValidationStatus status,
+  }) = _$EmailImpl;
 
   @override
   String get value;
@@ -623,28 +670,35 @@ class _$PhoneCopyWithImpl<$Res, $Val extends Phone>
     Object? hash = freezed,
     Object? status = null,
   }) {
-    return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            value:
+                null == value
+                    ? _value.value
+                    : value // ignore: cast_nullable_to_non_nullable
+                        as String,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as ValidationStatus,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$PhoneImplCopyWith<$Res> implements $PhoneCopyWith<$Res> {
   factory _$$PhoneImplCopyWith(
-          _$PhoneImpl value, $Res Function(_$PhoneImpl) then) =
-      __$$PhoneImplCopyWithImpl<$Res>;
+    _$PhoneImpl value,
+    $Res Function(_$PhoneImpl) then,
+  ) = __$$PhoneImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String value, String? hash, ValidationStatus status});
@@ -655,8 +709,9 @@ class __$$PhoneImplCopyWithImpl<$Res>
     extends _$PhoneCopyWithImpl<$Res, _$PhoneImpl>
     implements _$$PhoneImplCopyWith<$Res> {
   __$$PhoneImplCopyWithImpl(
-      _$PhoneImpl _value, $Res Function(_$PhoneImpl) _then)
-      : super(_value, _then);
+    _$PhoneImpl _value,
+    $Res Function(_$PhoneImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Phone
   /// with the given fields replaced by the non-null parameter values.
@@ -667,30 +722,36 @@ class __$$PhoneImplCopyWithImpl<$Res>
     Object? hash = freezed,
     Object? status = null,
   }) {
-    return _then(_$PhoneImpl(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ValidationStatus,
-    ));
+    return _then(
+      _$PhoneImpl(
+        value:
+            null == value
+                ? _value.value
+                : value // ignore: cast_nullable_to_non_nullable
+                    as String,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as ValidationStatus,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$PhoneImpl implements _Phone {
-  const _$PhoneImpl(
-      {required this.value,
-      this.hash,
-      this.status = ValidationStatus.unspecified});
+  const _$PhoneImpl({
+    required this.value,
+    this.hash,
+    this.status = ValidationStatus.unspecified,
+  });
 
   @override
   final String value;
@@ -728,10 +789,11 @@ class _$PhoneImpl implements _Phone {
 }
 
 abstract class _Phone implements Phone {
-  const factory _Phone(
-      {required final String value,
-      final String? hash,
-      final ValidationStatus status}) = _$PhoneImpl;
+  const factory _Phone({
+    required final String value,
+    final String? hash,
+    final ValidationStatus status,
+  }) = _$PhoneImpl;
 
   @override
   String get value;
@@ -781,28 +843,31 @@ class _$SelfieCopyWithImpl<$Res, $Val extends Selfie>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-  }) {
-    return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? value = null, Object? hash = freezed}) {
+    return _then(
+      _value.copyWith(
+            value:
+                null == value
+                    ? _value.value
+                    : value // ignore: cast_nullable_to_non_nullable
+                        as List<int>,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$SelfieImplCopyWith<$Res> implements $SelfieCopyWith<$Res> {
   factory _$$SelfieImplCopyWith(
-          _$SelfieImpl value, $Res Function(_$SelfieImpl) then) =
-      __$$SelfieImplCopyWithImpl<$Res>;
+    _$SelfieImpl value,
+    $Res Function(_$SelfieImpl) then,
+  ) = __$$SelfieImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<int> value, String? hash});
@@ -813,27 +878,29 @@ class __$$SelfieImplCopyWithImpl<$Res>
     extends _$SelfieCopyWithImpl<$Res, _$SelfieImpl>
     implements _$$SelfieImplCopyWith<$Res> {
   __$$SelfieImplCopyWithImpl(
-      _$SelfieImpl _value, $Res Function(_$SelfieImpl) _then)
-      : super(_value, _then);
+    _$SelfieImpl _value,
+    $Res Function(_$SelfieImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-  }) {
-    return _then(_$SelfieImpl(
-      value: null == value
-          ? _value._value
-          : value // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? value = null, Object? hash = freezed}) {
+    return _then(
+      _$SelfieImpl(
+        value:
+            null == value
+                ? _value._value
+                : value // ignore: cast_nullable_to_non_nullable
+                    as List<int>,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -841,7 +908,7 @@ class __$$SelfieImplCopyWithImpl<$Res>
 
 class _$SelfieImpl implements _Selfie {
   const _$SelfieImpl({required final List<int> value, this.hash})
-      : _value = value;
+    : _value = value;
 
   final List<int> _value;
   @override
@@ -870,7 +937,10 @@ class _$SelfieImpl implements _Selfie {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_value), hash);
+    runtimeType,
+    const DeepCollectionEquality().hash(_value),
+    hash,
+  );
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
@@ -937,28 +1007,35 @@ class _$NameCopyWithImpl<$Res, $Val extends Name>
     Object? lastName = null,
     Object? hash = freezed,
   }) {
-    return _then(_value.copyWith(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            firstName:
+                null == firstName
+                    ? _value.firstName
+                    : firstName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            lastName:
+                null == lastName
+                    ? _value.lastName
+                    : lastName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$NameImplCopyWith<$Res> implements $NameCopyWith<$Res> {
   factory _$$NameImplCopyWith(
-          _$NameImpl value, $Res Function(_$NameImpl) then) =
-      __$$NameImplCopyWithImpl<$Res>;
+    _$NameImpl value,
+    $Res Function(_$NameImpl) then,
+  ) = __$$NameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String firstName, String lastName, String? hash});
@@ -969,7 +1046,7 @@ class __$$NameImplCopyWithImpl<$Res>
     extends _$NameCopyWithImpl<$Res, _$NameImpl>
     implements _$$NameImplCopyWith<$Res> {
   __$$NameImplCopyWithImpl(_$NameImpl _value, $Res Function(_$NameImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of Name
   /// with the given fields replaced by the non-null parameter values.
@@ -980,28 +1057,36 @@ class __$$NameImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? hash = freezed,
   }) {
-    return _then(_$NameImpl(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$NameImpl(
+        firstName:
+            null == firstName
+                ? _value.firstName
+                : firstName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        lastName:
+            null == lastName
+                ? _value.lastName
+                : lastName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$NameImpl implements _Name {
-  const _$NameImpl(
-      {required this.firstName, required this.lastName, this.hash});
+  const _$NameImpl({
+    required this.firstName,
+    required this.lastName,
+    this.hash,
+  });
 
   @override
   final String firstName;
@@ -1040,10 +1125,11 @@ class _$NameImpl implements _Name {
 }
 
 abstract class _Name implements Name {
-  const factory _Name(
-      {required final String firstName,
-      required final String lastName,
-      final String? hash}) = _$NameImpl;
+  const factory _Name({
+    required final String firstName,
+    required final String lastName,
+    final String? hash,
+  }) = _$NameImpl;
 
   @override
   String get firstName;
@@ -1075,8 +1161,9 @@ mixin _$Citizenship {
 /// @nodoc
 abstract class $CitizenshipCopyWith<$Res> {
   factory $CitizenshipCopyWith(
-          Citizenship value, $Res Function(Citizenship) then) =
-      _$CitizenshipCopyWithImpl<$Res, Citizenship>;
+    Citizenship value,
+    $Res Function(Citizenship) then,
+  ) = _$CitizenshipCopyWithImpl<$Res, Citizenship>;
   @useResult
   $Res call({String value, String? hash});
 }
@@ -1095,20 +1182,22 @@ class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-  }) {
-    return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? value = null, Object? hash = freezed}) {
+    return _then(
+      _value.copyWith(
+            value:
+                null == value
+                    ? _value.value
+                    : value // ignore: cast_nullable_to_non_nullable
+                        as String,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -1116,8 +1205,9 @@ class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
 abstract class _$$CitizenshipImplCopyWith<$Res>
     implements $CitizenshipCopyWith<$Res> {
   factory _$$CitizenshipImplCopyWith(
-          _$CitizenshipImpl value, $Res Function(_$CitizenshipImpl) then) =
-      __$$CitizenshipImplCopyWithImpl<$Res>;
+    _$CitizenshipImpl value,
+    $Res Function(_$CitizenshipImpl) then,
+  ) = __$$CitizenshipImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String value, String? hash});
@@ -1128,27 +1218,29 @@ class __$$CitizenshipImplCopyWithImpl<$Res>
     extends _$CitizenshipCopyWithImpl<$Res, _$CitizenshipImpl>
     implements _$$CitizenshipImplCopyWith<$Res> {
   __$$CitizenshipImplCopyWithImpl(
-      _$CitizenshipImpl _value, $Res Function(_$CitizenshipImpl) _then)
-      : super(_value, _then);
+    _$CitizenshipImpl _value,
+    $Res Function(_$CitizenshipImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Citizenship
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-  }) {
-    return _then(_$CitizenshipImpl(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? value = null, Object? hash = freezed}) {
+    return _then(
+      _$CitizenshipImpl(
+        value:
+            null == value
+                ? _value.value
+                : value // ignore: cast_nullable_to_non_nullable
+                    as String,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -1189,8 +1281,10 @@ class _$CitizenshipImpl implements _Citizenship {
 }
 
 abstract class _Citizenship implements Citizenship {
-  const factory _Citizenship(
-      {required final String value, final String? hash}) = _$CitizenshipImpl;
+  const factory _Citizenship({
+    required final String value,
+    final String? hash,
+  }) = _$CitizenshipImpl;
 
   @override
   String get value;
@@ -1239,20 +1333,22 @@ class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-  }) {
-    return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? value = null, Object? hash = freezed}) {
+    return _then(
+      _value.copyWith(
+            value:
+                null == value
+                    ? _value.value
+                    : value // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -1260,8 +1356,9 @@ class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate>
 abstract class _$$BirthDateImplCopyWith<$Res>
     implements $BirthDateCopyWith<$Res> {
   factory _$$BirthDateImplCopyWith(
-          _$BirthDateImpl value, $Res Function(_$BirthDateImpl) then) =
-      __$$BirthDateImplCopyWithImpl<$Res>;
+    _$BirthDateImpl value,
+    $Res Function(_$BirthDateImpl) then,
+  ) = __$$BirthDateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTime value, String? hash});
@@ -1272,27 +1369,29 @@ class __$$BirthDateImplCopyWithImpl<$Res>
     extends _$BirthDateCopyWithImpl<$Res, _$BirthDateImpl>
     implements _$$BirthDateImplCopyWith<$Res> {
   __$$BirthDateImplCopyWithImpl(
-      _$BirthDateImpl _value, $Res Function(_$BirthDateImpl) _then)
-      : super(_value, _then);
+    _$BirthDateImpl _value,
+    $Res Function(_$BirthDateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of BirthDate
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-  }) {
-    return _then(_$BirthDateImpl(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? value = null, Object? hash = freezed}) {
+    return _then(
+      _$BirthDateImpl(
+        value:
+            null == value
+                ? _value.value
+                : value // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -1333,8 +1432,10 @@ class _$BirthDateImpl implements _BirthDate {
 }
 
 abstract class _BirthDate implements BirthDate {
-  const factory _BirthDate(
-      {required final DateTime value, final String? hash}) = _$BirthDateImpl;
+  const factory _BirthDate({
+    required final DateTime value,
+    final String? hash,
+  }) = _$BirthDateImpl;
 
   @override
   DateTime get value;
@@ -1371,14 +1472,15 @@ abstract class $DocumentCopyWith<$Res> {
   factory $DocumentCopyWith(Document value, $Res Function(Document) then) =
       _$DocumentCopyWithImpl<$Res, Document>;
   @useResult
-  $Res call(
-      {IdType type,
-      String number,
-      String countryCode,
-      DateTime? expirationDate,
-      List<int>? frontImage,
-      List<int>? backImage,
-      String? hash});
+  $Res call({
+    IdType type,
+    String number,
+    String countryCode,
+    DateTime? expirationDate,
+    List<int>? frontImage,
+    List<int>? backImage,
+    String? hash,
+  });
 }
 
 /// @nodoc
@@ -1404,36 +1506,46 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? backImage = freezed,
     Object? hash = freezed,
   }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as IdType,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as String,
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      expirationDate: freezed == expirationDate
-          ? _value.expirationDate
-          : expirationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      frontImage: freezed == frontImage
-          ? _value.frontImage
-          : frontImage // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-      backImage: freezed == backImage
-          ? _value.backImage
-          : backImage // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as IdType,
+            number:
+                null == number
+                    ? _value.number
+                    : number // ignore: cast_nullable_to_non_nullable
+                        as String,
+            countryCode:
+                null == countryCode
+                    ? _value.countryCode
+                    : countryCode // ignore: cast_nullable_to_non_nullable
+                        as String,
+            expirationDate:
+                freezed == expirationDate
+                    ? _value.expirationDate
+                    : expirationDate // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            frontImage:
+                freezed == frontImage
+                    ? _value.frontImage
+                    : frontImage // ignore: cast_nullable_to_non_nullable
+                        as List<int>?,
+            backImage:
+                freezed == backImage
+                    ? _value.backImage
+                    : backImage // ignore: cast_nullable_to_non_nullable
+                        as List<int>?,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -1441,18 +1553,20 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
 abstract class _$$DocumentImplCopyWith<$Res>
     implements $DocumentCopyWith<$Res> {
   factory _$$DocumentImplCopyWith(
-          _$DocumentImpl value, $Res Function(_$DocumentImpl) then) =
-      __$$DocumentImplCopyWithImpl<$Res>;
+    _$DocumentImpl value,
+    $Res Function(_$DocumentImpl) then,
+  ) = __$$DocumentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {IdType type,
-      String number,
-      String countryCode,
-      DateTime? expirationDate,
-      List<int>? frontImage,
-      List<int>? backImage,
-      String? hash});
+  $Res call({
+    IdType type,
+    String number,
+    String countryCode,
+    DateTime? expirationDate,
+    List<int>? frontImage,
+    List<int>? backImage,
+    String? hash,
+  });
 }
 
 /// @nodoc
@@ -1460,8 +1574,9 @@ class __$$DocumentImplCopyWithImpl<$Res>
     extends _$DocumentCopyWithImpl<$Res, _$DocumentImpl>
     implements _$$DocumentImplCopyWith<$Res> {
   __$$DocumentImplCopyWithImpl(
-      _$DocumentImpl _value, $Res Function(_$DocumentImpl) _then)
-      : super(_value, _then);
+    _$DocumentImpl _value,
+    $Res Function(_$DocumentImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -1476,52 +1591,61 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? backImage = freezed,
     Object? hash = freezed,
   }) {
-    return _then(_$DocumentImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as IdType,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as String,
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      expirationDate: freezed == expirationDate
-          ? _value.expirationDate
-          : expirationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      frontImage: freezed == frontImage
-          ? _value._frontImage
-          : frontImage // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-      backImage: freezed == backImage
-          ? _value._backImage
-          : backImage // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$DocumentImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as IdType,
+        number:
+            null == number
+                ? _value.number
+                : number // ignore: cast_nullable_to_non_nullable
+                    as String,
+        countryCode:
+            null == countryCode
+                ? _value.countryCode
+                : countryCode // ignore: cast_nullable_to_non_nullable
+                    as String,
+        expirationDate:
+            freezed == expirationDate
+                ? _value.expirationDate
+                : expirationDate // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        frontImage:
+            freezed == frontImage
+                ? _value._frontImage
+                : frontImage // ignore: cast_nullable_to_non_nullable
+                    as List<int>?,
+        backImage:
+            freezed == backImage
+                ? _value._backImage
+                : backImage // ignore: cast_nullable_to_non_nullable
+                    as List<int>?,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$DocumentImpl implements _Document {
-  const _$DocumentImpl(
-      {required this.type,
-      required this.number,
-      required this.countryCode,
-      this.expirationDate,
-      final List<int>? frontImage,
-      final List<int>? backImage,
-      this.hash})
-      : _frontImage = frontImage,
-        _backImage = backImage;
+  const _$DocumentImpl({
+    required this.type,
+    required this.number,
+    required this.countryCode,
+    this.expirationDate,
+    final List<int>? frontImage,
+    final List<int>? backImage,
+    this.hash,
+  }) : _frontImage = frontImage,
+       _backImage = backImage;
 
   @override
   final IdType type;
@@ -1570,23 +1694,28 @@ class _$DocumentImpl implements _Document {
                 other.countryCode == countryCode) &&
             (identical(other.expirationDate, expirationDate) ||
                 other.expirationDate == expirationDate) &&
-            const DeepCollectionEquality()
-                .equals(other._frontImage, _frontImage) &&
-            const DeepCollectionEquality()
-                .equals(other._backImage, _backImage) &&
+            const DeepCollectionEquality().equals(
+              other._frontImage,
+              _frontImage,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._backImage,
+              _backImage,
+            ) &&
             (identical(other.hash, hash) || other.hash == hash));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      type,
-      number,
-      countryCode,
-      expirationDate,
-      const DeepCollectionEquality().hash(_frontImage),
-      const DeepCollectionEquality().hash(_backImage),
-      hash);
+    runtimeType,
+    type,
+    number,
+    countryCode,
+    expirationDate,
+    const DeepCollectionEquality().hash(_frontImage),
+    const DeepCollectionEquality().hash(_backImage),
+    hash,
+  );
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -1598,14 +1727,15 @@ class _$DocumentImpl implements _Document {
 }
 
 abstract class _Document implements Document {
-  const factory _Document(
-      {required final IdType type,
-      required final String number,
-      required final String countryCode,
-      final DateTime? expirationDate,
-      final List<int>? frontImage,
-      final List<int>? backImage,
-      final String? hash}) = _$DocumentImpl;
+  const factory _Document({
+    required final IdType type,
+    required final String number,
+    required final String countryCode,
+    final DateTime? expirationDate,
+    final List<int>? frontImage,
+    final List<int>? backImage,
+    final String? hash,
+  }) = _$DocumentImpl;
 
   @override
   IdType get type;
@@ -1650,12 +1780,13 @@ abstract class $BankInfoCopyWith<$Res> {
   factory $BankInfoCopyWith(BankInfo value, $Res Function(BankInfo) then) =
       _$BankInfoCopyWithImpl<$Res, BankInfo>;
   @useResult
-  $Res call(
-      {String bankName,
-      String bankCode,
-      String accountNumber,
-      String countryCode,
-      String? hash});
+  $Res call({
+    String bankName,
+    String bankCode,
+    String accountNumber,
+    String countryCode,
+    String? hash,
+  });
 }
 
 /// @nodoc
@@ -1679,28 +1810,36 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
     Object? countryCode = null,
     Object? hash = freezed,
   }) {
-    return _then(_value.copyWith(
-      bankName: null == bankName
-          ? _value.bankName
-          : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankCode: null == bankCode
-          ? _value.bankCode
-          : bankCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountNumber: null == accountNumber
-          ? _value.accountNumber
-          : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            bankName:
+                null == bankName
+                    ? _value.bankName
+                    : bankName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bankCode:
+                null == bankCode
+                    ? _value.bankCode
+                    : bankCode // ignore: cast_nullable_to_non_nullable
+                        as String,
+            accountNumber:
+                null == accountNumber
+                    ? _value.accountNumber
+                    : accountNumber // ignore: cast_nullable_to_non_nullable
+                        as String,
+            countryCode:
+                null == countryCode
+                    ? _value.countryCode
+                    : countryCode // ignore: cast_nullable_to_non_nullable
+                        as String,
+            hash:
+                freezed == hash
+                    ? _value.hash
+                    : hash // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -1708,16 +1847,18 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
 abstract class _$$BankInfoImplCopyWith<$Res>
     implements $BankInfoCopyWith<$Res> {
   factory _$$BankInfoImplCopyWith(
-          _$BankInfoImpl value, $Res Function(_$BankInfoImpl) then) =
-      __$$BankInfoImplCopyWithImpl<$Res>;
+    _$BankInfoImpl value,
+    $Res Function(_$BankInfoImpl) then,
+  ) = __$$BankInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String bankName,
-      String bankCode,
-      String accountNumber,
-      String countryCode,
-      String? hash});
+  $Res call({
+    String bankName,
+    String bankCode,
+    String accountNumber,
+    String countryCode,
+    String? hash,
+  });
 }
 
 /// @nodoc
@@ -1725,8 +1866,9 @@ class __$$BankInfoImplCopyWithImpl<$Res>
     extends _$BankInfoCopyWithImpl<$Res, _$BankInfoImpl>
     implements _$$BankInfoImplCopyWith<$Res> {
   __$$BankInfoImplCopyWithImpl(
-      _$BankInfoImpl _value, $Res Function(_$BankInfoImpl) _then)
-      : super(_value, _then);
+    _$BankInfoImpl _value,
+    $Res Function(_$BankInfoImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1739,40 +1881,48 @@ class __$$BankInfoImplCopyWithImpl<$Res>
     Object? countryCode = null,
     Object? hash = freezed,
   }) {
-    return _then(_$BankInfoImpl(
-      bankName: null == bankName
-          ? _value.bankName
-          : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankCode: null == bankCode
-          ? _value.bankCode
-          : bankCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountNumber: null == accountNumber
-          ? _value.accountNumber
-          : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: freezed == hash
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$BankInfoImpl(
+        bankName:
+            null == bankName
+                ? _value.bankName
+                : bankName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bankCode:
+            null == bankCode
+                ? _value.bankCode
+                : bankCode // ignore: cast_nullable_to_non_nullable
+                    as String,
+        accountNumber:
+            null == accountNumber
+                ? _value.accountNumber
+                : accountNumber // ignore: cast_nullable_to_non_nullable
+                    as String,
+        countryCode:
+            null == countryCode
+                ? _value.countryCode
+                : countryCode // ignore: cast_nullable_to_non_nullable
+                    as String,
+        hash:
+            freezed == hash
+                ? _value.hash
+                : hash // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$BankInfoImpl implements _BankInfo {
-  const _$BankInfoImpl(
-      {required this.bankName,
-      required this.bankCode,
-      required this.accountNumber,
-      required this.countryCode,
-      this.hash});
+  const _$BankInfoImpl({
+    required this.bankName,
+    required this.bankCode,
+    required this.accountNumber,
+    required this.countryCode,
+    this.hash,
+  });
 
   @override
   final String bankName;
@@ -1808,7 +1958,13 @@ class _$BankInfoImpl implements _BankInfo {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, bankName, bankCode, accountNumber, countryCode, hash);
+    runtimeType,
+    bankName,
+    bankCode,
+    accountNumber,
+    countryCode,
+    hash,
+  );
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1820,12 +1976,13 @@ class _$BankInfoImpl implements _BankInfo {
 }
 
 abstract class _BankInfo implements BankInfo {
-  const factory _BankInfo(
-      {required final String bankName,
-      required final String bankCode,
-      required final String accountNumber,
-      required final String countryCode,
-      final String? hash}) = _$BankInfoImpl;
+  const factory _BankInfo({
+    required final String bankName,
+    required final String bankCode,
+    required final String accountNumber,
+    required final String countryCode,
+    final String? hash,
+  }) = _$BankInfoImpl;
 
   @override
   String get bankName;

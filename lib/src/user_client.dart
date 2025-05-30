@@ -4,6 +4,7 @@ import 'package:brij_client/src/common.dart';
 import 'package:brij_client/src/config/config.dart';
 import 'package:brij_client/src/grpc/transport.dart';
 import 'package:brij_client/src/models/export.dart';
+import 'package:brij_protos_dart/gen/brij/orders/v1/common/envelopes.pb.dart' as common;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client.dart' as order;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as proto;
@@ -400,28 +401,22 @@ class KycUserClient {
   }) async {
     final orderId = const Uuid().v4();
 
-    final signatureMessage = createUserOnRampMessage(
-      orderId: orderId,
-      cryptoAmount: cryptoAmount,
-      cryptoCurrency: cryptoCurrency,
-      fiatAmount: fiatAmount,
-      fiatCurrency: fiatCurrency,
-      walletAddress: cryptoWalletAddress,
-    );
-    final signature = _signingKey.sign(utf8.encode(signatureMessage));
+    final protoMessage =
+        common.OnRampOrderUserEnvelope(
+          orderId: orderId,
+          partnerPublicKey: partnerPK,
+          cryptoAmount: cryptoAmount,
+          cryptoCurrency: cryptoCurrency,
+          fiatAmount: fiatAmount,
+          fiatCurrency: fiatCurrency,
+          userWalletAddress: cryptoWalletAddress,
+          walletPublicKey: walletPK,
+        ).writeToBuffer();
+
+    final signature = _signingKey.sign(protoMessage);
 
     final response = await _orderClient.createOnRampOrder(
-      CreateOnRampOrderRequest(
-        orderId: orderId,
-        partnerPublicKey: partnerPK,
-        cryptoAmount: cryptoAmount,
-        cryptoCurrency: cryptoCurrency,
-        fiatAmount: fiatAmount,
-        fiatCurrency: fiatCurrency,
-        userWalletAddress: cryptoWalletAddress,
-        userSignature: base58.encode(signature.signature.asTypedList),
-        walletPublicKey: walletPK,
-      ),
+      CreateOnRampOrderRequest(payload: protoMessage, signature: signature.signature.asTypedList),
     );
 
     return response.orderId;
@@ -433,47 +428,29 @@ class KycUserClient {
     required String cryptoCurrency,
     required double fiatAmount,
     required String fiatCurrency,
-    required String bankName,
-    required String bankAccount,
+    required String bankDataHash,
     required String cryptoWalletAddress,
     required String walletPK,
   }) async {
     final orderId = const Uuid().v4();
 
-    final encryptedBankName = base64Encode(
-      encrypt(data: utf8.encode(bankName), secretBox: _secretBox),
-    );
+    final protoMessage =
+        common.OffRampOrderUserEnvelope(
+          orderId: orderId,
+          partnerPublicKey: partnerPK,
+          cryptoAmount: cryptoAmount,
+          cryptoCurrency: cryptoCurrency,
+          fiatAmount: fiatAmount,
+          fiatCurrency: fiatCurrency,
+          bankDataHash: bankDataHash,
+          userWalletAddress: cryptoWalletAddress,
+          walletPublicKey: walletPK,
+        ).writeToBuffer();
 
-    final encryptedBankAccount = base64Encode(
-      encrypt(data: utf8.encode(bankAccount), secretBox: _secretBox),
-    );
-
-    final signatureMessage = createUserOffRampMessage(
-      orderId: orderId,
-      cryptoAmount: cryptoAmount,
-      cryptoCurrency: cryptoCurrency,
-      fiatAmount: fiatAmount,
-      fiatCurrency: fiatCurrency,
-      encryptedBankName: encryptedBankName,
-      encryptedBankAccount: encryptedBankAccount,
-      walletAddress: cryptoWalletAddress,
-    );
-    final signature = _signingKey.sign(utf8.encode(signatureMessage));
+    final signature = _signingKey.sign(protoMessage);
 
     final response = await _orderClient.createOffRampOrder(
-      CreateOffRampOrderRequest(
-        orderId: orderId,
-        partnerPublicKey: partnerPK,
-        cryptoAmount: cryptoAmount,
-        cryptoCurrency: cryptoCurrency,
-        fiatAmount: fiatAmount,
-        fiatCurrency: fiatCurrency,
-        bankName: encryptedBankName,
-        bankAccount: encryptedBankAccount,
-        userSignature: base58.encode(signature.signature.asTypedList),
-        userWalletAddress: cryptoWalletAddress,
-        walletPublicKey: walletPK,
-      ),
+      CreateOffRampOrderRequest(payload: protoMessage, signature: signature.signature.asTypedList),
     );
 
     return response.orderId;

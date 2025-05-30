@@ -202,9 +202,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: _emailVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context
-                              .read<UserAppState>()
-                              .validateEmail(_emailVerificationController.text);
+                          await context.read<UserAppState>().validateEmail(_emailVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -232,9 +230,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: _phoneVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context
-                              .read<UserAppState>()
-                              .validatePhone(_phoneVerificationController.text);
+                          await context.read<UserAppState>().validatePhone(_phoneVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -290,9 +286,7 @@ class _UserViewState extends State<UserView> {
         children: [
           ValueField(
             title: 'Partner Info',
-            value: state.partnerInfo != null
-                ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})'
-                : '',
+            value: state.partnerInfo != null ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})' : '',
           ),
           Consumer<PartnerAppState>(
             builder: (context, partnerState, _) => ElevatedButton(
@@ -369,8 +363,7 @@ class _UserViewState extends State<UserView> {
                     amount: _amountController.text,
                     currency: _currencyController.text,
                     partnerPK: partnerPk,
-                    bankName: 'Bank',
-                    bankAccount: '123456789',
+                    bankDataHash: '123456789',
                   );
 
               if (!context.mounted) return;

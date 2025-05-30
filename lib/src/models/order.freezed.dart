@@ -12,7 +12,8 @@ part of 'order.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$Order {
@@ -21,7 +22,6 @@ mixin _$Order {
   String get status => throw _privateConstructorUsedError;
   String get partnerPublicKey => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
   RampType get type => throw _privateConstructorUsedError;
   double get cryptoAmount => throw _privateConstructorUsedError;
   String get cryptoCurrency => throw _privateConstructorUsedError;
@@ -29,6 +29,7 @@ mixin _$Order {
   String get fiatCurrency => throw _privateConstructorUsedError;
   String get bankName => throw _privateConstructorUsedError;
   String get bankAccount => throw _privateConstructorUsedError;
+  String get bankDataHash => throw _privateConstructorUsedError;
   String get cryptoWalletAddress => throw _privateConstructorUsedError;
   String get transaction => throw _privateConstructorUsedError;
   String get transactionId => throw _privateConstructorUsedError;
@@ -47,26 +48,27 @@ abstract class $OrderCopyWith<$Res> {
   factory $OrderCopyWith(Order value, $Res Function(Order) then) =
       _$OrderCopyWithImpl<$Res, Order>;
   @useResult
-  $Res call(
-      {String orderId,
-      String created,
-      String status,
-      String partnerPublicKey,
-      String userPublicKey,
-      String comment,
-      RampType type,
-      double cryptoAmount,
-      String cryptoCurrency,
-      double fiatAmount,
-      String fiatCurrency,
-      String bankName,
-      String bankAccount,
-      String cryptoWalletAddress,
-      String transaction,
-      String transactionId,
-      String externalId,
-      String userWalletAddress,
-      String walletPublicKey});
+  $Res call({
+    String orderId,
+    String created,
+    String status,
+    String partnerPublicKey,
+    String userPublicKey,
+    RampType type,
+    double cryptoAmount,
+    String cryptoCurrency,
+    double fiatAmount,
+    String fiatCurrency,
+    String bankName,
+    String bankAccount,
+    String bankDataHash,
+    String cryptoWalletAddress,
+    String transaction,
+    String transactionId,
+    String externalId,
+    String userWalletAddress,
+    String walletPublicKey,
+  });
 }
 
 /// @nodoc
@@ -89,7 +91,6 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? status = null,
     Object? partnerPublicKey = null,
     Object? userPublicKey = null,
-    Object? comment = null,
     Object? type = null,
     Object? cryptoAmount = null,
     Object? cryptoCurrency = null,
@@ -97,6 +98,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? fiatCurrency = null,
     Object? bankName = null,
     Object? bankAccount = null,
+    Object? bankDataHash = null,
     Object? cryptoWalletAddress = null,
     Object? transaction = null,
     Object? transactionId = null,
@@ -104,114 +106,138 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? userWalletAddress = null,
     Object? walletPublicKey = null,
   }) {
-    return _then(_value.copyWith(
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      partnerPublicKey: null == partnerPublicKey
-          ? _value.partnerPublicKey
-          : partnerPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      userPublicKey: null == userPublicKey
-          ? _value.userPublicKey
-          : userPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as RampType,
-      cryptoAmount: null == cryptoAmount
-          ? _value.cryptoAmount
-          : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      cryptoCurrency: null == cryptoCurrency
-          ? _value.cryptoCurrency
-          : cryptoCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      fiatAmount: null == fiatAmount
-          ? _value.fiatAmount
-          : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      fiatCurrency: null == fiatCurrency
-          ? _value.fiatCurrency
-          : fiatCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankName: null == bankName
-          ? _value.bankName
-          : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankAccount: null == bankAccount
-          ? _value.bankAccount
-          : bankAccount // ignore: cast_nullable_to_non_nullable
-              as String,
-      cryptoWalletAddress: null == cryptoWalletAddress
-          ? _value.cryptoWalletAddress
-          : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      transaction: null == transaction
-          ? _value.transaction
-          : transaction // ignore: cast_nullable_to_non_nullable
-              as String,
-      transactionId: null == transactionId
-          ? _value.transactionId
-          : transactionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalId: null == externalId
-          ? _value.externalId
-          : externalId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userWalletAddress: null == userWalletAddress
-          ? _value.userWalletAddress
-          : userWalletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      walletPublicKey: null == walletPublicKey
-          ? _value.walletPublicKey
-          : walletPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            orderId:
+                null == orderId
+                    ? _value.orderId
+                    : orderId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            created:
+                null == created
+                    ? _value.created
+                    : created // ignore: cast_nullable_to_non_nullable
+                        as String,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as String,
+            partnerPublicKey:
+                null == partnerPublicKey
+                    ? _value.partnerPublicKey
+                    : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            userPublicKey:
+                null == userPublicKey
+                    ? _value.userPublicKey
+                    : userPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as RampType,
+            cryptoAmount:
+                null == cryptoAmount
+                    ? _value.cryptoAmount
+                    : cryptoAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            cryptoCurrency:
+                null == cryptoCurrency
+                    ? _value.cryptoCurrency
+                    : cryptoCurrency // ignore: cast_nullable_to_non_nullable
+                        as String,
+            fiatAmount:
+                null == fiatAmount
+                    ? _value.fiatAmount
+                    : fiatAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            fiatCurrency:
+                null == fiatCurrency
+                    ? _value.fiatCurrency
+                    : fiatCurrency // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bankName:
+                null == bankName
+                    ? _value.bankName
+                    : bankName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bankAccount:
+                null == bankAccount
+                    ? _value.bankAccount
+                    : bankAccount // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bankDataHash:
+                null == bankDataHash
+                    ? _value.bankDataHash
+                    : bankDataHash // ignore: cast_nullable_to_non_nullable
+                        as String,
+            cryptoWalletAddress:
+                null == cryptoWalletAddress
+                    ? _value.cryptoWalletAddress
+                    : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
+                        as String,
+            transaction:
+                null == transaction
+                    ? _value.transaction
+                    : transaction // ignore: cast_nullable_to_non_nullable
+                        as String,
+            transactionId:
+                null == transactionId
+                    ? _value.transactionId
+                    : transactionId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            externalId:
+                null == externalId
+                    ? _value.externalId
+                    : externalId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            userWalletAddress:
+                null == userWalletAddress
+                    ? _value.userWalletAddress
+                    : userWalletAddress // ignore: cast_nullable_to_non_nullable
+                        as String,
+            walletPublicKey:
+                null == walletPublicKey
+                    ? _value.walletPublicKey
+                    : walletPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
   factory _$$OrderImplCopyWith(
-          _$OrderImpl value, $Res Function(_$OrderImpl) then) =
-      __$$OrderImplCopyWithImpl<$Res>;
+    _$OrderImpl value,
+    $Res Function(_$OrderImpl) then,
+  ) = __$$OrderImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String orderId,
-      String created,
-      String status,
-      String partnerPublicKey,
-      String userPublicKey,
-      String comment,
-      RampType type,
-      double cryptoAmount,
-      String cryptoCurrency,
-      double fiatAmount,
-      String fiatCurrency,
-      String bankName,
-      String bankAccount,
-      String cryptoWalletAddress,
-      String transaction,
-      String transactionId,
-      String externalId,
-      String userWalletAddress,
-      String walletPublicKey});
+  $Res call({
+    String orderId,
+    String created,
+    String status,
+    String partnerPublicKey,
+    String userPublicKey,
+    RampType type,
+    double cryptoAmount,
+    String cryptoCurrency,
+    double fiatAmount,
+    String fiatCurrency,
+    String bankName,
+    String bankAccount,
+    String bankDataHash,
+    String cryptoWalletAddress,
+    String transaction,
+    String transactionId,
+    String externalId,
+    String userWalletAddress,
+    String walletPublicKey,
+  });
 }
 
 /// @nodoc
@@ -219,8 +245,9 @@ class __$$OrderImplCopyWithImpl<$Res>
     extends _$OrderCopyWithImpl<$Res, _$OrderImpl>
     implements _$$OrderImplCopyWith<$Res> {
   __$$OrderImplCopyWithImpl(
-      _$OrderImpl _value, $Res Function(_$OrderImpl) _then)
-      : super(_value, _then);
+    _$OrderImpl _value,
+    $Res Function(_$OrderImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -232,7 +259,6 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? status = null,
     Object? partnerPublicKey = null,
     Object? userPublicKey = null,
-    Object? comment = null,
     Object? type = null,
     Object? cryptoAmount = null,
     Object? cryptoCurrency = null,
@@ -240,6 +266,7 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? fiatCurrency = null,
     Object? bankName = null,
     Object? bankAccount = null,
+    Object? bankDataHash = null,
     Object? cryptoWalletAddress = null,
     Object? transaction = null,
     Object? transactionId = null,
@@ -247,110 +274,132 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? userWalletAddress = null,
     Object? walletPublicKey = null,
   }) {
-    return _then(_$OrderImpl(
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      partnerPublicKey: null == partnerPublicKey
-          ? _value.partnerPublicKey
-          : partnerPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      userPublicKey: null == userPublicKey
-          ? _value.userPublicKey
-          : userPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as RampType,
-      cryptoAmount: null == cryptoAmount
-          ? _value.cryptoAmount
-          : cryptoAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      cryptoCurrency: null == cryptoCurrency
-          ? _value.cryptoCurrency
-          : cryptoCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      fiatAmount: null == fiatAmount
-          ? _value.fiatAmount
-          : fiatAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      fiatCurrency: null == fiatCurrency
-          ? _value.fiatCurrency
-          : fiatCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankName: null == bankName
-          ? _value.bankName
-          : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankAccount: null == bankAccount
-          ? _value.bankAccount
-          : bankAccount // ignore: cast_nullable_to_non_nullable
-              as String,
-      cryptoWalletAddress: null == cryptoWalletAddress
-          ? _value.cryptoWalletAddress
-          : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      transaction: null == transaction
-          ? _value.transaction
-          : transaction // ignore: cast_nullable_to_non_nullable
-              as String,
-      transactionId: null == transactionId
-          ? _value.transactionId
-          : transactionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalId: null == externalId
-          ? _value.externalId
-          : externalId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userWalletAddress: null == userWalletAddress
-          ? _value.userWalletAddress
-          : userWalletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      walletPublicKey: null == walletPublicKey
-          ? _value.walletPublicKey
-          : walletPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$OrderImpl(
+        orderId:
+            null == orderId
+                ? _value.orderId
+                : orderId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        created:
+            null == created
+                ? _value.created
+                : created // ignore: cast_nullable_to_non_nullable
+                    as String,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as String,
+        partnerPublicKey:
+            null == partnerPublicKey
+                ? _value.partnerPublicKey
+                : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        userPublicKey:
+            null == userPublicKey
+                ? _value.userPublicKey
+                : userPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as RampType,
+        cryptoAmount:
+            null == cryptoAmount
+                ? _value.cryptoAmount
+                : cryptoAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        cryptoCurrency:
+            null == cryptoCurrency
+                ? _value.cryptoCurrency
+                : cryptoCurrency // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fiatAmount:
+            null == fiatAmount
+                ? _value.fiatAmount
+                : fiatAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        fiatCurrency:
+            null == fiatCurrency
+                ? _value.fiatCurrency
+                : fiatCurrency // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bankName:
+            null == bankName
+                ? _value.bankName
+                : bankName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bankAccount:
+            null == bankAccount
+                ? _value.bankAccount
+                : bankAccount // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bankDataHash:
+            null == bankDataHash
+                ? _value.bankDataHash
+                : bankDataHash // ignore: cast_nullable_to_non_nullable
+                    as String,
+        cryptoWalletAddress:
+            null == cryptoWalletAddress
+                ? _value.cryptoWalletAddress
+                : cryptoWalletAddress // ignore: cast_nullable_to_non_nullable
+                    as String,
+        transaction:
+            null == transaction
+                ? _value.transaction
+                : transaction // ignore: cast_nullable_to_non_nullable
+                    as String,
+        transactionId:
+            null == transactionId
+                ? _value.transactionId
+                : transactionId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        externalId:
+            null == externalId
+                ? _value.externalId
+                : externalId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        userWalletAddress:
+            null == userWalletAddress
+                ? _value.userWalletAddress
+                : userWalletAddress // ignore: cast_nullable_to_non_nullable
+                    as String,
+        walletPublicKey:
+            null == walletPublicKey
+                ? _value.walletPublicKey
+                : walletPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$OrderImpl implements _Order {
-  const _$OrderImpl(
-      {required this.orderId,
-      required this.created,
-      required this.status,
-      required this.partnerPublicKey,
-      required this.userPublicKey,
-      required this.comment,
-      required this.type,
-      required this.cryptoAmount,
-      required this.cryptoCurrency,
-      required this.fiatAmount,
-      required this.fiatCurrency,
-      required this.bankName,
-      required this.bankAccount,
-      required this.cryptoWalletAddress,
-      required this.transaction,
-      required this.transactionId,
-      required this.externalId,
-      required this.userWalletAddress,
-      required this.walletPublicKey});
+  const _$OrderImpl({
+    required this.orderId,
+    required this.created,
+    required this.status,
+    required this.partnerPublicKey,
+    required this.userPublicKey,
+    required this.type,
+    required this.cryptoAmount,
+    required this.cryptoCurrency,
+    required this.fiatAmount,
+    required this.fiatCurrency,
+    required this.bankName,
+    required this.bankAccount,
+    required this.bankDataHash,
+    required this.cryptoWalletAddress,
+    required this.transaction,
+    required this.transactionId,
+    required this.externalId,
+    required this.userWalletAddress,
+    required this.walletPublicKey,
+  });
 
   @override
   final String orderId;
@@ -362,8 +411,6 @@ class _$OrderImpl implements _Order {
   final String partnerPublicKey;
   @override
   final String userPublicKey;
-  @override
-  final String comment;
   @override
   final RampType type;
   @override
@@ -379,6 +426,8 @@ class _$OrderImpl implements _Order {
   @override
   final String bankAccount;
   @override
+  final String bankDataHash;
+  @override
   final String cryptoWalletAddress;
   @override
   final String transaction;
@@ -393,7 +442,7 @@ class _$OrderImpl implements _Order {
 
   @override
   String toString() {
-    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, comment: $comment, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
+    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, bankDataHash: $bankDataHash, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -408,7 +457,6 @@ class _$OrderImpl implements _Order {
                 other.partnerPublicKey == partnerPublicKey) &&
             (identical(other.userPublicKey, userPublicKey) ||
                 other.userPublicKey == userPublicKey) &&
-            (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.cryptoAmount, cryptoAmount) ||
                 other.cryptoAmount == cryptoAmount) &&
@@ -422,6 +470,8 @@ class _$OrderImpl implements _Order {
                 other.bankName == bankName) &&
             (identical(other.bankAccount, bankAccount) ||
                 other.bankAccount == bankAccount) &&
+            (identical(other.bankDataHash, bankDataHash) ||
+                other.bankDataHash == bankDataHash) &&
             (identical(other.cryptoWalletAddress, cryptoWalletAddress) ||
                 other.cryptoWalletAddress == cryptoWalletAddress) &&
             (identical(other.transaction, transaction) ||
@@ -438,27 +488,27 @@ class _$OrderImpl implements _Order {
 
   @override
   int get hashCode => Object.hashAll([
-        runtimeType,
-        orderId,
-        created,
-        status,
-        partnerPublicKey,
-        userPublicKey,
-        comment,
-        type,
-        cryptoAmount,
-        cryptoCurrency,
-        fiatAmount,
-        fiatCurrency,
-        bankName,
-        bankAccount,
-        cryptoWalletAddress,
-        transaction,
-        transactionId,
-        externalId,
-        userWalletAddress,
-        walletPublicKey
-      ]);
+    runtimeType,
+    orderId,
+    created,
+    status,
+    partnerPublicKey,
+    userPublicKey,
+    type,
+    cryptoAmount,
+    cryptoCurrency,
+    fiatAmount,
+    fiatCurrency,
+    bankName,
+    bankAccount,
+    bankDataHash,
+    cryptoWalletAddress,
+    transaction,
+    transactionId,
+    externalId,
+    userWalletAddress,
+    walletPublicKey,
+  ]);
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -470,26 +520,27 @@ class _$OrderImpl implements _Order {
 }
 
 abstract class _Order implements Order {
-  const factory _Order(
-      {required final String orderId,
-      required final String created,
-      required final String status,
-      required final String partnerPublicKey,
-      required final String userPublicKey,
-      required final String comment,
-      required final RampType type,
-      required final double cryptoAmount,
-      required final String cryptoCurrency,
-      required final double fiatAmount,
-      required final String fiatCurrency,
-      required final String bankName,
-      required final String bankAccount,
-      required final String cryptoWalletAddress,
-      required final String transaction,
-      required final String transactionId,
-      required final String externalId,
-      required final String userWalletAddress,
-      required final String walletPublicKey}) = _$OrderImpl;
+  const factory _Order({
+    required final String orderId,
+    required final String created,
+    required final String status,
+    required final String partnerPublicKey,
+    required final String userPublicKey,
+    required final RampType type,
+    required final double cryptoAmount,
+    required final String cryptoCurrency,
+    required final double fiatAmount,
+    required final String fiatCurrency,
+    required final String bankName,
+    required final String bankAccount,
+    required final String bankDataHash,
+    required final String cryptoWalletAddress,
+    required final String transaction,
+    required final String transactionId,
+    required final String externalId,
+    required final String userWalletAddress,
+    required final String walletPublicKey,
+  }) = _$OrderImpl;
 
   @override
   String get orderId;
@@ -501,8 +552,6 @@ abstract class _Order implements Order {
   String get partnerPublicKey;
   @override
   String get userPublicKey;
-  @override
-  String get comment;
   @override
   RampType get type;
   @override
@@ -517,6 +566,8 @@ abstract class _Order implements Order {
   String get bankName;
   @override
   String get bankAccount;
+  @override
+  String get bankDataHash;
   @override
   String get cryptoWalletAddress;
   @override
