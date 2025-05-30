@@ -347,7 +347,6 @@ class PartnerAppState extends ChangeNotifier {
     required String orderId,
     required String bankName,
     required String bankAccount,
-    required String secretKey,
   }) async {
     _onRampExternalId = const Uuid().v4();
 
