@@ -42,8 +42,6 @@ class KycUserClient {
   late SimpleKeyPair _authKeyPair;
   late String _authPublicKey;
   late final PrivateKey _encryptionSecretKey;
-  late final SecretKey _secretKey;
-  late final String _encryptedSecretKey;
   late final String _rawSecretKey;
   late final SecretBox _secretBox;
   late final SigningKey _signingKey;
@@ -58,8 +56,9 @@ class KycUserClient {
 
   Future<void> init({required String walletAddress}) async {
     try {
-      final initAuthKeyPair = await Ed25519().newKeyPair();
-      final tempStorageClient = await _createTempStorageClient(initAuthKeyPair);
+      final tempStorageClient = wallet.WalletServiceClient(
+        createTransport(baseUrl: config.storageBaseUrl),
+      );
 
       final proofResponse = await tempStorageClient.getWalletProof(
         GetWalletProofRequest(walletAddress: walletAddress),
@@ -68,40 +67,46 @@ class KycUserClient {
       final proofSignature = await sign(utf8.encode(proofResponse.proofMessage));
       final encodedProofSignature = base58.encode(Uint8List.fromList(proofSignature.bytes));
 
-      final seedMessageResponse = await tempStorageClient.getSeedMessage(
-        GetSeedMessageRequest(
+      final restoreResponse = await tempStorageClient.restoreConnection(
+        RestoreConnectionRequest(
           walletAddress: walletAddress,
           walletProofSignature: encodedProofSignature,
         ),
       );
 
-      final seed = await _generateSeed(message: seedMessageResponse.message);
-      await _initializeKeys(seed);
+      if (restoreResponse.hasConnected()) {
+        final connected = restoreResponse.connected;
 
-      if (_authPublicKey != seedMessageResponse.publicKey) {
-        throw Exception(
-          'Authentication keys mismatch: potential security issue or data corruption',
+        final seed = await _generateSeed(message: connected.seedMessage);
+        await _initializeKeys(seed);
+
+        if (_authPublicKey != connected.publicKey) {
+          throw Exception(
+            'Authentication keys mismatch: potential security issue or data corruption',
+          );
+        }
+
+        await _initializeEncryption();
+        await _initializeStorageClient();
+      } else {
+        final notConnected = restoreResponse.notConnected;
+
+        final seed = await _generateSeed();
+        await _initializeKeys(seed);
+
+        await _initializeEncryption();
+        await _initializeStorageClient();
+
+        await _storageClient.connectWallet(
+          ConnectWalletRequest(
+            walletAddress: walletAddress,
+            connectToken: notConnected.connectToken,
+            seedMessage: _seedMessage,
+          ),
         );
       }
-
-      await _initializeEncryption(encryptedSecretKey: seedMessageResponse.encryptedSecretKey);
-      await _initializeStorageClient();
     } on ConnectException catch (e) {
-      if (!(_isUserNotInitialized(e) || _isRestoreAuthError(e))) {
-        rethrow;
-      }
-
-      final seed = await _generateSeed();
-      await _initializeKeys(seed);
-      await _initializeStorageClient();
-      await _initializeEncryption();
-
-      try {
-        await _initStorage(walletAddress: walletAddress);
-      } on ConnectException catch (e) {
-        if (_isUserAlreadyInitializedError(e)) {
-          throw Exception('User already initialized. Please retry the init operation.');
-        }
+      if (!_isRestoreAuthError(e)) {
         rethrow;
       }
     }
@@ -110,11 +115,7 @@ class KycUserClient {
     await _initializeOrderClient();
   }
 
-  bool _isUserNotInitialized(ConnectException e) => e.message == 'user not initialized';
-
   bool _isRestoreAuthError(ConnectException e) => e.message == 'wallet proof signature is invalid';
-
-  bool _isUserAlreadyInitializedError(ConnectException e) => e.message == 'user already exists';
 
   Future<Uint8List> _generateSeed({String? message}) async {
     final signature = await sign(utf8.encode(message ?? _seedMessage));
@@ -125,22 +126,6 @@ class KycUserClient {
     _authKeyPair = await Ed25519().newKeyPairFromSeed(seed);
     _authPublicKey = base58.encode(
       Uint8List.fromList(await _authKeyPair.extractPublicKey().then((value) => value.bytes)),
-    );
-  }
-
-  Future<wallet.WalletServiceClient> _createTempStorageClient(SimpleKeyPair keyPair) async {
-    final publicKeyBytes = await keyPair.extractPublicKey().then((value) => value.bytes);
-    final publicKeyBase58 = base58.encode(Uint8List.fromList(publicKeyBytes));
-
-    final payload = jwt.JWT(<String, dynamic>{'iss': publicKeyBase58, 'aud': 'storage.brij.fi'});
-
-    final token = payload.sign(
-      jwt.EdDSAPrivateKey(await keyPair.extractPrivateKeyBytes() + publicKeyBytes),
-      algorithm: jwt.JWTAlgorithm.EdDSA,
-    );
-
-    return wallet.WalletServiceClient(
-      createTransport(baseUrl: config.storageBaseUrl, token: token),
     );
   }
 
@@ -181,42 +166,28 @@ class KycUserClient {
     );
   }
 
-  Future<void> _initializeEncryption({String? encryptedSecretKey}) async {
+  Future<void> _initializeEncryption() async {
     final edSK = Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
     final xSK = Uint8List(32);
     TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(xSK, edSK);
     _encryptionSecretKey = PrivateKey(xSK);
 
-    final sealedBox = SealedBox(_encryptionSecretKey);
+    final publicKeyBytes = await _authKeyPair.extractPublicKey().then((key) => key.bytes);
+    final hkdf = Hkdf(hmac: Hmac(Sha256()), outputLength: 32);
 
-    _secretKey =
-        encryptedSecretKey == null
-            ? await Chacha20.poly1305Aead().newSecretKey()
-            : SecretKey(sealedBox.decrypt(base64Decode(encryptedSecretKey)));
-
-    _rawSecretKey = base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
-    _encryptedSecretKey = base64Encode(
-      sealedBox.encrypt(Uint8List.fromList(await _secretKey.extractBytes())),
+    final derivedKeyData = await hkdf.deriveKey(
+      secretKey: SecretKey(edSK),
+      nonce: Uint8List.fromList(publicKeyBytes),
+      info: utf8.encode('v1'),
     );
-    _secretBox = SecretBox(Uint8List.fromList(await _secretKey.extractBytes()));
+
+    final derivedKeyBytes = await derivedKeyData.extractBytes();
+
+    _rawSecretKey = base58.encode(Uint8List.fromList(derivedKeyBytes));
+    _secretBox = SecretBox(Uint8List.fromList(derivedKeyBytes));
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
         await _authKeyPair.extractPrivateKeyBytes() + (await _authKeyPair.extractPublicKey()).bytes,
-      ),
-    );
-  }
-
-  Future<void> _initStorage({required String walletAddress}) async {
-    final proofMessage = await _storageClient.getWalletProof(
-      GetWalletProofRequest(walletAddress: walletAddress),
-    );
-    final proofSignature = await sign(utf8.encode(proofMessage.proofMessage));
-    await _storageClient.initStorage(
-      InitStorageRequest(
-        walletAddress: walletAddress,
-        message: _seedMessage,
-        encryptedSecretKey: _encryptedSecretKey,
-        walletProofSignature: base58.encode(Uint8List.fromList(proofSignature.bytes)),
       ),
     );
   }
