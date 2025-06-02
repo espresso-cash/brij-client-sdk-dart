@@ -68,40 +68,46 @@ class KycUserClient {
       final proofSignature = await sign(utf8.encode(proofResponse.proofMessage));
       final encodedProofSignature = base58.encode(Uint8List.fromList(proofSignature.bytes));
 
-      final seedMessageResponse = await tempStorageClient.getSeedMessage(
-        GetSeedMessageRequest(
+      final restoreResponse = await tempStorageClient.restoreConnection(
+        RestoreConnectionRequest(
           walletAddress: walletAddress,
           walletProofSignature: encodedProofSignature,
         ),
       );
 
-      final seed = await _generateSeed(message: seedMessageResponse.message);
-      await _initializeKeys(seed);
+      if (restoreResponse.hasConnected()) {
+        final connected = restoreResponse.connected;
 
-      if (_authPublicKey != seedMessageResponse.publicKey) {
-        throw Exception(
-          'Authentication keys mismatch: potential security issue or data corruption',
+        final seed = await _generateSeed(message: connected.seedMessage);
+        await _initializeKeys(seed);
+
+        if (_authPublicKey != connected.publicKey) {
+          throw Exception(
+            'Authentication keys mismatch: potential security issue or data corruption',
+          );
+        }
+
+        await _initializeEncryption();
+        await _initializeStorageClient();
+      } else {
+        final notConnected = restoreResponse.notConnected;
+
+        final seed = await _generateSeed();
+        await _initializeKeys(seed);
+
+        await _initializeEncryption();
+        await _initializeStorageClient();
+
+        await _storageClient.connectWallet(
+          ConnectRequest(
+            walletAddress: walletAddress,
+            connectToken: notConnected.connectToken,
+            seedMessage: _seedMessage,
+          ),
         );
       }
-
-      await _initializeEncryption(encryptedSecretKey: seedMessageResponse.encryptedSecretKey);
-      await _initializeStorageClient();
     } on ConnectException catch (e) {
-      if (!(_isUserNotInitialized(e) || _isRestoreAuthError(e))) {
-        rethrow;
-      }
-
-      final seed = await _generateSeed();
-      await _initializeKeys(seed);
-      await _initializeStorageClient();
-      await _initializeEncryption();
-
-      try {
-        await _initStorage(walletAddress: walletAddress);
-      } on ConnectException catch (e) {
-        if (_isUserAlreadyInitializedError(e)) {
-          throw Exception('User already initialized. Please retry the init operation.');
-        }
+      if (!_isRestoreAuthError(e)) {
         rethrow;
       }
     }
@@ -110,11 +116,7 @@ class KycUserClient {
     await _initializeOrderClient();
   }
 
-  bool _isUserNotInitialized(ConnectException e) => e.message == 'user not initialized';
-
   bool _isRestoreAuthError(ConnectException e) => e.message == 'wallet proof signature is invalid';
-
-  bool _isUserAlreadyInitializedError(ConnectException e) => e.message == 'user already exists';
 
   Future<Uint8List> _generateSeed({String? message}) async {
     final signature = await sign(utf8.encode(message ?? _seedMessage));
@@ -202,21 +204,6 @@ class KycUserClient {
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
         await _authKeyPair.extractPrivateKeyBytes() + (await _authKeyPair.extractPublicKey()).bytes,
-      ),
-    );
-  }
-
-  Future<void> _initStorage({required String walletAddress}) async {
-    final proofMessage = await _storageClient.getWalletProof(
-      GetWalletProofRequest(walletAddress: walletAddress),
-    );
-    final proofSignature = await sign(utf8.encode(proofMessage.proofMessage));
-    await _storageClient.initStorage(
-      InitStorageRequest(
-        walletAddress: walletAddress,
-        message: _seedMessage,
-        encryptedSecretKey: _encryptedSecretKey,
-        walletProofSignature: base58.encode(Uint8List.fromList(proofSignature.bytes)),
       ),
     );
   }
