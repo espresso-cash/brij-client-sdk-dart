@@ -142,9 +142,7 @@ class KycPartnerClient {
       GetOrderRequest(orderId: orderId.orderId, externalId: orderId.externalId),
     );
 
-    final secretKey = await getUserSecretKey(response.userPublicKey);
-
-    return processPartnerOrderData(order: response, secretKey: secretKey);
+    return processPartnerOrderData(response);
   }
 
   Future<List<Order>> getPartnerOrders() async {
@@ -152,10 +150,7 @@ class KycPartnerClient {
 
     final orders = <Order>[];
     for (final order in response.orders) {
-      final secretKey = await getUserSecretKey(
-        order.userPublicKey,
-      ).catchError((_) => '', test: (e) => e is ConnectException);
-      orders.add(processPartnerOrderData(order: order, secretKey: secretKey));
+      orders.add(processPartnerOrderData(order));
     }
 
     return orders;
