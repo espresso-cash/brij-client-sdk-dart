@@ -172,8 +172,7 @@ class UserAppState extends ChangeNotifier {
     required String amount,
     required String currency,
     required String partnerPK,
-    required String bankName,
-    required String bankAccount,
+    required String bankDataHash,
   }) async {
     final orderId = await _client.createOffRampOrder(
       partnerPK: partnerPK,
@@ -181,8 +180,7 @@ class UserAppState extends ChangeNotifier {
       cryptoCurrency: currency,
       fiatAmount: double.parse(amount),
       fiatCurrency: currency,
-      bankName: bankName,
-      bankAccount: bankAccount,
+      bankDataHash: bankDataHash,
       cryptoWalletAddress: _wallet!.publicKey.toString(),
       walletPK: partnerPK,
     );
@@ -290,8 +288,7 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey =
-        await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
+    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
@@ -350,7 +347,6 @@ class PartnerAppState extends ChangeNotifier {
     required String orderId,
     required String bankName,
     required String bankAccount,
-    required String secretKey,
   }) async {
     _onRampExternalId = const Uuid().v4();
 
@@ -358,7 +354,6 @@ class PartnerAppState extends ChangeNotifier {
       orderId: OrderId.from(orderId: orderId, externalId: _onRampExternalId),
       bankName: bankName,
       bankAccount: bankAccount,
-      userSecretKey: secretKey,
     );
   }
 

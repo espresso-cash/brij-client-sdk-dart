@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:isolate';
 
-import 'package:brij_client/src/currency/currency_list.dart';
 import 'package:brij_client/src/models/export.dart';
-import 'package:brij_protos_dart/gen/brij/orders/v1/common/ramp_type.pbenum.dart' as orders;
 import 'package:brij_protos_dart/gen/brij/orders/v1/partner/partner.pb.dart' as partner;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' as wallet;
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as d;
@@ -21,6 +19,8 @@ import 'package:protobuf/protobuf.dart';
 
 export 'models/order_id.dart';
 export 'models/validation_result.dart';
+
+const bool _isWeb = identical(0, 0.0);
 
 String generateHash(Object data) {
   final bytes = switch (data) {
@@ -274,44 +274,11 @@ UserData _processUserDataForPartner({
 }
 
 Order processWalletOrderData({required wallet.GetOrderResponse order, required String secretKey}) {
-  final decryptedBankName =
-      order.bankName.isNotEmpty
-          ? utf8.decode(decrypt(encryptedData: base64Decode(order.bankName), secretKey: secretKey))
-          : '';
-
-  final decryptedBankAccount =
-      order.bankAccount.isNotEmpty
-          ? utf8.decode(
-            decrypt(encryptedData: base64Decode(order.bankAccount), secretKey: secretKey),
-          )
-          : '';
-
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage =
-        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
-            ? createUserOnRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              walletAddress: order.userWalletAddress,
-            )
-            : createUserOffRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              encryptedBankName: order.bankName,
-              encryptedBankAccount: order.bankAccount,
-              walletAddress: order.userWalletAddress,
-            );
-
     if (!verifyKey.verify(
-      signature: Signature(base58.decode(order.userSignature)),
-      message: Uint8List.fromList(utf8.encode(userMessage)),
+      signature: Signature(Uint8List.fromList(order.userSignature)),
+      message: Uint8List.fromList(order.userPayload),
     )) {
       throw Exception('Invalid user signature');
     }
@@ -319,87 +286,23 @@ Order processWalletOrderData({required wallet.GetOrderResponse order, required S
 
   if (order.partnerSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage =
-        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
-            ? createPartnerOnRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              encryptedBankName: order.bankName,
-              encryptedBankAccount: order.bankAccount,
-            )
-            : createPartnerOffRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              cryptoWalletAddress: order.cryptoWalletAddress,
-            );
-
     if (!verifyKey.verify(
-      signature: Signature(base58.decode(order.partnerSignature)),
-      message: Uint8List.fromList(utf8.encode(partnerMessage)),
+      signature: Signature(Uint8List.fromList(order.partnerSignature)),
+      message: Uint8List.fromList(order.partnerPayload),
     )) {
       throw Exception('Invalid partner signature');
     }
   }
 
-  order.freeze();
-
-  return Order.fromWalletGetOrderResponse(
-    order.rebuild((r) {
-      r
-        ..bankName = decryptedBankName
-        ..bankAccount = decryptedBankAccount;
-    }),
-  );
+  return Order.fromWalletGetOrderResponse(order);
 }
 
-Order processPartnerOrderData({
-  required partner.GetOrderResponse order,
-  required String secretKey,
-}) {
-  final decryptedBankName =
-      order.bankName.isNotEmpty && secretKey.isNotEmpty
-          ? utf8.decode(decrypt(encryptedData: base64Decode(order.bankName), secretKey: secretKey))
-          : '';
-
-  final decryptedBankAccount =
-      order.bankAccount.isNotEmpty && secretKey.isNotEmpty
-          ? utf8.decode(
-            decrypt(encryptedData: base64Decode(order.bankAccount), secretKey: secretKey),
-          )
-          : '';
-
+Order processPartnerOrderData(partner.GetOrderResponse order) {
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
-    final userMessage =
-        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
-            ? createUserOnRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              walletAddress: order.userWalletAddress,
-            )
-            : createUserOffRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              encryptedBankName: order.bankName,
-              encryptedBankAccount: order.bankAccount,
-              walletAddress: order.userWalletAddress,
-            );
-
     if (!verifyKey.verify(
-      signature: Signature(base58.decode(order.userSignature)),
-      message: Uint8List.fromList(utf8.encode(userMessage)),
+      signature: Signature(Uint8List.fromList(order.userSignature)),
+      message: Uint8List.fromList(order.userPayload),
     )) {
       throw Exception('Invalid user signature');
     }
@@ -407,102 +310,13 @@ Order processPartnerOrderData({
 
   if (order.partnerSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.partnerPublicKey)));
-    final partnerMessage =
-        order.type == orders.RampType.RAMP_TYPE_ON_RAMP
-            ? createPartnerOnRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              encryptedBankName: order.bankName,
-              encryptedBankAccount: order.bankAccount,
-            )
-            : createPartnerOffRampMessage(
-              orderId: order.orderId,
-              cryptoAmount: order.cryptoAmount,
-              cryptoCurrency: order.cryptoCurrency,
-              fiatAmount: order.fiatAmount,
-              fiatCurrency: order.fiatCurrency,
-              cryptoWalletAddress: order.cryptoWalletAddress,
-            );
-
     if (!verifyKey.verify(
-      signature: Signature(base58.decode(order.partnerSignature)),
-      message: Uint8List.fromList(utf8.encode(partnerMessage)),
+      signature: Signature(Uint8List.fromList(order.partnerSignature)),
+      message: Uint8List.fromList(order.partnerPayload),
     )) {
       throw Exception('Invalid partner signature');
     }
   }
 
-  order.freeze();
-
-  return Order.fromPartnerGetOrderResponse(
-    order.rebuild((r) {
-      r
-        ..bankName = decryptedBankName
-        ..bankAccount = decryptedBankAccount;
-    }),
-  );
+  return Order.fromPartnerGetOrderResponse(order);
 }
-
-String createUserOnRampMessage({
-  required String orderId,
-  required double cryptoAmount,
-  required String cryptoCurrency,
-  required double fiatAmount,
-  required String fiatCurrency,
-  required String walletAddress,
-}) {
-  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
-
-  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$walletAddress';
-}
-
-String createUserOffRampMessage({
-  required String orderId,
-  required double cryptoAmount,
-  required String cryptoCurrency,
-  required double fiatAmount,
-  required String fiatCurrency,
-  required String encryptedBankName,
-  required String encryptedBankAccount,
-  required String walletAddress,
-}) {
-  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
-
-  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$encryptedBankName|$encryptedBankAccount|$walletAddress';
-}
-
-String createPartnerOnRampMessage({
-  required String orderId,
-  required double cryptoAmount,
-  required String cryptoCurrency,
-  required double fiatAmount,
-  required String fiatCurrency,
-  required String encryptedBankName,
-  required String encryptedBankAccount,
-}) {
-  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
-
-  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$encryptedBankName|$encryptedBankAccount';
-}
-
-String createPartnerOffRampMessage({
-  required String orderId,
-  required double cryptoAmount,
-  required String cryptoCurrency,
-  required double fiatAmount,
-  required String fiatCurrency,
-  required String cryptoWalletAddress,
-}) {
-  final cryptoAmountDecimals = convertToDecimalPrecision(cryptoAmount, cryptoCurrency);
-  final fiatAmountDecimals = convertToDecimalPrecision(fiatAmount, fiatCurrency);
-
-  return '$orderId|$cryptoAmountDecimals|$cryptoCurrency|$fiatAmountDecimals|$fiatCurrency|$cryptoWalletAddress';
-}
-
-const bool _isWeb = identical(0, 0.0);
