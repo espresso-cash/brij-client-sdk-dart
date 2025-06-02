@@ -56,7 +56,9 @@ class KycUserClient {
 
   Future<void> init({required String walletAddress}) async {
     try {
-      final tempStorageClient = _createTempStorageClient();
+      final tempStorageClient = wallet.WalletServiceClient(
+        createTransport(baseUrl: config.storageBaseUrl),
+      );
 
       final proofResponse = await tempStorageClient.getWalletProof(
         GetWalletProofRequest(walletAddress: walletAddress),
@@ -126,9 +128,6 @@ class KycUserClient {
       Uint8List.fromList(await _authKeyPair.extractPublicKey().then((value) => value.bytes)),
     );
   }
-
-  wallet.WalletServiceClient _createTempStorageClient() =>
-      wallet.WalletServiceClient(createTransport(baseUrl: config.storageBaseUrl));
 
   Future<void> _initializeStorageClient() async {
     _storageClient = wallet.WalletServiceClient(
