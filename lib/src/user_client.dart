@@ -42,8 +42,6 @@ class KycUserClient {
   late SimpleKeyPair _authKeyPair;
   late String _authPublicKey;
   late final PrivateKey _encryptionSecretKey;
-  late final SecretKey _secretKey;
-  late final String _encryptedSecretKey;
   late final String _rawSecretKey;
   late final SecretBox _secretBox;
   late final SigningKey _signingKey;
@@ -183,24 +181,25 @@ class KycUserClient {
     );
   }
 
-  Future<void> _initializeEncryption({String? encryptedSecretKey}) async {
+  Future<void> _initializeEncryption() async {
     final edSK = Uint8List.fromList(await _authKeyPair.extractPrivateKeyBytes());
     final xSK = Uint8List(32);
     TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(xSK, edSK);
     _encryptionSecretKey = PrivateKey(xSK);
 
-    final sealedBox = SealedBox(_encryptionSecretKey);
+    final publicKeyBytes = await _authKeyPair.extractPublicKey().then((key) => key.bytes);
+    final hkdf = Hkdf(hmac: Hmac(Sha256()), outputLength: 32);
 
-    _secretKey =
-        encryptedSecretKey == null
-            ? await Chacha20.poly1305Aead().newSecretKey()
-            : SecretKey(sealedBox.decrypt(base64Decode(encryptedSecretKey)));
-
-    _rawSecretKey = base58.encode(Uint8List.fromList(await _secretKey.extractBytes()));
-    _encryptedSecretKey = base64Encode(
-      sealedBox.encrypt(Uint8List.fromList(await _secretKey.extractBytes())),
+    final derivedKeyData = await hkdf.deriveKey(
+      secretKey: SecretKey(edSK),
+      nonce: Uint8List.fromList(publicKeyBytes),
+      info: utf8.encode('v1'),
     );
-    _secretBox = SecretBox(Uint8List.fromList(await _secretKey.extractBytes()));
+
+    final derivedKeyBytes = await derivedKeyData.extractBytes();
+
+    _rawSecretKey = base58.encode(Uint8List.fromList(derivedKeyBytes));
+    _secretBox = SecretBox(Uint8List.fromList(derivedKeyBytes));
     _signingKey = SigningKey.fromValidBytes(
       Uint8List.fromList(
         await _authKeyPair.extractPrivateKeyBytes() + (await _authKeyPair.extractPublicKey()).bytes,
