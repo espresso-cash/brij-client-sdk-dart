@@ -12,7 +12,8 @@ part of 'kyc_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$KycItem {
@@ -35,13 +36,14 @@ abstract class $KycItemCopyWith<$Res> {
   factory $KycItemCopyWith(KycItem value, $Res Function(KycItem) then) =
       _$KycItemCopyWithImpl<$Res, KycItem>;
   @useResult
-  $Res call(
-      {List<String> countries,
-      KycStatus status,
-      String provider,
-      String userPublicKey,
-      List<String> hashes,
-      Map<String, List<int>> additionalData});
+  $Res call({
+    List<String> countries,
+    KycStatus status,
+    String provider,
+    String userPublicKey,
+    List<String> hashes,
+    Map<String, List<int>> additionalData,
+  });
 }
 
 /// @nodoc
@@ -66,49 +68,60 @@ class _$KycItemCopyWithImpl<$Res, $Val extends KycItem>
     Object? hashes = null,
     Object? additionalData = null,
   }) {
-    return _then(_value.copyWith(
-      countries: null == countries
-          ? _value.countries
-          : countries // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as KycStatus,
-      provider: null == provider
-          ? _value.provider
-          : provider // ignore: cast_nullable_to_non_nullable
-              as String,
-      userPublicKey: null == userPublicKey
-          ? _value.userPublicKey
-          : userPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      hashes: null == hashes
-          ? _value.hashes
-          : hashes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      additionalData: null == additionalData
-          ? _value.additionalData
-          : additionalData // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<int>>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            countries:
+                null == countries
+                    ? _value.countries
+                    : countries // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as KycStatus,
+            provider:
+                null == provider
+                    ? _value.provider
+                    : provider // ignore: cast_nullable_to_non_nullable
+                        as String,
+            userPublicKey:
+                null == userPublicKey
+                    ? _value.userPublicKey
+                    : userPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            hashes:
+                null == hashes
+                    ? _value.hashes
+                    : hashes // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+            additionalData:
+                null == additionalData
+                    ? _value.additionalData
+                    : additionalData // ignore: cast_nullable_to_non_nullable
+                        as Map<String, List<int>>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$KycItemImplCopyWith<$Res> implements $KycItemCopyWith<$Res> {
   factory _$$KycItemImplCopyWith(
-          _$KycItemImpl value, $Res Function(_$KycItemImpl) then) =
-      __$$KycItemImplCopyWithImpl<$Res>;
+    _$KycItemImpl value,
+    $Res Function(_$KycItemImpl) then,
+  ) = __$$KycItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<String> countries,
-      KycStatus status,
-      String provider,
-      String userPublicKey,
-      List<String> hashes,
-      Map<String, List<int>> additionalData});
+  $Res call({
+    List<String> countries,
+    KycStatus status,
+    String provider,
+    String userPublicKey,
+    List<String> hashes,
+    Map<String, List<int>> additionalData,
+  });
 }
 
 /// @nodoc
@@ -116,8 +129,9 @@ class __$$KycItemImplCopyWithImpl<$Res>
     extends _$KycItemCopyWithImpl<$Res, _$KycItemImpl>
     implements _$$KycItemImplCopyWith<$Res> {
   __$$KycItemImplCopyWithImpl(
-      _$KycItemImpl _value, $Res Function(_$KycItemImpl) _then)
-      : super(_value, _then);
+    _$KycItemImpl _value,
+    $Res Function(_$KycItemImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of KycItem
   /// with the given fields replaced by the non-null parameter values.
@@ -131,49 +145,57 @@ class __$$KycItemImplCopyWithImpl<$Res>
     Object? hashes = null,
     Object? additionalData = null,
   }) {
-    return _then(_$KycItemImpl(
-      countries: null == countries
-          ? _value._countries
-          : countries // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as KycStatus,
-      provider: null == provider
-          ? _value.provider
-          : provider // ignore: cast_nullable_to_non_nullable
-              as String,
-      userPublicKey: null == userPublicKey
-          ? _value.userPublicKey
-          : userPublicKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      hashes: null == hashes
-          ? _value._hashes
-          : hashes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      additionalData: null == additionalData
-          ? _value._additionalData
-          : additionalData // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<int>>,
-    ));
+    return _then(
+      _$KycItemImpl(
+        countries:
+            null == countries
+                ? _value._countries
+                : countries // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as KycStatus,
+        provider:
+            null == provider
+                ? _value.provider
+                : provider // ignore: cast_nullable_to_non_nullable
+                    as String,
+        userPublicKey:
+            null == userPublicKey
+                ? _value.userPublicKey
+                : userPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        hashes:
+            null == hashes
+                ? _value._hashes
+                : hashes // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        additionalData:
+            null == additionalData
+                ? _value._additionalData
+                : additionalData // ignore: cast_nullable_to_non_nullable
+                    as Map<String, List<int>>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$KycItemImpl extends _KycItem {
-  const _$KycItemImpl(
-      {required final List<String> countries,
-      required this.status,
-      required this.provider,
-      required this.userPublicKey,
-      final List<String> hashes = const [],
-      final Map<String, List<int>> additionalData = const {}})
-      : _countries = countries,
-        _hashes = hashes,
-        _additionalData = additionalData,
-        super._();
+  const _$KycItemImpl({
+    required final List<String> countries,
+    required this.status,
+    required this.provider,
+    required this.userPublicKey,
+    final List<String> hashes = const [],
+    final Map<String, List<int>> additionalData = const {},
+  }) : _countries = countries,
+       _hashes = hashes,
+       _additionalData = additionalData,
+       super._();
 
   final List<String> _countries;
   @override
@@ -217,27 +239,32 @@ class _$KycItemImpl extends _KycItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KycItemImpl &&
-            const DeepCollectionEquality()
-                .equals(other._countries, _countries) &&
+            const DeepCollectionEquality().equals(
+              other._countries,
+              _countries,
+            ) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.provider, provider) ||
                 other.provider == provider) &&
             (identical(other.userPublicKey, userPublicKey) ||
                 other.userPublicKey == userPublicKey) &&
             const DeepCollectionEquality().equals(other._hashes, _hashes) &&
-            const DeepCollectionEquality()
-                .equals(other._additionalData, _additionalData));
+            const DeepCollectionEquality().equals(
+              other._additionalData,
+              _additionalData,
+            ));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_countries),
-      status,
-      provider,
-      userPublicKey,
-      const DeepCollectionEquality().hash(_hashes),
-      const DeepCollectionEquality().hash(_additionalData));
+    runtimeType,
+    const DeepCollectionEquality().hash(_countries),
+    status,
+    provider,
+    userPublicKey,
+    const DeepCollectionEquality().hash(_hashes),
+    const DeepCollectionEquality().hash(_additionalData),
+  );
 
   /// Create a copy of KycItem
   /// with the given fields replaced by the non-null parameter values.
@@ -249,13 +276,14 @@ class _$KycItemImpl extends _KycItem {
 }
 
 abstract class _KycItem extends KycItem {
-  const factory _KycItem(
-      {required final List<String> countries,
-      required final KycStatus status,
-      required final String provider,
-      required final String userPublicKey,
-      final List<String> hashes,
-      final Map<String, List<int>> additionalData}) = _$KycItemImpl;
+  const factory _KycItem({
+    required final List<String> countries,
+    required final KycStatus status,
+    required final String provider,
+    required final String userPublicKey,
+    final List<String> hashes,
+    final Map<String, List<int>> additionalData,
+  }) = _$KycItemImpl;
   const _KycItem._() : super._();
 
   @override
