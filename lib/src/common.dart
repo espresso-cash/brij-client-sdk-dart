@@ -297,10 +297,7 @@ Order processWalletOrderData({required wallet.GetOrderResponse order, required S
   return Order.fromWalletGetOrderResponse(order);
 }
 
-Order processPartnerOrderData({
-  required partner.GetOrderResponse order,
-  required String secretKey,
-}) {
+Order processPartnerOrderData(partner.GetOrderResponse order) {
   if (order.userSignature.isNotEmpty) {
     final verifyKey = VerifyKey(Uint8List.fromList(base58.decode(order.userPublicKey)));
     if (!verifyKey.verify(
