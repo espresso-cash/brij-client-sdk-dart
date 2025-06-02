@@ -56,8 +56,7 @@ class KycUserClient {
 
   Future<void> init({required String walletAddress}) async {
     try {
-      final initAuthKeyPair = await Ed25519().newKeyPair();
-      final tempStorageClient = await _createTempStorageClient(initAuthKeyPair);
+      final tempStorageClient = _createTempStorageClient();
 
       final proofResponse = await tempStorageClient.getWalletProof(
         GetWalletProofRequest(walletAddress: walletAddress),
@@ -128,21 +127,8 @@ class KycUserClient {
     );
   }
 
-  Future<wallet.WalletServiceClient> _createTempStorageClient(SimpleKeyPair keyPair) async {
-    final publicKeyBytes = await keyPair.extractPublicKey().then((value) => value.bytes);
-    final publicKeyBase58 = base58.encode(Uint8List.fromList(publicKeyBytes));
-
-    final payload = jwt.JWT(<String, dynamic>{'iss': publicKeyBase58, 'aud': 'storage.brij.fi'});
-
-    final token = payload.sign(
-      jwt.EdDSAPrivateKey(await keyPair.extractPrivateKeyBytes() + publicKeyBytes),
-      algorithm: jwt.JWTAlgorithm.EdDSA,
-    );
-
-    return wallet.WalletServiceClient(
-      createTransport(baseUrl: config.storageBaseUrl, token: token),
-    );
-  }
+  wallet.WalletServiceClient _createTempStorageClient() =>
+      wallet.WalletServiceClient(createTransport(baseUrl: config.storageBaseUrl));
 
   Future<void> _initializeStorageClient() async {
     _storageClient = wallet.WalletServiceClient(
