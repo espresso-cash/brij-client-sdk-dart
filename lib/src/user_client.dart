@@ -97,7 +97,7 @@ class KycUserClient {
         await _initializeStorageClient();
 
         await _storageClient.connectWallet(
-          ConnectRequest(
+          ConnectWalletRequest(
             walletAddress: walletAddress,
             connectToken: notConnected.connectToken,
             seedMessage: _seedMessage,
