@@ -502,30 +502,6 @@ class KycUserClient {
     return Quote.fromWalletGetQuoteResponse(response);
   }
 
-  Future<Quote> getBestQuote({
-    required String country,
-    required double cryptoAmount,
-    required RampType rampType,
-    required String fiatCurrency,
-    required String walletPK,
-  }) async {
-    final anonymousClient = order.WalletServiceClient(
-      createTransport(baseUrl: config.orderBaseUrl),
-    );
-
-    final response = await anonymousClient.getBestQuote(
-      GetBestQuoteRequest(
-        country: country,
-        walletPublicKey: walletPK,
-        cryptoAmount: cryptoAmount,
-        rampType: rampType.toProto(),
-        fiatCurrency: fiatCurrency,
-      ),
-    );
-
-    return Quote.fromWalletGetBestQuoteResponse(response);
-  }
-
   Future<String> generateTransaction({required String orderId, required String externalId}) async {
     final response = await _orderClient.generateTransaction(
       GenerateTransactionRequest(orderId: orderId, externalId: externalId),

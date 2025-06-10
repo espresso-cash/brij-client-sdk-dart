@@ -1,3 +1,4 @@
+import 'package:brij_client/brij_client.dart';
 import 'package:brij_client_example/shared.dart';
 import 'package:brij_client_example/state.dart';
 import 'package:cross_file/cross_file.dart';
@@ -25,7 +26,7 @@ class _UserViewState extends State<UserView> {
   @override
   void initState() {
     super.initState();
-    final userState = context.read<UserAppState>();
+    final userState = context.read<UserAppState>()..initAnonymous();
     context.read<PartnerAppState>().createPartner();
     userState.addListener(_updateControllers);
     _updateControllers();
@@ -417,6 +418,11 @@ class _UserViewState extends State<UserView> {
             title: 'Quote:',
             value: state.quote ?? '',
           ),
+          const SizedBox(height: 8),
+          ValueField(
+            title: 'Best Quote:',
+            value: state.bestQuote ?? '',
+          ),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
@@ -444,6 +450,19 @@ class _UserViewState extends State<UserView> {
                   );
             },
             child: const Text('Fetch offramp quote'),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              await context.read<UserAppState>().getBestQuote(
+                    country: 'ES',
+                    rampType: RampType.onRamp,
+                    walletPK: walletAuthPk,
+                    cryptoAmount: _cryptoQuoteAmountController.text,
+                    fiatCurrency: _fiatQuoteCurrencyController.text,
+                  );
+            },
+            child: const Text('Fetch best quote'),
           ),
         ],
       );

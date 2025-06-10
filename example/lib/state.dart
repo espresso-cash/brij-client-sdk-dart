@@ -23,6 +23,7 @@ class UserAppState extends ChangeNotifier {
 
   List<PartnerModel>? _grantedAccessPartners;
 
+  late AnonymousClient _anonymousClient;
   late KycUserClient _client;
 
   String? _email;
@@ -43,6 +44,11 @@ class UserAppState extends ChangeNotifier {
   String? _bestQuote;
 
   String? get bestQuote => _bestQuote;
+
+  void initAnonymous() {
+    _anonymousClient = AnonymousClient();
+    _anonymousClient.init();
+  }
 
   Future<void> createWallet() async {
     _wallet = await Ed25519HDKeyPair.random();
@@ -250,7 +256,7 @@ class UserAppState extends ChangeNotifier {
     required String fiatCurrency,
     required RampType rampType,
   }) async {
-    final response = await _client.getBestQuote(
+    final response = await _anonymousClient.getBestQuote(
       country: country,
       cryptoAmount: double.parse(cryptoAmount),
       walletPK: walletPK,
@@ -466,4 +472,4 @@ class PartnerAppState extends ChangeNotifier {
 }
 
 // TODO(vsumin): Replace it with real one
-const walletAuthPk = 'DA71MeXeEwuM2FzWj8Bki6XTBTYC9TUsXspzPoNy2yEQ';
+const walletAuthPk = '3GEEuaKKs6wrmi8Z8GEafmEC524Tx6wvFHfCp36tTQut';
