@@ -30,6 +30,18 @@ class Quote with _$Quote {
     platformFee: RampFee.fromWalletRampFee(response.platformFee),
     totalFee: response.totalFee,
   );
+
+  factory Quote.fromWalletGetBestQuoteResponse(GetBestQuoteResponse response) => Quote(
+    cryptoAmount: response.cryptoAmount,
+    fiatAmount: response.fiatAmount,
+    fiatCurrency: response.fiatCurrency,
+    type: response.rampType.fromProto(),
+    conversionRate: response.conversionRate,
+    partnerFee: RampFee.fromWalletRampFee(response.partnerFee),
+    walletFee: RampFee.fromWalletRampFee(response.walletFee),
+    platformFee: RampFee.fromWalletRampFee(response.platformFee),
+    totalFee: response.totalFee,
+  );
 }
 
 @freezed
