@@ -40,6 +40,10 @@ class UserAppState extends ChangeNotifier {
 
   String? get quote => _quote;
 
+  String? _bestQuote;
+
+  String? get bestQuote => _bestQuote;
+
   Future<void> createWallet() async {
     _wallet = await Ed25519HDKeyPair.random();
 
@@ -236,6 +240,25 @@ class UserAppState extends ChangeNotifier {
     );
 
     _quote = response.toString();
+    notifyListeners();
+  }
+
+  Future<void> getBestQuote({
+    required String country,
+    required String walletPK,
+    required String cryptoAmount,
+    required String fiatCurrency,
+    required RampType rampType,
+  }) async {
+    final response = await _client.getBestQuote(
+      country: country,
+      cryptoAmount: double.parse(cryptoAmount),
+      walletPK: walletPK,
+      rampType: rampType,
+      fiatCurrency: fiatCurrency,
+    );
+
+    _bestQuote = response.toString();
     notifyListeners();
   }
 }
