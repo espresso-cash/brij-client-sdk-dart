@@ -21,6 +21,8 @@ class Quote with _$Quote {
     required double walletTotalFee,
     required double platformTotalFee,
     required double partnerTotalFee,
+    required String walletFeeAddress,
+    required String platformFeeAddress,
   }) = _Quote;
 
   factory Quote.fromWalletGetQuoteResponse(GetQuoteResponse response) => Quote(
@@ -37,6 +39,8 @@ class Quote with _$Quote {
     walletTotalFee: response.walletTotalFee,
     platformTotalFee: response.platformTotalFee,
     partnerTotalFee: response.partnerTotalFee,
+    walletFeeAddress: response.walletFeeAddress,
+    platformFeeAddress: response.platformFeeAddress,
   );
 
   factory Quote.fromWalletGetBestQuoteResponse(GetBestQuoteResponse response) => Quote(
@@ -53,6 +57,8 @@ class Quote with _$Quote {
     walletTotalFee: response.walletTotalFee,
     platformTotalFee: response.platformTotalFee,
     partnerTotalFee: response.partnerTotalFee,
+    walletFeeAddress: response.walletFeeAddress,
+    platformFeeAddress: response.platformFeeAddress,
   );
 }
 
