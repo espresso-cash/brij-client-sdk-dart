@@ -36,6 +36,11 @@ mixin _$Order {
   String get externalId => throw _privateConstructorUsedError;
   String get userWalletAddress => throw _privateConstructorUsedError;
   String get walletPublicKey => throw _privateConstructorUsedError;
+  String get walletFeeAddress => throw _privateConstructorUsedError;
+  double get walletFeeAmount => throw _privateConstructorUsedError;
+  String get platformFeeAddress => throw _privateConstructorUsedError;
+  double get platformFeeAmount => throw _privateConstructorUsedError;
+  double get partnerCryptoAmount => throw _privateConstructorUsedError;
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -68,6 +73,11 @@ abstract class $OrderCopyWith<$Res> {
     String externalId,
     String userWalletAddress,
     String walletPublicKey,
+    String walletFeeAddress,
+    double walletFeeAmount,
+    String platformFeeAddress,
+    double platformFeeAmount,
+    double partnerCryptoAmount,
   });
 }
 
@@ -105,6 +115,11 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? externalId = null,
     Object? userWalletAddress = null,
     Object? walletPublicKey = null,
+    Object? walletFeeAddress = null,
+    Object? walletFeeAmount = null,
+    Object? platformFeeAddress = null,
+    Object? platformFeeAmount = null,
+    Object? partnerCryptoAmount = null,
   }) {
     return _then(
       _value.copyWith(
@@ -203,6 +218,31 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
                     ? _value.walletPublicKey
                     : walletPublicKey // ignore: cast_nullable_to_non_nullable
                         as String,
+            walletFeeAddress:
+                null == walletFeeAddress
+                    ? _value.walletFeeAddress
+                    : walletFeeAddress // ignore: cast_nullable_to_non_nullable
+                        as String,
+            walletFeeAmount:
+                null == walletFeeAmount
+                    ? _value.walletFeeAmount
+                    : walletFeeAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            platformFeeAddress:
+                null == platformFeeAddress
+                    ? _value.platformFeeAddress
+                    : platformFeeAddress // ignore: cast_nullable_to_non_nullable
+                        as String,
+            platformFeeAmount:
+                null == platformFeeAmount
+                    ? _value.platformFeeAmount
+                    : platformFeeAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            partnerCryptoAmount:
+                null == partnerCryptoAmount
+                    ? _value.partnerCryptoAmount
+                    : partnerCryptoAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
           )
           as $Val,
     );
@@ -237,6 +277,11 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
     String externalId,
     String userWalletAddress,
     String walletPublicKey,
+    String walletFeeAddress,
+    double walletFeeAmount,
+    String platformFeeAddress,
+    double platformFeeAmount,
+    double partnerCryptoAmount,
   });
 }
 
@@ -273,6 +318,11 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? externalId = null,
     Object? userWalletAddress = null,
     Object? walletPublicKey = null,
+    Object? walletFeeAddress = null,
+    Object? walletFeeAmount = null,
+    Object? platformFeeAddress = null,
+    Object? platformFeeAmount = null,
+    Object? partnerCryptoAmount = null,
   }) {
     return _then(
       _$OrderImpl(
@@ -371,6 +421,31 @@ class __$$OrderImplCopyWithImpl<$Res>
                 ? _value.walletPublicKey
                 : walletPublicKey // ignore: cast_nullable_to_non_nullable
                     as String,
+        walletFeeAddress:
+            null == walletFeeAddress
+                ? _value.walletFeeAddress
+                : walletFeeAddress // ignore: cast_nullable_to_non_nullable
+                    as String,
+        walletFeeAmount:
+            null == walletFeeAmount
+                ? _value.walletFeeAmount
+                : walletFeeAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        platformFeeAddress:
+            null == platformFeeAddress
+                ? _value.platformFeeAddress
+                : platformFeeAddress // ignore: cast_nullable_to_non_nullable
+                    as String,
+        platformFeeAmount:
+            null == platformFeeAmount
+                ? _value.platformFeeAmount
+                : platformFeeAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        partnerCryptoAmount:
+            null == partnerCryptoAmount
+                ? _value.partnerCryptoAmount
+                : partnerCryptoAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
       ),
     );
   }
@@ -399,6 +474,11 @@ class _$OrderImpl implements _Order {
     required this.externalId,
     required this.userWalletAddress,
     required this.walletPublicKey,
+    required this.walletFeeAddress,
+    required this.walletFeeAmount,
+    required this.platformFeeAddress,
+    required this.platformFeeAmount,
+    required this.partnerCryptoAmount,
   });
 
   @override
@@ -439,10 +519,20 @@ class _$OrderImpl implements _Order {
   final String userWalletAddress;
   @override
   final String walletPublicKey;
+  @override
+  final String walletFeeAddress;
+  @override
+  final double walletFeeAmount;
+  @override
+  final String platformFeeAddress;
+  @override
+  final double platformFeeAmount;
+  @override
+  final double partnerCryptoAmount;
 
   @override
   String toString() {
-    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, bankDataHash: $bankDataHash, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey)';
+    return 'Order(orderId: $orderId, created: $created, status: $status, partnerPublicKey: $partnerPublicKey, userPublicKey: $userPublicKey, type: $type, cryptoAmount: $cryptoAmount, cryptoCurrency: $cryptoCurrency, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, bankName: $bankName, bankAccount: $bankAccount, bankDataHash: $bankDataHash, cryptoWalletAddress: $cryptoWalletAddress, transaction: $transaction, transactionId: $transactionId, externalId: $externalId, userWalletAddress: $userWalletAddress, walletPublicKey: $walletPublicKey, walletFeeAddress: $walletFeeAddress, walletFeeAmount: $walletFeeAmount, platformFeeAddress: $platformFeeAddress, platformFeeAmount: $platformFeeAmount, partnerCryptoAmount: $partnerCryptoAmount)';
   }
 
   @override
@@ -483,7 +573,17 @@ class _$OrderImpl implements _Order {
             (identical(other.userWalletAddress, userWalletAddress) ||
                 other.userWalletAddress == userWalletAddress) &&
             (identical(other.walletPublicKey, walletPublicKey) ||
-                other.walletPublicKey == walletPublicKey));
+                other.walletPublicKey == walletPublicKey) &&
+            (identical(other.walletFeeAddress, walletFeeAddress) ||
+                other.walletFeeAddress == walletFeeAddress) &&
+            (identical(other.walletFeeAmount, walletFeeAmount) ||
+                other.walletFeeAmount == walletFeeAmount) &&
+            (identical(other.platformFeeAddress, platformFeeAddress) ||
+                other.platformFeeAddress == platformFeeAddress) &&
+            (identical(other.platformFeeAmount, platformFeeAmount) ||
+                other.platformFeeAmount == platformFeeAmount) &&
+            (identical(other.partnerCryptoAmount, partnerCryptoAmount) ||
+                other.partnerCryptoAmount == partnerCryptoAmount));
   }
 
   @override
@@ -508,6 +608,11 @@ class _$OrderImpl implements _Order {
     externalId,
     userWalletAddress,
     walletPublicKey,
+    walletFeeAddress,
+    walletFeeAmount,
+    platformFeeAddress,
+    platformFeeAmount,
+    partnerCryptoAmount,
   ]);
 
   /// Create a copy of Order
@@ -540,6 +645,11 @@ abstract class _Order implements Order {
     required final String externalId,
     required final String userWalletAddress,
     required final String walletPublicKey,
+    required final String walletFeeAddress,
+    required final double walletFeeAmount,
+    required final String platformFeeAddress,
+    required final double platformFeeAmount,
+    required final double partnerCryptoAmount,
   }) = _$OrderImpl;
 
   @override
@@ -580,6 +690,16 @@ abstract class _Order implements Order {
   String get userWalletAddress;
   @override
   String get walletPublicKey;
+  @override
+  String get walletFeeAddress;
+  @override
+  double get walletFeeAmount;
+  @override
+  String get platformFeeAddress;
+  @override
+  double get platformFeeAmount;
+  @override
+  double get partnerCryptoAmount;
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.

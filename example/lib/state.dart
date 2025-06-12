@@ -117,9 +117,7 @@ class UserAppState extends ChangeNotifier {
     await _client.setData(
       email: Email(value: email, hash: _emailHash),
       phone: Phone(value: phone, hash: _phoneHash),
-      selfie: file != null
-          ? Selfie(value: await file.readAsBytes(), hash: _selfieHash)
-          : null,
+      selfie: file != null ? Selfie(value: await file.readAsBytes(), hash: _selfieHash) : null,
     );
 
     await fetchData();
@@ -165,6 +163,14 @@ class UserAppState extends ChangeNotifier {
     required String currency,
     required String partnerPK,
   }) async {
+    final quote = await _client.getQuote(
+      partnerPK: partnerPK,
+      walletPK: _wallet!.publicKey.toString(),
+      cryptoAmount: double.parse(amount),
+      rampType: RampType.onRamp,
+      fiatCurrency: currency,
+    );
+
     final orderId = await _client.createOnRampOrder(
       partnerPK: partnerPK,
       cryptoAmount: double.parse(amount),
@@ -173,6 +179,11 @@ class UserAppState extends ChangeNotifier {
       fiatCurrency: currency,
       cryptoWalletAddress: _wallet!.publicKey.toString(),
       walletPK: partnerPK,
+      walletFeeAmount: quote.walletTotalFee,
+      walletFeeAddress: quote.walletFeeAddress,
+      platformFeeAmount: quote.platformTotalFee,
+      platformFeeAddress: quote.platformFeeAddress,
+      partnerCryptoAmount: quote.partnerAmount,
     );
 
     _onRampOrderId = orderId;
@@ -185,6 +196,14 @@ class UserAppState extends ChangeNotifier {
     required String partnerPK,
     required String bankDataHash,
   }) async {
+    final quote = await _client.getQuote(
+      partnerPK: partnerPK,
+      walletPK: _wallet!.publicKey.toString(),
+      cryptoAmount: double.parse(amount),
+      rampType: RampType.offRamp,
+      fiatCurrency: currency,
+    );
+
     final orderId = await _client.createOffRampOrder(
       partnerPK: partnerPK,
       cryptoAmount: double.parse(amount),
@@ -194,6 +213,11 @@ class UserAppState extends ChangeNotifier {
       bankDataHash: bankDataHash,
       cryptoWalletAddress: _wallet!.publicKey.toString(),
       walletPK: partnerPK,
+      walletFeeAmount: quote.walletTotalFee,
+      walletFeeAddress: quote.walletFeeAddress,
+      platformFeeAmount: quote.platformTotalFee,
+      platformFeeAddress: quote.platformFeeAddress,
+      partnerCryptoAmount: quote.partnerAmount,
     );
 
     _offRampOrderId = orderId;
@@ -296,8 +320,7 @@ class PartnerAppState extends ChangeNotifier {
   late String _authPublicKey = '';
   late String _userSecretKey = '';
 
-  final String _partnerFeesAddress =
-      '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
+  final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
   UserData? _userData;
 
@@ -319,10 +342,7 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair
-        .extractPublicKey()
-        .then((value) => value.bytes)
-        .then(base58encode);
+    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
