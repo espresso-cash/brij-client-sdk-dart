@@ -362,9 +362,9 @@ class KycUserClient {
   }
 
   Future<String> createOnRampOrder({
-    required String partnerPK,
-    required String cryptoWalletAddress,
-    required String walletPK,
+    required String partnerPublicKey,
+    required String walletPublicKey,
+    required String userWalletAddress,
     required Quote quote,
   }) async {
     final orderId = const Uuid().v4();
@@ -372,14 +372,14 @@ class KycUserClient {
     final protoMessage =
         common.OnRampOrderUserEnvelope(
           orderId: orderId,
-          partnerPublicKey: partnerPK,
+          partnerPublicKey: partnerPublicKey,
           cryptoAmount: quote.cryptoAmount,
           // Hardcoded USDC for now
           cryptoCurrency: 'USDC',
           fiatAmount: quote.fiatAmount,
           fiatCurrency: quote.fiatCurrency,
-          userWalletAddress: cryptoWalletAddress,
-          walletPublicKey: walletPK,
+          userWalletAddress: userWalletAddress,
+          walletPublicKey: walletPublicKey,
           walletFeeAddress: quote.walletFeeAddress,
           walletFeeAmount: quote.walletTotalFee,
           platformFeeAddress: quote.platformFeeAddress,
@@ -399,8 +399,8 @@ class KycUserClient {
   Future<String> createOffRampOrder({
     required String partnerPK,
     required String bankDataHash,
-    required String cryptoWalletAddress,
-    required String walletPK,
+    required String userWalletAddress,
+    required String walletPublicKey,
     required Quote quote,
   }) async {
     final orderId = const Uuid().v4();
@@ -415,8 +415,8 @@ class KycUserClient {
           fiatAmount: quote.fiatAmount,
           fiatCurrency: quote.fiatCurrency,
           bankDataHash: bankDataHash,
-          userWalletAddress: cryptoWalletAddress,
-          walletPublicKey: walletPK,
+          userWalletAddress: userWalletAddress,
+          walletPublicKey: walletPublicKey,
           walletFeeAddress: quote.walletFeeAddress,
           walletFeeAmount: quote.walletTotalFee,
           platformFeeAddress: quote.platformFeeAddress,
