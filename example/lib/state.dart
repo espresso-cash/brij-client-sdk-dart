@@ -117,9 +117,7 @@ class UserAppState extends ChangeNotifier {
     await _client.setData(
       email: Email(value: email, hash: _emailHash),
       phone: Phone(value: phone, hash: _phoneHash),
-      selfie: file != null
-          ? Selfie(value: await file.readAsBytes(), hash: _selfieHash)
-          : null,
+      selfie: file != null ? Selfie(value: await file.readAsBytes(), hash: _selfieHash) : null,
     );
 
     await fetchData();
@@ -306,8 +304,7 @@ class PartnerAppState extends ChangeNotifier {
   late String _authPublicKey = '';
   late String _userSecretKey = '';
 
-  final String _partnerFeesAddress =
-      '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
+  final String _partnerFeesAddress = '5EY2wqRSXsnfU7YwBnW45HoTLGmZgFkfA1A69N8T7Vtx';
 
   UserData? _userData;
 
@@ -329,10 +326,8 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair
-        .extractPublicKey()
-        .then((value) => value.bytes)
-        .then(base58encode);
+    _authPublicKey =
+        await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }

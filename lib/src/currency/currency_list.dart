@@ -18,18 +18,8 @@ class UnsupportedCurrencyException implements Exception {
   String toString() => 'Unsupported currency: $currency';
 }
 
-const currencyDecimals = <String, int>{
-  ...cryptoCurrencies,
-  ...fiatCurrencies,
-};
+const currencyDecimals = <String, int>{...cryptoCurrencies, ...fiatCurrencies};
 
-const cryptoCurrencies = <String, int>{
-  'USDC': 6,
-  'SOL': 9,
-};
+const cryptoCurrencies = <String, int>{'USDC': 6, 'SOL': 9};
 
-const fiatCurrencies = <String, int>{
-  'USD': 2,
-  'EUR': 2,
-  'NGN': 2,
-};
+const fiatCurrencies = <String, int>{'USD': 2, 'EUR': 2, 'NGN': 2};

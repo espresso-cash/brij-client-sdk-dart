@@ -41,8 +41,7 @@ mixin _$Quote {
 
 /// @nodoc
 abstract class $QuoteCopyWith<$Res> {
-  factory $QuoteCopyWith(Quote value, $Res Function(Quote) then) =
-      _$QuoteCopyWithImpl<$Res, Quote>;
+  factory $QuoteCopyWith(Quote value, $Res Function(Quote) then) = _$QuoteCopyWithImpl<$Res, Quote>;
   @useResult
   $Res call({
     double cryptoAmount,
@@ -68,8 +67,7 @@ abstract class $QuoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
-    implements $QuoteCopyWith<$Res> {
+class _$QuoteCopyWithImpl<$Res, $Val extends Quote> implements $QuoteCopyWith<$Res> {
   _$QuoteCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -213,10 +211,8 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
 
 /// @nodoc
 abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
-  factory _$$QuoteImplCopyWith(
-    _$QuoteImpl value,
-    $Res Function(_$QuoteImpl) then,
-  ) = __$$QuoteImplCopyWithImpl<$Res>;
+  factory _$$QuoteImplCopyWith(_$QuoteImpl value, $Res Function(_$QuoteImpl) then) =
+      __$$QuoteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -246,13 +242,10 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$QuoteImplCopyWithImpl<$Res>
-    extends _$QuoteCopyWithImpl<$Res, _$QuoteImpl>
+class __$$QuoteImplCopyWithImpl<$Res> extends _$QuoteCopyWithImpl<$Res, _$QuoteImpl>
     implements _$$QuoteImplCopyWith<$Res> {
-  __$$QuoteImplCopyWithImpl(
-    _$QuoteImpl _value,
-    $Res Function(_$QuoteImpl) _then,
-  ) : super(_value, _then);
+  __$$QuoteImplCopyWithImpl(_$QuoteImpl _value, $Res Function(_$QuoteImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -419,23 +412,16 @@ class _$QuoteImpl implements _Quote {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuoteImpl &&
-            (identical(other.cryptoAmount, cryptoAmount) ||
-                other.cryptoAmount == cryptoAmount) &&
-            (identical(other.fiatAmount, fiatAmount) ||
-                other.fiatAmount == fiatAmount) &&
-            (identical(other.fiatCurrency, fiatCurrency) ||
-                other.fiatCurrency == fiatCurrency) &&
+            (identical(other.cryptoAmount, cryptoAmount) || other.cryptoAmount == cryptoAmount) &&
+            (identical(other.fiatAmount, fiatAmount) || other.fiatAmount == fiatAmount) &&
+            (identical(other.fiatCurrency, fiatCurrency) || other.fiatCurrency == fiatCurrency) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.conversionRate, conversionRate) ||
                 other.conversionRate == conversionRate) &&
-            (identical(other.partnerFee, partnerFee) ||
-                other.partnerFee == partnerFee) &&
-            (identical(other.walletFee, walletFee) ||
-                other.walletFee == walletFee) &&
-            (identical(other.platformFee, platformFee) ||
-                other.platformFee == platformFee) &&
-            (identical(other.totalFee, totalFee) ||
-                other.totalFee == totalFee) &&
+            (identical(other.partnerFee, partnerFee) || other.partnerFee == partnerFee) &&
+            (identical(other.walletFee, walletFee) || other.walletFee == walletFee) &&
+            (identical(other.platformFee, platformFee) || other.platformFee == platformFee) &&
+            (identical(other.totalFee, totalFee) || other.totalFee == totalFee) &&
             (identical(other.partnerAmount, partnerAmount) ||
                 other.partnerAmount == partnerAmount) &&
             (identical(other.walletTotalFee, walletTotalFee) ||
@@ -533,8 +519,7 @@ abstract class _Quote implements Quote {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -557,8 +542,7 @@ abstract class $RampFeeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee>
-    implements $RampFeeCopyWith<$Res> {
+class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee> implements $RampFeeCopyWith<$Res> {
   _$RampFeeCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -591,23 +575,18 @@ class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee>
 
 /// @nodoc
 abstract class _$$RampFeeImplCopyWith<$Res> implements $RampFeeCopyWith<$Res> {
-  factory _$$RampFeeImplCopyWith(
-    _$RampFeeImpl value,
-    $Res Function(_$RampFeeImpl) then,
-  ) = __$$RampFeeImplCopyWithImpl<$Res>;
+  factory _$$RampFeeImplCopyWith(_$RampFeeImpl value, $Res Function(_$RampFeeImpl) then) =
+      __$$RampFeeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double fixedFee, double percentageFee});
 }
 
 /// @nodoc
-class __$$RampFeeImplCopyWithImpl<$Res>
-    extends _$RampFeeCopyWithImpl<$Res, _$RampFeeImpl>
+class __$$RampFeeImplCopyWithImpl<$Res> extends _$RampFeeCopyWithImpl<$Res, _$RampFeeImpl>
     implements _$$RampFeeImplCopyWith<$Res> {
-  __$$RampFeeImplCopyWithImpl(
-    _$RampFeeImpl _value,
-    $Res Function(_$RampFeeImpl) _then,
-  ) : super(_value, _then);
+  __$$RampFeeImplCopyWithImpl(_$RampFeeImpl _value, $Res Function(_$RampFeeImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of RampFee
   /// with the given fields replaced by the non-null parameter values.
@@ -651,8 +630,7 @@ class _$RampFeeImpl implements _RampFee {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RampFeeImpl &&
-            (identical(other.fixedFee, fixedFee) ||
-                other.fixedFee == fixedFee) &&
+            (identical(other.fixedFee, fixedFee) || other.fixedFee == fixedFee) &&
             (identical(other.percentageFee, percentageFee) ||
                 other.percentageFee == percentageFee));
   }
@@ -670,10 +648,8 @@ class _$RampFeeImpl implements _RampFee {
 }
 
 abstract class _RampFee implements RampFee {
-  const factory _RampFee({
-    required final double fixedFee,
-    required final double percentageFee,
-  }) = _$RampFeeImpl;
+  const factory _RampFee({required final double fixedFee, required final double percentageFee}) =
+      _$RampFeeImpl;
 
   @override
   double get fixedFee;
@@ -684,6 +660,5 @@ abstract class _RampFee implements RampFee {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RampFeeImplCopyWith<_$RampFeeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RampFeeImplCopyWith<_$RampFeeImpl> get copyWith => throw _privateConstructorUsedError;
 }

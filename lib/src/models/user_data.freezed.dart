@@ -29,8 +29,7 @@ mixin _$UserData {
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserDataCopyWith<UserData> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserDataCopyWith<UserData> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -58,8 +57,7 @@ abstract class $UserDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
-    implements $UserDataCopyWith<$Res> {
+class _$UserDataCopyWithImpl<$Res, $Val extends UserData> implements $UserDataCopyWith<$Res> {
   _$UserDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -214,12 +212,9 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
 }
 
 /// @nodoc
-abstract class _$$UserDataImplCopyWith<$Res>
-    implements $UserDataCopyWith<$Res> {
-  factory _$$UserDataImplCopyWith(
-    _$UserDataImpl value,
-    $Res Function(_$UserDataImpl) then,
-  ) = __$$UserDataImplCopyWithImpl<$Res>;
+abstract class _$$UserDataImplCopyWith<$Res> implements $UserDataCopyWith<$Res> {
+  factory _$$UserDataImplCopyWith(_$UserDataImpl value, $Res Function(_$UserDataImpl) then) =
+      __$$UserDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -248,13 +243,10 @@ abstract class _$$UserDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UserDataImplCopyWithImpl<$Res>
-    extends _$UserDataCopyWithImpl<$Res, _$UserDataImpl>
+class __$$UserDataImplCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res, _$UserDataImpl>
     implements _$$UserDataImplCopyWith<$Res> {
-  __$$UserDataImplCopyWithImpl(
-    _$UserDataImpl _value,
-    $Res Function(_$UserDataImpl) _then,
-  ) : super(_value, _then);
+  __$$UserDataImplCopyWithImpl(_$UserDataImpl _value, $Res Function(_$UserDataImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -378,18 +370,10 @@ class _$UserDataImpl implements _UserData {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.citizenship, citizenship) ||
-                other.citizenship == citizenship) &&
-            (identical(other.birthDate, birthDate) ||
-                other.birthDate == birthDate) &&
-            const DeepCollectionEquality().equals(
-              other._documents,
-              _documents,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._bankInfos,
-              _bankInfos,
-            ) &&
+            (identical(other.citizenship, citizenship) || other.citizenship == citizenship) &&
+            (identical(other.birthDate, birthDate) || other.birthDate == birthDate) &&
+            const DeepCollectionEquality().equals(other._documents, _documents) &&
+            const DeepCollectionEquality().equals(other._bankInfos, _bankInfos) &&
             (identical(other.selfie, selfie) || other.selfie == selfie));
   }
 
@@ -448,8 +432,7 @@ abstract class _UserData implements UserData {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -466,15 +449,13 @@ mixin _$Email {
 
 /// @nodoc
 abstract class $EmailCopyWith<$Res> {
-  factory $EmailCopyWith(Email value, $Res Function(Email) then) =
-      _$EmailCopyWithImpl<$Res, Email>;
+  factory $EmailCopyWith(Email value, $Res Function(Email) then) = _$EmailCopyWithImpl<$Res, Email>;
   @useResult
   $Res call({String value, String? hash, ValidationStatus status});
 }
 
 /// @nodoc
-class _$EmailCopyWithImpl<$Res, $Val extends Email>
-    implements $EmailCopyWith<$Res> {
+class _$EmailCopyWithImpl<$Res, $Val extends Email> implements $EmailCopyWith<$Res> {
   _$EmailCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -486,11 +467,7 @@ class _$EmailCopyWithImpl<$Res, $Val extends Email>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-    Object? status = null,
-  }) {
+  $Res call({Object? value = null, Object? hash = freezed, Object? status = null}) {
     return _then(
       _value.copyWith(
             value:
@@ -516,33 +493,24 @@ class _$EmailCopyWithImpl<$Res, $Val extends Email>
 
 /// @nodoc
 abstract class _$$EmailImplCopyWith<$Res> implements $EmailCopyWith<$Res> {
-  factory _$$EmailImplCopyWith(
-    _$EmailImpl value,
-    $Res Function(_$EmailImpl) then,
-  ) = __$$EmailImplCopyWithImpl<$Res>;
+  factory _$$EmailImplCopyWith(_$EmailImpl value, $Res Function(_$EmailImpl) then) =
+      __$$EmailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String value, String? hash, ValidationStatus status});
 }
 
 /// @nodoc
-class __$$EmailImplCopyWithImpl<$Res>
-    extends _$EmailCopyWithImpl<$Res, _$EmailImpl>
+class __$$EmailImplCopyWithImpl<$Res> extends _$EmailCopyWithImpl<$Res, _$EmailImpl>
     implements _$$EmailImplCopyWith<$Res> {
-  __$$EmailImplCopyWithImpl(
-    _$EmailImpl _value,
-    $Res Function(_$EmailImpl) _then,
-  ) : super(_value, _then);
+  __$$EmailImplCopyWithImpl(_$EmailImpl _value, $Res Function(_$EmailImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Email
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-    Object? status = null,
-  }) {
+  $Res call({Object? value = null, Object? hash = freezed, Object? status = null}) {
     return _then(
       _$EmailImpl(
         value:
@@ -568,11 +536,7 @@ class __$$EmailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EmailImpl implements _Email {
-  const _$EmailImpl({
-    required this.value,
-    this.hash,
-    this.status = ValidationStatus.unspecified,
-  });
+  const _$EmailImpl({required this.value, this.hash, this.status = ValidationStatus.unspecified});
 
   @override
   final String value;
@@ -627,8 +591,7 @@ abstract class _Email implements Email {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$EmailImplCopyWith<_$EmailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$EmailImplCopyWith<_$EmailImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -645,15 +608,13 @@ mixin _$Phone {
 
 /// @nodoc
 abstract class $PhoneCopyWith<$Res> {
-  factory $PhoneCopyWith(Phone value, $Res Function(Phone) then) =
-      _$PhoneCopyWithImpl<$Res, Phone>;
+  factory $PhoneCopyWith(Phone value, $Res Function(Phone) then) = _$PhoneCopyWithImpl<$Res, Phone>;
   @useResult
   $Res call({String value, String? hash, ValidationStatus status});
 }
 
 /// @nodoc
-class _$PhoneCopyWithImpl<$Res, $Val extends Phone>
-    implements $PhoneCopyWith<$Res> {
+class _$PhoneCopyWithImpl<$Res, $Val extends Phone> implements $PhoneCopyWith<$Res> {
   _$PhoneCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -665,11 +626,7 @@ class _$PhoneCopyWithImpl<$Res, $Val extends Phone>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-    Object? status = null,
-  }) {
+  $Res call({Object? value = null, Object? hash = freezed, Object? status = null}) {
     return _then(
       _value.copyWith(
             value:
@@ -695,33 +652,24 @@ class _$PhoneCopyWithImpl<$Res, $Val extends Phone>
 
 /// @nodoc
 abstract class _$$PhoneImplCopyWith<$Res> implements $PhoneCopyWith<$Res> {
-  factory _$$PhoneImplCopyWith(
-    _$PhoneImpl value,
-    $Res Function(_$PhoneImpl) then,
-  ) = __$$PhoneImplCopyWithImpl<$Res>;
+  factory _$$PhoneImplCopyWith(_$PhoneImpl value, $Res Function(_$PhoneImpl) then) =
+      __$$PhoneImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String value, String? hash, ValidationStatus status});
 }
 
 /// @nodoc
-class __$$PhoneImplCopyWithImpl<$Res>
-    extends _$PhoneCopyWithImpl<$Res, _$PhoneImpl>
+class __$$PhoneImplCopyWithImpl<$Res> extends _$PhoneCopyWithImpl<$Res, _$PhoneImpl>
     implements _$$PhoneImplCopyWith<$Res> {
-  __$$PhoneImplCopyWithImpl(
-    _$PhoneImpl _value,
-    $Res Function(_$PhoneImpl) _then,
-  ) : super(_value, _then);
+  __$$PhoneImplCopyWithImpl(_$PhoneImpl _value, $Res Function(_$PhoneImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Phone
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-    Object? hash = freezed,
-    Object? status = null,
-  }) {
+  $Res call({Object? value = null, Object? hash = freezed, Object? status = null}) {
     return _then(
       _$PhoneImpl(
         value:
@@ -747,11 +695,7 @@ class __$$PhoneImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PhoneImpl implements _Phone {
-  const _$PhoneImpl({
-    required this.value,
-    this.hash,
-    this.status = ValidationStatus.unspecified,
-  });
+  const _$PhoneImpl({required this.value, this.hash, this.status = ValidationStatus.unspecified});
 
   @override
   final String value;
@@ -806,8 +750,7 @@ abstract class _Phone implements Phone {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PhoneImplCopyWith<_$PhoneImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PhoneImplCopyWith<_$PhoneImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -830,8 +773,7 @@ abstract class $SelfieCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SelfieCopyWithImpl<$Res, $Val extends Selfie>
-    implements $SelfieCopyWith<$Res> {
+class _$SelfieCopyWithImpl<$Res, $Val extends Selfie> implements $SelfieCopyWith<$Res> {
   _$SelfieCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -864,23 +806,18 @@ class _$SelfieCopyWithImpl<$Res, $Val extends Selfie>
 
 /// @nodoc
 abstract class _$$SelfieImplCopyWith<$Res> implements $SelfieCopyWith<$Res> {
-  factory _$$SelfieImplCopyWith(
-    _$SelfieImpl value,
-    $Res Function(_$SelfieImpl) then,
-  ) = __$$SelfieImplCopyWithImpl<$Res>;
+  factory _$$SelfieImplCopyWith(_$SelfieImpl value, $Res Function(_$SelfieImpl) then) =
+      __$$SelfieImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<int> value, String? hash});
 }
 
 /// @nodoc
-class __$$SelfieImplCopyWithImpl<$Res>
-    extends _$SelfieCopyWithImpl<$Res, _$SelfieImpl>
+class __$$SelfieImplCopyWithImpl<$Res> extends _$SelfieCopyWithImpl<$Res, _$SelfieImpl>
     implements _$$SelfieImplCopyWith<$Res> {
-  __$$SelfieImplCopyWithImpl(
-    _$SelfieImpl _value,
-    $Res Function(_$SelfieImpl) _then,
-  ) : super(_value, _then);
+  __$$SelfieImplCopyWithImpl(_$SelfieImpl _value, $Res Function(_$SelfieImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
@@ -907,8 +844,7 @@ class __$$SelfieImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SelfieImpl implements _Selfie {
-  const _$SelfieImpl({required final List<int> value, this.hash})
-    : _value = value;
+  const _$SelfieImpl({required final List<int> value, this.hash}) : _value = value;
 
   final List<int> _value;
   @override
@@ -936,11 +872,7 @@ class _$SelfieImpl implements _Selfie {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_value),
-    hash,
-  );
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_value), hash);
 
   /// Create a copy of Selfie
   /// with the given fields replaced by the non-null parameter values.
@@ -952,8 +884,7 @@ class _$SelfieImpl implements _Selfie {
 }
 
 abstract class _Selfie implements Selfie {
-  const factory _Selfie({required final List<int> value, final String? hash}) =
-      _$SelfieImpl;
+  const factory _Selfie({required final List<int> value, final String? hash}) = _$SelfieImpl;
 
   @override
   List<int> get value;
@@ -964,8 +895,7 @@ abstract class _Selfie implements Selfie {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SelfieImplCopyWith<_$SelfieImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SelfieImplCopyWith<_$SelfieImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -982,15 +912,13 @@ mixin _$Name {
 
 /// @nodoc
 abstract class $NameCopyWith<$Res> {
-  factory $NameCopyWith(Name value, $Res Function(Name) then) =
-      _$NameCopyWithImpl<$Res, Name>;
+  factory $NameCopyWith(Name value, $Res Function(Name) then) = _$NameCopyWithImpl<$Res, Name>;
   @useResult
   $Res call({String firstName, String lastName, String? hash});
 }
 
 /// @nodoc
-class _$NameCopyWithImpl<$Res, $Val extends Name>
-    implements $NameCopyWith<$Res> {
+class _$NameCopyWithImpl<$Res, $Val extends Name> implements $NameCopyWith<$Res> {
   _$NameCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -1002,11 +930,7 @@ class _$NameCopyWithImpl<$Res, $Val extends Name>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? hash = freezed,
-  }) {
+  $Res call({Object? firstName = null, Object? lastName = null, Object? hash = freezed}) {
     return _then(
       _value.copyWith(
             firstName:
@@ -1032,18 +956,15 @@ class _$NameCopyWithImpl<$Res, $Val extends Name>
 
 /// @nodoc
 abstract class _$$NameImplCopyWith<$Res> implements $NameCopyWith<$Res> {
-  factory _$$NameImplCopyWith(
-    _$NameImpl value,
-    $Res Function(_$NameImpl) then,
-  ) = __$$NameImplCopyWithImpl<$Res>;
+  factory _$$NameImplCopyWith(_$NameImpl value, $Res Function(_$NameImpl) then) =
+      __$$NameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String firstName, String lastName, String? hash});
 }
 
 /// @nodoc
-class __$$NameImplCopyWithImpl<$Res>
-    extends _$NameCopyWithImpl<$Res, _$NameImpl>
+class __$$NameImplCopyWithImpl<$Res> extends _$NameCopyWithImpl<$Res, _$NameImpl>
     implements _$$NameImplCopyWith<$Res> {
   __$$NameImplCopyWithImpl(_$NameImpl _value, $Res Function(_$NameImpl) _then)
     : super(_value, _then);
@@ -1052,11 +973,7 @@ class __$$NameImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? hash = freezed,
-  }) {
+  $Res call({Object? firstName = null, Object? lastName = null, Object? hash = freezed}) {
     return _then(
       _$NameImpl(
         firstName:
@@ -1082,11 +999,7 @@ class __$$NameImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NameImpl implements _Name {
-  const _$NameImpl({
-    required this.firstName,
-    required this.lastName,
-    this.hash,
-  });
+  const _$NameImpl({required this.firstName, required this.lastName, this.hash});
 
   @override
   final String firstName;
@@ -1105,10 +1018,8 @@ class _$NameImpl implements _Name {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NameImpl &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) || other.firstName == firstName) &&
+            (identical(other.lastName, lastName) || other.lastName == lastName) &&
             (identical(other.hash, hash) || other.hash == hash));
   }
 
@@ -1142,8 +1053,7 @@ abstract class _Name implements Name {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NameImplCopyWith<_$NameImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$NameImplCopyWith<_$NameImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1154,16 +1064,13 @@ mixin _$Citizenship {
   /// Create a copy of Citizenship
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CitizenshipCopyWith<Citizenship> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CitizenshipCopyWith<Citizenship> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CitizenshipCopyWith<$Res> {
-  factory $CitizenshipCopyWith(
-    Citizenship value,
-    $Res Function(Citizenship) then,
-  ) = _$CitizenshipCopyWithImpl<$Res, Citizenship>;
+  factory $CitizenshipCopyWith(Citizenship value, $Res Function(Citizenship) then) =
+      _$CitizenshipCopyWithImpl<$Res, Citizenship>;
   @useResult
   $Res call({String value, String? hash});
 }
@@ -1202,8 +1109,7 @@ class _$CitizenshipCopyWithImpl<$Res, $Val extends Citizenship>
 }
 
 /// @nodoc
-abstract class _$$CitizenshipImplCopyWith<$Res>
-    implements $CitizenshipCopyWith<$Res> {
+abstract class _$$CitizenshipImplCopyWith<$Res> implements $CitizenshipCopyWith<$Res> {
   factory _$$CitizenshipImplCopyWith(
     _$CitizenshipImpl value,
     $Res Function(_$CitizenshipImpl) then,
@@ -1217,10 +1123,8 @@ abstract class _$$CitizenshipImplCopyWith<$Res>
 class __$$CitizenshipImplCopyWithImpl<$Res>
     extends _$CitizenshipCopyWithImpl<$Res, _$CitizenshipImpl>
     implements _$$CitizenshipImplCopyWith<$Res> {
-  __$$CitizenshipImplCopyWithImpl(
-    _$CitizenshipImpl _value,
-    $Res Function(_$CitizenshipImpl) _then,
-  ) : super(_value, _then);
+  __$$CitizenshipImplCopyWithImpl(_$CitizenshipImpl _value, $Res Function(_$CitizenshipImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Citizenship
   /// with the given fields replaced by the non-null parameter values.
@@ -1281,10 +1185,7 @@ class _$CitizenshipImpl implements _Citizenship {
 }
 
 abstract class _Citizenship implements Citizenship {
-  const factory _Citizenship({
-    required final String value,
-    final String? hash,
-  }) = _$CitizenshipImpl;
+  const factory _Citizenship({required final String value, final String? hash}) = _$CitizenshipImpl;
 
   @override
   String get value;
@@ -1295,8 +1196,7 @@ abstract class _Citizenship implements Citizenship {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CitizenshipImplCopyWith<_$CitizenshipImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1307,8 +1207,7 @@ mixin _$BirthDate {
   /// Create a copy of BirthDate
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $BirthDateCopyWith<BirthDate> get copyWith =>
-      throw _privateConstructorUsedError;
+  $BirthDateCopyWith<BirthDate> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1320,8 +1219,7 @@ abstract class $BirthDateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate>
-    implements $BirthDateCopyWith<$Res> {
+class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate> implements $BirthDateCopyWith<$Res> {
   _$BirthDateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -1353,25 +1251,19 @@ class _$BirthDateCopyWithImpl<$Res, $Val extends BirthDate>
 }
 
 /// @nodoc
-abstract class _$$BirthDateImplCopyWith<$Res>
-    implements $BirthDateCopyWith<$Res> {
-  factory _$$BirthDateImplCopyWith(
-    _$BirthDateImpl value,
-    $Res Function(_$BirthDateImpl) then,
-  ) = __$$BirthDateImplCopyWithImpl<$Res>;
+abstract class _$$BirthDateImplCopyWith<$Res> implements $BirthDateCopyWith<$Res> {
+  factory _$$BirthDateImplCopyWith(_$BirthDateImpl value, $Res Function(_$BirthDateImpl) then) =
+      __$$BirthDateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTime value, String? hash});
 }
 
 /// @nodoc
-class __$$BirthDateImplCopyWithImpl<$Res>
-    extends _$BirthDateCopyWithImpl<$Res, _$BirthDateImpl>
+class __$$BirthDateImplCopyWithImpl<$Res> extends _$BirthDateCopyWithImpl<$Res, _$BirthDateImpl>
     implements _$$BirthDateImplCopyWith<$Res> {
-  __$$BirthDateImplCopyWithImpl(
-    _$BirthDateImpl _value,
-    $Res Function(_$BirthDateImpl) _then,
-  ) : super(_value, _then);
+  __$$BirthDateImplCopyWithImpl(_$BirthDateImpl _value, $Res Function(_$BirthDateImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of BirthDate
   /// with the given fields replaced by the non-null parameter values.
@@ -1432,10 +1324,7 @@ class _$BirthDateImpl implements _BirthDate {
 }
 
 abstract class _BirthDate implements BirthDate {
-  const factory _BirthDate({
-    required final DateTime value,
-    final String? hash,
-  }) = _$BirthDateImpl;
+  const factory _BirthDate({required final DateTime value, final String? hash}) = _$BirthDateImpl;
 
   @override
   DateTime get value;
@@ -1446,8 +1335,7 @@ abstract class _BirthDate implements BirthDate {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BirthDateImplCopyWith<_$BirthDateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$BirthDateImplCopyWith<_$BirthDateImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1463,8 +1351,7 @@ mixin _$Document {
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DocumentCopyWith<Document> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DocumentCopyWith<Document> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1484,8 +1371,7 @@ abstract class $DocumentCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DocumentCopyWithImpl<$Res, $Val extends Document>
-    implements $DocumentCopyWith<$Res> {
+class _$DocumentCopyWithImpl<$Res, $Val extends Document> implements $DocumentCopyWith<$Res> {
   _$DocumentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -1550,12 +1436,9 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
 }
 
 /// @nodoc
-abstract class _$$DocumentImplCopyWith<$Res>
-    implements $DocumentCopyWith<$Res> {
-  factory _$$DocumentImplCopyWith(
-    _$DocumentImpl value,
-    $Res Function(_$DocumentImpl) then,
-  ) = __$$DocumentImplCopyWithImpl<$Res>;
+abstract class _$$DocumentImplCopyWith<$Res> implements $DocumentCopyWith<$Res> {
+  factory _$$DocumentImplCopyWith(_$DocumentImpl value, $Res Function(_$DocumentImpl) then) =
+      __$$DocumentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -1570,13 +1453,10 @@ abstract class _$$DocumentImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DocumentImplCopyWithImpl<$Res>
-    extends _$DocumentCopyWithImpl<$Res, _$DocumentImpl>
+class __$$DocumentImplCopyWithImpl<$Res> extends _$DocumentCopyWithImpl<$Res, _$DocumentImpl>
     implements _$$DocumentImplCopyWith<$Res> {
-  __$$DocumentImplCopyWithImpl(
-    _$DocumentImpl _value,
-    $Res Function(_$DocumentImpl) _then,
-  ) : super(_value, _then);
+  __$$DocumentImplCopyWithImpl(_$DocumentImpl _value, $Res Function(_$DocumentImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Document
   /// with the given fields replaced by the non-null parameter values.
@@ -1690,18 +1570,11 @@ class _$DocumentImpl implements _Document {
             other is _$DocumentImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.number, number) || other.number == number) &&
-            (identical(other.countryCode, countryCode) ||
-                other.countryCode == countryCode) &&
+            (identical(other.countryCode, countryCode) || other.countryCode == countryCode) &&
             (identical(other.expirationDate, expirationDate) ||
                 other.expirationDate == expirationDate) &&
-            const DeepCollectionEquality().equals(
-              other._frontImage,
-              _frontImage,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._backImage,
-              _backImage,
-            ) &&
+            const DeepCollectionEquality().equals(other._frontImage, _frontImage) &&
+            const DeepCollectionEquality().equals(other._backImage, _backImage) &&
             (identical(other.hash, hash) || other.hash == hash));
   }
 
@@ -1756,8 +1629,7 @@ abstract class _Document implements Document {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1771,8 +1643,7 @@ mixin _$BankInfo {
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $BankInfoCopyWith<BankInfo> get copyWith =>
-      throw _privateConstructorUsedError;
+  $BankInfoCopyWith<BankInfo> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1790,8 +1661,7 @@ abstract class $BankInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
-    implements $BankInfoCopyWith<$Res> {
+class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo> implements $BankInfoCopyWith<$Res> {
   _$BankInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -1844,12 +1714,9 @@ class _$BankInfoCopyWithImpl<$Res, $Val extends BankInfo>
 }
 
 /// @nodoc
-abstract class _$$BankInfoImplCopyWith<$Res>
-    implements $BankInfoCopyWith<$Res> {
-  factory _$$BankInfoImplCopyWith(
-    _$BankInfoImpl value,
-    $Res Function(_$BankInfoImpl) then,
-  ) = __$$BankInfoImplCopyWithImpl<$Res>;
+abstract class _$$BankInfoImplCopyWith<$Res> implements $BankInfoCopyWith<$Res> {
+  factory _$$BankInfoImplCopyWith(_$BankInfoImpl value, $Res Function(_$BankInfoImpl) then) =
+      __$$BankInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -1862,13 +1729,10 @@ abstract class _$$BankInfoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BankInfoImplCopyWithImpl<$Res>
-    extends _$BankInfoCopyWithImpl<$Res, _$BankInfoImpl>
+class __$$BankInfoImplCopyWithImpl<$Res> extends _$BankInfoCopyWithImpl<$Res, _$BankInfoImpl>
     implements _$$BankInfoImplCopyWith<$Res> {
-  __$$BankInfoImplCopyWithImpl(
-    _$BankInfoImpl _value,
-    $Res Function(_$BankInfoImpl) _then,
-  ) : super(_value, _then);
+  __$$BankInfoImplCopyWithImpl(_$BankInfoImpl _value, $Res Function(_$BankInfoImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1945,26 +1809,17 @@ class _$BankInfoImpl implements _BankInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BankInfoImpl &&
-            (identical(other.bankName, bankName) ||
-                other.bankName == bankName) &&
-            (identical(other.bankCode, bankCode) ||
-                other.bankCode == bankCode) &&
+            (identical(other.bankName, bankName) || other.bankName == bankName) &&
+            (identical(other.bankCode, bankCode) || other.bankCode == bankCode) &&
             (identical(other.accountNumber, accountNumber) ||
                 other.accountNumber == accountNumber) &&
-            (identical(other.countryCode, countryCode) ||
-                other.countryCode == countryCode) &&
+            (identical(other.countryCode, countryCode) || other.countryCode == countryCode) &&
             (identical(other.hash, hash) || other.hash == hash));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    bankName,
-    bankCode,
-    accountNumber,
-    countryCode,
-    hash,
-  );
+  int get hashCode =>
+      Object.hash(runtimeType, bankName, bankCode, accountNumber, countryCode, hash);
 
   /// Create a copy of BankInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1999,6 +1854,5 @@ abstract class _BankInfo implements BankInfo {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BankInfoImplCopyWith<_$BankInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$BankInfoImplCopyWith<_$BankInfoImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -25,23 +25,15 @@ mixin _$PartnerModel {
   /// Create a copy of PartnerModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PartnerModelCopyWith<PartnerModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PartnerModelCopyWith<PartnerModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PartnerModelCopyWith<$Res> {
-  factory $PartnerModelCopyWith(
-    PartnerModel value,
-    $Res Function(PartnerModel) then,
-  ) = _$PartnerModelCopyWithImpl<$Res, PartnerModel>;
+  factory $PartnerModelCopyWith(PartnerModel value, $Res Function(PartnerModel) then) =
+      _$PartnerModelCopyWithImpl<$Res, PartnerModel>;
   @useResult
-  $Res call({
-    String name,
-    String publicKey,
-    String privacyUrl,
-    String termsUrl,
-  });
+  $Res call({String name, String publicKey, String privacyUrl, String termsUrl});
 }
 
 /// @nodoc
@@ -93,20 +85,14 @@ class _$PartnerModelCopyWithImpl<$Res, $Val extends PartnerModel>
 }
 
 /// @nodoc
-abstract class _$$PartnerModelImplCopyWith<$Res>
-    implements $PartnerModelCopyWith<$Res> {
+abstract class _$$PartnerModelImplCopyWith<$Res> implements $PartnerModelCopyWith<$Res> {
   factory _$$PartnerModelImplCopyWith(
     _$PartnerModelImpl value,
     $Res Function(_$PartnerModelImpl) then,
   ) = __$$PartnerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String name,
-    String publicKey,
-    String privacyUrl,
-    String termsUrl,
-  });
+  $Res call({String name, String publicKey, String privacyUrl, String termsUrl});
 }
 
 /// @nodoc
@@ -185,17 +171,13 @@ class _$PartnerModelImpl implements _PartnerModel {
         (other.runtimeType == runtimeType &&
             other is _$PartnerModelImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.publicKey, publicKey) ||
-                other.publicKey == publicKey) &&
-            (identical(other.privacyUrl, privacyUrl) ||
-                other.privacyUrl == privacyUrl) &&
-            (identical(other.termsUrl, termsUrl) ||
-                other.termsUrl == termsUrl));
+            (identical(other.publicKey, publicKey) || other.publicKey == publicKey) &&
+            (identical(other.privacyUrl, privacyUrl) || other.privacyUrl == privacyUrl) &&
+            (identical(other.termsUrl, termsUrl) || other.termsUrl == termsUrl));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, publicKey, privacyUrl, termsUrl);
+  int get hashCode => Object.hash(runtimeType, name, publicKey, privacyUrl, termsUrl);
 
   /// Create a copy of PartnerModel
   /// with the given fields replaced by the non-null parameter values.

@@ -50,8 +50,7 @@ mixin _$Order {
 
 /// @nodoc
 abstract class $OrderCopyWith<$Res> {
-  factory $OrderCopyWith(Order value, $Res Function(Order) then) =
-      _$OrderCopyWithImpl<$Res, Order>;
+  factory $OrderCopyWith(Order value, $Res Function(Order) then) = _$OrderCopyWithImpl<$Res, Order>;
   @useResult
   $Res call({
     String orderId,
@@ -82,8 +81,7 @@ abstract class $OrderCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderCopyWithImpl<$Res, $Val extends Order>
-    implements $OrderCopyWith<$Res> {
+class _$OrderCopyWithImpl<$Res, $Val extends Order> implements $OrderCopyWith<$Res> {
   _$OrderCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -251,10 +249,8 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
 
 /// @nodoc
 abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
-  factory _$$OrderImplCopyWith(
-    _$OrderImpl value,
-    $Res Function(_$OrderImpl) then,
-  ) = __$$OrderImplCopyWithImpl<$Res>;
+  factory _$$OrderImplCopyWith(_$OrderImpl value, $Res Function(_$OrderImpl) then) =
+      __$$OrderImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -286,13 +282,10 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$OrderImplCopyWithImpl<$Res>
-    extends _$OrderCopyWithImpl<$Res, _$OrderImpl>
+class __$$OrderImplCopyWithImpl<$Res> extends _$OrderCopyWithImpl<$Res, _$OrderImpl>
     implements _$$OrderImplCopyWith<$Res> {
-  __$$OrderImplCopyWithImpl(
-    _$OrderImpl _value,
-    $Res Function(_$OrderImpl) _then,
-  ) : super(_value, _then);
+  __$$OrderImplCopyWithImpl(_$OrderImpl _value, $Res Function(_$OrderImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Order
   /// with the given fields replaced by the non-null parameter values.
@@ -548,28 +541,20 @@ class _$OrderImpl implements _Order {
             (identical(other.userPublicKey, userPublicKey) ||
                 other.userPublicKey == userPublicKey) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.cryptoAmount, cryptoAmount) ||
-                other.cryptoAmount == cryptoAmount) &&
+            (identical(other.cryptoAmount, cryptoAmount) || other.cryptoAmount == cryptoAmount) &&
             (identical(other.cryptoCurrency, cryptoCurrency) ||
                 other.cryptoCurrency == cryptoCurrency) &&
-            (identical(other.fiatAmount, fiatAmount) ||
-                other.fiatAmount == fiatAmount) &&
-            (identical(other.fiatCurrency, fiatCurrency) ||
-                other.fiatCurrency == fiatCurrency) &&
-            (identical(other.bankName, bankName) ||
-                other.bankName == bankName) &&
-            (identical(other.bankAccount, bankAccount) ||
-                other.bankAccount == bankAccount) &&
-            (identical(other.bankDataHash, bankDataHash) ||
-                other.bankDataHash == bankDataHash) &&
+            (identical(other.fiatAmount, fiatAmount) || other.fiatAmount == fiatAmount) &&
+            (identical(other.fiatCurrency, fiatCurrency) || other.fiatCurrency == fiatCurrency) &&
+            (identical(other.bankName, bankName) || other.bankName == bankName) &&
+            (identical(other.bankAccount, bankAccount) || other.bankAccount == bankAccount) &&
+            (identical(other.bankDataHash, bankDataHash) || other.bankDataHash == bankDataHash) &&
             (identical(other.cryptoWalletAddress, cryptoWalletAddress) ||
                 other.cryptoWalletAddress == cryptoWalletAddress) &&
-            (identical(other.transaction, transaction) ||
-                other.transaction == transaction) &&
+            (identical(other.transaction, transaction) || other.transaction == transaction) &&
             (identical(other.transactionId, transactionId) ||
                 other.transactionId == transactionId) &&
-            (identical(other.externalId, externalId) ||
-                other.externalId == externalId) &&
+            (identical(other.externalId, externalId) || other.externalId == externalId) &&
             (identical(other.userWalletAddress, userWalletAddress) ||
                 other.userWalletAddress == userWalletAddress) &&
             (identical(other.walletPublicKey, walletPublicKey) ||
@@ -705,6 +690,5 @@ abstract class _Order implements Order {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OrderImplCopyWith<_$OrderImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderImplCopyWith<_$OrderImpl> get copyWith => throw _privateConstructorUsedError;
 }
