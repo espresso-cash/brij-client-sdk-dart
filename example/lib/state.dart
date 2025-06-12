@@ -172,18 +172,10 @@ class UserAppState extends ChangeNotifier {
     );
 
     final orderId = await _client.createOnRampOrder(
-      partnerPK: partnerPK,
-      cryptoAmount: double.parse(amount),
-      cryptoCurrency: currency,
-      fiatAmount: double.parse(amount),
-      fiatCurrency: currency,
-      cryptoWalletAddress: _wallet!.publicKey.toString(),
-      walletPK: partnerPK,
-      walletFeeAmount: quote.walletTotalFee,
-      walletFeeAddress: quote.walletFeeAddress,
-      platformFeeAmount: quote.platformTotalFee,
-      platformFeeAddress: quote.platformFeeAddress,
-      partnerCryptoAmount: quote.partnerAmount,
+      partnerPublicKey: partnerPK,
+      userWalletAddress: _wallet!.publicKey.toString(),
+      walletPublicKey: partnerPK,
+      quote: quote,
     );
 
     _onRampOrderId = orderId;
@@ -206,18 +198,10 @@ class UserAppState extends ChangeNotifier {
 
     final orderId = await _client.createOffRampOrder(
       partnerPK: partnerPK,
-      cryptoAmount: double.parse(amount),
-      cryptoCurrency: currency,
-      fiatAmount: double.parse(amount),
-      fiatCurrency: currency,
       bankDataHash: bankDataHash,
-      cryptoWalletAddress: _wallet!.publicKey.toString(),
-      walletPK: partnerPK,
-      walletFeeAmount: quote.walletTotalFee,
-      walletFeeAddress: quote.walletFeeAddress,
-      platformFeeAmount: quote.platformTotalFee,
-      platformFeeAddress: quote.platformFeeAddress,
-      partnerCryptoAmount: quote.partnerAmount,
+      userWalletAddress: _wallet!.publicKey.toString(),
+      walletPublicKey: partnerPK,
+      quote: quote,
     );
 
     _offRampOrderId = orderId;
