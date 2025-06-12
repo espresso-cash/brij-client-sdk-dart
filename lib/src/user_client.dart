@@ -369,6 +369,11 @@ class KycUserClient {
     required String fiatCurrency,
     required String cryptoWalletAddress,
     required String walletPK,
+    required String walletFeeAddress,
+    required double walletFeeAmount,
+    required String platformFeeAddress,
+    required double platformFeeAmount,
+    required double partnerCryptoAmount,
   }) async {
     final orderId = const Uuid().v4();
 
@@ -382,6 +387,11 @@ class KycUserClient {
           fiatCurrency: fiatCurrency,
           userWalletAddress: cryptoWalletAddress,
           walletPublicKey: walletPK,
+          walletFeeAddress: walletFeeAddress,
+          walletFeeAmount: walletFeeAmount,
+          platformFeeAddress: platformFeeAddress,
+          platformFeeAmount: platformFeeAmount,
+          partnerCryptoAmount: partnerCryptoAmount,
         ).writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
@@ -402,6 +412,11 @@ class KycUserClient {
     required String bankDataHash,
     required String cryptoWalletAddress,
     required String walletPK,
+    required String walletFeeAddress,
+    required double walletFeeAmount,
+    required String platformFeeAddress,
+    required double platformFeeAmount,
+    required double partnerCryptoAmount,
   }) async {
     final orderId = const Uuid().v4();
 
@@ -416,6 +431,11 @@ class KycUserClient {
           bankDataHash: bankDataHash,
           userWalletAddress: cryptoWalletAddress,
           walletPublicKey: walletPK,
+          walletFeeAddress: walletFeeAddress,
+          walletFeeAmount: walletFeeAmount,
+          platformFeeAddress: platformFeeAddress,
+          platformFeeAmount: platformFeeAmount,
+          partnerCryptoAmount: partnerCryptoAmount,
         ).writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
