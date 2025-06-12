@@ -363,17 +363,9 @@ class KycUserClient {
 
   Future<String> createOnRampOrder({
     required String partnerPK,
-    required double cryptoAmount,
-    required String cryptoCurrency,
-    required double fiatAmount,
-    required String fiatCurrency,
     required String cryptoWalletAddress,
     required String walletPK,
-    required String walletFeeAddress,
-    required double walletFeeAmount,
-    required String platformFeeAddress,
-    required double platformFeeAmount,
-    required double partnerCryptoAmount,
+    required Quote quote,
   }) async {
     final orderId = const Uuid().v4();
 
@@ -381,17 +373,18 @@ class KycUserClient {
         common.OnRampOrderUserEnvelope(
           orderId: orderId,
           partnerPublicKey: partnerPK,
-          cryptoAmount: cryptoAmount,
-          cryptoCurrency: cryptoCurrency,
-          fiatAmount: fiatAmount,
-          fiatCurrency: fiatCurrency,
+          cryptoAmount: quote.cryptoAmount,
+          // Hardcoded USDC for now
+          cryptoCurrency: 'USDC',
+          fiatAmount: quote.fiatAmount,
+          fiatCurrency: quote.fiatCurrency,
           userWalletAddress: cryptoWalletAddress,
           walletPublicKey: walletPK,
-          walletFeeAddress: walletFeeAddress,
-          walletFeeAmount: walletFeeAmount,
-          platformFeeAddress: platformFeeAddress,
-          platformFeeAmount: platformFeeAmount,
-          partnerCryptoAmount: partnerCryptoAmount,
+          walletFeeAddress: quote.walletFeeAddress,
+          walletFeeAmount: quote.walletTotalFee,
+          platformFeeAddress: quote.platformFeeAddress,
+          platformFeeAmount: quote.platformTotalFee,
+          partnerCryptoAmount: quote.partnerAmount,
         ).writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
@@ -405,18 +398,10 @@ class KycUserClient {
 
   Future<String> createOffRampOrder({
     required String partnerPK,
-    required double cryptoAmount,
-    required String cryptoCurrency,
-    required double fiatAmount,
-    required String fiatCurrency,
     required String bankDataHash,
     required String cryptoWalletAddress,
     required String walletPK,
-    required String walletFeeAddress,
-    required double walletFeeAmount,
-    required String platformFeeAddress,
-    required double platformFeeAmount,
-    required double partnerCryptoAmount,
+    required Quote quote,
   }) async {
     final orderId = const Uuid().v4();
 
@@ -424,18 +409,19 @@ class KycUserClient {
         common.OffRampOrderUserEnvelope(
           orderId: orderId,
           partnerPublicKey: partnerPK,
-          cryptoAmount: cryptoAmount,
-          cryptoCurrency: cryptoCurrency,
-          fiatAmount: fiatAmount,
-          fiatCurrency: fiatCurrency,
+          cryptoAmount: quote.cryptoAmount,
+          // Hardcoded USDC for now
+          cryptoCurrency: 'USDC',
+          fiatAmount: quote.fiatAmount,
+          fiatCurrency: quote.fiatCurrency,
           bankDataHash: bankDataHash,
           userWalletAddress: cryptoWalletAddress,
           walletPublicKey: walletPK,
-          walletFeeAddress: walletFeeAddress,
-          walletFeeAmount: walletFeeAmount,
-          platformFeeAddress: platformFeeAddress,
-          platformFeeAmount: platformFeeAmount,
-          partnerCryptoAmount: partnerCryptoAmount,
+          walletFeeAddress: quote.walletFeeAddress,
+          walletFeeAmount: quote.walletTotalFee,
+          platformFeeAddress: quote.platformFeeAddress,
+          platformFeeAmount: quote.platformTotalFee,
+          partnerCryptoAmount: quote.partnerAmount,
         ).writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
