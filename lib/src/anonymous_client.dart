@@ -5,15 +5,12 @@ import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
 
 class AnonymousClient {
-  AnonymousClient({this.config = const AppConfig.demo()});
+  AnonymousClient({this.config = const AppConfig.demo()})
+    : _orderClient = order.WalletServiceClient(createTransport(baseUrl: config.orderBaseUrl));
 
   final AppConfig config;
 
-  late final order.WalletServiceClient _orderClient;
-
-  void init() {
-    _orderClient = order.WalletServiceClient(createTransport(baseUrl: config.orderBaseUrl));
-  }
+  final order.WalletServiceClient _orderClient;
 
   Future<Quote> getBestQuote({
     required String country,
