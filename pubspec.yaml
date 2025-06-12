@@ -9,7 +9,7 @@ dependencies:
   brij_protos_dart:
     git:
       url: https://github.com/espresso-cash/protos.git
-      ref: v0.20.0
+      ref: v0.21.0
       path: brij_protos_dart
   bs58: ^1.0.2
   connectrpc: ^0.4.0

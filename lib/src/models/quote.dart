@@ -17,6 +17,10 @@ class Quote with _$Quote {
     required RampFee walletFee,
     required RampFee platformFee,
     required double totalFee,
+    required double partnerAmount,
+    required double walletTotalFee,
+    required double platformTotalFee,
+    required double partnerTotalFee,
   }) = _Quote;
 
   factory Quote.fromWalletGetQuoteResponse(GetQuoteResponse response) => Quote(
@@ -29,6 +33,10 @@ class Quote with _$Quote {
     walletFee: RampFee.fromWalletRampFee(response.walletFee),
     platformFee: RampFee.fromWalletRampFee(response.platformFee),
     totalFee: response.totalFee,
+    partnerAmount: response.partnerAmount,
+    walletTotalFee: response.walletTotalFee,
+    platformTotalFee: response.platformTotalFee,
+    partnerTotalFee: response.partnerTotalFee,
   );
 
   factory Quote.fromWalletGetBestQuoteResponse(GetBestQuoteResponse response) => Quote(
@@ -41,6 +49,10 @@ class Quote with _$Quote {
     walletFee: RampFee.fromWalletRampFee(response.walletFee),
     platformFee: RampFee.fromWalletRampFee(response.platformFee),
     totalFee: response.totalFee,
+    partnerAmount: response.partnerAmount,
+    walletTotalFee: response.walletTotalFee,
+    platformTotalFee: response.platformTotalFee,
+    partnerTotalFee: response.partnerTotalFee,
   );
 }
 
