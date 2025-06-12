@@ -397,7 +397,7 @@ class KycUserClient {
   }
 
   Future<String> createOffRampOrder({
-    required String partnerPK,
+    required String partnerPublicKey,
     required String bankDataHash,
     required String userWalletAddress,
     required String walletPublicKey,
@@ -408,7 +408,7 @@ class KycUserClient {
     final protoMessage =
         common.OffRampOrderUserEnvelope(
           orderId: orderId,
-          partnerPublicKey: partnerPK,
+          partnerPublicKey: partnerPublicKey,
           cryptoAmount: quote.cryptoAmount,
           // Hardcoded USDC for now
           cryptoCurrency: 'USDC',
