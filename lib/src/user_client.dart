@@ -363,7 +363,6 @@ class KycUserClient {
 
   Future<String> createOnRampOrder({
     required String userWalletAddress,
-
     required String walletFeeAddress,
     required Quote quote,
   }) async {
