@@ -25,51 +25,24 @@ class Quote with _$Quote {
     required String walletPublicKey,
   }) = _Quote;
 
-  factory Quote.fromWalletGetQuoteResponse(proto.GetQuoteResponse response) {
-    final quote = response.quote;
-
-    return Quote(
-      cryptoAmount: quote.cryptoAmount,
-      fiatAmount: quote.fiatAmount,
-      fiatCurrency: quote.fiatCurrency,
-      type: quote.rampType.fromProto(),
-      conversionRate: quote.conversionRate,
-      partnerFee: RampFee.fromWalletRampFee(quote.partnerFee),
-      walletFee: RampFee.fromWalletRampFee(quote.walletFee),
-      platformFee: RampFee.fromWalletRampFee(quote.platformFee),
-      totalFee: quote.totalFee,
-      partnerAmount: quote.partnerAmount,
-      walletTotalFee: quote.walletTotalFee,
-      platformTotalFee: quote.platformTotalFee,
-      partnerTotalFee: quote.partnerTotalFee,
-      platformFeeAddress: quote.platformFeeAddress,
-      partnerPublicKey: quote.partnerPublicKey,
-      walletPublicKey: quote.walletPublicKey,
-    );
-  }
-
-  factory Quote.fromWalletGetBestQuoteResponse(proto.GetBestQuoteResponse response) {
-    final quote = response.quote;
-
-    return Quote(
-      cryptoAmount: quote.cryptoAmount,
-      fiatAmount: quote.fiatAmount,
-      fiatCurrency: quote.fiatCurrency,
-      type: quote.rampType.fromProto(),
-      conversionRate: quote.conversionRate,
-      partnerFee: RampFee.fromWalletRampFee(quote.partnerFee),
-      walletFee: RampFee.fromWalletRampFee(quote.walletFee),
-      platformFee: RampFee.fromWalletRampFee(quote.platformFee),
-      totalFee: quote.totalFee,
-      partnerAmount: quote.partnerAmount,
-      walletTotalFee: quote.walletTotalFee,
-      platformTotalFee: quote.platformTotalFee,
-      partnerTotalFee: quote.partnerTotalFee,
-      platformFeeAddress: quote.platformFeeAddress,
-      partnerPublicKey: quote.partnerPublicKey,
-      walletPublicKey: quote.walletPublicKey,
-    );
-  }
+  factory Quote.fromProto(proto.Quote quote) => Quote(
+    cryptoAmount: quote.cryptoAmount,
+    fiatAmount: quote.fiatAmount,
+    fiatCurrency: quote.fiatCurrency,
+    type: quote.rampType.fromProto(),
+    conversionRate: quote.conversionRate,
+    partnerFee: RampFee.fromWalletRampFee(quote.partnerFee),
+    walletFee: RampFee.fromWalletRampFee(quote.walletFee),
+    platformFee: RampFee.fromWalletRampFee(quote.platformFee),
+    totalFee: quote.totalFee,
+    partnerAmount: quote.partnerAmount,
+    walletTotalFee: quote.walletTotalFee,
+    platformTotalFee: quote.platformTotalFee,
+    partnerTotalFee: quote.partnerTotalFee,
+    platformFeeAddress: quote.platformFeeAddress,
+    partnerPublicKey: quote.partnerPublicKey,
+    walletPublicKey: quote.walletPublicKey,
+  );
 }
 
 @freezed

@@ -504,7 +504,7 @@ class KycUserClient {
       ),
     );
 
-    return Quote.fromWalletGetQuoteResponse(response);
+    return Quote.fromProto(response.quote);
   }
 
   Future<String> generateTransaction({required String orderId, required String externalId}) async {

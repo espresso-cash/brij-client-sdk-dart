@@ -29,6 +29,6 @@ class AnonymousClient {
       ),
     );
 
-    return Quote.fromWalletGetBestQuoteResponse(response);
+    return Quote.fromProto(response.quote);
   }
 }
