@@ -139,7 +139,7 @@ class _UserViewState extends State<UserView> {
                     phone: _phoneController.text,
                     file: _file,
                   );
-              if (!context.mounted) return;
+              if (!mounted) return;
               showSnackBar(context, message: 'User data updated');
             },
             child: const Text('Update User Data'),
@@ -165,7 +165,7 @@ class _UserViewState extends State<UserView> {
                 ? null
                 : () async {
                     await context.read<UserAppState>().initEmailValidation();
-                    if (!context.mounted) return;
+                    if (!mounted) return;
                     showSnackBar(
                       context,
                       message: 'Verification code has been sent to ${_emailController.text}',
@@ -179,7 +179,7 @@ class _UserViewState extends State<UserView> {
                 ? null
                 : () async {
                     await context.read<UserAppState>().initPhoneValidation();
-                    if (!context.mounted) return;
+                    if (!mounted) return;
                     showSnackBar(
                       context,
                       message: 'Verification code has been sent to ${_phoneController.text}',
@@ -355,9 +355,10 @@ class _UserViewState extends State<UserView> {
                     amount: _amountController.text,
                     currency: _currencyController.text,
                     partnerPK: partnerPk,
+                    walletFeeAddress: 'test-wallet-fee-address',
                   );
 
-              if (!context.mounted) return;
+              if (!mounted) return;
               showSnackBar(context, message: 'Onramp Order created');
             },
             child: const Text('Create Onramp Order'),
@@ -371,9 +372,10 @@ class _UserViewState extends State<UserView> {
                     currency: _currencyController.text,
                     partnerPK: partnerPk,
                     bankDataHash: '123456789',
+                    walletFeeAddress: 'test-wallet-fee-address',
                   );
 
-              if (!context.mounted) return;
+              if (!mounted) return;
               showSnackBar(context, message: 'Offramp Order created');
             },
             child: const Text('Create Offramp Order'),

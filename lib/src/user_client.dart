@@ -363,8 +363,9 @@ class KycUserClient {
 
   Future<String> createOnRampOrder({
     required String partnerPublicKey,
-    required String walletPublicKey,
     required String userWalletAddress,
+    required String walletPublicKey,
+    required String walletFeeAddress,
     required Quote quote,
   }) async {
     final orderId = const Uuid().v4();
@@ -380,7 +381,7 @@ class KycUserClient {
           fiatCurrency: quote.fiatCurrency,
           userWalletAddress: userWalletAddress,
           walletPublicKey: walletPublicKey,
-          walletFeeAddress: quote.walletFeeAddress,
+          walletFeeAddress: walletFeeAddress,
           walletFeeAmount: quote.walletTotalFee,
           platformFeeAddress: quote.platformFeeAddress,
           platformFeeAmount: quote.platformTotalFee,
@@ -401,6 +402,7 @@ class KycUserClient {
     required String bankDataHash,
     required String userWalletAddress,
     required String walletPublicKey,
+    required String walletFeeAddress,
     required Quote quote,
   }) async {
     final orderId = const Uuid().v4();
@@ -417,7 +419,7 @@ class KycUserClient {
           bankDataHash: bankDataHash,
           userWalletAddress: userWalletAddress,
           walletPublicKey: walletPublicKey,
-          walletFeeAddress: quote.walletFeeAddress,
+          walletFeeAddress: walletFeeAddress,
           walletFeeAmount: quote.walletTotalFee,
           platformFeeAddress: quote.platformFeeAddress,
           platformFeeAmount: quote.platformTotalFee,

@@ -30,7 +30,6 @@ mixin _$Quote {
   double get walletTotalFee => throw _privateConstructorUsedError;
   double get platformTotalFee => throw _privateConstructorUsedError;
   double get partnerTotalFee => throw _privateConstructorUsedError;
-  String get walletFeeAddress => throw _privateConstructorUsedError;
   String get platformFeeAddress => throw _privateConstructorUsedError;
 
   /// Create a copy of Quote
@@ -57,7 +56,6 @@ abstract class $QuoteCopyWith<$Res> {
     double walletTotalFee,
     double platformTotalFee,
     double partnerTotalFee,
-    String walletFeeAddress,
     String platformFeeAddress,
   });
 
@@ -93,7 +91,6 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote> implements $QuoteCopyWith<$R
     Object? walletTotalFee = null,
     Object? platformTotalFee = null,
     Object? partnerTotalFee = null,
-    Object? walletFeeAddress = null,
     Object? platformFeeAddress = null,
   }) {
     return _then(
@@ -163,11 +160,6 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote> implements $QuoteCopyWith<$R
                     ? _value.partnerTotalFee
                     : partnerTotalFee // ignore: cast_nullable_to_non_nullable
                         as double,
-            walletFeeAddress:
-                null == walletFeeAddress
-                    ? _value.walletFeeAddress
-                    : walletFeeAddress // ignore: cast_nullable_to_non_nullable
-                        as String,
             platformFeeAddress:
                 null == platformFeeAddress
                     ? _value.platformFeeAddress
@@ -229,7 +221,6 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
     double walletTotalFee,
     double platformTotalFee,
     double partnerTotalFee,
-    String walletFeeAddress,
     String platformFeeAddress,
   });
 
@@ -265,7 +256,6 @@ class __$$QuoteImplCopyWithImpl<$Res> extends _$QuoteCopyWithImpl<$Res, _$QuoteI
     Object? walletTotalFee = null,
     Object? platformTotalFee = null,
     Object? partnerTotalFee = null,
-    Object? walletFeeAddress = null,
     Object? platformFeeAddress = null,
   }) {
     return _then(
@@ -335,11 +325,6 @@ class __$$QuoteImplCopyWithImpl<$Res> extends _$QuoteCopyWithImpl<$Res, _$QuoteI
                 ? _value.partnerTotalFee
                 : partnerTotalFee // ignore: cast_nullable_to_non_nullable
                     as double,
-        walletFeeAddress:
-            null == walletFeeAddress
-                ? _value.walletFeeAddress
-                : walletFeeAddress // ignore: cast_nullable_to_non_nullable
-                    as String,
         platformFeeAddress:
             null == platformFeeAddress
                 ? _value.platformFeeAddress
@@ -367,7 +352,6 @@ class _$QuoteImpl implements _Quote {
     required this.walletTotalFee,
     required this.platformTotalFee,
     required this.partnerTotalFee,
-    required this.walletFeeAddress,
     required this.platformFeeAddress,
   });
 
@@ -398,13 +382,11 @@ class _$QuoteImpl implements _Quote {
   @override
   final double partnerTotalFee;
   @override
-  final String walletFeeAddress;
-  @override
   final String platformFeeAddress;
 
   @override
   String toString() {
-    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee, partnerAmount: $partnerAmount, walletTotalFee: $walletTotalFee, platformTotalFee: $platformTotalFee, partnerTotalFee: $partnerTotalFee, walletFeeAddress: $walletFeeAddress, platformFeeAddress: $platformFeeAddress)';
+    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee, partnerAmount: $partnerAmount, walletTotalFee: $walletTotalFee, platformTotalFee: $platformTotalFee, partnerTotalFee: $partnerTotalFee, platformFeeAddress: $platformFeeAddress)';
   }
 
   @override
@@ -430,8 +412,6 @@ class _$QuoteImpl implements _Quote {
                 other.platformTotalFee == platformTotalFee) &&
             (identical(other.partnerTotalFee, partnerTotalFee) ||
                 other.partnerTotalFee == partnerTotalFee) &&
-            (identical(other.walletFeeAddress, walletFeeAddress) ||
-                other.walletFeeAddress == walletFeeAddress) &&
             (identical(other.platformFeeAddress, platformFeeAddress) ||
                 other.platformFeeAddress == platformFeeAddress));
   }
@@ -452,7 +432,6 @@ class _$QuoteImpl implements _Quote {
     walletTotalFee,
     platformTotalFee,
     partnerTotalFee,
-    walletFeeAddress,
     platformFeeAddress,
   );
 
@@ -480,7 +459,6 @@ abstract class _Quote implements Quote {
     required final double walletTotalFee,
     required final double platformTotalFee,
     required final double partnerTotalFee,
-    required final String walletFeeAddress,
     required final String platformFeeAddress,
   }) = _$QuoteImpl;
 
@@ -510,8 +488,6 @@ abstract class _Quote implements Quote {
   double get platformTotalFee;
   @override
   double get partnerTotalFee;
-  @override
-  String get walletFeeAddress;
   @override
   String get platformFeeAddress;
 

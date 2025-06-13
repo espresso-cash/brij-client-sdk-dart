@@ -162,6 +162,7 @@ class UserAppState extends ChangeNotifier {
     required String amount,
     required String currency,
     required String partnerPK,
+    required String walletFeeAddress,
   }) async {
     final quote = await _client.getQuote(
       partnerPK: partnerPK,
@@ -175,6 +176,7 @@ class UserAppState extends ChangeNotifier {
       partnerPublicKey: partnerPK,
       userWalletAddress: _wallet!.publicKey.toString(),
       walletPublicKey: partnerPK,
+      walletFeeAddress: walletFeeAddress,
       quote: quote,
     );
 
@@ -187,6 +189,7 @@ class UserAppState extends ChangeNotifier {
     required String currency,
     required String partnerPK,
     required String bankDataHash,
+    required String walletFeeAddress,
   }) async {
     final quote = await _client.getQuote(
       partnerPK: partnerPK,
@@ -201,6 +204,7 @@ class UserAppState extends ChangeNotifier {
       bankDataHash: bankDataHash,
       userWalletAddress: _wallet!.publicKey.toString(),
       walletPublicKey: partnerPK,
+      walletFeeAddress: walletFeeAddress,
       quote: quote,
     );
 

@@ -21,7 +21,6 @@ class Quote with _$Quote {
     required double walletTotalFee,
     required double platformTotalFee,
     required double partnerTotalFee,
-    required String walletFeeAddress,
     required String platformFeeAddress,
   }) = _Quote;
 
@@ -39,7 +38,6 @@ class Quote with _$Quote {
     walletTotalFee: response.walletTotalFee,
     platformTotalFee: response.platformTotalFee,
     partnerTotalFee: response.partnerTotalFee,
-    walletFeeAddress: response.walletFeeAddress,
     platformFeeAddress: response.platformFeeAddress,
   );
 
@@ -57,7 +55,6 @@ class Quote with _$Quote {
     walletTotalFee: response.walletTotalFee,
     platformTotalFee: response.platformTotalFee,
     partnerTotalFee: response.partnerTotalFee,
-    walletFeeAddress: response.walletFeeAddress,
     platformFeeAddress: response.platformFeeAddress,
   );
 }

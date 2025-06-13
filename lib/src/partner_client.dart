@@ -11,7 +11,6 @@ import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.connect.cli
     as storage;
 import 'package:brij_protos_dart/gen/brij/storage/v1/partner/service.pb.dart';
 import 'package:bs58/bs58.dart';
-import 'package:connectrpc/connect.dart';
 import 'package:cryptography/cryptography.dart' hide Hash, PublicKey, SecretBox, Signature;
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart' as jwt;
 import 'package:pinenacl/ed25519.dart';
