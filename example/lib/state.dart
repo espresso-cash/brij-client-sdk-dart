@@ -161,21 +161,19 @@ class UserAppState extends ChangeNotifier {
   Future<void> createOnRampOrder({
     required String amount,
     required String currency,
-    required String partnerPK,
+    required String partnerPublicKey,
     required String walletFeeAddress,
   }) async {
     final quote = await _client.getQuote(
-      partnerPK: partnerPK,
-      walletPK: _wallet!.publicKey.toString(),
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: _wallet!.publicKey.toString(),
       cryptoAmount: double.parse(amount),
       rampType: RampType.onRamp,
       fiatCurrency: currency,
     );
 
     final orderId = await _client.createOnRampOrder(
-      partnerPublicKey: partnerPK,
       userWalletAddress: _wallet!.publicKey.toString(),
-      walletPublicKey: partnerPK,
       walletFeeAddress: walletFeeAddress,
       quote: quote,
     );
@@ -187,23 +185,21 @@ class UserAppState extends ChangeNotifier {
   Future<void> createOffRampOrder({
     required String amount,
     required String currency,
-    required String partnerPK,
+    required String partnerPublicKey,
     required String bankDataHash,
     required String walletFeeAddress,
   }) async {
     final quote = await _client.getQuote(
-      partnerPK: partnerPK,
-      walletPK: _wallet!.publicKey.toString(),
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: _wallet!.publicKey.toString(),
       cryptoAmount: double.parse(amount),
       rampType: RampType.offRamp,
       fiatCurrency: currency,
     );
 
     final orderId = await _client.createOffRampOrder(
-      partnerPublicKey: partnerPK,
       bankDataHash: bankDataHash,
       userWalletAddress: _wallet!.publicKey.toString(),
-      walletPublicKey: partnerPK,
       walletFeeAddress: walletFeeAddress,
       quote: quote,
     );
@@ -227,14 +223,14 @@ class UserAppState extends ChangeNotifier {
   }
 
   Future<void> getOnRampQuote({
-    required String partnerPK,
+    required String partnerPublicKey,
     required String cryptoAmount,
     required String fiatCurrency,
-    required String walletPK,
+    required String walletPublicKey,
   }) async {
     final response = await _client.getQuote(
-      partnerPK: partnerPK,
-      walletPK: walletPK,
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: walletPublicKey,
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.onRamp,
       fiatCurrency: fiatCurrency,
@@ -245,14 +241,14 @@ class UserAppState extends ChangeNotifier {
   }
 
   Future<void> getOffRampQuote({
-    required String partnerPK,
+    required String partnerPublicKey,
     required String cryptoAmount,
     required String fiatCurrency,
-    required String walletPK,
+    required String walletPublicKey,
   }) async {
     final response = await _client.getQuote(
-      partnerPK: partnerPK,
-      walletPK: walletPK,
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: walletPublicKey,
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.offRamp,
       fiatCurrency: fiatCurrency,
@@ -264,7 +260,7 @@ class UserAppState extends ChangeNotifier {
 
   Future<void> getBestQuote({
     required String country,
-    required String walletPK,
+    required String walletPublicKey,
     required String cryptoAmount,
     required String fiatCurrency,
     required RampType rampType,
@@ -272,7 +268,7 @@ class UserAppState extends ChangeNotifier {
     final response = await _anonymousClient.getBestQuote(
       country: country,
       cryptoAmount: double.parse(cryptoAmount),
-      walletPK: walletPK,
+      walletPublicKey: walletPublicKey,
       rampType: rampType,
       fiatCurrency: fiatCurrency,
     );

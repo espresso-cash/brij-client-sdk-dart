@@ -350,11 +350,12 @@ class _UserViewState extends State<UserView> {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
-              final partnerPk = context.read<PartnerAppState>().authPublicKey;
+              final partnerPublicKey = context.read<PartnerAppState>().authPublicKey;
+
               await context.read<UserAppState>().createOnRampOrder(
                     amount: _amountController.text,
                     currency: _currencyController.text,
-                    partnerPK: partnerPk,
+                    partnerPublicKey: partnerPublicKey,
                     walletFeeAddress: 'test-wallet-fee-address',
                   );
 
@@ -366,11 +367,12 @@ class _UserViewState extends State<UserView> {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
-              final partnerPk = context.read<PartnerAppState>().authPublicKey;
+              final partnerPublicKey = context.read<PartnerAppState>().authPublicKey;
+
               await context.read<UserAppState>().createOffRampOrder(
                     amount: _amountController.text,
                     currency: _currencyController.text,
-                    partnerPK: partnerPk,
+                    partnerPublicKey: partnerPublicKey,
                     bankDataHash: '123456789',
                     walletFeeAddress: 'test-wallet-fee-address',
                   );
@@ -437,8 +439,8 @@ class _UserViewState extends State<UserView> {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
 
               await context.read<UserAppState>().getOnRampQuote(
-                    partnerPK: partnerPk,
-                    walletPK: walletAuthPk,
+                    partnerPublicKey: partnerPk,
+                    walletPublicKey: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
@@ -451,8 +453,8 @@ class _UserViewState extends State<UserView> {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
 
               await context.read<UserAppState>().getOffRampQuote(
-                    partnerPK: partnerPk,
-                    walletPK: walletAuthPk,
+                    partnerPublicKey: partnerPk,
+                    walletPublicKey: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
@@ -465,7 +467,7 @@ class _UserViewState extends State<UserView> {
               await context.read<UserAppState>().getBestQuote(
                     country: 'ES',
                     rampType: RampType.onRamp,
-                    walletPK: walletAuthPk,
+                    walletPublicKey: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );

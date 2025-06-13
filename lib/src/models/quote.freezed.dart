@@ -31,6 +31,8 @@ mixin _$Quote {
   double get platformTotalFee => throw _privateConstructorUsedError;
   double get partnerTotalFee => throw _privateConstructorUsedError;
   String get platformFeeAddress => throw _privateConstructorUsedError;
+  String get partnerPublicKey => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -57,6 +59,8 @@ abstract class $QuoteCopyWith<$Res> {
     double platformTotalFee,
     double partnerTotalFee,
     String platformFeeAddress,
+    String partnerPublicKey,
+    String walletPublicKey,
   });
 
   $RampFeeCopyWith<$Res> get partnerFee;
@@ -92,6 +96,8 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote> implements $QuoteCopyWith<$R
     Object? platformTotalFee = null,
     Object? partnerTotalFee = null,
     Object? platformFeeAddress = null,
+    Object? partnerPublicKey = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(
       _value.copyWith(
@@ -165,6 +171,16 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote> implements $QuoteCopyWith<$R
                     ? _value.platformFeeAddress
                     : platformFeeAddress // ignore: cast_nullable_to_non_nullable
                         as String,
+            partnerPublicKey:
+                null == partnerPublicKey
+                    ? _value.partnerPublicKey
+                    : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            walletPublicKey:
+                null == walletPublicKey
+                    ? _value.walletPublicKey
+                    : walletPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
           )
           as $Val,
     );
@@ -222,6 +238,8 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
     double platformTotalFee,
     double partnerTotalFee,
     String platformFeeAddress,
+    String partnerPublicKey,
+    String walletPublicKey,
   });
 
   @override
@@ -257,6 +275,8 @@ class __$$QuoteImplCopyWithImpl<$Res> extends _$QuoteCopyWithImpl<$Res, _$QuoteI
     Object? platformTotalFee = null,
     Object? partnerTotalFee = null,
     Object? platformFeeAddress = null,
+    Object? partnerPublicKey = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(
       _$QuoteImpl(
@@ -330,6 +350,16 @@ class __$$QuoteImplCopyWithImpl<$Res> extends _$QuoteCopyWithImpl<$Res, _$QuoteI
                 ? _value.platformFeeAddress
                 : platformFeeAddress // ignore: cast_nullable_to_non_nullable
                     as String,
+        partnerPublicKey:
+            null == partnerPublicKey
+                ? _value.partnerPublicKey
+                : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        walletPublicKey:
+            null == walletPublicKey
+                ? _value.walletPublicKey
+                : walletPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
       ),
     );
   }
@@ -353,6 +383,8 @@ class _$QuoteImpl implements _Quote {
     required this.platformTotalFee,
     required this.partnerTotalFee,
     required this.platformFeeAddress,
+    required this.partnerPublicKey,
+    required this.walletPublicKey,
   });
 
   @override
@@ -383,10 +415,14 @@ class _$QuoteImpl implements _Quote {
   final double partnerTotalFee;
   @override
   final String platformFeeAddress;
+  @override
+  final String partnerPublicKey;
+  @override
+  final String walletPublicKey;
 
   @override
   String toString() {
-    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee, partnerAmount: $partnerAmount, walletTotalFee: $walletTotalFee, platformTotalFee: $platformTotalFee, partnerTotalFee: $partnerTotalFee, platformFeeAddress: $platformFeeAddress)';
+    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee, partnerAmount: $partnerAmount, walletTotalFee: $walletTotalFee, platformTotalFee: $platformTotalFee, partnerTotalFee: $partnerTotalFee, platformFeeAddress: $platformFeeAddress, partnerPublicKey: $partnerPublicKey, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -413,7 +449,11 @@ class _$QuoteImpl implements _Quote {
             (identical(other.partnerTotalFee, partnerTotalFee) ||
                 other.partnerTotalFee == partnerTotalFee) &&
             (identical(other.platformFeeAddress, platformFeeAddress) ||
-                other.platformFeeAddress == platformFeeAddress));
+                other.platformFeeAddress == platformFeeAddress) &&
+            (identical(other.partnerPublicKey, partnerPublicKey) ||
+                other.partnerPublicKey == partnerPublicKey) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey));
   }
 
   @override
@@ -433,6 +473,8 @@ class _$QuoteImpl implements _Quote {
     platformTotalFee,
     partnerTotalFee,
     platformFeeAddress,
+    partnerPublicKey,
+    walletPublicKey,
   );
 
   /// Create a copy of Quote
@@ -460,6 +502,8 @@ abstract class _Quote implements Quote {
     required final double platformTotalFee,
     required final double partnerTotalFee,
     required final String platformFeeAddress,
+    required final String partnerPublicKey,
+    required final String walletPublicKey,
   }) = _$QuoteImpl;
 
   @override
@@ -490,6 +534,10 @@ abstract class _Quote implements Quote {
   double get partnerTotalFee;
   @override
   String get platformFeeAddress;
+  @override
+  String get partnerPublicKey;
+  @override
+  String get walletPublicKey;
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.

@@ -6,7 +6,7 @@ import 'package:brij_client/src/grpc/transport.dart';
 import 'package:brij_client/src/models/export.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/common/envelopes.pb.dart' as common;
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.connect.client.dart' as order;
-import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
+import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' hide Quote;
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/data.pb.dart' as proto;
 import 'package:brij_protos_dart/gen/brij/storage/v1/common/user_data.pb.dart' as user;
 import 'package:brij_protos_dart/gen/brij/storage/v1/wallet/service.connect.client.dart' as wallet;
@@ -362,9 +362,8 @@ class KycUserClient {
   }
 
   Future<String> createOnRampOrder({
-    required String partnerPublicKey,
     required String userWalletAddress,
-    required String walletPublicKey,
+
     required String walletFeeAddress,
     required Quote quote,
   }) async {
@@ -373,14 +372,14 @@ class KycUserClient {
     final protoMessage =
         common.OnRampOrderUserEnvelope(
           orderId: orderId,
-          partnerPublicKey: partnerPublicKey,
+          partnerPublicKey: quote.partnerPublicKey,
           cryptoAmount: quote.cryptoAmount,
           // Hardcoded USDC for now
           cryptoCurrency: 'USDC',
           fiatAmount: quote.fiatAmount,
           fiatCurrency: quote.fiatCurrency,
           userWalletAddress: userWalletAddress,
-          walletPublicKey: walletPublicKey,
+          walletPublicKey: quote.walletPublicKey,
           walletFeeAddress: walletFeeAddress,
           walletFeeAmount: quote.walletTotalFee,
           platformFeeAddress: quote.platformFeeAddress,
@@ -398,10 +397,8 @@ class KycUserClient {
   }
 
   Future<String> createOffRampOrder({
-    required String partnerPublicKey,
     required String bankDataHash,
     required String userWalletAddress,
-    required String walletPublicKey,
     required String walletFeeAddress,
     required Quote quote,
   }) async {
@@ -410,7 +407,7 @@ class KycUserClient {
     final protoMessage =
         common.OffRampOrderUserEnvelope(
           orderId: orderId,
-          partnerPublicKey: partnerPublicKey,
+          partnerPublicKey: quote.partnerPublicKey,
           cryptoAmount: quote.cryptoAmount,
           // Hardcoded USDC for now
           cryptoCurrency: 'USDC',
@@ -418,7 +415,7 @@ class KycUserClient {
           fiatCurrency: quote.fiatCurrency,
           bankDataHash: bankDataHash,
           userWalletAddress: userWalletAddress,
-          walletPublicKey: walletPublicKey,
+          walletPublicKey: quote.walletPublicKey,
           walletFeeAddress: walletFeeAddress,
           walletFeeAmount: quote.walletTotalFee,
           platformFeeAddress: quote.platformFeeAddress,
@@ -491,19 +488,19 @@ class KycUserClient {
   }
 
   Future<Quote> getQuote({
-    required String partnerPK,
-    required String walletPK,
+    required String partnerPublicKey,
+    required String walletPublicKey,
     required double cryptoAmount,
     required RampType rampType,
     required String fiatCurrency,
   }) async {
     final response = await _orderClient.getQuote(
       GetQuoteRequest(
-        partnerPublicKey: partnerPK,
+        partnerPublicKey: partnerPublicKey,
         cryptoAmount: cryptoAmount,
         rampType: rampType.toProto(),
         fiatCurrency: fiatCurrency,
-        walletPublicKey: walletPK,
+        walletPublicKey: walletPublicKey,
       ),
     );
 
