@@ -23,6 +23,7 @@ class UserAppState extends ChangeNotifier {
 
   List<PartnerModel>? _grantedAccessPartners;
 
+  late AnonymousClient _anonymousClient;
   late KycUserClient _client;
 
   String? _email;
@@ -39,6 +40,14 @@ class UserAppState extends ChangeNotifier {
   String? _quote;
 
   String? get quote => _quote;
+
+  String? _bestQuote;
+
+  String? get bestQuote => _bestQuote;
+
+  void initAnonymous() {
+    _anonymousClient = AnonymousClient();
+  }
 
   Future<void> createWallet() async {
     _wallet = await Ed25519HDKeyPair.random();
@@ -152,16 +161,21 @@ class UserAppState extends ChangeNotifier {
   Future<void> createOnRampOrder({
     required String amount,
     required String currency,
-    required String partnerPK,
+    required String partnerPublicKey,
+    required String walletFeeAddress,
   }) async {
-    final orderId = await _client.createOnRampOrder(
-      partnerPK: partnerPK,
+    final quote = await _client.getQuote(
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: _wallet!.publicKey.toString(),
       cryptoAmount: double.parse(amount),
-      cryptoCurrency: currency,
-      fiatAmount: double.parse(amount),
+      rampType: RampType.onRamp,
       fiatCurrency: currency,
-      cryptoWalletAddress: _wallet!.publicKey.toString(),
-      walletPK: partnerPK,
+    );
+
+    final orderId = await _client.createOnRampOrder(
+      userWalletAddress: _wallet!.publicKey.toString(),
+      walletFeeAddress: walletFeeAddress,
+      quote: quote,
     );
 
     _onRampOrderId = orderId;
@@ -171,18 +185,23 @@ class UserAppState extends ChangeNotifier {
   Future<void> createOffRampOrder({
     required String amount,
     required String currency,
-    required String partnerPK,
+    required String partnerPublicKey,
     required String bankDataHash,
+    required String walletFeeAddress,
   }) async {
-    final orderId = await _client.createOffRampOrder(
-      partnerPK: partnerPK,
+    final quote = await _client.getQuote(
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: _wallet!.publicKey.toString(),
       cryptoAmount: double.parse(amount),
-      cryptoCurrency: currency,
-      fiatAmount: double.parse(amount),
+      rampType: RampType.offRamp,
       fiatCurrency: currency,
+    );
+
+    final orderId = await _client.createOffRampOrder(
       bankDataHash: bankDataHash,
-      cryptoWalletAddress: _wallet!.publicKey.toString(),
-      walletPK: partnerPK,
+      userWalletAddress: _wallet!.publicKey.toString(),
+      walletFeeAddress: walletFeeAddress,
+      quote: quote,
     );
 
     _offRampOrderId = orderId;
@@ -204,14 +223,14 @@ class UserAppState extends ChangeNotifier {
   }
 
   Future<void> getOnRampQuote({
-    required String partnerPK,
+    required String partnerPublicKey,
     required String cryptoAmount,
     required String fiatCurrency,
-    required String walletPK,
+    required String walletPublicKey,
   }) async {
     final response = await _client.getQuote(
-      partnerPK: partnerPK,
-      walletPK: walletPK,
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: walletPublicKey,
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.onRamp,
       fiatCurrency: fiatCurrency,
@@ -222,20 +241,39 @@ class UserAppState extends ChangeNotifier {
   }
 
   Future<void> getOffRampQuote({
-    required String partnerPK,
+    required String partnerPublicKey,
     required String cryptoAmount,
     required String fiatCurrency,
-    required String walletPK,
+    required String walletPublicKey,
   }) async {
     final response = await _client.getQuote(
-      partnerPK: partnerPK,
-      walletPK: walletPK,
+      partnerPublicKey: partnerPublicKey,
+      walletPublicKey: walletPublicKey,
       cryptoAmount: double.parse(cryptoAmount),
       rampType: RampType.offRamp,
       fiatCurrency: fiatCurrency,
     );
 
     _quote = response.toString();
+    notifyListeners();
+  }
+
+  Future<void> getBestQuote({
+    required String country,
+    required String walletPublicKey,
+    required String cryptoAmount,
+    required String fiatCurrency,
+    required RampType rampType,
+  }) async {
+    final response = await _anonymousClient.getBestQuote(
+      country: country,
+      cryptoAmount: double.parse(cryptoAmount),
+      walletPublicKey: walletPublicKey,
+      rampType: rampType,
+      fiatCurrency: fiatCurrency,
+    );
+
+    _bestQuote = response.toString();
     notifyListeners();
   }
 }
@@ -288,7 +326,8 @@ class PartnerAppState extends ChangeNotifier {
 
     await _client.init();
 
-    _authPublicKey = await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
+    _authPublicKey =
+        await keyPair.extractPublicKey().then((value) => value.bytes).then(base58encode);
 
     notifyListeners();
   }
@@ -443,4 +482,4 @@ class PartnerAppState extends ChangeNotifier {
 }
 
 // TODO(vsumin): Replace it with real one
-const walletAuthPk = 'DA71MeXeEwuM2FzWj8Bki6XTBTYC9TUsXspzPoNy2yEQ';
+const walletAuthPk = '3GEEuaKKs6wrmi8Z8GEafmEC524Tx6wvFHfCp36tTQut';

@@ -26,6 +26,13 @@ mixin _$Quote {
   RampFee get walletFee => throw _privateConstructorUsedError;
   RampFee get platformFee => throw _privateConstructorUsedError;
   double get totalFee => throw _privateConstructorUsedError;
+  double get partnerAmount => throw _privateConstructorUsedError;
+  double get walletTotalFee => throw _privateConstructorUsedError;
+  double get platformTotalFee => throw _privateConstructorUsedError;
+  double get partnerTotalFee => throw _privateConstructorUsedError;
+  String get platformFeeAddress => throw _privateConstructorUsedError;
+  String get partnerPublicKey => throw _privateConstructorUsedError;
+  String get walletPublicKey => throw _privateConstructorUsedError;
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -35,8 +42,7 @@ mixin _$Quote {
 
 /// @nodoc
 abstract class $QuoteCopyWith<$Res> {
-  factory $QuoteCopyWith(Quote value, $Res Function(Quote) then) =
-      _$QuoteCopyWithImpl<$Res, Quote>;
+  factory $QuoteCopyWith(Quote value, $Res Function(Quote) then) = _$QuoteCopyWithImpl<$Res, Quote>;
   @useResult
   $Res call({
     double cryptoAmount,
@@ -48,6 +54,13 @@ abstract class $QuoteCopyWith<$Res> {
     RampFee walletFee,
     RampFee platformFee,
     double totalFee,
+    double partnerAmount,
+    double walletTotalFee,
+    double platformTotalFee,
+    double partnerTotalFee,
+    String platformFeeAddress,
+    String partnerPublicKey,
+    String walletPublicKey,
   });
 
   $RampFeeCopyWith<$Res> get partnerFee;
@@ -56,8 +69,7 @@ abstract class $QuoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
-    implements $QuoteCopyWith<$Res> {
+class _$QuoteCopyWithImpl<$Res, $Val extends Quote> implements $QuoteCopyWith<$Res> {
   _$QuoteCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -79,6 +91,13 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
     Object? walletFee = null,
     Object? platformFee = null,
     Object? totalFee = null,
+    Object? partnerAmount = null,
+    Object? walletTotalFee = null,
+    Object? platformTotalFee = null,
+    Object? partnerTotalFee = null,
+    Object? platformFeeAddress = null,
+    Object? partnerPublicKey = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(
       _value.copyWith(
@@ -127,6 +146,41 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
                     ? _value.totalFee
                     : totalFee // ignore: cast_nullable_to_non_nullable
                         as double,
+            partnerAmount:
+                null == partnerAmount
+                    ? _value.partnerAmount
+                    : partnerAmount // ignore: cast_nullable_to_non_nullable
+                        as double,
+            walletTotalFee:
+                null == walletTotalFee
+                    ? _value.walletTotalFee
+                    : walletTotalFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+            platformTotalFee:
+                null == platformTotalFee
+                    ? _value.platformTotalFee
+                    : platformTotalFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+            partnerTotalFee:
+                null == partnerTotalFee
+                    ? _value.partnerTotalFee
+                    : partnerTotalFee // ignore: cast_nullable_to_non_nullable
+                        as double,
+            platformFeeAddress:
+                null == platformFeeAddress
+                    ? _value.platformFeeAddress
+                    : platformFeeAddress // ignore: cast_nullable_to_non_nullable
+                        as String,
+            partnerPublicKey:
+                null == partnerPublicKey
+                    ? _value.partnerPublicKey
+                    : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
+            walletPublicKey:
+                null == walletPublicKey
+                    ? _value.walletPublicKey
+                    : walletPublicKey // ignore: cast_nullable_to_non_nullable
+                        as String,
           )
           as $Val,
     );
@@ -165,10 +219,8 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
 
 /// @nodoc
 abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
-  factory _$$QuoteImplCopyWith(
-    _$QuoteImpl value,
-    $Res Function(_$QuoteImpl) then,
-  ) = __$$QuoteImplCopyWithImpl<$Res>;
+  factory _$$QuoteImplCopyWith(_$QuoteImpl value, $Res Function(_$QuoteImpl) then) =
+      __$$QuoteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -181,6 +233,13 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
     RampFee walletFee,
     RampFee platformFee,
     double totalFee,
+    double partnerAmount,
+    double walletTotalFee,
+    double platformTotalFee,
+    double partnerTotalFee,
+    String platformFeeAddress,
+    String partnerPublicKey,
+    String walletPublicKey,
   });
 
   @override
@@ -192,13 +251,10 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$QuoteImplCopyWithImpl<$Res>
-    extends _$QuoteCopyWithImpl<$Res, _$QuoteImpl>
+class __$$QuoteImplCopyWithImpl<$Res> extends _$QuoteCopyWithImpl<$Res, _$QuoteImpl>
     implements _$$QuoteImplCopyWith<$Res> {
-  __$$QuoteImplCopyWithImpl(
-    _$QuoteImpl _value,
-    $Res Function(_$QuoteImpl) _then,
-  ) : super(_value, _then);
+  __$$QuoteImplCopyWithImpl(_$QuoteImpl _value, $Res Function(_$QuoteImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
@@ -214,6 +270,13 @@ class __$$QuoteImplCopyWithImpl<$Res>
     Object? walletFee = null,
     Object? platformFee = null,
     Object? totalFee = null,
+    Object? partnerAmount = null,
+    Object? walletTotalFee = null,
+    Object? platformTotalFee = null,
+    Object? partnerTotalFee = null,
+    Object? platformFeeAddress = null,
+    Object? partnerPublicKey = null,
+    Object? walletPublicKey = null,
   }) {
     return _then(
       _$QuoteImpl(
@@ -262,6 +325,41 @@ class __$$QuoteImplCopyWithImpl<$Res>
                 ? _value.totalFee
                 : totalFee // ignore: cast_nullable_to_non_nullable
                     as double,
+        partnerAmount:
+            null == partnerAmount
+                ? _value.partnerAmount
+                : partnerAmount // ignore: cast_nullable_to_non_nullable
+                    as double,
+        walletTotalFee:
+            null == walletTotalFee
+                ? _value.walletTotalFee
+                : walletTotalFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+        platformTotalFee:
+            null == platformTotalFee
+                ? _value.platformTotalFee
+                : platformTotalFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+        partnerTotalFee:
+            null == partnerTotalFee
+                ? _value.partnerTotalFee
+                : partnerTotalFee // ignore: cast_nullable_to_non_nullable
+                    as double,
+        platformFeeAddress:
+            null == platformFeeAddress
+                ? _value.platformFeeAddress
+                : platformFeeAddress // ignore: cast_nullable_to_non_nullable
+                    as String,
+        partnerPublicKey:
+            null == partnerPublicKey
+                ? _value.partnerPublicKey
+                : partnerPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
+        walletPublicKey:
+            null == walletPublicKey
+                ? _value.walletPublicKey
+                : walletPublicKey // ignore: cast_nullable_to_non_nullable
+                    as String,
       ),
     );
   }
@@ -280,6 +378,13 @@ class _$QuoteImpl implements _Quote {
     required this.walletFee,
     required this.platformFee,
     required this.totalFee,
+    required this.partnerAmount,
+    required this.walletTotalFee,
+    required this.platformTotalFee,
+    required this.partnerTotalFee,
+    required this.platformFeeAddress,
+    required this.partnerPublicKey,
+    required this.walletPublicKey,
   });
 
   @override
@@ -300,10 +405,24 @@ class _$QuoteImpl implements _Quote {
   final RampFee platformFee;
   @override
   final double totalFee;
+  @override
+  final double partnerAmount;
+  @override
+  final double walletTotalFee;
+  @override
+  final double platformTotalFee;
+  @override
+  final double partnerTotalFee;
+  @override
+  final String platformFeeAddress;
+  @override
+  final String partnerPublicKey;
+  @override
+  final String walletPublicKey;
 
   @override
   String toString() {
-    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee)';
+    return 'Quote(cryptoAmount: $cryptoAmount, fiatAmount: $fiatAmount, fiatCurrency: $fiatCurrency, type: $type, conversionRate: $conversionRate, partnerFee: $partnerFee, walletFee: $walletFee, platformFee: $platformFee, totalFee: $totalFee, partnerAmount: $partnerAmount, walletTotalFee: $walletTotalFee, platformTotalFee: $platformTotalFee, partnerTotalFee: $partnerTotalFee, platformFeeAddress: $platformFeeAddress, partnerPublicKey: $partnerPublicKey, walletPublicKey: $walletPublicKey)';
   }
 
   @override
@@ -311,23 +430,30 @@ class _$QuoteImpl implements _Quote {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuoteImpl &&
-            (identical(other.cryptoAmount, cryptoAmount) ||
-                other.cryptoAmount == cryptoAmount) &&
-            (identical(other.fiatAmount, fiatAmount) ||
-                other.fiatAmount == fiatAmount) &&
-            (identical(other.fiatCurrency, fiatCurrency) ||
-                other.fiatCurrency == fiatCurrency) &&
+            (identical(other.cryptoAmount, cryptoAmount) || other.cryptoAmount == cryptoAmount) &&
+            (identical(other.fiatAmount, fiatAmount) || other.fiatAmount == fiatAmount) &&
+            (identical(other.fiatCurrency, fiatCurrency) || other.fiatCurrency == fiatCurrency) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.conversionRate, conversionRate) ||
                 other.conversionRate == conversionRate) &&
-            (identical(other.partnerFee, partnerFee) ||
-                other.partnerFee == partnerFee) &&
-            (identical(other.walletFee, walletFee) ||
-                other.walletFee == walletFee) &&
-            (identical(other.platformFee, platformFee) ||
-                other.platformFee == platformFee) &&
-            (identical(other.totalFee, totalFee) ||
-                other.totalFee == totalFee));
+            (identical(other.partnerFee, partnerFee) || other.partnerFee == partnerFee) &&
+            (identical(other.walletFee, walletFee) || other.walletFee == walletFee) &&
+            (identical(other.platformFee, platformFee) || other.platformFee == platformFee) &&
+            (identical(other.totalFee, totalFee) || other.totalFee == totalFee) &&
+            (identical(other.partnerAmount, partnerAmount) ||
+                other.partnerAmount == partnerAmount) &&
+            (identical(other.walletTotalFee, walletTotalFee) ||
+                other.walletTotalFee == walletTotalFee) &&
+            (identical(other.platformTotalFee, platformTotalFee) ||
+                other.platformTotalFee == platformTotalFee) &&
+            (identical(other.partnerTotalFee, partnerTotalFee) ||
+                other.partnerTotalFee == partnerTotalFee) &&
+            (identical(other.platformFeeAddress, platformFeeAddress) ||
+                other.platformFeeAddress == platformFeeAddress) &&
+            (identical(other.partnerPublicKey, partnerPublicKey) ||
+                other.partnerPublicKey == partnerPublicKey) &&
+            (identical(other.walletPublicKey, walletPublicKey) ||
+                other.walletPublicKey == walletPublicKey));
   }
 
   @override
@@ -342,6 +468,13 @@ class _$QuoteImpl implements _Quote {
     walletFee,
     platformFee,
     totalFee,
+    partnerAmount,
+    walletTotalFee,
+    platformTotalFee,
+    partnerTotalFee,
+    platformFeeAddress,
+    partnerPublicKey,
+    walletPublicKey,
   );
 
   /// Create a copy of Quote
@@ -364,6 +497,13 @@ abstract class _Quote implements Quote {
     required final RampFee walletFee,
     required final RampFee platformFee,
     required final double totalFee,
+    required final double partnerAmount,
+    required final double walletTotalFee,
+    required final double platformTotalFee,
+    required final double partnerTotalFee,
+    required final String platformFeeAddress,
+    required final String partnerPublicKey,
+    required final String walletPublicKey,
   }) = _$QuoteImpl;
 
   @override
@@ -384,13 +524,26 @@ abstract class _Quote implements Quote {
   RampFee get platformFee;
   @override
   double get totalFee;
+  @override
+  double get partnerAmount;
+  @override
+  double get walletTotalFee;
+  @override
+  double get platformTotalFee;
+  @override
+  double get partnerTotalFee;
+  @override
+  String get platformFeeAddress;
+  @override
+  String get partnerPublicKey;
+  @override
+  String get walletPublicKey;
 
   /// Create a copy of Quote
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -413,8 +566,7 @@ abstract class $RampFeeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee>
-    implements $RampFeeCopyWith<$Res> {
+class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee> implements $RampFeeCopyWith<$Res> {
   _$RampFeeCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -447,23 +599,18 @@ class _$RampFeeCopyWithImpl<$Res, $Val extends RampFee>
 
 /// @nodoc
 abstract class _$$RampFeeImplCopyWith<$Res> implements $RampFeeCopyWith<$Res> {
-  factory _$$RampFeeImplCopyWith(
-    _$RampFeeImpl value,
-    $Res Function(_$RampFeeImpl) then,
-  ) = __$$RampFeeImplCopyWithImpl<$Res>;
+  factory _$$RampFeeImplCopyWith(_$RampFeeImpl value, $Res Function(_$RampFeeImpl) then) =
+      __$$RampFeeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double fixedFee, double percentageFee});
 }
 
 /// @nodoc
-class __$$RampFeeImplCopyWithImpl<$Res>
-    extends _$RampFeeCopyWithImpl<$Res, _$RampFeeImpl>
+class __$$RampFeeImplCopyWithImpl<$Res> extends _$RampFeeCopyWithImpl<$Res, _$RampFeeImpl>
     implements _$$RampFeeImplCopyWith<$Res> {
-  __$$RampFeeImplCopyWithImpl(
-    _$RampFeeImpl _value,
-    $Res Function(_$RampFeeImpl) _then,
-  ) : super(_value, _then);
+  __$$RampFeeImplCopyWithImpl(_$RampFeeImpl _value, $Res Function(_$RampFeeImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of RampFee
   /// with the given fields replaced by the non-null parameter values.
@@ -507,8 +654,7 @@ class _$RampFeeImpl implements _RampFee {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RampFeeImpl &&
-            (identical(other.fixedFee, fixedFee) ||
-                other.fixedFee == fixedFee) &&
+            (identical(other.fixedFee, fixedFee) || other.fixedFee == fixedFee) &&
             (identical(other.percentageFee, percentageFee) ||
                 other.percentageFee == percentageFee));
   }
@@ -526,10 +672,8 @@ class _$RampFeeImpl implements _RampFee {
 }
 
 abstract class _RampFee implements RampFee {
-  const factory _RampFee({
-    required final double fixedFee,
-    required final double percentageFee,
-  }) = _$RampFeeImpl;
+  const factory _RampFee({required final double fixedFee, required final double percentageFee}) =
+      _$RampFeeImpl;
 
   @override
   double get fixedFee;
@@ -540,6 +684,5 @@ abstract class _RampFee implements RampFee {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RampFeeImplCopyWith<_$RampFeeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RampFeeImplCopyWith<_$RampFeeImpl> get copyWith => throw _privateConstructorUsedError;
 }

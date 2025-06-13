@@ -150,12 +150,9 @@ class _PartnerViewState extends State<PartnerView> {
           ),
           Consumer<UserAppState>(
             builder: (context, userState, child) {
-              final orderId = partnerState.onRampUseExternalId
-                  ? null
-                  : userState.onRampOrderId;
-              final externalId = partnerState.onRampUseExternalId
-                  ? partnerState.onRampExternalId
-                  : null;
+              final orderId = partnerState.onRampUseExternalId ? null : userState.onRampOrderId;
+              final externalId =
+                  partnerState.onRampUseExternalId ? partnerState.onRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
               return Column(
@@ -299,12 +296,9 @@ class _PartnerViewState extends State<PartnerView> {
           ),
           Consumer<UserAppState>(
             builder: (context, userState, child) {
-              final orderId = partnerState.offRampUseExternalId
-                  ? null
-                  : userState.offRampOrderId;
-              final externalId = partnerState.offRampUseExternalId
-                  ? partnerState.offRampExternalId
-                  : null;
+              final orderId = partnerState.offRampUseExternalId ? null : userState.offRampOrderId;
+              final externalId =
+                  partnerState.offRampUseExternalId ? partnerState.offRampExternalId : null;
               final hasOrder = orderId != null || externalId != null;
 
               return Column(

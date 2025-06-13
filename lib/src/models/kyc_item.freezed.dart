@@ -22,8 +22,7 @@ mixin _$KycItem {
   String get provider => throw _privateConstructorUsedError;
   String get userPublicKey => throw _privateConstructorUsedError;
   List<String> get hashes => throw _privateConstructorUsedError;
-  Map<String, List<int>> get additionalData =>
-      throw _privateConstructorUsedError;
+  Map<String, List<int>> get additionalData => throw _privateConstructorUsedError;
 
   /// Create a copy of KycItem
   /// with the given fields replaced by the non-null parameter values.
@@ -47,8 +46,7 @@ abstract class $KycItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$KycItemCopyWithImpl<$Res, $Val extends KycItem>
-    implements $KycItemCopyWith<$Res> {
+class _$KycItemCopyWithImpl<$Res, $Val extends KycItem> implements $KycItemCopyWith<$Res> {
   _$KycItemCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -108,10 +106,8 @@ class _$KycItemCopyWithImpl<$Res, $Val extends KycItem>
 
 /// @nodoc
 abstract class _$$KycItemImplCopyWith<$Res> implements $KycItemCopyWith<$Res> {
-  factory _$$KycItemImplCopyWith(
-    _$KycItemImpl value,
-    $Res Function(_$KycItemImpl) then,
-  ) = __$$KycItemImplCopyWithImpl<$Res>;
+  factory _$$KycItemImplCopyWith(_$KycItemImpl value, $Res Function(_$KycItemImpl) then) =
+      __$$KycItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -125,13 +121,10 @@ abstract class _$$KycItemImplCopyWith<$Res> implements $KycItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$KycItemImplCopyWithImpl<$Res>
-    extends _$KycItemCopyWithImpl<$Res, _$KycItemImpl>
+class __$$KycItemImplCopyWithImpl<$Res> extends _$KycItemCopyWithImpl<$Res, _$KycItemImpl>
     implements _$$KycItemImplCopyWith<$Res> {
-  __$$KycItemImplCopyWithImpl(
-    _$KycItemImpl _value,
-    $Res Function(_$KycItemImpl) _then,
-  ) : super(_value, _then);
+  __$$KycItemImplCopyWithImpl(_$KycItemImpl _value, $Res Function(_$KycItemImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of KycItem
   /// with the given fields replaced by the non-null parameter values.
@@ -239,20 +232,13 @@ class _$KycItemImpl extends _KycItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KycItemImpl &&
-            const DeepCollectionEquality().equals(
-              other._countries,
-              _countries,
-            ) &&
+            const DeepCollectionEquality().equals(other._countries, _countries) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.provider, provider) ||
-                other.provider == provider) &&
+            (identical(other.provider, provider) || other.provider == provider) &&
             (identical(other.userPublicKey, userPublicKey) ||
                 other.userPublicKey == userPublicKey) &&
             const DeepCollectionEquality().equals(other._hashes, _hashes) &&
-            const DeepCollectionEquality().equals(
-              other._additionalData,
-              _additionalData,
-            ));
+            const DeepCollectionEquality().equals(other._additionalData, _additionalData));
   }
 
   @override
@@ -303,6 +289,5 @@ abstract class _KycItem extends KycItem {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$KycItemImplCopyWith<_$KycItemImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$KycItemImplCopyWith<_$KycItemImpl> get copyWith => throw _privateConstructorUsedError;
 }

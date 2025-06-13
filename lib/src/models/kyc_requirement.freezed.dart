@@ -23,16 +23,13 @@ mixin _$KycRequirement {
   /// Create a copy of KycRequirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $KycRequirementCopyWith<KycRequirement> get copyWith =>
-      throw _privateConstructorUsedError;
+  $KycRequirementCopyWith<KycRequirement> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $KycRequirementCopyWith<$Res> {
-  factory $KycRequirementCopyWith(
-    KycRequirement value,
-    $Res Function(KycRequirement) then,
-  ) = _$KycRequirementCopyWithImpl<$Res, KycRequirement>;
+  factory $KycRequirementCopyWith(KycRequirement value, $Res Function(KycRequirement) then) =
+      _$KycRequirementCopyWithImpl<$Res, KycRequirement>;
   @useResult
   $Res call({String country, List<Requirement> requirements});
 }
@@ -71,8 +68,7 @@ class _$KycRequirementCopyWithImpl<$Res, $Val extends KycRequirement>
 }
 
 /// @nodoc
-abstract class _$$KycRequirementImplCopyWith<$Res>
-    implements $KycRequirementCopyWith<$Res> {
+abstract class _$$KycRequirementImplCopyWith<$Res> implements $KycRequirementCopyWith<$Res> {
   factory _$$KycRequirementImplCopyWith(
     _$KycRequirementImpl value,
     $Res Function(_$KycRequirementImpl) then,
@@ -116,10 +112,8 @@ class __$$KycRequirementImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$KycRequirementImpl implements _KycRequirement {
-  const _$KycRequirementImpl({
-    required this.country,
-    required final List<Requirement> requirements,
-  }) : _requirements = requirements;
+  const _$KycRequirementImpl({required this.country, required final List<Requirement> requirements})
+    : _requirements = requirements;
 
   @override
   final String country;
@@ -142,18 +136,12 @@ class _$KycRequirementImpl implements _KycRequirement {
         (other.runtimeType == runtimeType &&
             other is _$KycRequirementImpl &&
             (identical(other.country, country) || other.country == country) &&
-            const DeepCollectionEquality().equals(
-              other._requirements,
-              _requirements,
-            ));
+            const DeepCollectionEquality().equals(other._requirements, _requirements));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    country,
-    const DeepCollectionEquality().hash(_requirements),
-  );
+  int get hashCode =>
+      Object.hash(runtimeType, country, const DeepCollectionEquality().hash(_requirements));
 
   /// Create a copy of KycRequirement
   /// with the given fields replaced by the non-null parameter values.
@@ -161,10 +149,7 @@ class _$KycRequirementImpl implements _KycRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$KycRequirementImplCopyWith<_$KycRequirementImpl> get copyWith =>
-      __$$KycRequirementImplCopyWithImpl<_$KycRequirementImpl>(
-        this,
-        _$identity,
-      );
+      __$$KycRequirementImplCopyWithImpl<_$KycRequirementImpl>(this, _$identity);
 }
 
 abstract class _KycRequirement implements KycRequirement {
@@ -254,10 +239,8 @@ mixin _$Requirement {
 
 /// @nodoc
 abstract class $RequirementCopyWith<$Res> {
-  factory $RequirementCopyWith(
-    Requirement value,
-    $Res Function(Requirement) then,
-  ) = _$RequirementCopyWithImpl<$Res, Requirement>;
+  factory $RequirementCopyWith(Requirement value, $Res Function(Requirement) then) =
+      _$RequirementCopyWithImpl<$Res, Requirement>;
 }
 
 /// @nodoc
@@ -339,12 +322,8 @@ class _$BasicInfoRequirementImpl implements BasicInfoRequirement {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl>
-  get copyWith =>
-      __$$BasicInfoRequirementImplCopyWithImpl<_$BasicInfoRequirementImpl>(
-        this,
-        _$identity,
-      );
+  _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl> get copyWith =>
+      __$$BasicInfoRequirementImplCopyWithImpl<_$BasicInfoRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -448,8 +427,8 @@ abstract class BasicInfoRequirement implements Requirement {
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl>
-  get copyWith => throw _privateConstructorUsedError;
+  _$$BasicInfoRequirementImplCopyWith<_$BasicInfoRequirementImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -517,12 +496,8 @@ class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl>
-  get copyWith =>
-      __$$CountryCodeRequirementImplCopyWithImpl<_$CountryCodeRequirementImpl>(
-        this,
-        _$identity,
-      );
+  _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl> get copyWith =>
+      __$$CountryCodeRequirementImplCopyWithImpl<_$CountryCodeRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -618,16 +593,15 @@ class _$CountryCodeRequirementImpl implements CountryCodeRequirement {
 }
 
 abstract class CountryCodeRequirement implements Requirement {
-  const factory CountryCodeRequirement({required final String code}) =
-      _$CountryCodeRequirementImpl;
+  const factory CountryCodeRequirement({required final String code}) = _$CountryCodeRequirementImpl;
 
   String get code;
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl>
-  get copyWith => throw _privateConstructorUsedError;
+  _$$CountryCodeRequirementImplCopyWith<_$CountryCodeRequirementImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -695,10 +669,8 @@ class _$DocumentTypeRequirementImpl implements DocumentTypeRequirement {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl>
-  get copyWith => __$$DocumentTypeRequirementImplCopyWithImpl<
-    _$DocumentTypeRequirementImpl
-  >(this, _$identity);
+  _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl> get copyWith =>
+      __$$DocumentTypeRequirementImplCopyWithImpl<_$DocumentTypeRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -802,8 +774,8 @@ abstract class DocumentTypeRequirement implements Requirement {
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl>
-  get copyWith => throw _privateConstructorUsedError;
+  _$$DocumentTypeRequirementImplCopyWith<_$DocumentTypeRequirementImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -871,10 +843,11 @@ class _$DocumentFieldRequirementImpl implements DocumentFieldRequirement {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl>
-  get copyWith => __$$DocumentFieldRequirementImplCopyWithImpl<
-    _$DocumentFieldRequirementImpl
-  >(this, _$identity);
+  _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl> get copyWith =>
+      __$$DocumentFieldRequirementImplCopyWithImpl<_$DocumentFieldRequirementImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -978,8 +951,8 @@ abstract class DocumentFieldRequirement implements Requirement {
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl>
-  get copyWith => throw _privateConstructorUsedError;
+  _$$DocumentFieldRequirementImplCopyWith<_$DocumentFieldRequirementImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1042,17 +1015,11 @@ class _$AndRequirementImpl implements AndRequirement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AndRequirementImpl &&
-            const DeepCollectionEquality().equals(
-              other._requirements,
-              _requirements,
-            ));
+            const DeepCollectionEquality().equals(other._requirements, _requirements));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_requirements),
-  );
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_requirements));
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
@@ -1060,10 +1027,7 @@ class _$AndRequirementImpl implements AndRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$AndRequirementImplCopyWith<_$AndRequirementImpl> get copyWith =>
-      __$$AndRequirementImplCopyWithImpl<_$AndRequirementImpl>(
-        this,
-        _$identity,
-      );
+      __$$AndRequirementImplCopyWithImpl<_$AndRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1159,9 +1123,8 @@ class _$AndRequirementImpl implements AndRequirement {
 }
 
 abstract class AndRequirement implements Requirement {
-  const factory AndRequirement({
-    required final List<Requirement> requirements,
-  }) = _$AndRequirementImpl;
+  const factory AndRequirement({required final List<Requirement> requirements}) =
+      _$AndRequirementImpl;
 
   List<Requirement> get requirements;
 
@@ -1232,17 +1195,11 @@ class _$OrRequirementImpl implements OrRequirement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OrRequirementImpl &&
-            const DeepCollectionEquality().equals(
-              other._requirements,
-              _requirements,
-            ));
+            const DeepCollectionEquality().equals(other._requirements, _requirements));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_requirements),
-  );
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_requirements));
 
   /// Create a copy of Requirement
   /// with the given fields replaced by the non-null parameter values.
@@ -1424,8 +1381,7 @@ class _$NotRequirementImpl implements NotRequirement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NotRequirementImpl &&
-            (identical(other.requirement, requirement) ||
-                other.requirement == requirement));
+            (identical(other.requirement, requirement) || other.requirement == requirement));
   }
 
   @override
@@ -1437,10 +1393,7 @@ class _$NotRequirementImpl implements NotRequirement {
   @override
   @pragma('vm:prefer-inline')
   _$$NotRequirementImplCopyWith<_$NotRequirementImpl> get copyWith =>
-      __$$NotRequirementImplCopyWithImpl<_$NotRequirementImpl>(
-        this,
-        _$identity,
-      );
+      __$$NotRequirementImplCopyWithImpl<_$NotRequirementImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1536,8 +1489,7 @@ class _$NotRequirementImpl implements NotRequirement {
 }
 
 abstract class NotRequirement implements Requirement {
-  const factory NotRequirement({required final Requirement requirement}) =
-      _$NotRequirementImpl;
+  const factory NotRequirement({required final Requirement requirement}) = _$NotRequirementImpl;
 
   Requirement get requirement;
 

@@ -28,6 +28,11 @@ class Order with _$Order {
     required String externalId,
     required String userWalletAddress,
     required String walletPublicKey,
+    required String walletFeeAddress,
+    required double walletFeeAmount,
+    required String platformFeeAddress,
+    required double platformFeeAmount,
+    required double partnerCryptoAmount,
   }) = _Order;
 
   factory Order.fromWalletGetOrderResponse(wallet.GetOrderResponse response) {
@@ -60,6 +65,11 @@ class Order with _$Order {
           externalId: '',
           userWalletAddress: userEnvelope.userWalletAddress,
           walletPublicKey: userEnvelope.walletPublicKey,
+          walletFeeAddress: userEnvelope.walletFeeAddress,
+          walletFeeAmount: userEnvelope.walletFeeAmount,
+          platformFeeAddress: userEnvelope.platformFeeAddress,
+          platformFeeAmount: userEnvelope.platformFeeAmount,
+          partnerCryptoAmount: userEnvelope.partnerCryptoAmount,
         );
       case RampType.offRamp:
         final userEnvelope = common.OffRampOrderUserEnvelope.fromBuffer(response.userPayload);
@@ -87,6 +97,11 @@ class Order with _$Order {
           externalId: '',
           userWalletAddress: userEnvelope.userWalletAddress,
           walletPublicKey: userEnvelope.walletPublicKey,
+          walletFeeAddress: userEnvelope.walletFeeAddress,
+          walletFeeAmount: userEnvelope.walletFeeAmount,
+          platformFeeAddress: userEnvelope.platformFeeAddress,
+          platformFeeAmount: userEnvelope.platformFeeAmount,
+          partnerCryptoAmount: userEnvelope.partnerCryptoAmount,
         );
       case RampType.unspecified:
         throw UnimplementedError('Unsupported order type: $type');
@@ -123,6 +138,11 @@ class Order with _$Order {
           externalId: response.externalId,
           userWalletAddress: userEnvelope.userWalletAddress,
           walletPublicKey: userEnvelope.walletPublicKey,
+          walletFeeAddress: userEnvelope.walletFeeAddress,
+          walletFeeAmount: userEnvelope.walletFeeAmount,
+          platformFeeAddress: userEnvelope.platformFeeAddress,
+          platformFeeAmount: userEnvelope.platformFeeAmount,
+          partnerCryptoAmount: userEnvelope.partnerCryptoAmount,
         );
       case RampType.offRamp:
         final userEnvelope = common.OffRampOrderUserEnvelope.fromBuffer(response.userPayload);
@@ -150,6 +170,11 @@ class Order with _$Order {
           externalId: response.externalId,
           userWalletAddress: userEnvelope.userWalletAddress,
           walletPublicKey: userEnvelope.walletPublicKey,
+          walletFeeAddress: userEnvelope.walletFeeAddress,
+          walletFeeAmount: userEnvelope.walletFeeAmount,
+          platformFeeAddress: userEnvelope.platformFeeAddress,
+          platformFeeAmount: userEnvelope.platformFeeAmount,
+          partnerCryptoAmount: userEnvelope.partnerCryptoAmount,
         );
       case RampType.unspecified:
         throw UnimplementedError('Unsupported order type: $type');

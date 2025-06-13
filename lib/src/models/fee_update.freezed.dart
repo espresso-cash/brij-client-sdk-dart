@@ -24,8 +24,7 @@ mixin _$FeeUpdate {
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FeeUpdateCopyWith<FeeUpdate> get copyWith =>
-      throw _privateConstructorUsedError;
+  $FeeUpdateCopyWith<FeeUpdate> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -33,19 +32,14 @@ abstract class $FeeUpdateCopyWith<$Res> {
   factory $FeeUpdateCopyWith(FeeUpdate value, $Res Function(FeeUpdate) then) =
       _$FeeUpdateCopyWithImpl<$Res, FeeUpdate>;
   @useResult
-  $Res call({
-    RampFeeUpdate onRampFee,
-    RampFeeUpdate offRampFee,
-    String walletAddress,
-  });
+  $Res call({RampFeeUpdate onRampFee, RampFeeUpdate offRampFee, String walletAddress});
 
   $RampFeeUpdateCopyWith<$Res> get onRampFee;
   $RampFeeUpdateCopyWith<$Res> get offRampFee;
 }
 
 /// @nodoc
-class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
-    implements $FeeUpdateCopyWith<$Res> {
+class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate> implements $FeeUpdateCopyWith<$Res> {
   _$FeeUpdateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -57,11 +51,7 @@ class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? onRampFee = null,
-    Object? offRampFee = null,
-    Object? walletAddress = null,
-  }) {
+  $Res call({Object? onRampFee = null, Object? offRampFee = null, Object? walletAddress = null}) {
     return _then(
       _value.copyWith(
             onRampFee:
@@ -106,19 +96,12 @@ class _$FeeUpdateCopyWithImpl<$Res, $Val extends FeeUpdate>
 }
 
 /// @nodoc
-abstract class _$$FeeUpdateImplCopyWith<$Res>
-    implements $FeeUpdateCopyWith<$Res> {
-  factory _$$FeeUpdateImplCopyWith(
-    _$FeeUpdateImpl value,
-    $Res Function(_$FeeUpdateImpl) then,
-  ) = __$$FeeUpdateImplCopyWithImpl<$Res>;
+abstract class _$$FeeUpdateImplCopyWith<$Res> implements $FeeUpdateCopyWith<$Res> {
+  factory _$$FeeUpdateImplCopyWith(_$FeeUpdateImpl value, $Res Function(_$FeeUpdateImpl) then) =
+      __$$FeeUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    RampFeeUpdate onRampFee,
-    RampFeeUpdate offRampFee,
-    String walletAddress,
-  });
+  $Res call({RampFeeUpdate onRampFee, RampFeeUpdate offRampFee, String walletAddress});
 
   @override
   $RampFeeUpdateCopyWith<$Res> get onRampFee;
@@ -127,23 +110,16 @@ abstract class _$$FeeUpdateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$FeeUpdateImplCopyWithImpl<$Res>
-    extends _$FeeUpdateCopyWithImpl<$Res, _$FeeUpdateImpl>
+class __$$FeeUpdateImplCopyWithImpl<$Res> extends _$FeeUpdateCopyWithImpl<$Res, _$FeeUpdateImpl>
     implements _$$FeeUpdateImplCopyWith<$Res> {
-  __$$FeeUpdateImplCopyWithImpl(
-    _$FeeUpdateImpl _value,
-    $Res Function(_$FeeUpdateImpl) _then,
-  ) : super(_value, _then);
+  __$$FeeUpdateImplCopyWithImpl(_$FeeUpdateImpl _value, $Res Function(_$FeeUpdateImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? onRampFee = null,
-    Object? offRampFee = null,
-    Object? walletAddress = null,
-  }) {
+  $Res call({Object? onRampFee = null, Object? offRampFee = null, Object? walletAddress = null}) {
     return _then(
       _$FeeUpdateImpl(
         onRampFee:
@@ -192,17 +168,14 @@ class _$FeeUpdateImpl extends _FeeUpdate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FeeUpdateImpl &&
-            (identical(other.onRampFee, onRampFee) ||
-                other.onRampFee == onRampFee) &&
-            (identical(other.offRampFee, offRampFee) ||
-                other.offRampFee == offRampFee) &&
+            (identical(other.onRampFee, onRampFee) || other.onRampFee == onRampFee) &&
+            (identical(other.offRampFee, offRampFee) || other.offRampFee == offRampFee) &&
             (identical(other.walletAddress, walletAddress) ||
                 other.walletAddress == walletAddress));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, onRampFee, offRampFee, walletAddress);
+  int get hashCode => Object.hash(runtimeType, onRampFee, offRampFee, walletAddress);
 
   /// Create a copy of FeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -232,8 +205,7 @@ abstract class _FeeUpdate extends FeeUpdate {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FeeUpdateImplCopyWith<_$FeeUpdateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FeeUpdateImplCopyWith<_$FeeUpdateImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -245,22 +217,15 @@ mixin _$RampFeeUpdate {
   /// Create a copy of RampFeeUpdate
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RampFeeUpdateCopyWith<RampFeeUpdate> get copyWith =>
-      throw _privateConstructorUsedError;
+  $RampFeeUpdateCopyWith<RampFeeUpdate> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RampFeeUpdateCopyWith<$Res> {
-  factory $RampFeeUpdateCopyWith(
-    RampFeeUpdate value,
-    $Res Function(RampFeeUpdate) then,
-  ) = _$RampFeeUpdateCopyWithImpl<$Res, RampFeeUpdate>;
+  factory $RampFeeUpdateCopyWith(RampFeeUpdate value, $Res Function(RampFeeUpdate) then) =
+      _$RampFeeUpdateCopyWithImpl<$Res, RampFeeUpdate>;
   @useResult
-  $Res call({
-    double fixedFee,
-    double percentageFee,
-    ConversionRate conversionRates,
-  });
+  $Res call({double fixedFee, double percentageFee, ConversionRate conversionRates});
 
   $ConversionRateCopyWith<$Res> get conversionRates;
 }
@@ -318,19 +283,14 @@ class _$RampFeeUpdateCopyWithImpl<$Res, $Val extends RampFeeUpdate>
 }
 
 /// @nodoc
-abstract class _$$RampFeeUpdateImplCopyWith<$Res>
-    implements $RampFeeUpdateCopyWith<$Res> {
+abstract class _$$RampFeeUpdateImplCopyWith<$Res> implements $RampFeeUpdateCopyWith<$Res> {
   factory _$$RampFeeUpdateImplCopyWith(
     _$RampFeeUpdateImpl value,
     $Res Function(_$RampFeeUpdateImpl) then,
   ) = __$$RampFeeUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double fixedFee,
-    double percentageFee,
-    ConversionRate conversionRates,
-  });
+  $Res call({double fixedFee, double percentageFee, ConversionRate conversionRates});
 
   @override
   $ConversionRateCopyWith<$Res> get conversionRates;
@@ -402,8 +362,7 @@ class _$RampFeeUpdateImpl extends _RampFeeUpdate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RampFeeUpdateImpl &&
-            (identical(other.fixedFee, fixedFee) ||
-                other.fixedFee == fixedFee) &&
+            (identical(other.fixedFee, fixedFee) || other.fixedFee == fixedFee) &&
             (identical(other.percentageFee, percentageFee) ||
                 other.percentageFee == percentageFee) &&
             (identical(other.conversionRates, conversionRates) ||
@@ -411,8 +370,7 @@ class _$RampFeeUpdateImpl extends _RampFeeUpdate {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, fixedFee, percentageFee, conversionRates);
+  int get hashCode => Object.hash(runtimeType, fixedFee, percentageFee, conversionRates);
 
   /// Create a copy of RampFeeUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -455,16 +413,13 @@ mixin _$ConversionRate {
   /// Create a copy of ConversionRate
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConversionRateCopyWith<ConversionRate> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ConversionRateCopyWith<ConversionRate> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ConversionRateCopyWith<$Res> {
-  factory $ConversionRateCopyWith(
-    ConversionRate value,
-    $Res Function(ConversionRate) then,
-  ) = _$ConversionRateCopyWithImpl<$Res, ConversionRate>;
+  factory $ConversionRateCopyWith(ConversionRate value, $Res Function(ConversionRate) then) =
+      _$ConversionRateCopyWithImpl<$Res, ConversionRate>;
   @useResult
   $Res call({String cryptoCurrency, String fiatCurrency, double rate});
 }
@@ -483,11 +438,7 @@ class _$ConversionRateCopyWithImpl<$Res, $Val extends ConversionRate>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? cryptoCurrency = null,
-    Object? fiatCurrency = null,
-    Object? rate = null,
-  }) {
+  $Res call({Object? cryptoCurrency = null, Object? fiatCurrency = null, Object? rate = null}) {
     return _then(
       _value.copyWith(
             cryptoCurrency:
@@ -512,8 +463,7 @@ class _$ConversionRateCopyWithImpl<$Res, $Val extends ConversionRate>
 }
 
 /// @nodoc
-abstract class _$$ConversionRateImplCopyWith<$Res>
-    implements $ConversionRateCopyWith<$Res> {
+abstract class _$$ConversionRateImplCopyWith<$Res> implements $ConversionRateCopyWith<$Res> {
   factory _$$ConversionRateImplCopyWith(
     _$ConversionRateImpl value,
     $Res Function(_$ConversionRateImpl) then,
@@ -536,11 +486,7 @@ class __$$ConversionRateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? cryptoCurrency = null,
-    Object? fiatCurrency = null,
-    Object? rate = null,
-  }) {
+  $Res call({Object? cryptoCurrency = null, Object? fiatCurrency = null, Object? rate = null}) {
     return _then(
       _$ConversionRateImpl(
         cryptoCurrency:
@@ -591,14 +537,12 @@ class _$ConversionRateImpl extends _ConversionRate {
             other is _$ConversionRateImpl &&
             (identical(other.cryptoCurrency, cryptoCurrency) ||
                 other.cryptoCurrency == cryptoCurrency) &&
-            (identical(other.fiatCurrency, fiatCurrency) ||
-                other.fiatCurrency == fiatCurrency) &&
+            (identical(other.fiatCurrency, fiatCurrency) || other.fiatCurrency == fiatCurrency) &&
             (identical(other.rate, rate) || other.rate == rate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, cryptoCurrency, fiatCurrency, rate);
+  int get hashCode => Object.hash(runtimeType, cryptoCurrency, fiatCurrency, rate);
 
   /// Create a copy of ConversionRate
   /// with the given fields replaced by the non-null parameter values.
@@ -606,10 +550,7 @@ class _$ConversionRateImpl extends _ConversionRate {
   @override
   @pragma('vm:prefer-inline')
   _$$ConversionRateImplCopyWith<_$ConversionRateImpl> get copyWith =>
-      __$$ConversionRateImplCopyWithImpl<_$ConversionRateImpl>(
-        this,
-        _$identity,
-      );
+      __$$ConversionRateImplCopyWithImpl<_$ConversionRateImpl>(this, _$identity);
 }
 
 abstract class _ConversionRate extends ConversionRate {

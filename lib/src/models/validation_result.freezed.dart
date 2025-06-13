@@ -25,16 +25,13 @@ mixin _$ValidationResult {
   /// Create a copy of ValidationResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ValidationResultCopyWith<ValidationResult> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ValidationResultCopyWith<ValidationResult> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ValidationResultCopyWith<$Res> {
-  factory $ValidationResultCopyWith(
-    ValidationResult value,
-    $Res Function(ValidationResult) then,
-  ) = _$ValidationResultCopyWithImpl<$Res, ValidationResult>;
+  factory $ValidationResultCopyWith(ValidationResult value, $Res Function(ValidationResult) then) =
+      _$ValidationResultCopyWithImpl<$Res, ValidationResult>;
   @useResult
   $Res call({
     ValidationStatus status,
@@ -93,8 +90,7 @@ class _$ValidationResultCopyWithImpl<$Res, $Val extends ValidationResult>
 }
 
 /// @nodoc
-abstract class _$$ValidationResultImplCopyWith<$Res>
-    implements $ValidationResultCopyWith<$Res> {
+abstract class _$$ValidationResultImplCopyWith<$Res> implements $ValidationResultCopyWith<$Res> {
   factory _$$ValidationResultImplCopyWith(
     _$ValidationResultImpl value,
     $Res Function(_$ValidationResultImpl) then,
@@ -188,13 +184,11 @@ class _$ValidationResultImpl extends _ValidationResult {
             (identical(other.hash, hash) || other.hash == hash) &&
             (identical(other.validatorPublicKey, validatorPublicKey) ||
                 other.validatorPublicKey == validatorPublicKey) &&
-            (identical(other.validatedAt, validatedAt) ||
-                other.validatedAt == validatedAt));
+            (identical(other.validatedAt, validatedAt) || other.validatedAt == validatedAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, hash, validatorPublicKey, validatedAt);
+  int get hashCode => Object.hash(runtimeType, status, hash, validatorPublicKey, validatedAt);
 
   /// Create a copy of ValidationResult
   /// with the given fields replaced by the non-null parameter values.
@@ -202,10 +196,7 @@ class _$ValidationResultImpl extends _ValidationResult {
   @override
   @pragma('vm:prefer-inline')
   _$$ValidationResultImplCopyWith<_$ValidationResultImpl> get copyWith =>
-      __$$ValidationResultImplCopyWithImpl<_$ValidationResultImpl>(
-        this,
-        _$identity,
-      );
+      __$$ValidationResultImplCopyWithImpl<_$ValidationResultImpl>(this, _$identity);
 }
 
 abstract class _ValidationResult extends ValidationResult {

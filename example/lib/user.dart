@@ -1,3 +1,4 @@
+import 'package:brij_client/brij_client.dart';
 import 'package:brij_client_example/shared.dart';
 import 'package:brij_client_example/state.dart';
 import 'package:cross_file/cross_file.dart';
@@ -25,7 +26,7 @@ class _UserViewState extends State<UserView> {
   @override
   void initState() {
     super.initState();
-    final userState = context.read<UserAppState>();
+    final userState = context.read<UserAppState>()..initAnonymous();
     context.read<PartnerAppState>().createPartner();
     userState.addListener(_updateControllers);
     _updateControllers();
@@ -138,7 +139,7 @@ class _UserViewState extends State<UserView> {
                     phone: _phoneController.text,
                     file: _file,
                   );
-              if (!context.mounted) return;
+              if (!mounted) return;
               showSnackBar(context, message: 'User data updated');
             },
             child: const Text('Update User Data'),
@@ -164,7 +165,7 @@ class _UserViewState extends State<UserView> {
                 ? null
                 : () async {
                     await context.read<UserAppState>().initEmailValidation();
-                    if (!context.mounted) return;
+                    if (!mounted) return;
                     showSnackBar(
                       context,
                       message: 'Verification code has been sent to ${_emailController.text}',
@@ -178,7 +179,7 @@ class _UserViewState extends State<UserView> {
                 ? null
                 : () async {
                     await context.read<UserAppState>().initPhoneValidation();
-                    if (!context.mounted) return;
+                    if (!mounted) return;
                     showSnackBar(
                       context,
                       message: 'Verification code has been sent to ${_phoneController.text}',
@@ -202,7 +203,9 @@ class _UserViewState extends State<UserView> {
                   onPressed: _emailVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context.read<UserAppState>().validateEmail(_emailVerificationController.text);
+                          await context
+                              .read<UserAppState>()
+                              .validateEmail(_emailVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -230,7 +233,9 @@ class _UserViewState extends State<UserView> {
                   onPressed: _phoneVerificationController.text.isEmpty
                       ? null
                       : () async {
-                          await context.read<UserAppState>().validatePhone(_phoneVerificationController.text);
+                          await context
+                              .read<UserAppState>()
+                              .validatePhone(_phoneVerificationController.text);
                           if (!context.mounted) return;
                           showSnackBar(
                             context,
@@ -286,7 +291,9 @@ class _UserViewState extends State<UserView> {
         children: [
           ValueField(
             title: 'Partner Info',
-            value: state.partnerInfo != null ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})' : '',
+            value: state.partnerInfo != null
+                ? '${state.partnerInfo?.name} (${state.partnerInfo?.publicKey})'
+                : '',
           ),
           Consumer<PartnerAppState>(
             builder: (context, partnerState, _) => ElevatedButton(
@@ -343,14 +350,16 @@ class _UserViewState extends State<UserView> {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
-              final partnerPk = context.read<PartnerAppState>().authPublicKey;
+              final partnerPublicKey = context.read<PartnerAppState>().authPublicKey;
+
               await context.read<UserAppState>().createOnRampOrder(
                     amount: _amountController.text,
                     currency: _currencyController.text,
-                    partnerPK: partnerPk,
+                    partnerPublicKey: partnerPublicKey,
+                    walletFeeAddress: 'test-wallet-fee-address',
                   );
 
-              if (!context.mounted) return;
+              if (!mounted) return;
               showSnackBar(context, message: 'Onramp Order created');
             },
             child: const Text('Create Onramp Order'),
@@ -358,15 +367,17 @@ class _UserViewState extends State<UserView> {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
-              final partnerPk = context.read<PartnerAppState>().authPublicKey;
+              final partnerPublicKey = context.read<PartnerAppState>().authPublicKey;
+
               await context.read<UserAppState>().createOffRampOrder(
                     amount: _amountController.text,
                     currency: _currencyController.text,
-                    partnerPK: partnerPk,
+                    partnerPublicKey: partnerPublicKey,
                     bankDataHash: '123456789',
+                    walletFeeAddress: 'test-wallet-fee-address',
                   );
 
-              if (!context.mounted) return;
+              if (!mounted) return;
               showSnackBar(context, message: 'Offramp Order created');
             },
             child: const Text('Create Offramp Order'),
@@ -417,14 +428,19 @@ class _UserViewState extends State<UserView> {
             title: 'Quote:',
             value: state.quote ?? '',
           ),
+          const SizedBox(height: 8),
+          ValueField(
+            title: 'Best Quote:',
+            value: state.bestQuote ?? '',
+          ),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
 
               await context.read<UserAppState>().getOnRampQuote(
-                    partnerPK: partnerPk,
-                    walletPK: walletAuthPk,
+                    partnerPublicKey: partnerPk,
+                    walletPublicKey: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
@@ -437,13 +453,26 @@ class _UserViewState extends State<UserView> {
               final partnerPk = context.read<PartnerAppState>().authPublicKey;
 
               await context.read<UserAppState>().getOffRampQuote(
-                    partnerPK: partnerPk,
-                    walletPK: walletAuthPk,
+                    partnerPublicKey: partnerPk,
+                    walletPublicKey: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
                     fiatCurrency: _fiatQuoteCurrencyController.text,
                   );
             },
             child: const Text('Fetch offramp quote'),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              await context.read<UserAppState>().getBestQuote(
+                    country: 'ES',
+                    rampType: RampType.onRamp,
+                    walletPublicKey: walletAuthPk,
+                    cryptoAmount: _cryptoQuoteAmountController.text,
+                    fiatCurrency: _fiatQuoteCurrencyController.text,
+                  );
+            },
+            child: const Text('Fetch best quote'),
           ),
         ],
       );

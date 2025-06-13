@@ -1,6 +1,5 @@
 import 'package:brij_client/src/models/ramp_type.dart';
 import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart' as proto;
-import 'package:brij_protos_dart/gen/brij/orders/v1/wallet/wallet.pb.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'quote.freezed.dart';
@@ -17,18 +16,32 @@ class Quote with _$Quote {
     required RampFee walletFee,
     required RampFee platformFee,
     required double totalFee,
+    required double partnerAmount,
+    required double walletTotalFee,
+    required double platformTotalFee,
+    required double partnerTotalFee,
+    required String platformFeeAddress,
+    required String partnerPublicKey,
+    required String walletPublicKey,
   }) = _Quote;
 
-  factory Quote.fromWalletGetQuoteResponse(GetQuoteResponse response) => Quote(
-    cryptoAmount: response.cryptoAmount,
-    fiatAmount: response.fiatAmount,
-    fiatCurrency: response.fiatCurrency,
-    type: response.rampType.fromProto(),
-    conversionRate: response.conversionRate,
-    partnerFee: RampFee.fromWalletRampFee(response.partnerFee),
-    walletFee: RampFee.fromWalletRampFee(response.walletFee),
-    platformFee: RampFee.fromWalletRampFee(response.platformFee),
-    totalFee: response.totalFee,
+  factory Quote.fromProto(proto.Quote quote) => Quote(
+    cryptoAmount: quote.cryptoAmount,
+    fiatAmount: quote.fiatAmount,
+    fiatCurrency: quote.fiatCurrency,
+    type: quote.rampType.fromProto(),
+    conversionRate: quote.conversionRate,
+    partnerFee: RampFee.fromWalletRampFee(quote.partnerFee),
+    walletFee: RampFee.fromWalletRampFee(quote.walletFee),
+    platformFee: RampFee.fromWalletRampFee(quote.platformFee),
+    totalFee: quote.totalFee,
+    partnerAmount: quote.partnerAmount,
+    walletTotalFee: quote.walletTotalFee,
+    platformTotalFee: quote.platformTotalFee,
+    partnerTotalFee: quote.partnerTotalFee,
+    platformFeeAddress: quote.platformFeeAddress,
+    partnerPublicKey: quote.partnerPublicKey,
+    walletPublicKey: quote.walletPublicKey,
   );
 }
 
