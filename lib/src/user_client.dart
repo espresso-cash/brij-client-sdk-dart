@@ -66,7 +66,7 @@ class KycUserClient {
     return proofResponse.proofMessage;
   }
 
-  Future<RestoreConnectionResponse> signProofAndGetStatus({
+  Future<ConnectionStatus> signProofAndGetStatus({
     required String walletAddress,
     required String proofMessage,
   }) async {
@@ -78,12 +78,21 @@ class KycUserClient {
     final encodedProofSignature = base58.encode(Uint8List.fromList(proofSignature.bytes));
 
     try {
-      return await tempStorageClient.restoreConnection(
+      final response = await tempStorageClient.restoreConnection(
         RestoreConnectionRequest(
           walletAddress: walletAddress,
           walletProofSignature: encodedProofSignature,
         ),
       );
+
+      if (response.hasConnected()) {
+        return ConnectionStatus.connected(
+          publicKey: response.connected.publicKey,
+          seedMessage: response.connected.seedMessage,
+        );
+      } else {
+        return ConnectionStatus.notConnected(connectToken: response.notConnected.connectToken);
+      }
     } on ConnectException catch (e) {
       if (_isRestoreAuthError(e)) {
         throw Exception('Invalid proof signature');
@@ -92,43 +101,36 @@ class KycUserClient {
     }
   }
 
-  String getSeedMessage(RestoreConnectionResponse connectionStatus) {
-    if (connectionStatus.hasConnected()) {
-      return connectionStatus.connected.seedMessage;
-    }
-    return _seedMessage;
-  }
+  String getSeedMessage(ConnectionStatus connectionStatus) =>
+      connectionStatus.getSeedMessage() ?? _seedMessage;
 
   Future<void> signSeedAndComplete({
     required String walletAddress,
-    required RestoreConnectionResponse connectionStatus,
+    required ConnectionStatus connectionStatus,
     required String seedMessage,
   }) async {
     final seedSignature = await sign(utf8.encode(seedMessage));
     final seed = Uint8List.fromList(seedSignature.bytes.sublist(0, 32));
     await _initializeKeys(seed);
 
-    if (connectionStatus.hasConnected()) {
-      final connected = connectionStatus.connected;
-      if (_authPublicKey != connected.publicKey) {
-        throw Exception(
-          'Authentication keys mismatch: potential security issue or data corruption',
-        );
-      }
-    }
-
     await _initializeEncryption();
     await _initializeStorageClient();
 
-    if (!connectionStatus.hasConnected()) {
-      final notConnected = connectionStatus.notConnected;
-      await _storageClient.connectWallet(
-        ConnectWalletRequest(
-          walletAddress: walletAddress,
-          connectToken: notConnected.connectToken,
-          seedMessage: _seedMessage,
-        ),
-      );
+    switch (connectionStatus) {
+      case ConnectedStatus(publicKey: final publicKey):
+        if (_authPublicKey != publicKey) {
+          throw Exception(
+            'Authentication keys mismatch: potential security issue or data corruption',
+          );
+        }
+      case NotConnectedStatus(connectToken: final connectToken):
+        await _storageClient.connectWallet(
+          ConnectWalletRequest(
+            walletAddress: walletAddress,
+            connectToken: connectToken,
+            seedMessage: _seedMessage,
+          ),
+        );
     }
 
     await _initializeValidatorClient();
