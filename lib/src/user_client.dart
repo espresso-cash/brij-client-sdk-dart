@@ -37,7 +37,7 @@ class KycUserClient {
   final AppConfig config;
   final SignRequest sign;
 
-  static const _seedMessage = 'hello';
+  final String _seedMessage = 'Encryption key generation message ${const Uuid().v4()}';
 
   late SimpleKeyPair _authKeyPair;
   late String _authPublicKey;
