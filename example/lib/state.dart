@@ -276,6 +276,16 @@ class UserAppState extends ChangeNotifier {
     _bestQuote = response.toString();
     notifyListeners();
   }
+
+  Future<void> generateTransaction() async {
+    if (_offRampOrderId == null) return;
+
+    final tx = await _client.generateTransaction(
+      orderId: _offRampOrderId!,
+      externalId: '',
+    );
+    print(tx);
+  }
 }
 
 class PartnerAppState extends ChangeNotifier {
@@ -478,6 +488,17 @@ class PartnerAppState extends ChangeNotifier {
       ),
       walletAddress: walletAddress,
     );
+  }
+
+  Future<void> generateTransaction({
+    required String orderId,
+  }) async {
+    final tx = await _client.generateTransaction(
+      orderId: orderId,
+      externalId: '',
+      fundingWalletAddress: _partnerFeesAddress,
+    );
+    print(tx);
   }
 }
 
