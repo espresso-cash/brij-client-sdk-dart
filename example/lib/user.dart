@@ -356,7 +356,7 @@ class _UserViewState extends State<UserView> {
                     amount: _amountController.text,
                     currency: _currencyController.text,
                     partnerPublicKey: partnerPublicKey,
-                    walletFeeAddress: 'test-wallet-fee-address',
+                    walletFeeAddress: '5ZQdTQvHEWkgYWP17JcERQ4VPuGnPb2LmW5BYzXWVSRg',
                   );
 
               if (!mounted) return;
@@ -381,6 +381,16 @@ class _UserViewState extends State<UserView> {
               showSnackBar(context, message: 'Offramp Order created');
             },
             child: const Text('Create Offramp Order'),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              await context.read<UserAppState>().generateTransaction();
+
+              if (!context.mounted) return;
+              showSnackBar(context, message: 'Generated Tx');
+            },
+            child: const Text('Generate Tx'),
           ),
           const SizedBox(height: 16),
           const CustomDivider(),

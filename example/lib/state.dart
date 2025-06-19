@@ -166,12 +166,11 @@ class UserAppState extends ChangeNotifier {
   }) async {
     final quote = await _client.getQuote(
       partnerPublicKey: partnerPublicKey,
-      walletPublicKey: _wallet!.publicKey.toString(),
+      walletPublicKey: walletAuthPk,
       cryptoAmount: double.parse(amount),
       rampType: RampType.onRamp,
-      fiatCurrency: currency,
+      fiatCurrency: 'EUR',
     );
-
     final orderId = await _client.createOnRampOrder(
       userWalletAddress: _wallet!.publicKey.toString(),
       walletFeeAddress: walletFeeAddress,
@@ -191,10 +190,10 @@ class UserAppState extends ChangeNotifier {
   }) async {
     final quote = await _client.getQuote(
       partnerPublicKey: partnerPublicKey,
-      walletPublicKey: _wallet!.publicKey.toString(),
+      walletPublicKey: walletAuthPk,
       cryptoAmount: double.parse(amount),
       rampType: RampType.offRamp,
-      fiatCurrency: currency,
+      fiatCurrency: 'EUR',
     );
 
     final orderId = await _client.createOffRampOrder(
@@ -282,7 +281,7 @@ class UserAppState extends ChangeNotifier {
 
     final tx = await _client.generateTransaction(
       orderId: _offRampOrderId!,
-      externalId: '',
+      feePayerAddress: _wallet!.publicKey.toString(),
     );
     print(tx);
   }
@@ -503,4 +502,4 @@ class PartnerAppState extends ChangeNotifier {
 }
 
 // TODO(vsumin): Replace it with real one
-const walletAuthPk = '3GEEuaKKs6wrmi8Z8GEafmEC524Tx6wvFHfCp36tTQut';
+const walletAuthPk = '5ZQdTQvHEWkgYWP17JcERQ4VPuGnPb2LmW5BYzXWVSRg';

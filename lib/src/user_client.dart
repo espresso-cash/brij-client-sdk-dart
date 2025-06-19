@@ -466,9 +466,7 @@ class KycUserClient {
   }
 
   Future<Order> getOrder({required OrderId orderId}) async {
-    final response = await _orderClient.getOrder(
-      GetOrderRequest(orderId: orderId.orderId, externalId: orderId.externalId),
-    );
+    final response = await _orderClient.getOrder(GetOrderRequest(orderId: orderId.orderId));
 
     return processWalletOrderData(order: response, secretKey: rawSecretKey);
   }
@@ -540,9 +538,12 @@ class KycUserClient {
     return Quote.fromProto(response.quote);
   }
 
-  Future<String> generateTransaction({required String orderId, required String externalId}) async {
+  Future<String> generateTransaction({
+    required String orderId,
+    required String feePayerAddress,
+  }) async {
     final response = await _orderClient.generateTransaction(
-      GenerateTransactionRequest(orderId: orderId, externalId: externalId),
+      GenerateTransactionRequest(orderId: orderId, feePayerAddress: feePayerAddress),
     );
 
     return response.transaction;
