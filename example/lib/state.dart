@@ -502,4 +502,4 @@ class PartnerAppState extends ChangeNotifier {
 }
 
 // TODO(vsumin): Replace it with real one
-const walletAuthPk = '5ZQdTQvHEWkgYWP17JcERQ4VPuGnPb2LmW5BYzXWVSRg';
+const walletAuthPk = '3GEEuaKKs6wrmi8Z8GEafmEC524Tx6wvFHfCp36tTQut';

@@ -356,7 +356,7 @@ class _UserViewState extends State<UserView> {
                     amount: _amountController.text,
                     currency: _currencyController.text,
                     partnerPublicKey: partnerPublicKey,
-                    walletFeeAddress: '5ZQdTQvHEWkgYWP17JcERQ4VPuGnPb2LmW5BYzXWVSRg',
+                    walletFeeAddress: 'test-wallet-fee-address',
                   );
 
               if (!mounted) return;
