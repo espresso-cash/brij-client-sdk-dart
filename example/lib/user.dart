@@ -383,6 +383,16 @@ class _UserViewState extends State<UserView> {
             child: const Text('Create Offramp Order'),
           ),
           const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () async {
+              await context.read<UserAppState>().generateTransaction();
+
+              if (!context.mounted) return;
+              showSnackBar(context, message: 'Generated Tx');
+            },
+            child: const Text('Generate Tx'),
+          ),
+          const SizedBox(height: 16),
           const CustomDivider(),
           const SizedBox(height: 16),
         ],

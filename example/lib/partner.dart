@@ -212,6 +212,22 @@ class _PartnerViewState extends State<PartnerView> {
                       ElevatedButton(
                         onPressed: hasOrder
                             ? () async {
+                                await partnerState.generateTransaction(
+                                  orderId: orderId!,
+                                );
+                                if (!context.mounted) return;
+                                showSnackBar(
+                                  context,
+                                  message: 'Generated tx',
+                                );
+                              }
+                            : null,
+                        child: const Text('Generate tx'),
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: hasOrder
+                            ? () async {
                                 await partnerState.rejectOrder(
                                   orderId: orderId!,
                                   reason: 'Reject reason',

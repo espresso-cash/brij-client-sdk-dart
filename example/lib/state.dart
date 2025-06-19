@@ -166,12 +166,11 @@ class UserAppState extends ChangeNotifier {
   }) async {
     final quote = await _client.getQuote(
       partnerPublicKey: partnerPublicKey,
-      walletPublicKey: _wallet!.publicKey.toString(),
+      walletPublicKey: walletAuthPk,
       cryptoAmount: double.parse(amount),
       rampType: RampType.onRamp,
-      fiatCurrency: currency,
+      fiatCurrency: 'EUR',
     );
-
     final orderId = await _client.createOnRampOrder(
       userWalletAddress: _wallet!.publicKey.toString(),
       walletFeeAddress: walletFeeAddress,
@@ -191,10 +190,10 @@ class UserAppState extends ChangeNotifier {
   }) async {
     final quote = await _client.getQuote(
       partnerPublicKey: partnerPublicKey,
-      walletPublicKey: _wallet!.publicKey.toString(),
+      walletPublicKey: walletAuthPk,
       cryptoAmount: double.parse(amount),
       rampType: RampType.offRamp,
-      fiatCurrency: currency,
+      fiatCurrency: 'EUR',
     );
 
     final orderId = await _client.createOffRampOrder(
@@ -275,6 +274,16 @@ class UserAppState extends ChangeNotifier {
 
     _bestQuote = response.toString();
     notifyListeners();
+  }
+
+  Future<void> generateTransaction() async {
+    if (_offRampOrderId == null) return;
+
+    final tx = await _client.generateTransaction(
+      orderId: _offRampOrderId!,
+      feePayerAddress: _wallet!.publicKey.toString(),
+    );
+    print(tx);
   }
 }
 
@@ -478,6 +487,17 @@ class PartnerAppState extends ChangeNotifier {
       ),
       walletAddress: walletAddress,
     );
+  }
+
+  Future<void> generateTransaction({
+    required String orderId,
+  }) async {
+    final tx = await _client.generateTransaction(
+      orderId: orderId,
+      externalId: '',
+      fundingWalletAddress: _partnerFeesAddress,
+    );
+    print(tx);
   }
 }
 

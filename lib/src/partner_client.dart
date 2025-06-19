@@ -174,6 +174,7 @@ class KycPartnerClient {
         payload: protoMessage,
         signature: signature.signature.asTypedList,
         externalId: orderId.externalId,
+        orderId: orderId.orderId,
       ),
     );
   }
@@ -195,6 +196,7 @@ class KycPartnerClient {
         payload: protoMessage,
         signature: signature.signature.asTypedList,
         externalId: orderId.externalId,
+        orderId: orderId.orderId,
       ),
     );
   }
