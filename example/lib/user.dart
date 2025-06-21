@@ -357,6 +357,7 @@ class _UserViewState extends State<UserView> {
                     currency: _currencyController.text,
                     partnerPublicKey: partnerPublicKey,
                     walletFeeAddress: 'test-wallet-fee-address',
+                    country: _countryCode,
                   );
 
               if (!mounted) return;
@@ -375,6 +376,7 @@ class _UserViewState extends State<UserView> {
                     partnerPublicKey: partnerPublicKey,
                     bankDataHash: '123456789',
                     walletFeeAddress: 'test-wallet-fee-address',
+                    country: _countryCode,
                   );
 
               if (!mounted) return;
@@ -475,7 +477,7 @@ class _UserViewState extends State<UserView> {
           ElevatedButton(
             onPressed: () async {
               await context.read<UserAppState>().getBestQuote(
-                    country: 'ES',
+                    country: _countryCode,
                     rampType: RampType.onRamp,
                     walletPublicKey: walletAuthPk,
                     cryptoAmount: _cryptoQuoteAmountController.text,
@@ -487,3 +489,5 @@ class _UserViewState extends State<UserView> {
         ],
       );
 }
+
+const _countryCode = 'ES';

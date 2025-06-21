@@ -399,6 +399,7 @@ class KycUserClient {
     required String userWalletAddress,
     required String walletFeeAddress,
     required Quote quote,
+    required String countryCode,
   }) async {
     final orderId = const Uuid().v4();
 
@@ -418,6 +419,7 @@ class KycUserClient {
           platformFeeAddress: quote.platformFeeAddress,
           platformFeeAmount: quote.platformTotalFee,
           partnerCryptoAmount: quote.partnerAmount,
+          country: countryCode,
         ).writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
@@ -434,6 +436,7 @@ class KycUserClient {
     required String userWalletAddress,
     required String walletFeeAddress,
     required Quote quote,
+    required String countryCode,
   }) async {
     final orderId = const Uuid().v4();
 
@@ -454,6 +457,7 @@ class KycUserClient {
           platformFeeAddress: quote.platformFeeAddress,
           platformFeeAmount: quote.platformTotalFee,
           partnerCryptoAmount: quote.partnerAmount,
+          country: countryCode,
         ).writeToBuffer();
 
     final signature = _signingKey.sign(protoMessage);
