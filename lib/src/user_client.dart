@@ -542,7 +542,7 @@ class KycUserClient {
     return Quote.fromProto(response.quote);
   }
 
-  Future<String> generateTransaction({
+  Future<({String transaction, String reference})> generateTransaction({
     required String orderId,
     required String feePayerAddress,
   }) async {
@@ -550,7 +550,7 @@ class KycUserClient {
       GenerateTransactionRequest(orderId: orderId, feePayerAddress: feePayerAddress),
     );
 
-    return response.transaction;
+    return (transaction: response.transaction, reference: response.reference);
   }
 }
 

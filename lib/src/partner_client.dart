@@ -280,7 +280,7 @@ class KycPartnerClient {
     ),
   );
 
-  Future<String> generateTransaction({
+  Future<({String transaction, String reference})> generateTransaction({
     required String orderId,
     required String externalId,
     required String fundingWalletAddress,
@@ -293,6 +293,6 @@ class KycPartnerClient {
       ),
     );
 
-    return response.transaction;
+    return (transaction: response.transaction, reference: response.reference);
   }
 }
