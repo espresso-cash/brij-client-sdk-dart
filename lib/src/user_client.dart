@@ -475,8 +475,10 @@ class KycUserClient {
     return processWalletOrderData(order: response, secretKey: rawSecretKey);
   }
 
-  Future<List<Order>> getOrders() async {
-    final response = await _orderClient.getOrders(GetOrdersRequest());
+  Future<List<Order>> getOrders({String? walletPublicKey}) async {
+    final response = await _orderClient.getOrders(
+      GetOrdersRequest(walletPublicKey: walletPublicKey),
+    );
 
     return response.orders
         .map((order) => processWalletOrderData(order: order, secretKey: rawSecretKey))
